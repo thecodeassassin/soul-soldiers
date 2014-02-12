@@ -21,39 +21,39 @@ class AclBuilder extends Plugin {
 
     const PUBLIC_RESOURCE = 'public';
 
-    const ROLE_ADMIN = 'admin';
-    const ROLE_MODERATOR = 'moderator';
-    const ROLE_USER = 'user';
-    const ROLE_GUEST = 'guest';
+    const ROLE_ADMIN = 3;
+    const ROLE_MODERATOR = 2;
+    const ROLE_USER = 1;
+    const ROLE_GUEST = 0;
 
     /**
      * @var Acl\Adapter\Memory
      */
-    protected $_acl;
+    protected $acl;
 
     /**
      * @var \Phalcon\Config
      */
-    protected $_config;
+    protected $config;
 
     /**
      * @var array
      */
-    protected $_roles = array();
+    protected $roles = array();
 
 
     /**
      * Method for adding the acl to the di container
      */
     public function addAclToDi() {
-        $this->di->setShared('acl', $this->_acl);
+        $this->di->setShared('acl', $this->acl);
     }
 
     /**
      * @return array
      */
     public function getRoles() {
-        return $this->_roles;
+        return $this->roles;
     }
 
     /**
@@ -63,8 +63,8 @@ class AclBuilder extends Plugin {
      */
     protected  function __construct(Acl\Adapter\Memory $acl, Config $config) {
 
-        $this->_config = $config;
-        $this->_acl = $acl;
+        $this->config = $config;
+        $this->acl = $acl;
 
     }
 
@@ -72,8 +72,8 @@ class AclBuilder extends Plugin {
      *
      */
     protected function _addRoles() {
-        foreach($this->_config->roles as $role) {
-            $this->_acl->addRole($this->_roles[strtolower($role)] = new Acl\Role($role));
+        foreach($this->config->roles as $role) {
+            $this->acl->addRole($this->roles[strtolower($role)] = new Acl\Role($role));
         }
     }
 
@@ -83,7 +83,7 @@ class AclBuilder extends Plugin {
      * @throws \Phalcon\Acl\Exception
      */
     protected function _processPublicControllers() {
-        $publicControllers = $this->_config->publiccontrollers;
+        $publicControllers = $this->config->publiccontrollers;
 
         // if the public resources config does not exist, or is not a valid array, skip processing it.
         if (!$publicControllers) {
@@ -96,7 +96,7 @@ class AclBuilder extends Plugin {
                 throw new Acl\Exception('Invalid controller specified as public');
             }
 
-            foreach ($this->_roles as $role) {
+            foreach ($this->roles as $role) {
                 $this->_processActions($role, $controller, '*');
             }
         }
@@ -109,14 +109,14 @@ class AclBuilder extends Plugin {
      */
     protected function _processResources()
     {
-        if (count($this->_roles) == 0) {
+        if (count($this->roles) == 0) {
             throw new Exception('Add the roles before processing the resources');
         }
 
         // We iterate over the role list backwards because the highest should inherit the lowest rights
-        $resourcesList = $this->_config->resources->toArray();
+        $resourcesList = $this->config->resources->toArray();
         $inheritedResources = array();
-        $reversedRoleList = array_reverse($this->_roles);
+        $reversedRoleList = array_reverse($this->roles);
 
         // set all the rights for the users according to the ACL
         foreach ($reversedRoleList as $role) {
@@ -144,7 +144,7 @@ class AclBuilder extends Plugin {
                         }
 
                         // deny actions for all roles first
-                        foreach ($this->_roles as $denyRole) {
+                        foreach ($this->roles as $denyRole) {
                             $this->_processActions($denyRole, $controller, $actions, 'deny');
                         }
 
@@ -173,13 +173,13 @@ class AclBuilder extends Plugin {
             throw new Acl\Exception(sprintf('Invalid %s method: %s. Allowed methods: allow, deny', __FUNCTION__, $method));
         }
 
-        $this->_acl->addResource(new Acl\Resource($controller), $actions);
+        $this->acl->addResource(new Acl\Resource($controller), $actions);
 
         if (is_string($actions)) {
-            $this->_acl->$method($role->getName(), $controller, $actions);
+            $this->acl->$method($role->getName(), $controller, $actions);
         } elseif (is_array($actions)) {
             foreach ($actions as $action) {
-                $this->_acl->$method($role->getName(), $controller, $action);
+                $this->acl->$method($role->getName(), $controller, $action);
             }
         }
 

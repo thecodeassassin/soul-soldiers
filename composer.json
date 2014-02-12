@@ -24,12 +24,16 @@
                     "type": "git",
                     "reference": "master"
                 }
+            },
+            "autoload": {
+                "classmap": ["/Library/Phalcon"]
             }
         }
     ],
     "autoload": {
         "psr-0" : {
-            "Soul"    :   "app/src"
+            "Soul"    :   "app/src",
+            "Phalcon" :   "vendor/phalcon/incubator/Library"
         }
     }
 }

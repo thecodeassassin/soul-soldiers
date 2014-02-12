@@ -1,14 +1,14 @@
 <?php
 
-//use Phalcon\Mvc\Dispatcher\Exception as DispatchException;
+use Phalcon\Mvc\Dispatcher\Exception as DispatchException;
 //use \Soul\Auth\OAuth\GithubAuth;
 //use \Soul\Auth\OAuth\GoogleAuth;
 //
-//$di->setShared("auth",function() use ($di,$config){
-//
-//    return new \Soul\Auth\AuthService();
-//
-//});
+$di->setShared("auth",function() use ($di,$config){
+
+    return new \Soul\Auth\AuthService();
+
+});
 //
 //$di->set('githubAuth', function() use ($di,$config){
 //

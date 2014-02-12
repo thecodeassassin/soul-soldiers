@@ -3,8 +3,10 @@
  * @author Stephen Hoogendijk
 */
 namespace Soul;
+
+use Phalcon\Cache\Backend\Memcache;
+use Phalcon\Config;
 use Phalcon\Mvc\User\Plugin;
-use phpDocumentor\Reflection\Exception;
 use Phalcon\DI as DI;
 
 /**
@@ -14,37 +16,107 @@ use Phalcon\DI as DI;
 abstract class Module extends Plugin
 {
     /**
-     * @var mixed
+     * @var Memcache
      */
-    public $cache;
+    protected $cache;
     /**
      * @var mixed
      */
-    public $db;
+    protected $db;
     /**
-     * @var mixed
+     * @var Config
      */
-    public $config;
+    protected $config;
+
+    /**
+     * @var DI
+     */
+    protected $di;
 
 
     /**
      * Constructor
      */
-    public  function __construct()
+    public function __construct()
     {
 
         /**
          * Gets the necessary services for use in modules
          * @todo include security, session and auth services here
          */
-        $di = DI::getDefault();
+        $this->di = DI::getDefault();
 
 
-        $this->cache = ($di->has('cache') ? $di->get('cache') : null);
-        $this->db = ($di->has('db') ? $di->get('db') : null);
-        $this->config = ($di->has('config') ? $di->get('config') : null);
+        $this->cache = ($this->di->has('cache') ? $this->di->get('cache') : null);
+        $this->db = ($this->di->has('db') ? $this->di->get('db') : null);
+        $this->config = ($this->di->has('config') ? $this->di->get('config') : null);
 
     }
+
+    /**
+     * @param \Phalcon\DI $di
+     */
+    public function setDi($di)
+    {
+        $this->di = $di;
+    }
+
+    /**
+     * @return \Phalcon\DI
+     */
+    public function getDi()
+    {
+        return $this->di;
+    }
+
+    /**
+     * @param mixed $db
+     */
+    public function setDb($db)
+    {
+        $this->db = $db;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDb()
+    {
+        return $this->db;
+    }
+
+    /**
+     * @param \Phalcon\Cache\Backend\Libmemcached $cache
+     */
+    public function setCache($cache)
+    {
+        $this->cache = $cache;
+    }
+
+    /**
+     * @return \Phalcon\Cache\Backend\Libmemcached
+     */
+    public function getCache()
+    {
+        return $this->cache;
+    }
+
+    /**
+     * @param \Phalcon\Config $config
+     */
+    public function setConfig($config)
+    {
+        $this->config = $config;
+    }
+
+    /**
+     * @return \Phalcon\Config
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
 }
 
 

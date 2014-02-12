@@ -21,10 +21,6 @@ use Phalcon\Events\Event,
 class Security extends Module
 {
 
-    protected $roleMap = array(
-
-    );
-
     /**
      * Make sure the user does not reach any page he/she is not authenticated to see
      *
@@ -42,6 +38,7 @@ class Security extends Module
             $role = AclBuilder::ROLE_GUEST;
         } else {
             $role = AclBuilder::ROLE_USER;
+            var_dump($auth);
 
             //@todo check admin role
         }

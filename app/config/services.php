@@ -44,9 +44,6 @@ include __DIR__."/services/acl.php";
 // load the security service
 include __DIR__."/services/security.php";
 
-// load the dispatcher service
-include __DIR__."/services/dispatcher.php";
-
 // load the routes
 include __DIR__ . "/services/router.php";
 

@@ -19,20 +19,6 @@ use Phalcon\Paginator\Adapter\Model;
 abstract class ServiceBase extends Module
 {
 
-    /**
-     * @var \Phalcon\Db
-     */
-    protected $db;
-
-    /**
-     * @var \Phalcon\Config
-     */
-    protected $config;
-
-    /**
-     * @var \Phalcon\Cache\Backend\Apc
-     */
-    protected $cache;
 
     /**
      * @var bool
