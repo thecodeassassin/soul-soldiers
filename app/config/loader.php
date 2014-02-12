@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author Stephen Hoogendijk
+ */
 
 $loader = new \Phalcon\Loader();
 
@@ -10,4 +13,9 @@ $loader->registerDirs(
         $config->application->controllersDir,
         $config->application->modelsDir
     )
-)->register();
+);
+
+$loader->register();
+
+// autoload the dependencies found in composer
+include __DIR__ . "/../../vendor/autoload.php";

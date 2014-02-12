@@ -13,68 +13,48 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
  */
 $di = new FactoryDefault();
 
-/**
- * The URL component is used to generate all kind of urls in the application
- */
-$di->set('url', function () use ($config) {
-    $url = new UrlResolver();
-    $url->setBaseUri($config->application->baseUri);
+// read all the services
 
-    return $url;
-}, true);
 
-/**
- * Setting up the view component
- */
-$di->set('view', function () use ($config) {
+// load the caching service
+include __DIR__."/services/caches.php";
 
-    $view = new View();
 
-    $view->setViewsDir($config->application->viewsDir);
+// load the session service
+include __DIR__."/services/session.php";
 
-    $view->registerEngines(array(
-        '.volt' => function ($view, $di) use ($config) {
+// load the translation service
+include __DIR__."/services/translate.php";
 
-            $volt = new VoltEngine($view, $di);
+// load the view services
+include __DIR__."/services/view.php";
 
-            $volt->setOptions(array(
-                'compiledPath' => $config->application->cacheDir,
-                'compiledSeparator' => '_'
-            ));
+// load the url service
+include __DIR__."/services/url.php";
 
-            return $volt;
-        },
-        '.phtml' => 'Phalcon\Mvc\View\Engine\Php'
-    ));
+// load the db service
+include __DIR__."/services/db.php";
 
-    return $view;
-}, true);
+// load the flash service
+include __DIR__."/services/flash.php";
 
-/**
- * Database connection is created based in the parameters defined in the configuration file
- */
-$di->set('db', function () use ($config) {
-    return new DbAdapter(array(
-        'host' => $config->database->host,
-        'username' => $config->database->username,
-        'password' => $config->database->password,
-        'dbname' => $config->database->dbname
-    ));
-});
+// load the ACL
+include __DIR__."/services/acl.php";
 
-/**
- * If the configuration specify the use of metadata adapter use it or use memory otherwise
- */
-$di->set('modelsMetadata', function () {
-    return new MetaDataAdapter();
-});
+// load the security service
+include __DIR__."/services/security.php";
 
-/**
- * Start the session the first time some component request the session service
- */
-$di->set('session', function () {
-    $session = new SessionAdapter();
-    $session->start();
+// load the dispatcher service
+include __DIR__."/services/dispatcher.php";
 
-    return $session;
-});
+// load the routes
+include __DIR__ . "/services/router.php";
+
+// load the routes
+include __DIR__ . "/services/notification.php";
+
+// load auth services
+
+// load the config into the DI
+$di->set('config', $config);
+include __DIR__ . "/services/auth.php";

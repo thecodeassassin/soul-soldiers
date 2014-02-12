@@ -1,0 +1,35 @@
+{
+    "name": "thecodeassassin/soul-soldiers",
+    "description": "Soul-Soldiers Website",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Stephen Hoogendijk",
+            "email": "stephen@phalconhosting.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.6",
+        "phalcon/incubator": "dev-master"
+    },
+    "repositories": [
+        {
+            "url": "https://github.com/phalcon/incubator",
+            "type": "package",
+            "package": {
+                "name": "phalcon/incubator",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/phalcon/incubator",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        }
+    ],
+    "autoload": {
+        "psr-0" : {
+            "Soul"    :   "app/src"
+        }
+    }
+}
