@@ -1,21 +1,26 @@
 <?php
 
-return new \Phalcon\Config(array(
-    'database' => array(
-        'adapter'     => 'Mysql',
-        'host'        => 'localhost',
-        'username'    => 'root',
-        'password'    => '',
-        'dbname'      => 'test',
-    ),
-    'application' => array(
-        'controllersDir' => __DIR__ . '/../../app/controllers/',
-        'modelsDir'      => __DIR__ . '/../../app/models/',
-        'viewsDir'       => __DIR__ . '/../../app/views/',
-        'pluginsDir'     => __DIR__ . '/../../app/plugins/',
-        'libraryDir'     => __DIR__ . '/../../app/library/',
-        'cacheDir'       => __DIR__ . '/../../app/cache/',
-        'locales'        => __DIR__ .'/../../app/locales/',
-        'baseUri'        => '/soul-site/',
-    )
-));
+return new \Phalcon\Config(
+    [
+        'database' => [
+            'adapter'     => 'Mysql',
+            'host'        => '',
+            'username'    => '',
+            'password'    => '',
+            'dbname'      => '',
+        ],
+        'application' => [
+            'viewsDir'       => APPLICATION_PATH . '/views/',
+            'pluginsDir'     => APPLICATION_PATH . '/plugins/',
+            'cacheDir'       => APPLICATION_PATH . '/cache/',
+            'locales'        => APPLICATION_PATH .'/locales/',
+            'baseUri'        => '/',
+            'baseTitle'      => 'Soul-Soldiers - Lan parties'
+        ],
+        'error' => [
+            'logger' => new \Phalcon\Logger\Adapter\File(APPLICATION_PATH . '/log/' . APPLICATION_ENV . '.log'),
+            'controller' => 'error',
+            'action' => 'index',
+        ]
+    ]
+);

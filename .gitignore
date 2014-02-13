@@ -3,3 +3,5 @@ app/config/config.php
 app/config/acl.php
 app/cache/*
 vendor/*
+public/doc
+public/demo

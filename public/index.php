@@ -13,7 +13,6 @@ defined('BASE_URL')
 || define('BASE_URL', sprintf('%s://%s', strpos(strtolower($_SERVER['SERVER_PROTOCOL']), 'https')
     === false ? 'http' : 'https', $_SERVER['HTTP_HOST']));
 
-
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APPLICATION_PATH . '/library'),
     realpath(APPLICATION_PATH . '/models'),
@@ -30,7 +29,17 @@ if (!is_readable(APPLICATION_PATH . '/../vendor/autoload.php')) {
 
 if (APPLICATION_ENV == 'development') {
     ini_set('display_errors' , 1);
+}
 
+// create the logfile if it doesn't exist
+$logFile = APPLICATION_PATH . '/log/'.APPLICATION_ENV.'.log';
+if (!file_exists($logFile)) {
+
+    if (!is_writeable(dirname($logFile))) {
+        die('Please chmod 777 '.dirname($logFile));
+    }
+
+    touch($logFile);
 }
 
 /*
@@ -56,9 +65,9 @@ include __DIR__ . "/../app/config/services.php";
 /**
  * Handle the request
  */
-$application = new \Phalcon\Mvc\Application();
-$application->setDI($di);
 
+$kernel = new \Soul\Kernel($di);
 
-echo $application->handle()->getContent();
+echo $kernel->handle()->getContent();
 // exception/404 managed from the dispatcher event
+

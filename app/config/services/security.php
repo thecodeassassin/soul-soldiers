@@ -15,7 +15,7 @@ $di->set('dispatcher', function() use ($di) {
      $eventsManager->attach('dispatch', $security);
 
      $dispatcher = new Phalcon\Mvc\Dispatcher();
-
+     $dispatcher->setDefaultNamespace('Soul\Controller');
     /*
         * Attach a listener for 404 and other errors
         */
@@ -47,4 +47,4 @@ $di->set('dispatcher', function() use ($di) {
      $dispatcher->setEventsManager($eventsManager);
 
      return $dispatcher;
-});
+    });
