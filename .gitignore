@@ -2,6 +2,7 @@
 app/config/config.php
 app/config/acl.php
 app/cache/*
+app/log
 vendor/*
 public/doc
 public/demo
