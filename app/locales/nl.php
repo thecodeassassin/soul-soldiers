@@ -1,5 +1,6 @@
 <?php
-$messages = array(
+$messages = [
     'navTitle'                    =>          'Navigatie',
-    'Welcome'                     =>          'Welkom'
-);
+    'Welcome'                     =>          'Welkom',
+    'back_to_page'                =>          'Terug naar vorige pagina'
+];

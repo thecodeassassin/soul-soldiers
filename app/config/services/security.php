@@ -3,6 +3,8 @@
  /**
   * Initialize the security plugin
   */
+use Phalcon\Mvc\Dispatcher\Exception as DispatchException;
+
 $di->set('dispatcher', function() use ($di) {
 
     //Obtain the standard eventsManager from the DI
@@ -23,24 +25,16 @@ $di->set('dispatcher', function() use ($di) {
 
         //Handle 404 exceptions
         if ($exception instanceof DispatchException) {
-            $dispatcher->forward(array(
-                'controller' => 'error',
-                'action' => 'notFound'
-            ));
+            $dispatcher->forward(
+                [
+                    'controller' => 'error',
+                    'action' => 'index'
+                ]
+            );
 
             return false;
         }
 
-        // Not a 404, then we trigger an error (that aims go in the error log)
-        trigger_error("An exception has been detected from the dispatcher event :".$exception->getMessage(),E_USER_WARNING);
-
-        //Handle other exceptions
-        $dispatcher->forward(array(
-            'controller' => 'error',
-            'action' => 'fatal'
-        ));
-
-        return false;
     });
 
      //Bind the EventsManager to the Dispatcher

@@ -47,8 +47,8 @@ include __DIR__."/services/security.php";
 // load the routes
 include __DIR__ . "/services/router.php";
 
-// load the routes
-include __DIR__ . "/services/notification.php";
+// load the menu config
+include __DIR__ . "/menu.php";
 
 // load auth services
 

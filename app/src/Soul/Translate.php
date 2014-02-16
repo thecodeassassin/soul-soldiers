@@ -11,37 +11,38 @@ use Phalcon\Translate\Adapter\NativeArray;
 /**
 @package Hosting
 */
-class Translate extends Module {
+class Translate extends Module
+{
 
     /**
      * @var NativeArray
      */
-    protected $_translations;
+    protected $translations;
 
     /**
      * @var Translate
      */
-    static $_instance;
+    static $instance;
 
     /**
      * @param string $language
      * @param array $manualTranslations
+     * @param bool $disableCache
      * @return mixed
      */
-    public function __construct($language = 'nl', array $manualTranslations = array())
+    public function __construct($language = 'nl', array $manualTranslations = array(), $disableCache = false)
     {
         parent::__construct();
         /**
          * Initialize multiLingual support
          */
 
-        $languagePath = $this->_config->application->locales;
+        $languagePath = $this->config->application->locales;
 
         $translationCacheKey = "translations_$language";
-        if ($this->_cache->exists($translationCacheKey)) {
-            $this->_translations = $this->_cache->get($translationCacheKey);
+        if ($this->cache->exists($translationCacheKey) && !$disableCache) {
+            $this->translations = $this->cache->get($translationCacheKey);
         } else {
-
             $messages = array();
 
             // manual translations can also be passed and will overwrite the language files
@@ -64,21 +65,25 @@ class Translate extends Module {
              *
              * The maximum lifetime for translated messages is 1 hour
              */
-            $translations = new NativeArray(array(
-                "content" => $messages
-            ));
+            $translations = new NativeArray(
+                [
+                    "content" => $messages
+                ]
+            );
 
-            // save the translations in the cache
-            $this->_cache->save($translationCacheKey, $translations, 3600);
+            if (!$disableCache) {
+                // save the translations in the cache
+                $this->cache->save($translationCacheKey, $translations, 3600);
+            }
 
             //Return a translation object
-            $this->_translations = $translations;
+            $this->translations = $translations;
 
         }
 
 
         // save the instance
-        self::$_instance = $this;
+        self::$instance = $this;
 
     }
 
@@ -87,7 +92,7 @@ class Translate extends Module {
      */
     public function getTranslations()
     {
-        return $this->_translations;
+        return $this->translations;
     }
 
     /**
@@ -101,11 +106,11 @@ class Translate extends Module {
      */
     public static function translate($key, array $params = array())
     {
-        if (!self::$_instance instanceof self) {
+        if (!self::$instance instanceof self) {
             throw new Exception('Translations need to be set first, initialize the object');
         }
 
-        return vsprintf(self::$_instance->_translations[$key], $params);
+        return vsprintf(self::$instance->translations[$key], $params);
     }
 
     /**

@@ -1,7 +1,8 @@
 <?php
 use Phalcon\Mvc\View,
-    PH\Master\Translate,
+    Soul\Translate,
     Phalcon\Mvc\View\Engine\Volt as VoltEngine;
+
 
 /**
  * Setting up the view component

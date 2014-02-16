@@ -23,7 +23,6 @@ $di->set('dispatcher', function() use ($config){
         /* @var $dispatcher \Phalcon\Dispatcher */
 
         $authService = $dispatcher->getDi()->get("auth");
-        die('anal');
 
         // if user is not logged and not in the AuthController, then we redirect him to the login screen
         if (!$authService->isLoggedIn() && $dispatcher->getControllerName() != "auth") {
