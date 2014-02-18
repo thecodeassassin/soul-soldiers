@@ -9,6 +9,7 @@ class IndexController extends BaseController
 //        $users = new User();
 //
 //        die(var_dump($users->find()->toArray()));
+        $this->view->setVar('menu', $this->getMenu()->outputHTML());
     }
 
 }

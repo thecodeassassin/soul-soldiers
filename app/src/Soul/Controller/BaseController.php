@@ -32,6 +32,7 @@ class BaseController extends Controller
         $this->setTitle($this->title);
         $this->setMenu($this->di->get('menu'));
 
+
         // too much work to do translations for this project
 //        $this->setTranslate($this->di->get('translate'));
 

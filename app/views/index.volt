@@ -100,30 +100,10 @@
                         <!-- Logo -->
                         <a class="navbar-brand" href="index.html"><img src="images/main-logo.png" alt="Soul-Soldiers"/></a>
                     </div>
-                    <div class="collapse navbar-collapse" id="mainMenu">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav pull-right">
+                    <!-- Main navigation -->
+                    {{ menu }}
+                    <!-- End main navigation -->
 
-                            <li class="primary">
-                                <a href="index.html" class="firstLevel active hasSubMenu" >Home</a>
-                                {#<ul class="subMenu">#}
-                                    {#<li><a href="index.html">Default</a></li>#}
-                                {#</ul>#}
-                            </li>
-
-                            <li class="sep"></li>
-
-                            {##}
-                            {#<li class="primary">#}
-                                {#<a href="{{ link_to() }}" class="firstLevel">Login</a>#}
-                            {#</li>#}
-
-
-                            <li class="sep"></li>
-                            <li id="lastMenu" class="last"><a href="#" class="firstLevel last">Contact</a></li>
-                        </ul>
-                        <!-- End main navigation -->
-                    </div>
                 </nav>
             </div>
         </div>

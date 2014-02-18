@@ -40,6 +40,16 @@ class Util {
 
         echo '</pre>';
     }
+
+    /**
+     * Returns the full current URL
+     *
+     * @return string
+     */
+    public static function getCurrentUrl()
+    {
+        return "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    }
 }
 
 

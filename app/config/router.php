@@ -17,4 +17,8 @@ $router->add("/register",
     )
 );
 
+
+$router->removeExtraSlashes(true);
+
+
 return $router;
