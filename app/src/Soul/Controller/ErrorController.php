@@ -13,7 +13,7 @@ class ErrorController extends BaseController
     /**
      * Handle general errors
      */
-    public function indexAction($errorCode)
+    public function indexAction($errorCode = null)
     {
         $code = (!is_null($errorCode) ? $errorCode : 404);
         $dispatchError = null;

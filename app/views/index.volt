@@ -13,7 +13,7 @@
         {# Layout CSS #}
         {{ stylesheet_link("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700", false) }}
         {{ stylesheet_link("bootstrap/css/bootstrap.css") }}
-        {{ stylesheet_link("css/dark-dark.css") }}
+        {{ stylesheet_link("css/soul-color.css") }}
         {{ stylesheet_link("font-icons/custom-icons/css/custom-icons.css") }}
         {{ stylesheet_link("font-icons/custom-icons/css/custom-icons-ie7.css") }}
 
@@ -98,7 +98,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <!-- Logo -->
-                        <a class="navbar-brand" href="index.html"><img src="images/main-logo.png" alt="Soul-Soldiers"/></a>
+                        <a class="navbar-brand" href="index.html"><img src="img/main-logo.png" alt="Soul-Soldiers"/></a>
                     </div>
                     <!-- Main navigation -->
                     {{ menu }}

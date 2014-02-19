@@ -1,4 +1,4 @@
-/* 
+/*
     Document   : colors
     Author     : Little Neko
     Description: template colors
@@ -13,10 +13,10 @@
 #PARALLAX STUFF
 #LINKS AND BUTTONS
 #HEADER
-#MAIN MENU 
-#FOOTER 
+#MAIN MENU
+#FOOTER
 #HOME
-#PAGES 
+#PAGES
 #SLIDERS
 #BLOG
 #PORTFOLIO
@@ -109,7 +109,7 @@ h1 strong {
 }
 h2 i {color:#999}
 .subTitle  {
-	color:#999;	
+	color:#999;
 }
 .largeQuote {background:#FDFDFD; border-top: 1px dashed #eee; border-bottom: 1px dashed #eee;}
 .title {
@@ -245,7 +245,7 @@ ul.quickMenu li a:hover {color:#555;}
 /* END HEADER
 ================================================== */
 
-/* MAIN MENU 
+/* MAIN MENU
 ================================================== */
 
 #mainHeader{
@@ -289,7 +289,7 @@ ul.quickMenu li a:hover {color:#555;}
 @media(max-width:767px){}
 
 @media(min-width:768px){
-	
+
 	/* normal header (no class on body) */
 	.navbar-nav ul {background:#333;}
 	.navbar-nav ul li a:hover, .navbar-nav ul li.hover>a{background:#3d3d3d; color:#fff;}
@@ -299,11 +299,11 @@ ul.quickMenu li a:hover {color:#555;}
 
 	.nekoMegaMenu {background:#444;}
 	.nekoMegaMenu h2 {color:#eee;}
-	
+
 	#boxedLayout {background: #3d3d3d;}
 
 
-	
+
 }
 
 @media(min-width:992px){}
@@ -348,8 +348,8 @@ ul.quickMenu li a:hover {color:#555;}
 @media(max-width:767px){}
 
 @media(min-width:768px){
-	
-	
+
+
 
 	/* Header 1 */
 	.header1 .navbar-default .navbar-nav > li > a.active, .header1 .navbar-default .navbar-nav>li>a:hover, .header1 .navbar-default .navbar-nav>li.hover>a,.header1 #resMainMenu li.active>a {
@@ -369,7 +369,7 @@ ul.quickMenu li a:hover {color:#555;}
 	.header2 .navbar-nav ul li a {color:#fff;}
 	.header2 .navbar-nav ul li a:hover {background:#fff; color:#3D3D3D;}
 
-	/*** header 3 ***/	
+	/*** header 3 ***/
 	.header3 .navbar-default .navbar-nav > li > a {border-left:1px solid #eee;}
 
 
@@ -394,7 +394,7 @@ ul.quickMenu li a:hover {color:#555;}
 	.header5 .navbar-nav ul li a {color:#fff;}
 	.header5 .navbar-nav ul li a:hover, .header5 .navbar-nav ul li.hover > a {background:#fff;color:#3D3D3D;}
 	.header5 #mainMenu .navbar-nav ul li a {border-color:rgba(255,255,255,0.25);}
-	
+
 }
 
 @media(min-width:992px){}
@@ -403,11 +403,11 @@ ul.quickMenu li a:hover {color:#555;}
 
 /*** END MEDIA QUERIES ***/
 
-/* END MAIN MENU 
+/* END MAIN MENU
 ================================================== */
 
 
-/* FOOTER 
+/* FOOTER
 ================================================== */
 
 footer {
@@ -422,7 +422,7 @@ footer h1,footer h2,footer h3,footer h4{color:#777; font-weight:300;}
 	border-top:1px dashed #ccc;
 }
 
-/* END FOOTER 
+/* END FOOTER
 ================================================== */
 
 /* HOME
@@ -446,8 +446,8 @@ ul#navTrail li#navTrailLast {color:#fff;}
 
 /** sidebar **/
 
-nav#subnav ul li a {border-bottom:1px solid #eee ; color:#aaa;} 
-nav#subnav ul li a.active, nav#subnav ul li a:hover{border-bottom-color:#3d3d3d ; color:#3d3d3d;} 
+nav#subnav ul li a {border-bottom:1px solid #eee ; color:#aaa;}
+nav#subnav ul li a.active, nav#subnav ul li a:hover{border-bottom-color:#3d3d3d ; color:#3d3d3d;}
 
 /* END PAGES
 ================================================== */
@@ -579,7 +579,7 @@ section#projectDescription {
 }
 .pinInfo li a {color:#fff;}
 .iconLinks a:hover i, .pinInfo li a:hover{text-shadow: 0 0 5px #FFF;}
- 
+
 .imgHover figcaption {
 	background: #3d3d3d;
 	color: #fff;
@@ -595,9 +595,9 @@ section#projectDescription {
 ================================================== */
 /* Preloader one page */
 #preloader {
-	background-color:#3d3d3d; /* change if the mask should have another color then white */	
+	background-color:#3d3d3d; /* change if the mask should have another color then white */
 }
- 
+
 /*** Scroll up Button ***/
 #nekoToTop{
 	color:#3d3d3d;
@@ -606,7 +606,7 @@ section#projectDescription {
 }
 #nekoToTop:hover{
 	color:#fff;
-	background:#3d3d3d;	
+	background:#3d3d3d;
 }
 
 /** focus color ***/
@@ -711,7 +711,7 @@ section#projectDescription {
 .boxContent h2, .boxContent h3 {color:#3d3d3d;}
 /*** Feature box **/
 
-.boxFeature i {color:#3d3d3d ;} 
+.boxFeature i {color:#3d3d3d ;}
 
 /*** Focus box **/
 

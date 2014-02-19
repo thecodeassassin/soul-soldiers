@@ -1,8 +1,7 @@
-
-
-{% if errorMessage %}
-
-{% endif %}<section id="content" class="mt30 pb30 color2">
+{% if error is defined %}
+ {{ dump(error) }}
+{% endif %}
+<section id="content" class="mt30 pb30 color2">
     <div class="container">
         <div class="row">
 

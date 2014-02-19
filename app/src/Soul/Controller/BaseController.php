@@ -38,6 +38,7 @@ class BaseController extends Controller
 
 //
 //        $this->dispatcher->getActiveController();
+       $this->view->setVar('menu', $this->getMenu()->outputHTML());
     }
 
     /**

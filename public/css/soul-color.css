@@ -59,7 +59,7 @@
 	background: none repeat scroll 0 0 #487990 ;
 }
 .pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus{
-	background: none repeat scroll 0 0 #487990 ;
+	background: none repeat scroll 0 0 #2e465c;
 	border-color:#487990 ;
 	color:#fff;
 }
@@ -150,7 +150,7 @@ h2 i {color:#999}
 ================================================== */
 #home, #paralaxSlice1, #paralaxSlice2, #paralaxSlice3 {background-color:#487990;}
 
-#home, #noSliderWrapper {background:url('../img/theme-pics/textures/sea-green-b-2.jpg') no-repeat #487990;}
+/*#home, #noSliderWrapper {background:url('../img/theme-pics/textures/sea-green-b-2.jpg') no-repeat #487990;}*/
 
 
 .paralaxText blockquote, .paralaxText h1, .paralaxText h2, .paralaxText h2 small, .paralaxText h3, .paralaxText p, .paralaxText i{ color:#fff;}
@@ -271,8 +271,9 @@ ul.quickMenu li a:hover {color:#555;}
 	color:#aaa;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus, #resMainMenu li.active>a {
-	color:#487990;
-	background:none;
+	color: #79cbe0;
+	background: none;
+
 }
 .navbar-nav > li.sep:before  {color:#eee;}
 .navbar-default .navbar-nav > li > a.active {color:#487990;}
@@ -292,7 +293,7 @@ ul.quickMenu li a:hover {color:#555;}
 
 	/* normal header (no class on body) */
 	.navbar-nav ul {background:#333;}
-	.navbar-nav ul li a:hover, .navbar-nav ul li.hover>a{background:#487990; color:#fff;}
+	.navbar-nav ul li a:hover, .navbar-nav ul li.hover>a{background:#2e465c; color:#fff;}
 
 	#mainMenu .navbar-nav li{border-bottom:none;}
 	#mainMenu .navbar-nav ul li a{border-bottom:1px solid #444;}
@@ -528,7 +529,7 @@ p.credits {
 	background:#eee;
 }
 p.credits a {color:#487990;}
-}
+
 .widget {border-bottom: 1px dashed #eee}
 
 .search .btn {border: 1px solid #DDD;}

@@ -22,19 +22,19 @@ class Menu
     /**
      * @var string
      */
-    protected $menuWrapper = "<div class='collapse navbar-collapse' id='mainMenu'>%s</div>";
+    public $menuWrapper = "<div class='collapse navbar-collapse' id='mainMenu'>%s</div>";
 
     /**
      * classes to be applied to the main menu
      *
      * @var array
      */
-    protected $menuClasses = ['nav', 'navbar-nav', 'pull-right'];
+    public $menuClasses = ['nav', 'navbar-nav', 'pull-right'];
 
     /**
      * @var array
      */
-    protected $subMenuClasses = ['subMenu'];
+    public $subMenuClasses = ['subMenu'];
 
 
     /**
@@ -42,17 +42,17 @@ class Menu
      *
      * @var string
      */
-    protected $separator = "<li class='sep'></li>";
+    public $separator = "<li class='sep'></li>";
 
     /**
      * @var array
      */
-    protected $primaryLinkClasses = ['primary'];
+    public $primaryLinkClasses = ['primary', 'braces'];
 
     /**
      * @var array
      */
-    protected $subMenuLinkClasses = [];
+    public $subMenuLinkClasses = [];
 
 
     /**
@@ -120,37 +120,6 @@ class Menu
         return static::parseHTML($this);
     }
 
-    /**
-     * @param array $menuClasses
-     */
-    public function setMenuClasses($menuClasses)
-    {
-        $this->menuClasses = $menuClasses;
-    }
-
-    /**
-     * @return array
-     */
-    public function getMenuClasses()
-    {
-        return $this->menuClasses;
-    }
-
-    /**
-     * @param string $menuWrapper
-     */
-    public function setMenuWrapper($menuWrapper)
-    {
-        $this->menuWrapper = $menuWrapper;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMenuWrapper()
-    {
-        return $this->menuWrapper;
-    }
 
     /**
      * @param string $separator
@@ -169,54 +138,6 @@ class Menu
     }
 
     /**
-     * @param array $subMenuClasses
-     */
-    public function setSubMenuClasses($subMenuClasses)
-    {
-        $this->subMenuClasses = $subMenuClasses;
-    }
-
-    /**
-     * @return array
-     */
-    public function getSubMenuClasses()
-    {
-        return $this->subMenuClasses;
-    }
-
-    /**
-     * @param array $primaryLinkClasses
-     */
-    public function setPrimaryLinkClasses($primaryLinkClasses)
-    {
-        $this->primaryLinkClasses = $primaryLinkClasses;
-    }
-
-    /**
-     * @return array
-     */
-    public function getPrimaryLinkClasses()
-    {
-        return $this->primaryLinkClasses;
-    }
-
-    /**
-     * @param array $subMenuLinkClasses
-     */
-    public function setSubMenuLinkClasses($subMenuLinkClasses)
-    {
-        $this->subMenuLinkClasses = $subMenuLinkClasses;
-    }
-
-    /**
-     * @return array
-     */
-    public function getSubMenuLinkClasses()
-    {
-        return $this->subMenuLinkClasses;
-    }
-
-    /**
      *  Output this menu as HTML
      *
      * @param Menu $menu      Menu to parse
@@ -228,7 +149,7 @@ class Menu
     {
 
 
-        $classes = ($isSubMenu ? $menu->getSubMenuClasses() : $menu->getMenuClasses());
+        $classes = ($isSubMenu ? $menu->subMenuClasses : $menu->menuClasses);
         $output = "\n<ul class='".implode(' ', $classes)."'>\n";
 
         $links = $menu->getLinks();
@@ -240,7 +161,7 @@ class Menu
             $subMenuHTML = '';
             $lastItem = ++$count == $linkCount;
 
-            $linkClasses = ($isSubMenu ? $menu->getSubMenuLinkClasses() : $menu->getPrimaryLinkClasses());
+            $linkClasses = ($isSubMenu ? $menu->subMenuLinkClasses : $menu->primaryLinkClasses);
             if ($lastItem) {
                 $linkClasses[] = 'last';
             }
@@ -262,7 +183,7 @@ class Menu
         }
 
         if (!$isSubMenu) {
-            $output = sprintf($menu->getMenuWrapper(), $output);
+            $output = sprintf($menu->menuWrapper, $output);
         }
 
         $output .= '</ul>';
