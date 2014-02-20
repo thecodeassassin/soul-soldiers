@@ -47,7 +47,17 @@ class Menu
     /**
      * @var array
      */
-    public $primaryLinkClasses = ['primary', 'braces'];
+    public $menuLIClasses = ['primary', 'braces'];
+
+    /**
+     * @var array
+     */
+    public $subMenuLIClasses = [];
+
+    /**
+     * @var array
+     */
+    public $menuLinkClasses = [];
 
     /**
      * @var array
@@ -158,23 +168,24 @@ class Menu
         $count = 0;
         foreach ($links as $name => $properties) {
 
+
             $subMenuHTML = '';
             $lastItem = ++$count == $linkCount;
+            $parsedProperties = $menu->parseProperties($properties, $lastItem, $isSubMenu);
 
-            $linkClasses = ($isSubMenu ? $menu->subMenuLinkClasses : $menu->primaryLinkClasses);
-            if ($lastItem) {
-                $linkClasses[] = 'last';
-            }
 
-            if (array_key_exists('subMenu', $properties)) {
+            if ($parsedProperties['hasSubMenu']) {
                 $subMenuHTML = static::parseHTML($properties['subMenu'], true);
             }
 
-            $link = sprintf("\n<a href='%s' class='%s'>%s</a>", $properties['link'], implode(' ', $properties['class']), $name);
+            $link = sprintf("\n<a href='%s' class='%s'>%s</a>", $properties['link'],
+                implode(' ', $parsedProperties['linkClasses']),
+                $name
+            );
             $output .= sprintf("\n\n<li class='%s'>
                 %s
                 %s
-            </li>", implode(' ', $linkClasses), $link, $subMenuHTML);
+            </li>", implode(' ', $parsedProperties['listItemClasses']), $link, $subMenuHTML);
 
             if (!$lastItem && !$isSubMenu) {
                 $output .= $menu->getSeparator();
@@ -189,6 +200,45 @@ class Menu
         $output .= '</ul>';
 
         return $output;
+    }
+
+    /**
+     * Parse the properties of a link item
+     *
+     * @param array $properties the properties of the given list item
+     * @param bool  $isLastItem true if the link is the last one in the list
+     * @param bool  $inSubMenu  item is being processed inside a submenu
+     *
+     * @return array
+     */
+    public function parseProperties(array $properties, $isLastItem = false, $inSubMenu = false)
+    {
+        $parsedProperties = [
+            'hasSubMenu' => false,
+            'linkClasses' => [],
+            'listItemClasses' => []
+        ];
+
+        $parsedProperties['linkClasses'] = $properties['class'];
+
+        if (array_key_exists('subMenu', $properties)) {
+            $parsedProperties['hasSubMenu'] = true;
+
+        }
+
+        if ($inSubMenu) {
+            $parsedProperties['linkClasses'] = array_merge($parsedProperties['linkClasses'], $this->subMenuLinkClasses);
+            $parsedProperties['listItemClasses'] = $this->subMenuLIClasses;
+        } else {
+            $parsedProperties['linkClasses'] = array_merge($parsedProperties['linkClasses'], $this->menuLinkClasses);
+            $parsedProperties['listItemClasses'] = $this->menuLIClasses;
+        }
+
+        if ($isLastItem) {
+            $parsedProperties['listItemClasses'][] = 'last';
+        }
+
+        return $parsedProperties;
     }
 
 }

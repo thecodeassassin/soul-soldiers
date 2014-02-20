@@ -1,5 +1,5 @@
 <?php
-/**  
+/**
  * @author Stephen Hoogendijk
  * @copyright Soul-Soldiers
  *  @package Kernel
@@ -18,8 +18,12 @@ use Phalcon\Error\Application;
  */
 class Kernel extends Application
 {
+    /**
+     * @param DI $di
+     */
     public function __construct(DI $di)
     {
+
         // set the DI
         $this->setDI($di);
 

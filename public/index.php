@@ -51,23 +51,33 @@ $configDist = include __DIR__ . "/../app/config/config.dist.php";
 if ($config->count() != $configDist->count()) {
     die('Fatal: It seems that the configuration file does not contain all the requirements set by the config.dist.php');
 }
-/**
- * Read auto-loader
- */
-include __DIR__ . "/../app/config/loader.php";
 
-/**
- * Read services
- */
-include __DIR__ . "/../app/config/services.php";
+try {
+    /**
+     * Read auto-loader
+     */
+    include __DIR__ . "/../app/config/loader.php";
 
 
-/**
- * Handle the request
- */
+    /**
+     * Read services
+     */
+    include __DIR__ . "/../app/config/services.php";
 
-$kernel = new \Soul\Kernel($di);
+    /**
+     * Handle the request
+     */
 
-echo $kernel->handle()->getContent();
-// exception/404 managed from the dispatcher event
+    $kernel = new \Soul\Kernel($di);
+
+    echo $kernel->handle()->getContent();
+    // exception/404 managed from the dispatcher event
+} catch(\Exception $e) {
+
+    $view = new \Phalcon\Mvc\View\Simple();
+
+    $view->setViewsDir("../app/views/");
+
+    echo $view->render("error/fatal");
+}
 

@@ -20,7 +20,7 @@ use Soul\Menu\Builder;
 
 
 // menu available for everybody
-$defaultMenu = [
+$menuConfig = [
     'Home' => '/',
     'Archief' => [
         'Soul-Soldiers: The Reunion 2013' => BASE_URL.'/archive/1'
@@ -29,58 +29,27 @@ $defaultMenu = [
         'link' => BASE_URL.'/information',
         'Regelement' => BASE_URL.'/rules',
         'Lan-Party checklist' => BASE_URL.'/checklist',
-        'Wat is een lan party?' => BASE_URL.'/lan-description'
-    ]
-];
-
-// guest menu
-$guestMenu = [
+        'Wat is een lan party?' => BASE_URL.'/lan-description',
+        'Competities' => BASE_URL.'/compos'
+    ],
     'Inloggen' => BASE_URL.'/login',
-    'Registreren' => BASE_URL.'/register'
+    'Uitloggen' => BASE_URL.'/logout',
+    'Registreren' => BASE_URL.'/register',
+    'Contact' => BASE_URL.'/contact'
 ];
 
-// authenticated only menu
-$authenticatedMenu = [
-
+// guest only menu items
+$guestOnly = [
+    'Inloggen',
+    'Registeren'
 ];
 
-// Admin only menu
-$adminMenu = [
-
+// authenticated only menu items
+$authenticatedOnly = [
+    'Uitloggen'
 ];
 
-$di->set(
-    'menu',
-    function () use ($defaultMenu, $guestMenu, $authenticatedMenu, $adminMenu, $di) {
+// Admin only menu items
+$adminOnly = [
 
-        $auth = $di->get('auth');
-        $cache = $di->get('cache');
-
-        if ($auth->isLoggedIn()) {
-            $menuConfig = array_merge($defaultMenu, $authenticatedMenu);
-
-            if ($auth->getUserType == \Soul\AclBuilder::ROLE_ADMIN) {
-                $menuConfig = array_merge($menuConfig, $adminMenu);
-            }
-        } else {
-            $menuConfig = array_merge($defaultMenu, $guestMenu);
-        }
-
-
-        $cacheKey = crc32(serialize($menuConfig));
-
-        // disable translations cache in development
-        $disableCache = (APPLICATION_ENV == \Phalcon\Error\Application::ENV_DEVELOPMENT ? true : false);
-
-        if ($cache->exists($cacheKey) && !$disableCache) {
-            return $cache->get($cacheKey);
-        }
-
-        // build the menu and save it in the cache
-        $menu = Builder::build($menuConfig);
-        $cache->save($cacheKey, $menu);
-
-
-        return $menu;
-    }
-);
+];

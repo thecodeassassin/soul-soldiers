@@ -178,7 +178,7 @@ ul.iconsList li a:hover, ul.iconsList i {color:#487990;}
 }
 
 .btn:hover {
-	background: #5faabe;
+	background: #5187a1;
 	/*border-color: #000;*/
 	color: #FFFFFF;
 
@@ -436,7 +436,7 @@ footer h1,footer h2,footer h3,footer h4{color:#777; font-weight:300;}
 
 /* PAGES
 ================================================== */
-.page-header{border-bottom: 1px solid rgba(1,1,1,0.075); background: #5faabe;}
+.page-header{border-bottom: 1px solid rgba(1,1,1,0.075); background: #5187a1;}
 .page-header h1, .page-header p {color:#fff;}
 .page-header.bigHeader h1, .page-header.bigHeader h2, .page-header.bigHeader p {color:#333;}
 
@@ -460,11 +460,11 @@ nav#subnav ul li a.active, nav#subnav ul li a:hover{border-bottom-color:#487990 
 
 /*** OWL Carousel ***/
 .owl-theme .owl-controls .owl-buttons div{background:#487990;}
-.owl-theme .owl-controls .owl-buttons div:hover{background:#5faabe;}
-.owl-theme .owl-controls .owl-page span {background:#5faabe;}
+.owl-theme .owl-controls .owl-buttons div:hover{background:#5187a1;}
+.owl-theme .owl-controls .owl-page span {background:#5187a1;}
 .carouselHome .owl-theme .owl-controls .owl-page span {
 	background:#fff;
-	color:#5faabe;
+	color:#5187a1;
 }
 
 .owlCaption {
@@ -481,7 +481,7 @@ nav#subnav ul li a.active, nav#subnav ul li a:hover{border-bottom-color:#487990 
 	text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.33);
 }
 .camera_caption h2 {
-	color:#5faabe;
+	color:#5187a1;
 	background:#fff;
 }
 .camera_caption .camera_wrap a {background: inherit;}
@@ -775,10 +775,10 @@ section#projectDescription {
 .color2 h1 strong {background:#fff; color:#487990;}
 
 .color2 .ctaBox {border-color:rgba(255,255,255,0.5);}
-.color2 h1:before,.color2 h1:after{color:#5faabe;}
+.color2 h1:before,.color2 h1:after{color:#5187a1;}
 /*** icons ***/
 .iconRounded {color:#487990; border: 1px dashed #487990;}
-.iconRounded:hover, .color1 .iconRounded:hover, .boxIcon a:hover i{background-color:#5faabe;color:#fff;text-shadow: 0 0 5px #FFF; border-style: solid;}
+.iconRounded:hover, .color1 .iconRounded:hover, .boxIcon a:hover i{background-color:#5187a1;color:#fff;text-shadow: 0 0 5px #FFF; border-style: solid;}
 
 .color2 .iconRounded {background-color:#FFF;color:#487990 ;}
 
