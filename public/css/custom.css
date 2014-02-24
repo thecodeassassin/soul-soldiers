@@ -34,6 +34,20 @@ h1 {
     color: #cccccc !important;
 }
 
+/* Form elements */
+
+label {
+    font-size: 13px;
+}
+
+.form-control {
+    padding: 5px;
+    height: 42px;
+    margin-bottom: 5px;
+}
+
+/* End Form Elements */
+
 #mainMenu .navbar-nav li {
     margin-right: 5px;
 }

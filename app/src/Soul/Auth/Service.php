@@ -8,6 +8,7 @@
 namespace Soul\Auth;
 
 use Phalcon\Session\AdapterInterface as Session;
+use Soul\Model\User;
 use Soul\Module;
 use Soul\ServiceBase;
 
@@ -52,10 +53,20 @@ class Service extends ServiceBase
     public function getAuthData()
     {
         if ($this->isLoggedIn()) {
-            return $this->session->get('auth');
+            return unserialize($this->session->get('auth'));
         }
 
         return null;
+    }
+
+    /**
+     * Set authentication data
+     *
+     * @param array $data Authentication data
+     */
+    public function setAuthData(array $data)
+    {
+        $this->session->set('auth', serialize($data));
     }
 
 
@@ -69,6 +80,31 @@ class Service extends ServiceBase
         if ($authData = $this->getAuthData()) {
             return $authData->getUserType();
         }
+    }
+
+    /**
+     * Checks for a valid username / password combination
+     *
+     * @param string $email    User's email
+     * @param string $password User's password
+     * @return bool
+     */
+    public function check($email, $password)
+    {
+        $user = new User();
+
+        $hasAccount = User::findFirst(
+            [
+                "email = '$email'",
+                "password = '".sha1($password)."'"
+            ]
+        );
+
+        if ($hasAccount) {
+            return true;
+        };
+
+        return false;
     }
 
     /**

@@ -149,11 +149,6 @@ class AclBuilder extends Plugin
                                 $controller));
                         }
 
-                        // deny actions for all roles first
-                        foreach ($this->roles as $denyRole) {
-                            $this->processActions($denyRole, $controller, $actions, 'deny');
-                        }
-
                         // allow actions for this specific role
                         $this->processActions($role, $controller, $actions, 'allow');
 

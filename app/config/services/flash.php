@@ -4,7 +4,8 @@
  */
 $di->set('flash', function(){
     $flash = new Phalcon\Flash\Session(array(
-        'error' => 'alert alert-error',
+        'error' => 'alert alert-danger',
+        'warning' => 'alert alert-warning',
         'success' => 'alert alert-success',
         'notice' => 'alert alert-info',
     ));

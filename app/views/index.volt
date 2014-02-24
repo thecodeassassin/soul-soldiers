@@ -50,7 +50,7 @@
                 <div class="row">
                     <div class="col-xs-6">
                         <ul class="quickMenu">
-                            <li><a href="template-site-map.html" class="linkLeft">Site map</a></li>
+                            {#<li><a href="template-site-map.html" class="linkLeft">Site map</a></li>#}
                         </ul>
                     </div>
                     <div class="col-xs-6">
@@ -97,7 +97,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <!-- Logo -->
-                        <a class="navbar-brand" href="index.html"><img src="img/main-logo.png" alt="Soul-Soldiers"/></a>
+                        <a class="navbar-brand" href="index.html"><img src="/img/main-logo.png" alt="Soul-Soldiers"/></a>
                     </div>
                     <!-- Main navigation -->
                     {{ menu }}
@@ -111,7 +111,12 @@
 
         {# Actual content #}
         <section id="content" class="pt30 pb30 color2">
-        {{ content() }}
+            <div class="container">
+                <div class="row">
+                    <div id="messages col-md-3 col-md-offset-3">{{ flash.output() }}</div>
+                </div>
+            </div>
+            {{ content() }}
         </section>
         {# /Content #}
 
@@ -121,7 +126,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="footerWidget">
-                                <img src="" alt="Soul-Soldiers" id="footerLogo">
+                                {#<img src="/img/main-logo.png" alt="Soul-Soldiers" id="footerLogo">#}
                                 <p>
                                     &copy; Soul-Soldiers 2014
                                 </p>
