@@ -1,6 +1,6 @@
 <?php
 
-$aclConfig = include __DIR__ . '/../acl.php';
+$aclConfig = include __DIR__ . '/../aclConfig.php';
 
 $cache = \Phalcon\DI::getDefault()->get('cache');
 
@@ -14,7 +14,10 @@ try {
      */
     $aclConfigKey = crc32(serialize($aclConfig));
 
-    if (!$cache->exists($aclConfigKey)) {
+    // disable translations cache in development
+    $disableCache = (APPLICATION_ENV == \Phalcon\Error\Application::ENV_DEVELOPMENT ? true : false);
+
+    if (!$cache->exists($aclConfigKey) || $disableCache) {
 
         $acl = new \Phalcon\Acl\Adapter\Memory();
 
@@ -23,7 +26,10 @@ try {
 
         // build the ACL
         \Soul\AclBuilder::build($acl, $aclConfig);
-        $cache->save($aclConfigKey, $acl);
+
+        if (!$disableCache) {
+            $cache->save($aclConfigKey, $acl);
+        }
 
     } else {
         $acl = $cache->get($aclConfigKey);

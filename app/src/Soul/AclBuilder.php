@@ -17,7 +17,8 @@ use Phalcon\Mvc\User\Plugin;
  * @todo improve documentation
  *
 */
-class AclBuilder extends Plugin {
+class AclBuilder extends Plugin
+{
 
     const PUBLIC_RESOURCE = 'public';
 
@@ -45,14 +46,16 @@ class AclBuilder extends Plugin {
     /**
      * Method for adding the acl to the di container
      */
-    public function addAclToDi() {
+    public function addAclToDi()
+    {
         $this->di->setShared('acl', $this->acl);
     }
 
     /**
      * @return array
      */
-    public function getRoles() {
+    public function getRoles()
+    {
         return $this->roles;
     }
 
@@ -61,7 +64,8 @@ class AclBuilder extends Plugin {
      * @param \Phalcon\Config $config
      * @return \Soul\AclBuilder
      */
-    protected  function __construct(Acl\Adapter\Memory $acl, Config $config) {
+    protected  function __construct(Acl\Adapter\Memory $acl, Config $config)
+    {
 
         $this->config = $config;
         $this->acl = $acl;
@@ -71,7 +75,8 @@ class AclBuilder extends Plugin {
     /**
      *
      */
-    protected function _addRoles() {
+    protected function addRoles()
+    {
         foreach($this->config->roles as $role) {
             $this->acl->addRole($this->roles[strtolower($role)] = new Acl\Role($role));
         }
@@ -82,7 +87,8 @@ class AclBuilder extends Plugin {
      * @return bool
      * @throws \Phalcon\Acl\Exception
      */
-    protected function _processPublicControllers() {
+    protected function processPublicControllers()
+    {
         $publicControllers = $this->config->publiccontrollers;
 
         // if the public resources config does not exist, or is not a valid array, skip processing it.
@@ -97,7 +103,7 @@ class AclBuilder extends Plugin {
             }
 
             foreach ($this->roles as $role) {
-                $this->_processActions($role, $controller, '*');
+                $this->processActions($role, $controller, '*');
             }
         }
 
@@ -107,7 +113,7 @@ class AclBuilder extends Plugin {
     /**
      *
      */
-    protected function _processResources()
+    protected function processResources()
     {
         if (count($this->roles) == 0) {
             throw new Exception('Add the roles before processing the resources');
@@ -145,11 +151,11 @@ class AclBuilder extends Plugin {
 
                         // deny actions for all roles first
                         foreach ($this->roles as $denyRole) {
-                            $this->_processActions($denyRole, $controller, $actions, 'deny');
+                            $this->processActions($denyRole, $controller, $actions, 'deny');
                         }
 
                         // allow actions for this specific role
-                        $this->_processActions($role, $controller, $actions);
+                        $this->processActions($role, $controller, $actions, 'allow');
 
                     }
 
@@ -167,7 +173,7 @@ class AclBuilder extends Plugin {
      *
      * @throws \Phalcon\Acl\Exception
      */
-    protected function _processActions(Acl\Role $role, $controller, $actions, $method = 'allow')
+    protected function processActions(Acl\Role $role, $controller, $actions, $method = 'allow')
     {
         if(!in_array($method, array('allow', 'deny'))){
             throw new Acl\Exception(sprintf('Invalid %s method: %s. Allowed methods: allow, deny', __FUNCTION__, $method));
@@ -194,13 +200,13 @@ class AclBuilder extends Plugin {
         $obj = new self($acl, $config);
 
         // add the roles to the acl
-        $obj->_addRoles();
+        $obj->addRoles();
 
         // process the public controllers
-        $obj->_processPublicControllers();
+        $obj->processPublicControllers();
 
         // process the resources
-        $obj->_processResources();
+        $obj->processResources();
 
     }
 

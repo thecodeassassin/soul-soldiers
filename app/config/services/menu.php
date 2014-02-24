@@ -3,7 +3,7 @@
  * @author Stephen "TheCodeAssassin" Hoogendijk <admin@tca0.nl>
  */
 
-include __DIR__ . '/../menu.php';
+include __DIR__ . '/../menuConfig.php';
 
 use Soul\Menu\Builder;
 

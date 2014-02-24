@@ -1,7 +1,11 @@
 /** Soul-Soldiers custom CSS **/
 
 body {
-    text-shadow: 0px 0px 4px #000;
+    text-shadow: 0px 0px 1px #1e1e1e;
+}
+
+h1 {
+    text-shadow: 0px 0px 4px #1e1e1e;
 }
 
 /*Menu Fix*/
@@ -71,6 +75,12 @@ body {
     color: transparent;/* It makes the curly braces invisible at the beginning.*/
     text-shadow: none;
 }
+
+/* Fix for the fixed header menu */
+.fixedHeader .braces:before, .fixedHeader .braces:after {
+    top: 19px;
+}
+
 .braces:hover:before, .braces:hover:after {
     color: #ccc;
 }

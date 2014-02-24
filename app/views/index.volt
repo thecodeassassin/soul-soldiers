@@ -41,8 +41,7 @@
 
         {# Custom javascript #}
     </head>
-    <body class="activateAppearAnimation">
-      {{ content() }}
+    <body>
         <div id="globalWrapper">
         <header class="navbar-fixed-top">
         <!-- pre header -->
@@ -110,58 +109,64 @@
         </header>
         <!-- header -->
 
-            <footer id="footerWrapper">
-                <section id="mainFooter">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="footerWidget">
-                                    <img src="" alt="Soul-Soldiers" id="footerLogo">
+        {# Actual content #}
+        <section id="content" class="pt30 pb30 color2">
+        {{ content() }}
+        </section>
+        {# /Content #}
+
+        <footer id="footerWrapper">
+            <section id="mainFooter">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="footerWidget">
+                                <img src="" alt="Soul-Soldiers" id="footerLogo">
+                                <p>
+                                    &copy; Soul-Soldiers 2014
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="footerWidget">
+
+                                <h3>Soul-Soldiers</h3>
+                                <address>
                                     <p>
-                                        &copy; Soul-Soldiers 2014
+                                        <i class="icon-mail-alt"></i>&nbsp;<a href="mailto:info@soul-soldiers.nl">info@soul-soldiers.nl</a>
                                     </p>
-                                </div>
+                                </address>
                             </div>
-
-                            <div class="col-sm-3">
-                                <div class="footerWidget">
-
-                                    <h3>Soul-Soldiers</h3>
-                                    <address>
-                                        <p>
-                                            <i class="icon-mail-alt"></i>&nbsp;<a href="mailto:info@soul-soldiers.nl">info@soul-soldiers.nl</a>
-                                        </p>
-                                    </address>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="footerWidget">
-                                    <h3>Social Media</h3>
-                                    <ul class="socialNetwork">
-                                        <li><a href="http://facebook.com/soulsoldiers" target="_blank" class="tips" title="" data-original-title="follow us on Facebook"><i class="icon-facebook-1 iconRounded"></i></a></li>
-                                        <li><a href="http://twitter.com/soulsoldiers2" target="_blank" class="tips" title="" data-original-title="follow us on Twitter"><i class="icon-twitter-bird iconRounded"></i></a></li>
-                                        {#<li><a href="#" class="tips" title="" data-original-title="follow me on Google+"><i class="icon-gplus-1 iconRounded"></i></a></li>#}
-                                        {#<li><a href="#" class="tips" title="" data-original-title="follow me on Linkedin"><i class="icon-linkedin-1 iconRounded"></i></a></li>#}
-                                        {#<li><a href="#" class="tips" title="" data-original-title="follow me on Dribble"><i class="icon-dribbble iconRounded"></i></a></li>#}
-                                    </ul>
-                                </div>
-                            </div>
-
                         </div>
-                    </div>
-                </section>
-
-                <section id="footerRights">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p>Copyright &copy; 2014 Soul-Soldiers / All rights reserved.</p>
+                        <div class="col-sm-3">
+                            <div class="footerWidget">
+                                <h3>Social Media</h3>
+                                <ul class="socialNetwork">
+                                    <li><a href="http://facebook.com/soulsoldiers" target="_blank" class="tips" title="" data-original-title="follow us on Facebook"><i class="icon-facebook-1 iconRounded"></i></a></li>
+                                    <li><a href="http://twitter.com/soulsoldiers2" target="_blank" class="tips" title="" data-original-title="follow us on Twitter"><i class="icon-twitter-bird iconRounded"></i></a></li>
+                                    {#<li><a href="#" class="tips" title="" data-original-title="follow me on Google+"><i class="icon-gplus-1 iconRounded"></i></a></li>#}
+                                    {#<li><a href="#" class="tips" title="" data-original-title="follow me on Linkedin"><i class="icon-linkedin-1 iconRounded"></i></a></li>#}
+                                    {#<li><a href="#" class="tips" title="" data-original-title="follow me on Dribble"><i class="icon-dribbble iconRounded"></i></a></li>#}
+                                </ul>
                             </div>
-
                         </div>
+
                     </div>
-                </section>
-            </footer>
+                </div>
+            </section>
+
+            <section id="footerRights">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>Copyright &copy; 2014 Soul-Soldiers / All rights reserved.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </footer>
 
         </div>
     </body>

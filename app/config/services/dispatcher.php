@@ -1,41 +1,29 @@
-<?php
-
+ <?php
+//
+ /**
+  * Initialize the security plugin
+  */
 use Phalcon\Mvc\Dispatcher\Exception as DispatchException;
 
-$di->set('dispatcher', function() use ($config){
+$di->set('dispatcher', function() use ($di) {
 
-    $dispatcher = new \Phalcon\Mvc\Dispatcher();
+    //Obtain the standard eventsManager from the DI
+    $eventsManager = $di->getShared('eventsManager');
 
-    $eventsManager = new \Phalcon\Events\Manager();
+    // Instantiate the Security plugin
+    $security = new \Soul\Security($di);
 
-    // when working on the development environment, we need the debugger to show us what is going bad
-    if (APPLICATION_ENV != "development") {
+    //Listen for events produced in the dispatcher using the Security plugin
+    $eventsManager->attach('dispatch', $security);
 
-
-
-
-    }
-
-    /**
-     * attach a listener to redirect to the login page if not logged
-     */
-    $eventsManager->attach("dispatch:beforeExecuteRoute", function($event, $dispatcher, $exception) {
-        /* @var $dispatcher \Phalcon\Dispatcher */
-
-        $authService = $dispatcher->getDi()->get("auth");
-
-        // if user is not logged and not in the AuthController, then we redirect him to the login screen
-        if (!$authService->isLoggedIn() && $dispatcher->getControllerName() != "auth") {
-            return $dispatcher->getDi()->get("response")->redirect('login');
-        }
-
-        return true;
-
-    });
+    $dispatcher = new Phalcon\Mvc\Dispatcher();
+    $dispatcher->setDefaultNamespace('Soul\Controller');
+    $dispatcher->setControllerSuffix('');
 
 
-    //Bind the eventsManager to the view component
+
+    //Bind the EventsManager to the Dispatcher
     $dispatcher->setEventsManager($eventsManager);
 
-    return $dispatcher;
-});
+     return $dispatcher;
+    });

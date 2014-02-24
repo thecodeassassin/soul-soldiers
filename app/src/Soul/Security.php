@@ -50,7 +50,10 @@ class Security extends Module
 
 
         //Obtain the ACL list
-        $acl = $this->_getAcl();
+        $acl = $this->getACL();
+
+        die(var_dump($role, $controller, $action, $acl->isAllowed($role, $controller, $action)));
+
 
         //Check if the Role have access to the controller (resource)
         $allowed = $acl->isAllowed($role, $controller, $action);
@@ -70,7 +73,8 @@ class Security extends Module
     /**
      * @return \Phalcon\Acl\Adapter\Memory
      */
-    protected function _getAcl() {
+    protected function getACL()
+    {
         return $this->di->get('acl');
 
     }

@@ -1,55 +1,43 @@
-{% if error is defined %}
- {{ dump(error) }}
-{% endif %}
-<section id="content" class="mt30 pb30 color2">
-    <div class="container">
-        <div class="row">
+<div class="container">
+    <div class="row">
 
-            {% if error['message'] %}
-            <div class="col-md-6 col-md-offset-3">
-                <h1>Error</h1>
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Code</th>
-                            <th>Message</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                           <tr>
-                            <td>{{ error['code'] }}</td>
-                            <td>{{ error['message']}}</td>
-                           </tr>
-                        </tbody>
-                    </table>
-            </div>
-            {% endif %}
+        {% if error['message'] %}
+        <div class="col-md-6 col-md-offset-3">
+            <div class="alert alert-danger">Error {{ error['code'] }}: {{ error['message']}}</div>
+        </div>
+        {% endif %}
 
-            <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-3">
 
-                <article class="boxIcon text-center" style="opacity: 1;">
+            <article class="boxIcon text-center" style="opacity: 1;">
 
-                    <i class="icon-unlink iconBig iconRounded"></i>
-                    {% if code == 404 %}
-                    <h1>Pagina niet gevonden</h1>
-                    <p>De pagina die u zoekt bestaat niet (meer).</p>
-                    {% else %}
-                        <h1>Er is een fout opgetreden</h1>
-                        <p>
-                            Er is iets onverwachts mis gegaan, onze excuses voor het ongemak.
-                            <br />
-                            {% if error['code'] %}
-                                U kunt de volgende code doorgeven als u contact met ons opneemt: {{ error['code'] }}.
-                            {% endif %}
+                {% if code == 404 %}
+                <i class="icon-unlink iconBig iconRounded"></i>
+                <h1>Pagina niet gevonden</h1>
+                <p>De pagina die u zoekt bestaat niet (meer).</p>
+                {% elseif code == 403 %}
+                <i class="icon-frown iconBig iconRounded"></i>
+                <h1>Geen toegang</h1>
+                <p>U heeft geen toegang tot deze pagina.</p>
+                {% else %}
+                    <i class="icon-bug iconBig iconRounded"></i>
+                    <h1>Er is een fout opgetreden</h1>
+                    <p>
+                        Er is iets onverwachts mis gegaan, onze excuses voor het ongemak.
+                        <br />
+                        {% if error['code'] %}
+                            U kunt de volgende code doorgeven als u contact met ons opneemt: {{ error['code'] }}.
+                        {% endif %}
 
-                        </p>
-                    {% endif %}
+                    </p>
+                {% endif %}
 
-                    <a href="javascript:history.back()" class="btn btn-lg btn-primary mt15">{{ 'Terug naar vorige pagina' }}</a>
-                </article>
 
-            </div>
+
+                <a href="javascript:history.back()" class="btn btn-lg btn-primary mt15">{{ 'Terug naar vorige pagina' }}</a>
+            </article>
 
         </div>
+
     </div>
-</section>
+</div>
