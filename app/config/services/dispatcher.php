@@ -18,12 +18,9 @@ $di->set('dispatcher', function() use ($di) {
 
     $dispatcher = new Phalcon\Mvc\Dispatcher();
     $dispatcher->setDefaultNamespace('Soul\Controller');
-    $dispatcher->setControllerSuffix('');
-
-
 
     //Bind the EventsManager to the Dispatcher
     $dispatcher->setEventsManager($eventsManager);
 
      return $dispatcher;
-    });
+});

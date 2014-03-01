@@ -1,11 +1,12 @@
 <?php
 namespace Soul\Controller;
+
 use Phalcon\Error\Application;
 
 /**
  * Class ErrorController
  */
-class ErrorController extends BaseController
+class ErrorController extends Base
 {
 
 
@@ -13,9 +14,10 @@ class ErrorController extends BaseController
     /**
      * Handle general errors
      */
-    public function indexAction($errorCode = null)
+    public function indexAction($httpStatusCode = null)
     {
-        $code = (!is_null($errorCode) ? $errorCode : 404);
+        $httpStatusCode = (!is_null($httpStatusCode) ? $httpStatusCode : 500);
+
         $dispatchError = null;
         $error = null;
 
@@ -33,17 +35,12 @@ class ErrorController extends BaseController
             }
         }
 
-
-        switch ($code) {
-            case 404:
-                $code = 404;
-                break;
-            default:
-                $code = 500;
+        if ($httpStatusCode instanceof \Phalcon\Error\Error) {
+            $httpStatusCode = 500;
         }
 
-        $this->getDi()->getShared('response')->resetHeaders()->setStatusCode($code, null);
-        $this->view->setVar('code', $code);
+        $this->getDi()->getShared('response')->resetHeaders()->setStatusCode($httpStatusCode, null);
+        $this->view->setVar('code', $httpStatusCode);
         $this->view->setVar('error', $error);
 
     }
@@ -66,6 +63,18 @@ class ErrorController extends BaseController
                 'controller' => 'error',
                 'action'    => 'index',
                 'params'    => [404]
+            ]
+        );
+    }
+
+
+    public function notAuthenticatedAction()
+    {
+        $this->dispatcher->forward(
+            [
+                'controller' => 'error',
+                'action'    => 'index',
+                'params'    => [403]
             ]
         );
     }

@@ -11,7 +11,7 @@ $di->set('view', function() use ($config) {
 
     $view = new View();
 
-    $view->setViewsDir($config->application->viewsDir);
+    $view->setViewsDir($config->application->libraryDir.'Soul/View/');
 
     $view->registerEngines(array(
         '.volt' => function($view, $di) use ($config) {

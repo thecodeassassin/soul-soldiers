@@ -2,12 +2,16 @@
 namespace Soul\Model;
 
 use Phalcon\Mvc\Model\Validator\Email as Email;
+use Soul\Auth\Exception;
+use Soul\Auth\Service as AuthService;
+use Soul\Auth\Data as AuthData;
+use Soul\Util;
 
 /**
  * Class User
  * @package Soul\Model
  */
-class User extends BaseModel
+class User extends Base
 {
 
     /**
@@ -83,7 +87,22 @@ class User extends BaseModel
     public $isActive;
 
     /**
+     * @var integer
+     */
+    public $state;
+
+    const STATE_INACTIVE = 0;
+
+    const STATE_ACTIVE = 1;
+
+    const STATE_REQUIRES_PASSWORD_CHANGE = 2;
+
+    const STATE_BANNED = 3;
+
+    /**
      * Validations and business logic
+     *
+     * @return bool
      */
     public function validation()
     {
@@ -111,7 +130,56 @@ class User extends BaseModel
     }
 
     /**
+     * Run forgot password routine
+     * returns true if the password was reset and mailed to the user
+     *
+     * @return bool
+     */
+    public function forgotPassword()
+    {
+
+        // set the password to a temporary one and email the user with this temporary password
+        if ($this->state == self::STATE_ACTIVE) {
+            $this->password = Util::generateRandomPassword();
+            $this->state = self::STATE_REQUIRES_PASSWORD_CHANGE;
+
+            // todo mail user
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Authenticate a user
+     *
+     * @param string $email    user's email
+     * @param string $password user's password
+     *
+     * @return bool
+     */
+    public static function authenticate($email, $password)
+    {
+        // add a login attempt
+        FailedAttempt::add($email);
+
+        $authService = new AuthService();
+
+        $authUser = $authService->check($email, $password);
+        if ($authUser instanceof self) {
+            $authService->setAuthData(AuthData::buildFromUser($authUser));
+
+            return true;
+        }
+
+        Throw new Exception('E-mail en/of wachtwoord is ongeldig');
+    }
+
+    /**
      * Independent Column Mapping.
+     *
+     * @return array
      */
     public function columnMap()
     {
@@ -127,7 +195,8 @@ class User extends BaseModel
             'telephone' => 'telephone',
             'userType' => 'userType',
             'confirmKey' => 'confirmKey',
-            'isActive' => 'isActive'
+            'isActive' => 'isActive',
+            'state' => 'state'
         );
     }
 

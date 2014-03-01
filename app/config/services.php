@@ -13,33 +13,37 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
  */
 $di = new FactoryDefault();
 
-// read all the services
+
+/**
+ * Read auto-loader
+ */
+include __DIR__ . "/services/loader.php";
 
 
 // load the caching service
-include __DIR__."/services/caches.php";
+include __DIR__ . "/services/caches.php";
 
 
 // load the session service
-include __DIR__."/services/session.php";
+include __DIR__ . "/services/session.php";
 
 // load the translation service
-include __DIR__."/services/translate.php";
+include __DIR__ . "/services/translate.php";
 
 // load the view services
-include __DIR__."/services/view.php";
+include __DIR__ . "/services/view.php";
 
 // load the url service
-include __DIR__."/services/url.php";
+include __DIR__ . "/services/url.php";
 
 // load the db service
-include __DIR__."/services/db.php";
+include __DIR__ . "/services/db.php";
 
 // load the flash service
-include __DIR__."/services/flash.php";
+include __DIR__ . "/services/flash.php";
 
 // load the ACL
-include __DIR__."/services/acl.php";
+include __DIR__ . "/services/acl.php";
 
 // load the security service
 include __DIR__ . "/services/dispatcher.php";

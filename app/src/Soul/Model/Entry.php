@@ -6,7 +6,7 @@ namespace Soul\Model;
  *
  * @package Soul\Model
  */
-class Entry extends BaseModel
+class Entry extends Base
 {
 
     /**
@@ -14,19 +14,19 @@ class Entry extends BaseModel
      * @var integer
      */
     public $entryId;
-     
+
     /**
      *
      * @var integer
      */
     public $eventId;
-     
+
     /**
      *
      * @var integer
      */
     public $userId;
-     
+
     /**
      * Initialize method for model.
      */
@@ -42,8 +42,8 @@ class Entry extends BaseModel
     public function columnMap()
     {
         return array(
-            'entryId' => 'entryId', 
-            'eventId' => 'eventId', 
+            'entryId' => 'entryId',
+            'eventId' => 'eventId',
             'userId' => 'userId'
         );
     }

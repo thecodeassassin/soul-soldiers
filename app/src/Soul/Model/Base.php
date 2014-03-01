@@ -1,9 +1,9 @@
 <?php
-/**  
+/**
  * @author Stephen Hoogendijk
  * @copyright Soul-Soldiers
  *
- * @package Base 
+ * @package Base
  */
 namespace Soul\Model;
 
@@ -14,7 +14,7 @@ namespace Soul\Model;
  *
  * @package Soul\Model
  */
-class BaseModel extends  \Phalcon\Mvc\Model
+class Base extends  \Phalcon\Mvc\Model
 {
 
 }

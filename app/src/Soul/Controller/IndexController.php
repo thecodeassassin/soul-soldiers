@@ -1,9 +1,19 @@
 <?php
 namespace Soul\Controller;
 
-class IndexController extends BaseController
+/**
+ * Class IndexController
+ *
+ * @package Soul\Controller
+ *
+ */
+class IndexController extends Base
 {
 
+
+    /**
+     * Index action
+     */
     public function indexAction()
     {
 //        $users = new User();
@@ -13,4 +23,3 @@ class IndexController extends BaseController
     }
 
 }
-

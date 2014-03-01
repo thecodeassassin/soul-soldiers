@@ -5,6 +5,8 @@
 
 namespace Soul\Auth;
 
+use Soul\Model\User;
+
 /**
  * Authentication data
  *
@@ -18,14 +20,19 @@ class Data
     protected $email = null;
     protected $realName = null;
     protected $userType = null;
+    protected $userState = null;
 
 
     /**
      * @param string $email
+     *
+     * @return Data
      */
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
     }
 
     /**
@@ -38,10 +45,14 @@ class Data
 
     /**
      * @param string $nickName
+     *
+     * @return Data
      */
     public function setNickName($nickName)
     {
         $this->nickName = $nickName;
+
+        return $this;
     }
 
     /**
@@ -54,10 +65,14 @@ class Data
 
     /**
      * @param string $realName
+     *
+     * @return Data
      */
     public function setRealName($realName)
     {
         $this->realName = $realName;
+
+        return $this;
     }
 
     /**
@@ -70,10 +85,14 @@ class Data
 
     /**
      * @param int $userId
+     *
+     * @return Data
      */
     public function setUserId($userId)
     {
         $this->userId = $userId;
+
+        return $this;
     }
 
     /**
@@ -86,10 +105,14 @@ class Data
 
     /**
      * @param int $userType
+     *
+     * @return Data
      */
     public function setUserType($userType)
     {
         $this->userType = $userType;
+
+        return $this;
     }
 
     /**
@@ -100,5 +123,44 @@ class Data
         return $this->userType;
     }
 
+    /**
+     * @param null $userState
+     *
+     * @return Data
+     */
+    public function setUserState($userState)
+    {
+        $this->userState = $userState;
 
+        return $this;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUserState()
+    {
+        return $this->userState;
+    }
+
+    /**
+     * Build user data object from user
+     *
+     * @param User $user user object
+     *
+     * @return \Soul\Auth\Data
+     */
+    public static function buildFromUser(User $user)
+    {
+        $instance = new self();
+
+        $instance->setEmail($user->email)
+                 ->setUserId($user->userId)
+                 ->setUserType($user->userType)
+                 ->setNickName($user->nickName)
+                 ->setUserState($user->state);
+
+        return $instance;
+
+    }
 }

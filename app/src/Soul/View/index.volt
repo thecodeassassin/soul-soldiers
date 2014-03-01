@@ -12,7 +12,7 @@
 
         {# Layout CSS #}
         {{ stylesheet_link("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700", false) }}
-        {{ stylesheet_link("bootstrap/css/bootstrap.css") }}
+        {{ stylesheet_link("//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", false) }}
         {{ stylesheet_link("css/soul-color.css") }}
         {{ stylesheet_link("font-icons/custom-icons/css/custom-icons.css") }}
         {{ stylesheet_link("font-icons/custom-icons/css/custom-icons-ie7.css") }}
@@ -25,14 +25,14 @@
         {{ javascript_include("js-plugin/respond/respond.min.js") }}
         {{ javascript_include("js-plugin/jquery/jquery-1.10.2.min.js") }}
         {{ javascript_include("js-plugin/jquery-ui/jquery-ui-1.8.23.custom.min.js") }}
-        {{ javascript_include("bootstrap/js/bootstrap.js") }}
+        {{ javascript_include("//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js", false) }}
         {{ javascript_include("js-plugin/easing/jquery.easing.1.3.js") }}
 
         {{ javascript_include("js-plugin/neko-contact-ajax-plugin/js/jquery.form.js") }}
         {{ javascript_include("js-plugin/neko-contact-ajax-plugin/js/jquery.validate.min.js") }}
         {{ javascript_include("js-plugin/appear/jquery.appear.js") }}
-        {{ javascript_include("js-plugin/ytplayer/jquery.mb.YTPlayer_modifed.js") }}
-        {{ javascript_include("js-plugin/parallax/js/jquery.stellar.min.js") }}
+        {#{{ javascript_include("js-plugin/ytplayer/jquery.mb.YTPlayer_modifed.js") }}#}
+        {#{{ javascript_include("js-plugin/parallax/js/jquery.stellar.min.js") }}#}
         {{ javascript_include("js-plugin/toucheeffect/toucheffects.js") }}
         {{ javascript_include("js/jquery.loadmask.js") }}
         {{ javascript_include("js/custom.js") }}
@@ -113,7 +113,7 @@
         <section id="content" class="pt30 pb30 color2">
             <div class="container">
                 <div class="row">
-                    <div id="messages col-md-3 col-md-offset-3">{{ flash.output() }}</div>
+                    <div id="messages" class="col-md-8 col-md-offset-2">{{ flash.output() }}</div>
                 </div>
             </div>
             {{ content() }}

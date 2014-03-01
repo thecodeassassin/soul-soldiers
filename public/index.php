@@ -28,7 +28,7 @@ if (!is_readable(APPLICATION_PATH . '/../vendor/autoload.php')) {
 }
 
 if (APPLICATION_ENV == 'development') {
-    ini_set('display_errors' , 1);
+    ini_set('display_errors', 1);
 }
 
 // create the logfile if it doesn't exist
@@ -51,13 +51,6 @@ $configDist = include __DIR__ . "/../app/config/config.dist.php";
 if ($config->count() != $configDist->count()) {
     die('Fatal: It seems that the configuration file does not contain all the requirements set by the config.dist.php');
 }
-
-
-/**
- * Read auto-loader
- */
-include __DIR__ . "/../app/config/loader.php";
-
 
 /**
  * Read services

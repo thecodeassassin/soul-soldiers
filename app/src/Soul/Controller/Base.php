@@ -6,6 +6,7 @@ use Phalcon\Config;
 use Phalcon\Mvc\Controller;
 use Soul\Menu;
 use Soul\Translate;
+use Soul\Util;
 
 /**
  * Base controller for all controllers
@@ -91,5 +92,48 @@ class Base extends Controller
     {
         return $this->translate;
     }
+
+    protected function setLastPage()
+    {
+        $referer = $_SERVER['HTTP_REFERER'];
+
+        // do not overwrite if the user simply refreshes
+        if ($referer != Util::getCurrentUrl()) {
+            $this->session->set('referer', $referer);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getLastPage()
+    {
+        return $this->session->get('referer');
+    }
+
+    /**
+     * Redirect to the last known page
+     */
+    protected function redirectToLastPage()
+    {
+        $this->response->redirect($this->getLastPage(), true);
+    }
+
+    /**
+     * Flash an array of messages
+     *
+     * @param array|\stdClass  $messages
+     * @param string           $type
+     */
+    protected function flashMessages($messages, $type = 'error')
+    {
+        $output = '';
+        foreach ($messages as $message) {
+            $output .= "&nbsp;<span class='glyphicon glyphicon-chevron-right'></span>&nbsp; $message <br />";
+        }
+        $this->flash->$type($output);
+
+    }
+
 
 }

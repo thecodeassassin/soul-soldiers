@@ -6,7 +6,7 @@ namespace Soul\Model;
  *
  * @package Soul\Model
  */
-class FeedBack extends BaseModel
+class FeedBack extends Base
 {
 
     /**
@@ -14,25 +14,25 @@ class FeedBack extends BaseModel
      * @var integer
      */
     public $feedbackId;
-     
+
     /**
      *
      * @var string
      */
     public $message;
-     
+
     /**
      *
      * @var integer
      */
     public $score;
-     
+
     /**
      *
      * @var integer
      */
     public $userId;
-     
+
     /**
      * Initialize method for model.
      */
@@ -48,9 +48,9 @@ class FeedBack extends BaseModel
     public function columnMap()
     {
         return array(
-            'feedbackId' => 'feedbackId', 
-            'message' => 'message', 
-            'score' => 'score', 
+            'feedbackId' => 'feedbackId',
+            'message' => 'message',
+            'score' => 'score',
             'userId' => 'userId'
         );
     }

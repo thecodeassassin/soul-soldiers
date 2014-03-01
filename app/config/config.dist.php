@@ -9,7 +9,7 @@ return new \Phalcon\Config(
             'dbname'      => '',
         ],
         'application' => [
-            'viewsDir'       => APPLICATION_PATH . '/views/',
+            'libraryDir'     => APPLICATION_PATH . '/src/',
             'pluginsDir'     => APPLICATION_PATH . '/plugins/',
             'cacheDir'       => APPLICATION_PATH . '/cache/',
             'locales'        => APPLICATION_PATH .'/locales/',

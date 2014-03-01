@@ -9,8 +9,9 @@
         }
     ],
     "require": {
-        "php": ">=5.3.6",
-        "phalcon/incubator": "dev-master"
+        "php": ">=5.4",
+        "phalcon/incubator": "dev-master",
+        "mrclay/minify": "2.*"
     },
     "repositories": [
         {
@@ -30,6 +31,14 @@
             }
         }
     ],
+    "scripts": {
+        "post-install-cmd": [
+
+        ],
+        "post-update-cmd": [
+
+        ]
+    },
     "autoload": {
         "psr-0" : {
             "Soul"    :   "app/src",

@@ -6,7 +6,7 @@ namespace Soul\Model;
  *
  * @package Soul\Model
  */
-class Payment extends BaseModel
+class Payment extends Base
 {
 
     /**
@@ -14,37 +14,37 @@ class Payment extends BaseModel
      * @var integer
      */
     public $paymentId;
-     
+
     /**
      *
      * @var integer
      */
     public $userId;
-     
+
     /**
      *
      * @var integer
      */
     public $productId;
-     
+
     /**
      *
      * @var string
      */
     public $transactionId;
-     
+
     /**
      *
      * @var double
      */
     public $amount;
-     
+
     /**
      *
      * @var string
      */
     public $confirmed;
-     
+
     /**
      * Initialize method for model.
      */
@@ -60,11 +60,11 @@ class Payment extends BaseModel
     public function columnMap()
     {
         return array(
-            'paymentId' => 'paymentId', 
-            'userId' => 'userId', 
-            'productId' => 'productId', 
-            'transactionId' => 'transactionId', 
-            'amount' => 'amount', 
+            'paymentId' => 'paymentId',
+            'userId' => 'userId',
+            'productId' => 'productId',
+            'transactionId' => 'transactionId',
+            'amount' => 'amount',
             'confirmed' => 'confirmed'
         );
     }

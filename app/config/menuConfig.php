@@ -21,7 +21,7 @@ use Soul\Menu\Builder;
 
 // menu available for everybody
 $menuConfig = [
-    'Home' => '/',
+    'Home' => BASE_URL . '/home',
     'Archief' => [
         'Soul-Soldiers: The Reunion 2013' => BASE_URL.'/archive/1'
     ],
@@ -41,7 +41,7 @@ $menuConfig = [
 // guest only menu items
 $guestOnly = [
     'Inloggen',
-    'Registeren'
+    'Registreren'
 ];
 
 // authenticated only menu items

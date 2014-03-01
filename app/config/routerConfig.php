@@ -1,23 +1,24 @@
 <?php
-$router = new \Phalcon\Mvc\Router();
 
 // Custom routes
-
-$router->add(
-    "/login",
-    [
+return [
+    '/login' => [
         "controller" => "account",
         "action"     => "login"
-    ]
-);
+    ],
 
-$router->add(
-    "/register",
-    [
+    '/logout' => [
+        "controller" => 'account',
+        "action"     => 'logout'
+    ],
+
+    '/register' =>  [
         "controller" => "account",
         "action"     => "register"
-    ]
-);
+    ],
 
-$router->removeExtraSlashes(true);
-return $router;
+    '/home' => [
+        "controller" => "index",
+        "action" => "index"
+    ]
+];

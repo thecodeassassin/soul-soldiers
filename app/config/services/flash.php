@@ -9,5 +9,6 @@ $di->set('flash', function(){
         'success' => 'alert alert-success',
         'notice' => 'alert alert-info',
     ));
+
     return $flash;
 });

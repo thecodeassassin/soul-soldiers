@@ -13,7 +13,8 @@ use Soul\Module;
 use Soul\ServiceBase;
 
 /**
- * Class AuthService
+ * Class Service
+ *
  * @package Soul\Auth
  */
 class Service extends ServiceBase
@@ -62,11 +63,19 @@ class Service extends ServiceBase
     /**
      * Set authentication data
      *
-     * @param array $data Authentication data
+     * @param \Soul\Auth\Data $data Authentication data
      */
-    public function setAuthData(array $data)
+    public function setAuthData(Data $data)
     {
         $this->session->set('auth', serialize($data));
+    }
+
+    /**
+     *
+     */
+    public function destroyAuthData()
+    {
+        $this->session->remove('auth');
     }
 
 
@@ -85,23 +94,21 @@ class Service extends ServiceBase
     /**
      * Checks for a valid username / password combination
      *
+     * Returns the user upon successful authentication
+     *
      * @param string $email    User's email
      * @param string $password User's password
-     * @return bool
+     *
+     * @return bool|User
      */
     public function check($email, $password)
     {
-        $user = new User();
+        $userAccount = User::findFirstByEmail($email);
 
-        $hasAccount = User::findFirst(
-            [
-                "email = '$email'",
-                "password = '".sha1($password)."'"
-            ]
-        );
-
-        if ($hasAccount) {
-            return true;
+        if ($userAccount) {
+            if ($userAccount->password == sha1($password)) {
+                return $userAccount;
+            }
         };
 
         return false;
