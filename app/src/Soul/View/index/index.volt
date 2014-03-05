@@ -1,3 +1,12 @@
-<h1>Congratulations!</h1>
+<div class="container">
+    <div class="row">
+        <div class="jumbotron color0">
+            <h1>Welkom</h1>
 
-<p>You're now flying with Phalcon. Great things are about to happen!</p>
+            <p>
+                Welkom op de nieuwe site van Soul-Soldiers. We zijn druk bezig met de voorbereidingen voor een nieuwe
+                lan party.
+            </p>
+        </div>
+    </div>
+</div>

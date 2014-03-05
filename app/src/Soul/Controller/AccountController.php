@@ -7,6 +7,7 @@
 
 namespace Soul\Controller;
 
+use Soul\AclBuilder;
 use Soul\Auth\Service as AuthService;
 use Soul\Form\LoginForm;
 use Soul\Form\RegistrationForm;
@@ -53,7 +54,7 @@ class AccountController extends Base
     public function loginAction()
     {
 
-        $form = new LoginForm();
+        $loginForm = new LoginForm();
 
         try {
             if ($this->request->isPost()) {
@@ -61,11 +62,15 @@ class AccountController extends Base
                 $password = $this->request->getPost('password', 'string');
 
                 // if the form is invalid, show the messages to the user
-                if ($form->isValid($this->request->getPost()) == false) {
-                    $this->flashMessages($form->getMessages(), 'error');
+                if ($loginForm->isValid($this->request->getPost()) == false) {
+                    $this->flashMessages($loginForm->getMessages(), 'error');
 
                 } else {
-                    User::authenticate($email, $password);
+                    $authUser = User::authenticate($email, $password);
+
+                    if ($authUser->state == User::STATE_REQUIRES_PASSWORD_CHANGE) {
+                        $this->response->redirect('/change-password');
+                    }
 
                     // redirect the user to his last known location
                     $this->redirectToLastPage();
@@ -76,7 +81,7 @@ class AccountController extends Base
             $this->flash->error($e->getMessage());
         }
 
-        $this->view->form = $form;
+        $this->view->form = $loginForm;
     }
 
     /**
@@ -85,8 +90,37 @@ class AccountController extends Base
     public function registerAction()
     {
         $registrationForm = new RegistrationForm();
+        $post = $this->request->getPost();
+        $newUser = new User();
 
-        
+        $registrationForm->bind($post, $newUser);
+
+        if ($this->request->isPost()) {
+            if ($registrationForm->isValid($this->request->getPost()) == false) {
+                $this->flashMessages($registrationForm->getMessages(), 'error');
+            } else {
+
+                // if validation fails, show messages
+                if ($newUser->validation() === false) {
+
+                    $this->flashMessages($newUser->getMessages(), 'error');
+                } else {
+
+                    $newUser->userType = AclBuilder::ROLE_USER;
+                    $newUser->isActive = 0;
+                    $newUser->state = User::STATE_INACTIVE;
+
+                    die(var_dump($this->authService->generateConfirmationLink($newUser)));
+
+                }
+
+//                die(var_dump());
+
+                // create the new user
+            }
+        }
+
+        $this->view->form = $registrationForm;
     }
 
     /**

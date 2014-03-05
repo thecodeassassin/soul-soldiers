@@ -5,7 +5,11 @@
 
 namespace Soul\Form;
 
+use Phalcon\Forms\Element\Check;
+use Phalcon\Forms\Element\Submit;
+use Phalcon\Mvc\Model\Validator\Regex;
 use Phalcon\Validation\Validator\Confirmation;
+use Phalcon\Validation\Validator\Identical;
 use Phalcon\Validation\Validator\StringLength;
 use Soul\Model\User;
 
@@ -37,19 +41,25 @@ class RegistrationForm extends Base
             ])
         );
 
-        $passwordRepeat->addValidators(
+        $passwordRepeat->addValidator(
             new Confirmation([
                 'message' => 'De ingevulde wachtwoorden zijn niet gelijk aan elkaar',
                 'with' => 'password'
             ])
         );
 
+        $terms = new Check('terms', ['value' => 'yes']);
+        $terms->addValidator(new Identical([
+            'value'   => 'yes',
+            'message' => 'U dient akkoord te gaan met de algemene voorwaarden.'
+        ]));
+
         $realName = $this->getTextField('Volledige naam', 'realName', true);
         $nickName = $this->getTextField('Nickname (bijnaam)', 'nickName', true);
         $telephone = $this->getTextField('Telefoonnummer', 'telephone');
         $address = $this->getTextField('Adres', 'address');
-        $postalCode = $this->getTextField('Postcode', 'postalCode');
         $city = $this->getTextField('Woonplaats', 'city');
+        $postalCode = $this->getPostalCodeField('Postcode', 'postalCode');
 
         $this->add($this->getCRSF())
              ->add($email)
@@ -60,7 +70,10 @@ class RegistrationForm extends Base
              ->add($telephone)
              ->add($address)
              ->add($postalCode)
-             ->add($city);
+             ->add($terms)
+             ->add($city)->add(new Submit('Registeren', [
+                'class' => 'btn btn-primary pull-right'
+             ]));
 
     }
 }

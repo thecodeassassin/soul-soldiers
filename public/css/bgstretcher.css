@@ -1,0 +1,36 @@
+.bgstretcher-area {
+    text-align: left;
+}
+.bgstretcher {
+
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+}
+.bgstretcher,
+.bgstretcher ul,
+.bgstretcher li {
+    left: 0;
+    top: 0;
+}
+
+.bgstretcher {
+    /*background: rgba(255,255,255,0.51);*/
+    opacity: 0.6;
+}
+
+.bgstretcher ul,
+.bgstretcher li {
+    position: absolute;
+}
+.bgstretcher ul,
+.bgstretcher li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+/*  Compatibility with old browsers  */
+.bgstretcher {
+    _position: absolute;
+}

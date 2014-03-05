@@ -11,7 +11,7 @@
         <title>{{ title }}</title>
 
         {# Layout CSS #}
-        {{ stylesheet_link("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700", false) }}
+        {{ stylesheet_link("http://fonts.googleapis.com/css?family=Droid+Sans:400,700", false) }}
         {{ stylesheet_link("//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", false) }}
         {{ stylesheet_link("css/soul-color.css") }}
         {{ stylesheet_link("font-icons/custom-icons/css/custom-icons.css") }}
@@ -21,6 +21,8 @@
 
         {# Custom CSS #}
         {{ stylesheet_link("css/custom.css") }}
+        {{ stylesheet_link("css/bgstretcher.css") }}
+        {{ stylesheet_link("css/buttons.css") }}
 
         {{ javascript_include("js-plugin/respond/respond.min.js") }}
         {{ javascript_include("js-plugin/jquery/jquery-1.10.2.min.js") }}
@@ -33,11 +35,13 @@
         {{ javascript_include("js-plugin/appear/jquery.appear.js") }}
         {#{{ javascript_include("js-plugin/ytplayer/jquery.mb.YTPlayer_modifed.js") }}#}
         {#{{ javascript_include("js-plugin/parallax/js/jquery.stellar.min.js") }}#}
-        {{ javascript_include("js-plugin/toucheeffect/toucheffects.js") }}
+        {#{{ javascript_include("js-plugin/toucheeffect/toucheffects.js") }}#}
         {{ javascript_include("js/jquery.loadmask.js") }}
-        {{ javascript_include("js/custom.js") }}
+        {{ javascript_include("js/neko.js") }}
         {{ javascript_include("js/bootstrap-remote-data.min.js") }}
         {{ javascript_include("js/modernizr-2.6.1.min.js") }}
+
+        {{ javascript_include("js/soul.js") }}
 
         {# Custom javascript #}
     </head>
@@ -110,13 +114,15 @@
         <!-- header -->
 
         {# Actual content #}
-        <section id="content" class="pt30 pb30 color2">
+        <section id="content" class="color2 pt30 pb30">
             <div class="container">
                 <div class="row">
                     <div id="messages" class="col-md-8 col-md-offset-2">{{ flash.output() }}</div>
                 </div>
             </div>
-            {{ content() }}
+            <div id="mainContent">
+                {{ content() }}
+            </div>
         </section>
         {# /Content #}
 

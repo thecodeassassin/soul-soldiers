@@ -1,38 +1,41 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+            <h1>Inloggen</h1>
             <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Inloggen</h3>
-                </div>
-                <div class="panel-body">
+
+                <div class="panel-body login-panel">
                     {{ form('login', "method": "post", "name":"login", "class":"form-horizontal", "role":"form") }}
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">E-mail</label>
-                            <div class="col-sm-10">
-                                {#{{ email_field('email', "class":"form-control", "name":"email", "placeholder":"E-Mail") }}#}
-                                {{ form.render('email') }}
-                            </div>
+                    <div class="form-group">
+                        {#<label for="inputEmail3" class="col-sm-2 control-label">E-mail</label>#}
+                        <div class="input-group">
+                            <span class="input-group-addon icon-mail">&nbsp;</span>
+                            {{ form.render('email') }}
                         </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">Wachtwoord</label>
-                            <div class="col-sm-10">
-                                {#{{ password_field('password', "class":"form-control", "name":"password", "placeholder":"Wachtwoord") }}#}
-                                {{ form.render('password') }}
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon icon-lock">&nbsp;</span>
+                            {{ form.render('password') }}
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="pull-right">
-                                    <button type="submit" class="btn btn-default">Inloggen</button>
-                                </div>
-                            </div>
-                        </div>
-                        {{ form.render('csrf', ['value': security.getToken()]) }}
+                    </div>
+
+                    {{ form.render('Inloggen') }}
+
+                    {{ form.render('csrf', ['value': security.getToken()]) }}
                     </form>
+                </div>
+                <div class="panel-footer login-footer">
+
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <span class="icon-lock-open-alt"></span> <a href="{{ url('forgot-password') }}"> Wachtwoord vergeten?</a>
+                        </div>
+                        <div class="col-xs-5">
+                            <span class="icon-user-1"></span> <a href="{{ url('register') }}"> Registeren</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-

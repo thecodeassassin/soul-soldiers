@@ -72,9 +72,9 @@ class FailedAttempt extends Base
      */
     public static function add($emailAddress)
     {
-        $ipAddress = Util::getClientIp();
 
-        $entryExists = static::findFirst("ipaddress='$ipAddress'");
+        $ipAddress = Util::getClientIp();
+        $entryExists = self::getFirstByIp($ipAddress);
 
         // failed login entry exists, add one to the counter
         if ($entryExists instanceof self) {
@@ -109,6 +109,30 @@ class FailedAttempt extends Base
             ]);
             $newEntry->save();
         }
+    }
+
+    /**
+     * @param string $ipAddress
+     *
+     * @return \Phalcon\Mvc\Model
+     */
+    public static function getFirstByIp($ipAddress)
+    {
+        $entryExists = static::findFirst("ipaddress='$ipAddress'");
+
+        return $entryExists;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function reset()
+    {
+        $ipAddress = Util::getClientIp();
+
+        $entryToReset = self::getFirstByIp($ipAddress);
+
+        $entryToReset->delete();
     }
 
     /**

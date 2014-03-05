@@ -2,6 +2,7 @@
 namespace Soul\Model;
 
 use Phalcon\Mvc\Model\Validator\Email as Email;
+use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Soul\Auth\Exception;
 use Soul\Auth\Service as AuthService;
 use Soul\Auth\Data as AuthData;
@@ -115,9 +116,27 @@ class User extends Base
                 )
             )
         );
+
+        $this->validate(new Uniqueness(
+            array(
+                "field"   => "email",
+                "message" => "Er bestaat al een account met dit e-mail adres"
+            )
+        ));
+
+        $this->validate(new Uniqueness(
+            array(
+                "field"   => "nickName",
+                "message" => "Deze nickname is reeds gekozen"
+            )
+        ));
+
+
         if ($this->validationHasFailed() == true) {
             return false;
         }
+
+        return true;
     }
 
     /**
@@ -157,7 +176,8 @@ class User extends Base
      * @param string $email    user's email
      * @param string $password user's password
      *
-     * @return bool
+     * @throws \Soul\Auth\Exception
+     * @return User
      */
     public static function authenticate($email, $password)
     {
@@ -168,12 +188,19 @@ class User extends Base
 
         $authUser = $authService->check($email, $password);
         if ($authUser instanceof self) {
+
+            if (!in_array($authUser->state, [User::STATE_ACTIVE, User::STATE_REQUIRES_PASSWORD_CHANGE])) {
+                throw new Exception('Dit account is niet actief, u kunt niet inloggen');
+            }
+
             $authService->setAuthData(AuthData::buildFromUser($authUser));
 
-            return true;
+            FailedAttempt::reset();
+
+            return $authUser;
         }
 
-        Throw new Exception('E-mail en/of wachtwoord is ongeldig');
+        throw new Exception('E-mail en/of wachtwoord is ongeldig');
     }
 
     /**

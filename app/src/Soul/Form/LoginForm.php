@@ -33,7 +33,7 @@ class LoginForm extends Base
              ->add($this->getEmailField('E-Mail'))
              ->add($this->getPasswordField('Wachtwoord'))
              ->add(new Submit('Inloggen', [
-                'class' => 'btn btn-default'
+                'class' => 'btn btn-block btn-lg btn-primary'
         ]));
     }
 

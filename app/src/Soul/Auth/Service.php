@@ -11,6 +11,7 @@ use Phalcon\Session\AdapterInterface as Session;
 use Soul\Model\User;
 use Soul\Module;
 use Soul\ServiceBase;
+use Soul\Util;
 
 /**
  * Class Service
@@ -114,6 +115,23 @@ class Service extends ServiceBase
         return false;
     }
 
+    /**
+     * Generate a confirmation link for a user
+     *
+     * Also updates the user's confirmKey
+     *
+     * @param User $user
+     *
+     * @return string
+     */
+    public function generateConfirmationLink(User $user)
+    {
+        $uniqueKey = sha1(uniqid());
+        $user->confirmKey = $uniqueKey;
+        $user->save();
+
+        return $this->url->get('confirm-user/'.$uniqueKey);
+    }
     /**
      * @param Session $session The session to set
      */
