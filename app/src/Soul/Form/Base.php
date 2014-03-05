@@ -127,7 +127,7 @@ abstract class Base extends Form
         $postalCode = $this->getTextField($placeholder, $name, $required, $filter);
 
         $postalCode->addValidator(new Regex([
-            'pattern' => '/^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/',
+            'pattern' => '/^$|^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/',
             'message' => 'De opgegeven postcode is ongeldig'
         ]));
 

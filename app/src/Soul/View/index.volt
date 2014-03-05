@@ -113,7 +113,7 @@
         </header>
         <!-- header -->
 
-        {# Actual content #}
+
         <section id="content" class="color2 pt30 pb30">
             <div class="container">
                 <div class="row">
@@ -124,7 +124,7 @@
                 {{ content() }}
             </div>
         </section>
-        {# /Content #}
+
 
         <footer id="footerWrapper">
             <section id="mainFooter">
@@ -145,7 +145,7 @@
                                 <h3>Soul-Soldiers</h3>
                                 <address>
                                     <p>
-                                        <i class="icon-mail-alt"></i>&nbsp;<a href="mailto:info@soul-soldiers.nl">info@soul-soldiers.nl</a>
+                                        <i class="icon-mail-alt"></i>&nbsp;<a href="{{ url('contact') }}">Contactformulier</a>
                                     </p>
                                 </address>
                             </div>
@@ -154,11 +154,8 @@
                             <div class="footerWidget">
                                 <h3>Social Media</h3>
                                 <ul class="socialNetwork">
-                                    <li><a href="http://facebook.com/soulsoldiers" target="_blank" class="tips" title="" data-original-title="follow us on Facebook"><i class="icon-facebook-1 iconRounded"></i></a></li>
-                                    <li><a href="http://twitter.com/soulsoldiers2" target="_blank" class="tips" title="" data-original-title="follow us on Twitter"><i class="icon-twitter-bird iconRounded"></i></a></li>
-                                    {#<li><a href="#" class="tips" title="" data-original-title="follow me on Google+"><i class="icon-gplus-1 iconRounded"></i></a></li>#}
-                                    {#<li><a href="#" class="tips" title="" data-original-title="follow me on Linkedin"><i class="icon-linkedin-1 iconRounded"></i></a></li>#}
-                                    {#<li><a href="#" class="tips" title="" data-original-title="follow me on Dribble"><i class="icon-dribbble iconRounded"></i></a></li>#}
+                                    <li><a href="http://facebook.com/soulsoldiers" target="_blank" class="tips" title="" data-original-title="Volg ons op facebook"><i class="icon-facebook-1 iconRounded"></i></a></li>
+                                    <li><a href="http://twitter.com/soulsoldiers2" target="_blank" class="tips" title="" data-original-title="Volg ons op Twitter"><i class="icon-twitter-bird iconRounded"></i></a></li>
                                 </ul>
                             </div>
                         </div>

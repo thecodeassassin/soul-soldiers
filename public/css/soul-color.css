@@ -777,7 +777,7 @@ section#projectDescription {
 .color2 .ctaBox {border-color:rgba(255,255,255,0.5);}
 .color2 h1:before,.color2 h1:after{color:#5187a1;}
 /*** icons ***/
-.iconRounded {color:#487990; border: 1px dashed #487990;}
+.iconRounded {color:#487990; border: 1px solid #487990;}
 .iconRounded:hover, .color1 .iconRounded:hover, .boxIcon a:hover i{background-color:#5187a1;color:#fff;text-shadow: 0 0 5px #FFF; border-style: solid;}
 
 .color2 .iconRounded {background-color:#FFF;color:#487990 ;}

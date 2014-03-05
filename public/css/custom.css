@@ -91,6 +91,11 @@ h1,h2,h3,h4,h5 {
     margin-top: 5px;
 }
 
+.register-submit {
+    text-align: right;
+}
+
+
 /* End Form Elements */
 
 #mainMenu .navbar-nav li {
@@ -99,6 +104,10 @@ h1,h2,h3,h4,h5 {
 
 #mainMenu .subMenu li {
     margin: 0;
+}
+
+#mainMenu a {
+    font-weight: 500;
 }
 
 #mainMenu .navbar-nav li.sep:before {

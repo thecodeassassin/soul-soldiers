@@ -72,7 +72,7 @@ class RegistrationForm extends Base
              ->add($postalCode)
              ->add($terms)
              ->add($city)->add(new Submit('Registeren', [
-                'class' => 'btn btn-primary pull-right'
+                'class' => 'btn btn-primary btn-lg'
              ]));
 
     }

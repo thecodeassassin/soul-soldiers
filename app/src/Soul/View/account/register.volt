@@ -42,6 +42,9 @@
                     </div>
                 </div>
 
+                <br />
+                <span>Velden gemarkeerd met een * zijn verplicht.</span>
+
             </div>
             <div class="col-md-6">
 
@@ -59,27 +62,29 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-5 control-label">Postcode / Woonplaats</label>
-
-                    <div class="col-xs-3">
+                    <label for="inputPassword3" class="col-sm-5 control-label">Postcode</label>
+                    <div class="col-sm-7">
                         {{ form.render('postalCode') }}
                     </div>
-                    <div class="col-xs-4">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-5 control-label">Woonplaats</label>
+                    <div class="col-sm-7">
                         {{ form.render('city') }}
                     </div>
-
                 </div>
 
-                <br /><br />
+                <br />
                 <div class="checkbox pull-right">
                     {{ form.render('terms') }} Ik ga akkoord met de algemene voorwaarden
                 </div>
                 <br />
                 <br />
                 {{ form.render('csrf', ['value': security.getToken()]) }}
-                {{ form.render('Registeren') }}
+                <div class="register-submit">
+                    {{ form.render('Registeren') }}
+                </div>
             </div>
-
         </div>
     </div>
 

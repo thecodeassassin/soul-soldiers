@@ -23,15 +23,15 @@ use Soul\Menu\Builder;
 $menuConfig = [
     'Home' => BASE_URL . '/home',
     'Archief' => [
-        'Soul-Soldiers: The Reunion 2013' => BASE_URL.'/archive/1'
+        'Soul-Soldiers: The Reunion 2013' => BASE_URL.'/event/the-reunion'
     ],
     'Informatie' => [
-        'link' => BASE_URL.'/information',
         'Regelement' => BASE_URL.'/rules',
         'Lan-Party checklist' => BASE_URL.'/checklist',
         'Wat is een lan party?' => BASE_URL.'/lan-description',
         'Competities' => BASE_URL.'/compos'
     ],
+    'Aankomend evenement' => BASE_URL.'/event/current',
     'Inloggen' => BASE_URL.'/login',
     'Uitloggen' => BASE_URL.'/logout',
     'Registreren' => BASE_URL.'/register',
