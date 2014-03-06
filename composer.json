@@ -11,7 +11,10 @@
     "require": {
         "php": ">=5.4",
         "phalcon/incubator": "dev-master",
-        "mrclay/minify": "2.*"
+        "mrclay/minify": "2.*",
+        "ext-phalcon" : ">=1.2.4",
+        "swiftmailer/swiftmailer" : "5.0.*",
+        "amazonwebservices/aws-sdk-for-php" : "~1.0"
     },
     "repositories": [
         {

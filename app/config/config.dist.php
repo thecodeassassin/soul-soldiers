@@ -20,6 +20,21 @@ return new \Phalcon\Config(
             'logger' => new \Phalcon\Logger\Adapter\File(APPLICATION_PATH . '/log/' . APPLICATION_ENV . '.log'),
             'controller' => 'error',
             'action' => 'index',
-        ]
+        ],
+        'mail' => array(
+            'fromName' => 'Soul-Soldiers',
+            'fromEmail' => 'info@soul-soldiers.nl',
+            'smtp' => array(
+                'server' => 'smtp.gmail.com',
+                'port' => 587,
+                'security' => 'tls',
+                'username' => '',
+                'password' => ''
+            )
+        ),
+        'amazon' => array(
+            'AWSAccessKeyId' => '',
+            'AWSSecretKey' => ''
+        )
     ]
 );

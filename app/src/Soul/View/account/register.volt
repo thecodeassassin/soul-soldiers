@@ -6,7 +6,7 @@
     {{ form('register', "method": "post", "name":"login", "class":"form-horizontal validate", "role":"form") }}
     <h1>Registeren</h1>
     <div class="row">
-        <div class="well-large color0 col-md-12">
+        <div class="well-large color0 col-md-12 signup">
             <div class="col-md-6">
 
                 <h2>Account gegevens</h2>
@@ -42,9 +42,9 @@
                     </div>
                 </div>
 
-                <br />
-                <span>Velden gemarkeerd met een * zijn verplicht.</span>
-
+                <div class="well mt30">
+                    {{ form.render('terms') }} Ik ga akkoord met de algemene voorwaarden
+                </div>
             </div>
             <div class="col-md-6">
 
@@ -54,8 +54,8 @@
                     <div class="col-sm-7">
                         {{ form.render('telephone') }}
                     </div>
+                    <div class="form-group">
                 </div>
-                <div class="form-group">
                     <label for="inputPassword3" class="col-sm-5 control-label">Adres</label>
                     <div class="col-sm-7">
                         {{ form.render('address') }}
@@ -73,18 +73,17 @@
                         {{ form.render('city') }}
                     </div>
                 </div>
-
-                <br />
-                <div class="checkbox pull-right">
-                    {{ form.render('terms') }} Ik ga akkoord met de algemene voorwaarden
-                </div>
-                <br />
-                <br />
-                {{ form.render('csrf', ['value': security.getToken()]) }}
-                <div class="register-submit">
-                    {{ form.render('Registeren') }}
-                </div>
             </div>
+
+            <div class="register-submit">
+                {{ form.render('csrf', ['value': security.getToken()]) }}
+                {{ form.render('Registeren') }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-9 pt10">
+            <span>Velden gemarkeerd met een * zijn verplicht.</span>
         </div>
     </div>
 

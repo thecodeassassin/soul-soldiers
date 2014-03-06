@@ -12,6 +12,7 @@
 
         {# Layout CSS #}
         {{ stylesheet_link("http://fonts.googleapis.com/css?family=Droid+Sans:400,700", false) }}
+        {{ stylesheet_link("http://fonts.googleapis.com/css?family=Roboto:400,300,500,700", false) }}
         {{ stylesheet_link("//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", false) }}
         {{ stylesheet_link("css/soul-color.css") }}
         {{ stylesheet_link("font-icons/custom-icons/css/custom-icons.css") }}

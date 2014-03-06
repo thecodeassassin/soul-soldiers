@@ -70,10 +70,6 @@ h1,h2,h3,h4,h5 {
     margin-bottom: 5px;
 }
 
-.well-large {
-    padding: 30px 40px;
-}
-
 .form-group label {
     font-size: 14px;
     margin-top: 10px;
@@ -91,10 +87,16 @@ h1,h2,h3,h4,h5 {
     margin-top: 5px;
 }
 
-.register-submit {
-    text-align: right;
+div.signup {
+    position: relative;
 }
 
+div.signup .register-submit {
+    text-align: right;
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+}
 
 /* End Form Elements */
 
@@ -169,3 +171,40 @@ h1,h2,h3,h4,h5 {
     right: -5px;
 }
 /*End curly brace support*/
+
+/*Fonts*/
+
+/*misc*/
+
+.well {
+    background: #4E4E4E;
+    border: 1px solid #cccccc;
+    margin-bottom: 5px;
+}
+
+.well-large {
+    padding: 20px 10px;
+}
+
+.pt10 {
+    padding-top: 10px;
+}
+.pb10 {
+    padding-bottom: 10px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mt30 {
+    margin-top: 30px;
+}
+
+.mb30 {
+    margin-bottom: 30px;
+}
