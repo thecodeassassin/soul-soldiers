@@ -6,6 +6,7 @@
  * @package Base
  */
 namespace Soul\Model;
+use Soul\Mail;
 
 /**
  * Class Base
@@ -17,4 +18,11 @@ namespace Soul\Model;
 class Base extends  \Phalcon\Mvc\Model
 {
 
+    /**
+     * @return Mail
+     */
+    protected function getMail()
+    {
+        return $this->di->get('mail');
+    }
 }

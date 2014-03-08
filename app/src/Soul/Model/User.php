@@ -3,6 +3,7 @@ namespace Soul\Model;
 
 use Phalcon\Mvc\Model\Validator\Email as Email;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
+use Soul\AclBuilder;
 use Soul\Auth\Exception;
 use Soul\Auth\Service as AuthService;
 use Soul\Auth\Data as AuthData;
@@ -145,7 +146,16 @@ class User extends Base
     public function initialize()
     {
 		$this->setSource('tblUser');
+    }
 
+    public function beforeValidationOnCreate()
+    {
+
+        // set default values
+        $this->state = self::STATE_INACTIVE;
+        $this->isActive = 0;
+        $this->userType = AclBuilder::ROLE_USER;
+        $this->password = sha1($this->password);
     }
 
     /**

@@ -25,7 +25,7 @@ class SES extends AbstractProvider
 
     protected $amazonSes;
 
-    protected $directSmtp = false;
+    protected $directSmtp = true;
 
     /**
      * Send a raw e-mail via AmazonSES
@@ -38,11 +38,12 @@ class SES extends AbstractProvider
     private function amazonSESSend($raw)
     {
         if ($this->amazonSes == null) {
-            $this->amazonSes = new \AmazonSES(
-                $this->config->amazon->AWSAccessKeyId,
-                $this->config->amazon->AWSSecretKey
+            $this->amazonSes = new \AmazonSES([
+                    'key' => $this->config->amazon->AWSAccessKeyId,
+                    'secret' => $this->config->amazon->AWSSecretKey
+                ]
             );
-            $this->amazonSes->disable_ssl_verification();
+//            $this->amazonSes->disable_ssl_verification();
         }
 
         $response = $this->amazonSes->send_raw_email([
@@ -73,7 +74,7 @@ class SES extends AbstractProvider
      *
      * @return bool|int
      */
-    public function send(array $to, $subject, $templateName, $templateParams)
+    public function send(array $to, $subject, $templateName, array $templateParams)
     {
 
         // Settings

@@ -4,6 +4,7 @@ namespace Soul\Controller;
 
 use Phalcon\Config;
 use Phalcon\Mvc\Controller;
+use Soul\Mail;
 use Soul\Menu;
 use Soul\Translate;
 use Soul\Util;
@@ -133,6 +134,23 @@ class Base extends Controller
         }
         $this->flash->$type($output);
 
+    }
+
+    /**
+     * @param string $message
+     * @param string $type
+     */
+    public function flashMessage($message, $type)
+    {
+        $this->flashMessages([$message], $type);
+    }
+
+    /**
+     * @return Mail
+     */
+    protected function getMail()
+    {
+        return $this->di->get('mail');
     }
 
 

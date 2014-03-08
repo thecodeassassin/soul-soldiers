@@ -9,6 +9,7 @@ namespace Soul\Mail\Provider;
 
 
  
+use Phalcon\Mvc\View;
 use Soul\Module;
 
 abstract class AbstractProvider extends Module implements ProviderInterface
@@ -25,11 +26,11 @@ abstract class AbstractProvider extends Module implements ProviderInterface
             'publicUrl' => BASE_URL
         ], $params);
 
-        return $this->view->getRender('emailTemplates', $name, $parameters, function ($view) {
+        return $this->view->getRender('email', $name, $parameters, function ($view) {
             $view->setRenderLevel(View::LEVEL_LAYOUT);
         });
 
     }
 
-    abstract public function send(array $to, $subject, $templateName, $templateParams);
+    abstract public function send(array $to, $subject, $templateName, array $templateParams);
 } 

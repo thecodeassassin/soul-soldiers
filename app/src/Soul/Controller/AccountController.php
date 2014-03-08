@@ -46,6 +46,7 @@ class AccountController extends Base
         $this->authService = $this->di->get('auth');
 
         $this->setLastPage();
+        die;
     }
 
     /**
@@ -106,17 +107,24 @@ class AccountController extends Base
                     $this->flashMessages($newUser->getMessages(), 'error');
                 } else {
 
-                    $newUser->userType = AclBuilder::ROLE_USER;
-                    $newUser->isActive = 0;
-                    $newUser->state = User::STATE_INACTIVE;
+                    $confirmLink = $this->authService->generateConfirmationLink($newUser);
 
-                    die(var_dump($this->authService->generateConfirmationLink($newUser)));
+                    // send the user a confirmation email
+                    $this->getMail()->sendToUser(
+                        $newUser,
+                        'Bevestig je e-mail adres',
+                        'confirmEmail',
+                        compact('confirmLink')
+                    );
+
+                    // create the new user
+                    $newUser->save();
+
+                    $this->flashMessage('Je registratie is gelukt, hou je e-mail in de gaten voor een bevestigings e-mail.', 'success');
+                    $this->redirectToLastPage();
 
                 }
 
-//                die(var_dump());
-
-                // create the new user
             }
         }
 

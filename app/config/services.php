@@ -51,8 +51,11 @@ include __DIR__ . "/services/dispatcher.php";
 // load the routes
 include __DIR__ . "/services/router.php";
 
-// load the menu config//
+// load the menu config
 include __DIR__ . "/services/menu.php";
+
+// load the mailer
+include __DIR__ . "/services/mail.php";
 
 // load auth services
 

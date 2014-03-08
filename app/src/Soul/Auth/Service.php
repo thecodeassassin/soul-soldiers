@@ -120,6 +120,8 @@ class Service extends ServiceBase
      *
      * Also updates the user's confirmKey
      *
+     * Does not save the user!
+     *
      * @param User $user
      *
      * @return string
@@ -128,7 +130,6 @@ class Service extends ServiceBase
     {
         $uniqueKey = sha1(uniqid());
         $user->confirmKey = $uniqueKey;
-        $user->save();
 
         return $this->url->get('confirm-user/'.$uniqueKey);
     }

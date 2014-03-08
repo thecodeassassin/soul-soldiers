@@ -23,6 +23,6 @@ interface ProviderInterface
      * @param string $templateName   Template name
      * @param array  $templateParams Template parameters
      */
-    public function send(array $to, $subject, $templateName, $templateParams);
+    public function send(array $to, $subject, $templateName, array $templateParams);
 
 } 

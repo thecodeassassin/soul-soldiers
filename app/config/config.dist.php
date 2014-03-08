@@ -30,7 +30,8 @@ return new \Phalcon\Config(
                 'security' => 'tls',
                 'username' => '',
                 'password' => ''
-            )
+            ),
+            'provider' => 'SES'
         ),
         'amazon' => array(
             'AWSAccessKeyId' => '',
