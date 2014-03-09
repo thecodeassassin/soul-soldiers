@@ -13,7 +13,6 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
  */
 $di = new FactoryDefault();
 
-
 /**
  * Read auto-loader
  */
@@ -45,8 +44,11 @@ include __DIR__ . "/services/flash.php";
 // load the ACL
 include __DIR__ . "/services/acl.php";
 
-// load the security service
+// load the dispatcher
 include __DIR__ . "/services/dispatcher.php";
+
+// load crypt
+include __DIR__ . "/services/crypt.php";
 
 // load the routes
 include __DIR__ . "/services/router.php";

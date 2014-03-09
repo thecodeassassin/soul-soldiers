@@ -176,6 +176,10 @@ div.signup .register-submit {
 
 /*misc*/
 
+.alert a {
+    color: #000000;
+}
+
 .well {
     background: #4E4E4E;
     border: 1px solid #cccccc;

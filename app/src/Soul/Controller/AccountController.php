@@ -8,11 +8,12 @@
 namespace Soul\Controller;
 
 use Soul\AclBuilder;
-use Soul\Auth\Service as AuthService;
+use Soul\Auth\AuthService as AuthService;
 use Soul\Form\LoginForm;
 use Soul\Form\RegistrationForm;
 use Soul\Model\User;
 use Soul\Auth\Exception as AuthException;
+use Soul\Util;
 
 /**
  * Class Account
@@ -46,7 +47,6 @@ class AccountController extends Base
         $this->authService = $this->di->get('auth');
 
         $this->setLastPage();
-        die;
     }
 
     /**
@@ -72,6 +72,8 @@ class AccountController extends Base
                     if ($authUser->state == User::STATE_REQUIRES_PASSWORD_CHANGE) {
                         $this->response->redirect('/change-password');
                     }
+
+                    $this->flashSession->success('dsadsada');
 
                     // redirect the user to his last known location
                     $this->redirectToLastPage();
@@ -107,20 +109,15 @@ class AccountController extends Base
                     $this->flashMessages($newUser->getMessages(), 'error');
                 } else {
 
-                    $confirmLink = $this->authService->generateConfirmationLink($newUser);
-
                     // send the user a confirmation email
-                    $this->getMail()->sendToUser(
-                        $newUser,
-                        'Bevestig je e-mail adres',
-                        'confirmEmail',
-                        compact('confirmLink')
-                    );
+                    $this->authService->sendConfirmationMail($newUser);
 
                     // create the new user
                     $newUser->save();
 
-                    $this->flashMessage('Je registratie is gelukt, hou je e-mail in de gaten voor een bevestigings e-mail.', 'success');
+                    $this->flash->success(
+                        'Je registratie is gelukt, hou je e-mail in de gaten voor een bevestigings e-mail.'
+                    );
                     $this->redirectToLastPage();
 
                 }
@@ -136,7 +133,33 @@ class AccountController extends Base
      */
     public function logoutAction()
     {
+        $this->flash->error('Bevestigings email kon niet worden vestuurd, gebruiker niet gevonden.');
         $this->authService->destroyAuthData();
         $this->redirectToLastPage();
+    }
+
+    /**
+     * @param $userId
+     */
+    public function resendConfirmationAction($userId)
+    {
+
+        try {
+            $userId = Util::decodeUrlSafe($userId);
+
+            if ($user = User::findFirstByUserId($userId)) {
+
+                $this->authService->sendConfirmationMail($user);
+
+                $this->flash->success('Bevestigings email opnieuw verstuurd.');
+                $this->redirectToLastPage();
+            }
+
+        } catch (\Exception $e) {
+            $this->flash->error('Bevestigings email kon niet worden vestuurd, gebruiker niet gevonden.');
+        }
+
+        $this->redirectToLastPage();
+
     }
 }

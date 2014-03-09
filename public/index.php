@@ -1,5 +1,6 @@
 <?php
 
+
 // Define path to application directory
 defined('APPLICATION_PATH')
 || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../app'));
@@ -27,9 +28,6 @@ if (!is_readable(APPLICATION_PATH . '/../vendor/autoload.php')) {
     die('Fatal: Please run wget https://getcomposer.org/installer && php installer && php composer.phar install');
 }
 
-if (APPLICATION_ENV == 'development') {
-    ini_set('display_errors', 1);
-}
 
 // create the logfile if it doesn't exist
 $logFile = APPLICATION_PATH . '/log/'.APPLICATION_ENV.'.log';
@@ -57,11 +55,22 @@ if ($config->count() != $configDist->count()) {
  */
 include __DIR__ . "/../app/config/services.php";
 
+
+if (APPLICATION_ENV == 'development') {
+    ini_set('display_errors', 1);
+    (new Phalcon\Debug)->listen();
+
+    // load the default kernel in development mode
+    $kernel = new \Phalcon\Mvc\Application($di);
+
+} else {
+    $kernel = new \Soul\Kernel\Application($di);
+}
+
 /**
  * Handle the request
  */
 
-$kernel = new \Soul\Kernel\Application($di);
 
 echo $kernel->handle()->getContent();
 // exception/404 managed from the dispatcher event

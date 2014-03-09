@@ -31,11 +31,10 @@ return new \Phalcon\Config(
                 'username' => '',
                 'password' => ''
             ),
-            'provider' => 'SES'
+            'provider' => 'Swift'
         ),
-        'amazon' => array(
-            'AWSAccessKeyId' => '',
-            'AWSSecretKey' => ''
-        )
+        'crypt' => [
+            'key' => ''
+        ]
     ]
 );

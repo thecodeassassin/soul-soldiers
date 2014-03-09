@@ -128,6 +128,57 @@ class Util {
         return $ipAddress;
 
     }
+
+    /**
+     * Encrypt a string url-safe
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function encodeUrlSafe($string)
+    {
+        $crypt = DI::getDefault()->get('crypt');
+
+        return strtr($crypt->encryptBase64($string), '+/=', '-_,');
+    }
+
+    /**
+     * Encrypt a string url-safe
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function decodeUrlSafe($string)
+    {
+        $crypt = DI::getDefault()->get('crypt');
+
+        return $crypt->decryptBase64(strtr($string, '-_,', '+/='));
+    }
+
+    /**
+     * Strpos but with arrays
+     *
+     * @param string $haystack
+     * @param array $needles
+     * @param int $offset
+     *
+     * @return bool|mixed
+     */
+    public static function strposa($haystack, array $needles, $offset = 0)
+    {
+        $chr = array();
+        foreach ($needles as $needle) {
+            $res = strpos($haystack, $needle, $offset);
+            if ($res !== false) {
+                $chr[$needle] = $res;
+            }
+        }
+
+        if (empty($chr)) {
+            return false;
+        }
+        return min($chr);
+    }
 }
 
 

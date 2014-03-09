@@ -6,6 +6,9 @@
  * @package Base
  */
 namespace Soul\Model;
+
+use Phalcon\Crypt;
+use Phalcon\Mvc\Model;
 use Soul\Mail;
 
 /**
@@ -15,7 +18,7 @@ use Soul\Mail;
  *
  * @package Soul\Model
  */
-class Base extends  \Phalcon\Mvc\Model
+class Base extends Model
 {
 
     /**
@@ -24,5 +27,13 @@ class Base extends  \Phalcon\Mvc\Model
     protected function getMail()
     {
         return $this->di->get('mail');
+    }
+
+    /**
+     * @return Crypt
+     */
+    protected function getCrypt()
+    {
+        return $this->di->get('crypt');
     }
 }

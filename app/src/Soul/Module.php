@@ -6,6 +6,7 @@ namespace Soul;
 
 use Phalcon\Cache\Backend\Memcache;
 use Phalcon\Config;
+use Phalcon\Crypt;
 use Phalcon\Mvc\User\Plugin;
 use Phalcon\DI as DI;
 
@@ -115,6 +116,22 @@ abstract class Module extends Plugin
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * @return Mail
+     */
+    protected function getMail()
+    {
+        return $this->di->get('mail');
+    }
+
+    /**
+     * @return Crypt
+     */
+    protected function getCrypt()
+    {
+        return $this->di->get('crypt');
     }
 
 }

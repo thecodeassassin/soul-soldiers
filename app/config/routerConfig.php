@@ -20,5 +20,11 @@ return [
     '/home' => [
         "controller" => "index",
         "action" => "index"
+    ],
+
+    '/resend-confirmation/(.*)' => [
+        "controller" => "account",
+        "action" => "resendConfirmation",
+        "userId" => 1
     ]
 ];

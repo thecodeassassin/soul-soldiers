@@ -1,11 +1,12 @@
 <?php
 namespace Soul\Model;
 
+use Phalcon\DI;
 use Phalcon\Mvc\Model\Validator\Email as Email;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Soul\AclBuilder;
 use Soul\Auth\Exception;
-use Soul\Auth\Service as AuthService;
+use Soul\Auth\AuthService as AuthService;
 use Soul\Auth\Data as AuthData;
 use Soul\Util;
 
@@ -199,8 +200,20 @@ class User extends Base
         $authUser = $authService->check($email, $password);
         if ($authUser instanceof self) {
 
+            if ($authUser->state == User::STATE_BANNED) {
+                throw new Exception('Je bent gebanned, je kunt niet meer inloggen met deze account');
+            }
+
             if (!in_array($authUser->state, [User::STATE_ACTIVE, User::STATE_REQUIRES_PASSWORD_CHANGE])) {
-                throw new Exception('Dit account is niet actief, u kunt niet inloggen');
+                $resendLink = sprintf(
+                    '<a href="%s/%s">hier</a>',
+                    BASE_URL.'/resend-confirmation',
+                    Util::encodeUrlSafe($authUser->userId)
+                );
+
+                throw new Exception(sprintf(
+                    'Dit account is niet actief, u dient uw account te activeren. Klik %s
+                                     om de activatiemail opnieuw te versturen.', $resendLink));
             }
 
             $authService->setAuthData(AuthData::buildFromUser($authUser));

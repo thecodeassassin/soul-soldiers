@@ -118,7 +118,10 @@
         <section id="content" class="color2 pt30 pb30">
             <div class="container">
                 <div class="row">
-                    <div id="messages" class="col-md-8 col-md-offset-2">{{ flash.output() }}</div>
+                    <div id="messages" class="col-md-8 col-md-offset-2">
+                        {{ flash.output() }}
+                        {{ flashSession.output() }}
+                    </div>
                 </div>
             </div>
             <div id="mainContent">

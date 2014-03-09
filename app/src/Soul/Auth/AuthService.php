@@ -14,11 +14,11 @@ use Soul\ServiceBase;
 use Soul\Util;
 
 /**
- * Class Service
+ * Class AuthService
  *
  * @package Soul\Auth
  */
-class Service extends ServiceBase
+class AuthService extends ServiceBase
 {
 
     /**
@@ -133,6 +133,25 @@ class Service extends ServiceBase
 
         return $this->url->get('confirm-user/'.$uniqueKey);
     }
+
+    /**
+     * Send a confirmation mail to the given user
+     *
+     * @param User $user
+     * @return mixed
+     */
+    public function sendConfirmationMail(User $user)
+    {
+        $confirmLink = $this->generateConfirmationLink($user);
+
+        return $this->getMail()->sendToUser(
+            $user,
+            'Bevestig je e-mail adres',
+            'confirmEmail',
+            compact('confirmLink')
+        );
+    }
+
     /**
      * @param Session $session The session to set
      */

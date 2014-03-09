@@ -6,7 +6,7 @@ use Phalcon\Mvc\Dispatcher\Exception as DispatchException;
 //
 $di->setShared("auth",function() use ($di,$config){
 
-    return new \Soul\Auth\Service();
+    return new \Soul\Auth\AuthService();
 
 });
 //

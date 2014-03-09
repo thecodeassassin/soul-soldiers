@@ -38,7 +38,6 @@ class Security extends Module
             $role = AclBuilder::ROLE_GUEST;
         } else {
             $role = AclBuilder::ROLE_USER;
-            var_dump($auth);
 
             //@todo check admin role
         }
@@ -54,6 +53,7 @@ class Security extends Module
 
         //Check if the Role have access to the controller (resource)
         $allowed = $acl->isAllowed($role, $controller, $action);
+
         if ($allowed != Acl::ALLOW) {
 
             //If he doesn't have access forward him to the index controller

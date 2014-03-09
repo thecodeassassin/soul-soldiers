@@ -3,6 +3,7 @@
 namespace Soul\Controller;
 
 use Phalcon\Config;
+use Phalcon\Crypt;
 use Phalcon\Mvc\Controller;
 use Soul\Mail;
 use Soul\Menu;
@@ -96,11 +97,14 @@ class Base extends Controller
 
     protected function setLastPage()
     {
-        $referer = $_SERVER['HTTP_REFERER'];
+        if (array_key_exists('HTTP_REFERER', $_SERVER)) {
 
-        // do not overwrite if the user simply refreshes
-        if ($referer != Util::getCurrentUrl()) {
-            $this->session->set('referer', $referer);
+            $referer = $_SERVER['HTTP_REFERER'];
+
+            // do not overwrite if the user simply refreshes
+            if ($referer != Util::getCurrentUrl() && Util::strposa($referer, ['login', 'register']) === false) {
+                $this->session->set('referer', $referer);
+            }
         }
     }
 
@@ -117,6 +121,9 @@ class Base extends Controller
      */
     protected function redirectToLastPage()
     {
+        if (is_null($this->getLastPage())) {
+            $this->response->redirect($this->url->get('home', true));
+        }
         $this->response->redirect($this->getLastPage(), true);
     }
 
@@ -153,5 +160,12 @@ class Base extends Controller
         return $this->di->get('mail');
     }
 
+    /**
+     * @return Crypt
+     */
+    protected function getCrypt()
+    {
+        return $this->di->get('crypt');
+    }
 
 }
