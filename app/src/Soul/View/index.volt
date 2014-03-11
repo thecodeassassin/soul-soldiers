@@ -149,7 +149,9 @@
                                 <h3>Soul-Soldiers</h3>
                                 <address>
                                     <p>
-                                        <i class="icon-mail-alt"></i>&nbsp;<a href="{{ url('contact') }}">Contactformulier</a>
+                                        <i class="icon-mail-alt"></i>&nbsp;<a href="{{ url('contact') }}">Contact</a> <br />
+                                        <i class="icon-phone"></i>&nbsp; 084-8727663 <br />
+                                        <i class="icon-briefcase"></i>&nbsp; KVK te Den Haag: 50981633
                                     </p>
                                 </address>
                             </div>
@@ -172,7 +174,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <p>Copyright &copy; 2014 Soul-Soldiers / All rights reserved.</p>
+                            <p>Copyright &copy; 2014 Soul-Soldiers / Alle rechten voorbehouden.</p>
                         </div>
 
                     </div>
@@ -182,4 +184,5 @@
 
         </div>
     </body>
+    {{ analyticsScript }}
 </html>

@@ -16,6 +16,9 @@ return new \Phalcon\Config(
             'baseUri'        => '/',
             'baseTitle'      => 'Soul-Soldiers - Lan parties'
         ],
+        'analytics' =>[
+            'code' => '',
+        ],
         'error' => [
             'logger' => new \Phalcon\Logger\Adapter\File(APPLICATION_PATH . '/log/' . APPLICATION_ENV . '.log'),
             'controller' => 'error',

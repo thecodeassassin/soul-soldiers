@@ -160,28 +160,6 @@ class User extends Base
     }
 
     /**
-     * Run forgot password routine
-     * returns true if the password was reset and mailed to the user
-     *
-     * @return bool
-     */
-    public function forgotPassword()
-    {
-
-        // set the password to a temporary one and email the user with this temporary password
-        if ($this->state == self::STATE_ACTIVE) {
-            $this->password = Util::generateRandomPassword();
-            $this->state = self::STATE_REQUIRES_PASSWORD_CHANGE;
-
-            // todo mail user
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
      * Authenticate a user
      *
      * @param string $email    user's email
@@ -224,6 +202,16 @@ class User extends Base
         }
 
         throw new Exception('E-mail en/of wachtwoord is ongeldig');
+    }
+
+    /**
+     * Confirm the user
+     */
+    public function confirm()
+    {
+        $this->confirmKey = null;
+        $this->state = self::STATE_ACTIVE;
+        $this->save();
     }
 
     /**

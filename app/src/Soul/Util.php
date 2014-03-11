@@ -111,17 +111,17 @@ class Util {
 
         $ipAddress = '';
 
-        if ($_SERVER['HTTP_CLIENT_IP']) {
+        if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {
             $ipAddress = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif ($_SERVER['HTTP_X_FORWARDED_FOR']) {
+        } elseif (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
             $ipAddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } elseif ($_SERVER['HTTP_X_FORWARDED']) {
+        } elseif (array_key_exists('HTTP_X_FORWARDED', $_SERVER)) {
             $ipAddress = $_SERVER['HTTP_X_FORWARDED'];
-        } elseif ($_SERVER['HTTP_FORWARDED_FOR']) {
+        } elseif (array_key_exists('HTTP_FORWARDED_FOR', $_SERVER)) {
             $ipAddress = $_SERVER['HTTP_FORWARDED_FOR'];
-        } elseif ($_SERVER['HTTP_FORWARDED']) {
+        } elseif (array_key_exists('HTTP_FORWARDED', $_SERVER)) {
             $ipAddress = $_SERVER['HTTP_FORWARDED'];
-        } elseif ($_SERVER['REMOTE_ADDR']) {
+        } elseif (array_key_exists('REMOTE_ADDR', $_SERVER)) {
             $ipAddress = $_SERVER['REMOTE_ADDR'];
         }
 

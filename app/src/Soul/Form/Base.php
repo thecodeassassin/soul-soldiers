@@ -105,6 +105,7 @@ abstract class Base extends Form
             $password->addValidator(new PresenceOf(array(
                 'message' => 'Wachtwoord is verplicht'
             )));
+            $password->setAttribute('required', '');
         }
 
         if (!empty($filter)) {

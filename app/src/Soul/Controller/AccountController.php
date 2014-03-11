@@ -9,10 +9,13 @@ namespace Soul\Controller;
 
 use Soul\AclBuilder;
 use Soul\Auth\AuthService as AuthService;
+use Soul\Form\ForgotPasswordForm;
 use Soul\Form\LoginForm;
 use Soul\Form\RegistrationForm;
+use Soul\Model\FailedAttempt;
 use Soul\Model\User;
 use Soul\Auth\Exception as AuthException;
+use Soul\Auth\Data as AuthData;
 use Soul\Util;
 
 /**
@@ -69,7 +72,7 @@ class AccountController extends Base
                 } else {
                     $authUser = User::authenticate($email, $password);
 
-                    if ($authUser->state == User::STATE_REQUIRES_PASSWORD_CHANGE) {
+                    if ($authUser->state == User::STATE_ACTIVE && $authUser->confirmKey != null) {
                         $this->response->redirect('/change-password');
                     }
 
@@ -136,6 +139,84 @@ class AccountController extends Base
     }
 
     /**
+     * Confirm the user by confirmKey
+     *
+     * @param string $confirmKey Unique confirmation key
+     */
+    public function confirmUserAction($confirmKey)
+    {
+
+        if ($user = User::findFirstByConfirmKey($confirmKey)) {
+
+            // confirm the user
+            $user->confirm();
+
+            // make sure the user is also logged in
+            $this->authService->setAuthData(AuthData::buildFromUser($user));
+            $this->flashMessage('Uw account is geactiveerd, u bent nu ingelogd.', 'success', true);
+
+            return $this->response->redirect('home');
+        }
+
+        $this->flashMessage('Uw account kan niet worden geactiveerd, neem a.u.b. contact met ons.', 'error', true);
+        return $this->response->redirect('home');
+
+    }
+
+    public function changePasswordAction()
+    {
+        // reset failed attempts
+        FailedAttempt::reset();
+
+
+    }
+
+    /**
+     * User forgot his password
+     */
+    public function forgotPasswordAction()
+    {
+        $forgotPasswordForm = new ForgotPasswordForm();
+
+
+        if ($this->request->isPost()) {
+
+            $email = $this->request->get('email', 'email');
+
+            if ($forgotPasswordForm->isValid($this->request->getPost()) == false) {
+                $this->flashMessages($forgotPasswordForm->getMessages(), 'error');
+            } else {
+
+                // if validation fails, show messages
+                if ($user = User::findFirstByEmail($email)) {
+
+                    try {
+
+                        FailedAttempt::add($email, true);
+
+                        // send the user a confirmation email
+                        $this->authService->sendForgotPasswordMail($user);
+
+                        $this->flashMessage('Er is een e-mail naar u gestuurd met instructies om uw wachtwoord te wijzigen',  'success', true);
+                        return $this->redirectToLastPage();
+
+                    } catch (AuthException $e) {
+                        $this->flashMessage('U heeft dit formulier te vaak geprobeerd te versturen, probeer het later nogmaals.', 'error');
+                    }
+
+                } else {
+                    $this->flashMessage('Dit e-mail adres is niet bij ons bekend.', 'error');
+                }
+
+            }
+        }
+
+        $this->view->form = $forgotPasswordForm;
+    }
+
+    /**
+     * Resend a confirmation email
+     *
      * @param $userId
      */
     public function resendConfirmationAction($userId)
@@ -147,7 +228,7 @@ class AccountController extends Base
 
             if ($user = User::findFirstByUserId($userId)) {
 
-                $this->authService->sendConfirmationMail($user);
+                $this->authService->sendConfirmationMail($user, true);
 
                 $this->flashMessage('Bevestigings email opnieuw verstuurd.', 'success', true);
                 $this->redirectToLastPage();

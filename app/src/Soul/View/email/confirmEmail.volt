@@ -1,3 +1,5 @@
+<h1 style="text-align: right">Welkom bij Soul-Soldiers</h1>
+
 <p class="lead">Beste {{ user.realName }},</p>
 
 <p>

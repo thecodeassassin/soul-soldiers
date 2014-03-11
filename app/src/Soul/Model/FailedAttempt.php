@@ -81,6 +81,7 @@ class FailedAttempt extends Base
 
             $minutesLeft = round((strtotime($entryExists->timestamp) + 300 - time()) / 60);
             if ($entryExists->count == 3 && $minutesLeft > 0) {
+
                 throw new AuthException(sprintf(
                     'U heeft te vaak proberen in te loggen, U kunt het over %d minuten nog een keer proberen.',
                     $minutesLeft

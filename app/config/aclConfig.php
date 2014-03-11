@@ -43,14 +43,21 @@ return new \Phalcon\Config(
         'resources' =>
             [
                 AclBuilder::ROLE_GUEST => [
-                    'account'       =>      ['register', 'login', 'resendConfirmation']
+                    'account' => [
+                        'register',
+                        'login',
+                        'resendConfirmation',
+                        'forgotPassword',
+                        'confirmUser',
+                        'changePassword'
+                    ]
                 ],
                 AclBuilder::ROLE_USER => [
-                    'account'       =>      ['logout', 'manage']
+                    'account' => ['logout', 'manage']
                 ],
                 AclBuilder::ROLE_ADMIN => [
-                    'admin'          =>      'index',
-                    'index'          =>      'generate',
+                    'admin' => 'index',
+                    'index' => 'generate',
                 ]
             ]
     ]

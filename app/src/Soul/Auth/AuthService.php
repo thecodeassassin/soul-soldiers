@@ -122,32 +122,55 @@ class AuthService extends ServiceBase
      *
      * Does not save the user!
      *
-     * @param User $user
+     * @param User   $user       user instance
+     * @param bool   $useLastKey use last known key
+     * @param string $path       Path to generate
      *
      * @return string
      */
-    public function generateConfirmationLink(User $user)
+    public function generateConfirmationLink(User $user, $useLastKey = false, $path = 'confirm-user/')
     {
-        $uniqueKey = sha1(uniqid());
-        $user->confirmKey = $uniqueKey;
+        if ($useLastKey) {
+            $uniqueKey = $user->confirmKey;
+        } else {
+            $uniqueKey = sha1(uniqid());
+            $user->confirmKey = $uniqueKey;
+        }
 
-        return $this->url->get('confirm-user/'.$uniqueKey);
+        return $this->url->get($path.$uniqueKey);
     }
 
     /**
      * Send a confirmation mail to the given user
      *
-     * @param User $user
+     * @param User $user       user instance
+     * @param bool $useLastKey use last known key
+     *
      * @return mixed
      */
-    public function sendConfirmationMail(User $user)
+    public function sendConfirmationMail(User $user, $useLastKey = false)
     {
-        $confirmLink = $this->generateConfirmationLink($user);
+        $confirmLink = $this->generateConfirmationLink($user, $useLastKey);
 
         return $this->getMail()->sendToUser(
             $user,
             'Bevestig je e-mail adres',
             'confirmEmail',
+            compact('confirmLink')
+        );
+    }
+
+    /**
+     * @param User $user
+     */
+    public function sendForgotPasswordMail(User $user)
+    {
+        $confirmLink = $this->generateConfirmationLink($user, false, 'change-password/');
+
+        return $this->getMail()->sendToUser(
+            $user,
+            'Wachtwoord vergeten',
+            'forgotPassword',
             compact('confirmLink')
         );
     }

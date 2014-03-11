@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "3de14caf27ade839626d327fc1b1315c",
+    "hash": "1e47dba5da0c10a544bb6d12b474ec65",
     "packages": [
         {
             "name": "mrclay/minify",
@@ -35,7 +35,7 @@
             ],
             "authors": [
                 {
-                    "name": "Steve Clay",
+                    "name": "Stephen Clay",
                     "email": "steve@mrclay.org",
                     "homepage": "http://www.mrclay.org/",
                     "role": "Developer"
@@ -54,7 +54,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-02-14 11:36:46"
+            "time": "2014-02-12 12:13:53"
         },
         {
             "name": "swiftmailer/swiftmailer",

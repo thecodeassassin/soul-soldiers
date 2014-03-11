@@ -8,11 +8,11 @@ namespace Soul\Form;
 use Phalcon\Forms\Element\Submit;
 
 /**
- * Class LoginForm
+ * Class ForgotPasswordForm
  *
  * @package Soul\Form
  */
-class LoginForm extends Base
+class ForgotPasswordForm extends Base
 {
     /**
      * Initialize the Login Form
@@ -22,10 +22,9 @@ class LoginForm extends Base
         // add the elements to the form
         $this->add($this->getCRSF())
              ->add($this->getEmailField('E-Mail'))
-             ->add($this->getPasswordField('Wachtwoord'))
-             ->add(new Submit('Inloggen', [
-                'class' => 'btn btn-block btn-lg btn-primary'
-        ]));
+             ->add(new Submit('Nieuw wachtwoord opvragen', ['class' => 'btn btn-block btn-lg btn-primary']));
+
+
     }
 
 }

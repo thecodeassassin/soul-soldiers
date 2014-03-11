@@ -17,9 +17,25 @@ return [
         "action"     => "register"
     ],
 
+    '/forgot-password' =>  [
+        "controller" => "account",
+        "action"     => "forgotPassword"
+    ],
+
+    '/change-password/(.*)' =>  [
+        "controller" => "account",
+        "action"     => "changePassword"
+    ],
+
     '/home' => [
         "controller" => "index",
         "action" => "index"
+    ],
+
+    '/confirm-user/(.*)' => [
+        "controller" => "account",
+        "action" => "confirmUser",
+        "confirmKey" => 1
     ],
 
     '/resend-confirmation/(.*)' => [

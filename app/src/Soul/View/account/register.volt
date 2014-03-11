@@ -1,7 +1,3 @@
-<script type="text/javascript">
-    $(".validate").validate();
-</script>
-
 <div class="container">
     {{ form('register', "method": "post", "name":"login", "class":"form-horizontal validate", "role":"form") }}
     <h1>Registeren</h1>
