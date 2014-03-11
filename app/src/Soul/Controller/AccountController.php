@@ -73,7 +73,7 @@ class AccountController extends Base
                         $this->response->redirect('/change-password');
                     }
 
-                    $this->flashSession->success('dsadsada');
+                    $this->flashMessage('Je bent nu ingelogd.', 'success', true);
 
                     // redirect the user to his last known location
                     $this->redirectToLastPage();
@@ -115,9 +115,7 @@ class AccountController extends Base
                     // create the new user
                     $newUser->save();
 
-                    $this->flash->success(
-                        'Je registratie is gelukt, hou je e-mail in de gaten voor een bevestigings e-mail.'
-                    );
+                    $this->flashMessage('Je registratie is gelukt, hou je e-mail in de gaten voor een bevestigings e-mail.', 'success', true);
                     $this->redirectToLastPage();
 
                 }
@@ -133,7 +131,6 @@ class AccountController extends Base
      */
     public function logoutAction()
     {
-        $this->flash->error('Bevestigings email kon niet worden vestuurd, gebruiker niet gevonden.');
         $this->authService->destroyAuthData();
         $this->redirectToLastPage();
     }
@@ -144,6 +141,7 @@ class AccountController extends Base
     public function resendConfirmationAction($userId)
     {
 
+        $this->view->disable();
         try {
             $userId = Util::decodeUrlSafe($userId);
 
@@ -151,12 +149,12 @@ class AccountController extends Base
 
                 $this->authService->sendConfirmationMail($user);
 
-                $this->flash->success('Bevestigings email opnieuw verstuurd.');
+                $this->flashMessage('Bevestigings email opnieuw verstuurd.', 'success', true);
                 $this->redirectToLastPage();
             }
 
         } catch (\Exception $e) {
-            $this->flash->error('Bevestigings email kon niet worden vestuurd, gebruiker niet gevonden.');
+            $this->flashMessage('Bevestigings email kon niet worden vestuurd, gebruiker niet gevonden.', 'error', true);
         }
 
         $this->redirectToLastPage();

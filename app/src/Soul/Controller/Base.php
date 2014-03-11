@@ -130,11 +130,16 @@ class Base extends Controller
     /**
      * Flash an array of messages
      *
-     * @param array|\stdClass  $messages
-     * @param string           $type
+     * @param array|\stdClass $messages
+     * @param string          $type
+     * @param bool            $isSession
      */
-    protected function flashMessages($messages, $type = 'error')
+    protected function flashMessages($messages, $type = 'error', $isSession = false)
     {
+        if ($isSession) {
+            $this->view->disable();
+        }
+
         $output = '';
         foreach ($messages as $message) {
             $output .= "&nbsp;<span class='glyphicon glyphicon-chevron-right'></span>&nbsp; $message <br />";
@@ -146,10 +151,11 @@ class Base extends Controller
     /**
      * @param string $message
      * @param string $type
+     * @param bool   $isSession
      */
-    public function flashMessage($message, $type)
+    public function flashMessage($message, $type, $isSession = false)
     {
-        $this->flashMessages([$message], $type);
+        $this->flashMessages([$message], $type, $isSession);
     }
 
     /**

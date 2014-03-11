@@ -28,7 +28,6 @@ if (!is_readable(APPLICATION_PATH . '/../vendor/autoload.php')) {
     die('Fatal: Please run wget https://getcomposer.org/installer && php installer && php composer.phar install');
 }
 
-
 // create the logfile if it doesn't exist
 $logFile = APPLICATION_PATH . '/log/'.APPLICATION_ENV.'.log';
 if (!file_exists($logFile)) {
