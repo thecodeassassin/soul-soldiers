@@ -192,6 +192,7 @@ div.signup .register-submit {
     padding: 15px 17px;
     pointer-events: none;
     color: red;
+    z-index: 100;
 }
 
 .well {
