@@ -24,7 +24,8 @@ return [
 
     '/change-password/(.*)' =>  [
         "controller" => "account",
-        "action"     => "changePassword"
+        "action"     => "changePassword",
+        "confirmKey" => 1
     ],
 
     '/home' => [

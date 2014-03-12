@@ -214,6 +214,17 @@ class User extends Base
         $this->save();
     }
 
+
+    /**
+     * Change the user's password
+     */
+    public function changePassword($password)
+    {
+        $this->confirmKey = null;
+        $this->password = sha1($password);
+        $this->save();
+    }
+
     /**
      * Independent Column Mapping.
      *

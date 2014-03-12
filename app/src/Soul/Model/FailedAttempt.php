@@ -133,7 +133,9 @@ class FailedAttempt extends Base
 
         $entryToReset = self::getFirstByIp($ipAddress);
 
-        $entryToReset->delete();
+        if ($entryToReset) {
+            $entryToReset->delete();
+        }
     }
 
     /**

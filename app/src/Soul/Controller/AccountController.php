@@ -9,6 +9,7 @@ namespace Soul\Controller;
 
 use Soul\AclBuilder;
 use Soul\Auth\AuthService as AuthService;
+use Soul\Form\ChangePasswordForm;
 use Soul\Form\ForgotPasswordForm;
 use Soul\Form\LoginForm;
 use Soul\Form\RegistrationForm;
@@ -142,6 +143,8 @@ class AccountController extends Base
      * Confirm the user by confirmKey
      *
      * @param string $confirmKey Unique confirmation key
+     *
+     * @return \Phalcon\Http\ResponseInterface
      */
     public function confirmUserAction($confirmKey)
     {
@@ -163,11 +166,50 @@ class AccountController extends Base
 
     }
 
-    public function changePasswordAction()
+    /**
+     * Change password after reset mail has been send
+     *
+     * @param null $confirmKey
+     *
+     * @return \Phalcon\Http\ResponseInterface
+     */
+    public function changePasswordAction($confirmKey = null)
     {
+
+        $user = User::findFirstByConfirmKey($confirmKey);
+
+        if (!$user) {
+            return $this->redirectToLastPage();
+        }
+
         // reset failed attempts
         FailedAttempt::reset();
 
+        $changePasswordForm = new ChangePasswordForm();
+
+        if ($this->request->isPost()) {
+
+            $password = $this->request->get('password', 'string');
+
+            if ($changePasswordForm->isValid($this->request->getPost()) == false) {
+                $this->flashMessages($changePasswordForm->getMessages(), 'error');
+            } else {
+
+                $user->changePassword($password);
+
+                // make sure the user is also logged in
+                $this->authService->setAuthData(AuthData::buildFromUser($user));
+
+                $this->flashMessage('Uw wachtwoord is gewijzigd, u bent nu ingelogd', 'success', true);
+                return $this->redirectToLastPage();
+
+
+            }
+        }
+
+
+        $this->view->form = $changePasswordForm;
+        $this->view->confirmKey = $confirmKey;
 
     }
 
@@ -194,8 +236,9 @@ class AccountController extends Base
 
                         FailedAttempt::add($email, true);
 
-                        // send the user a confirmation email
+                        // send the user a confirmation email and save the user
                         $this->authService->sendForgotPasswordMail($user);
+                        $user->save();
 
                         $this->flashMessage('Er is een e-mail naar u gestuurd met instructies om uw wachtwoord te wijzigen',  'success', true);
                         return $this->redirectToLastPage();
