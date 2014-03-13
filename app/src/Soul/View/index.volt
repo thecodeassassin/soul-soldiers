@@ -38,6 +38,7 @@
         {#{{ javascript_include("js-plugin/parallax/js/jquery.stellar.min.js") }}#}
         {#{{ javascript_include("js-plugin/toucheeffect/toucheffects.js") }}#}
         {{ javascript_include("js/jquery.loadmask.js") }}
+        {{ javascript_include("js/jquery.validate.nl.js") }}
         {{ javascript_include("js/neko.js") }}
         {{ javascript_include("js/bootstrap-remote-data.min.js") }}
         {{ javascript_include("js/modernizr-2.6.1.min.js") }}

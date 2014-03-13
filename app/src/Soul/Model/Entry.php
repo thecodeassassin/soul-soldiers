@@ -27,13 +27,22 @@ class Entry extends Base
      */
     public $userId;
 
+
+    /**
+     * @var integer
+     */
+    public $paymentId;
+
     /**
      * Initialize method for model.
      */
     public function initialize()
     {
-		$this->setSource('tblEntry');
+        $this->setSource('tblEntry');
 
+        $this->hasOne('userId', '\Soul\Model\User', 'userId', ['alias' => 'user']);
+        $this->belongsTo('eventId', '\Soul\Model\Event', 'eventId', ['alias' => 'event']);
+        $this->hasOne('paymentId', '\Soul\Model\Payment', 'paymentId', ['alias' => 'payment']);
     }
 
     /**
@@ -44,7 +53,8 @@ class Entry extends Base
         return array(
             'entryId' => 'entryId',
             'eventId' => 'eventId',
-            'userId' => 'userId'
+            'userId' => 'userId',
+            'paymentId' => 'paymentId'
         );
     }
 

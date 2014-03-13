@@ -50,7 +50,8 @@ return new \Phalcon\Config(
                         'forgotPassword',
                         'confirmUser',
                         'changePassword'
-                    ]
+                    ],
+                    'event' => ['show']
                 ],
                 AclBuilder::ROLE_USER => [
                     'account' => ['logout', 'manage']

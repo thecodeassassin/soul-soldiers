@@ -52,6 +52,7 @@ class Payment extends Base
     {
 		$this->setSource('tblPayment');
 
+        $this->belongsTo('productId', '\Soul\Model\Product', 'productId', ['alias' => 'product']);
     }
 
     /**

@@ -2,6 +2,20 @@
 
 // Custom routes
 return [
+
+    /**
+     * General
+     */
+
+    '/home' => [
+        "controller" => "index",
+        "action" => "index"
+    ],
+
+    /**
+     * Account
+     */
+
     '/login' => [
         "controller" => "account",
         "action"     => "login"
@@ -28,11 +42,6 @@ return [
         "confirmKey" => 1
     ],
 
-    '/home' => [
-        "controller" => "index",
-        "action" => "index"
-    ],
-
     '/confirm-user/(.*)' => [
         "controller" => "account",
         "action" => "confirmUser",
@@ -43,5 +52,14 @@ return [
         "controller" => "account",
         "action" => "resendConfirmation",
         "userId" => 1
+    ],
+
+    /**
+     * Event
+     */
+    '/event/([a-zA-Z0-9_-]+)' => [
+        "controller" => "event",
+        "action" => "show",
+        "systemName" => 1
     ]
 ];

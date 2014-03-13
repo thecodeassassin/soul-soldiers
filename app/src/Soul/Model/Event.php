@@ -1,6 +1,9 @@
 <?php
 namespace Soul\Model;
 
+use Phalcon\DI;
+use Phalcon\Mvc\Model\Query;
+
 /**
  * Class Event
  *
@@ -64,6 +67,20 @@ class Event extends Base
     {
 		$this->setSource('tblEvent');
 
+        $this->hasOne('productId', '\Soul\Model\Product', 'productId', ['alias' => 'product']);
+        $this->hasMany('eventId', '\Soul\Model\Entry', 'eventId', ['alias' => 'entries']);
+
+    }
+
+    /**
+     * Return the current event
+     *
+     * @return \Phalcon\Mvc\Model
+     */
+    public static function getCurrent()
+    {
+        $event =  self::findFirst(['order' => 'abs(now() - startDate) asc']);
+        return $event;
     }
 
     /**

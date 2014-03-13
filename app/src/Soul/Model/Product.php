@@ -40,7 +40,9 @@ class Product extends Base
     public function initialize()
     {
 		$this->setSource('tblProduct');
+        $this->belongsTo("productId", "\Soul\Model\Event", "productId");
 
+        $this->hasMany('productId', '\Soul\Model\Payment', 'productId', ['alias' => 'payments']);
     }
 
     /**
