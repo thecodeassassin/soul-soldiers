@@ -7,6 +7,8 @@
  */
 namespace Soul\Model;
 
+use Phalcon\Cache\BackendInterface;
+use Phalcon\Config;
 use Phalcon\Crypt;
 use Phalcon\Mvc\Model;
 use Soul\Mail;
@@ -26,7 +28,7 @@ class Base extends Model
      */
     protected function getMail()
     {
-        return $this->di->get('mail');
+        return $this->getDI()->get('mail');
     }
 
     /**
@@ -34,6 +36,22 @@ class Base extends Model
      */
     protected function getCrypt()
     {
-        return $this->di->get('crypt');
+        return $this->getDI()->get('crypt');
+    }
+
+    /**
+     * @return Config
+     */
+    protected function getConfig()
+    {
+        return $this->getDI()->get('config');
+    }
+
+    /**
+     * @return BackendInterface
+     */
+    protected function getCache()
+    {
+        return $this->getDI()->get('cache');
     }
 }

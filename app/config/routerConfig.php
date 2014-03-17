@@ -61,5 +61,11 @@ return [
         "controller" => "event",
         "action" => "show",
         "systemName" => 1
+    ],
+
+    '/event/register/([a-zA-Z0-9_-]+)' => [
+        "controller" => "event",
+        "action" => "register",
+        "systemName" => 1
     ]
 ];

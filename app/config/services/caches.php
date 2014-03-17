@@ -7,12 +7,17 @@ $di->set('cache', function() use ($config){
         "lifetime" => 86400
     ));
 
-    //Create the Cache setting memcached connection options
-//    $cache = new Phalcon\Cache\Backend\Memcache($backCache, array(
-//        'host' => 'localhost',
-//        'port' => 11211,
-//        'persistent' => false
-//    ));
+    if (APPLICATION_ENV != \Phalcon\Error\Application::ENV_DEVELOPMENT) {
+        
+        //Create the Cache setting memcached connection options
+        $cache = new Phalcon\Cache\Backend\Memcache($backCache, array(
+            'host' => 'localhost',
+            'port' => 11211,
+            'persistent' => false
+        ));
+
+        return $cache;
+    }
 
     $cache = new \Phalcon\Cache\Backend\Memory($backCache);
 

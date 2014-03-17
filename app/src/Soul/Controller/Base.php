@@ -5,6 +5,7 @@ namespace Soul\Controller;
 use Phalcon\Config;
 use Phalcon\Crypt;
 use Phalcon\Mvc\Controller;
+use Soul\Auth\AuthService;
 use Soul\Mail;
 use Soul\Menu;
 use Soul\Translate;
@@ -28,6 +29,11 @@ class Base extends Controller
 
     protected $translate = null;
 
+    /**
+     * @var AuthService
+     */
+    protected $authService = null;
+
 
     public function initialize()
     {
@@ -35,9 +41,12 @@ class Base extends Controller
         $this->setTitle($this->title);
         $this->setMenu($this->di->get('menu'));
 
+        $this->authService = $this->di->get('auth');
 
-        $this->view->setVar('analyticsScript', $this->getAnalyticsScript($this->getConfig()->analytics->code));
+        $this->view->setVar('analyticsCode', $this->getConfig()->analytics->code);
         $this->view->setVar('menu', $this->getMenu()->outputHTML());
+
+        $this->view->user = $this->authService->getAuthData();
     }
 
     /**
@@ -170,27 +179,4 @@ class Base extends Controller
         return $this->di->get('crypt');
     }
 
-    /**
-     * Get google analytics script
-     *
-     * @param string $analyicsCode
-     * @return string
-     */
-    protected function getAnalyticsScript($analyicsCode)
-    {
-        return <<<CODE
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', '$analyicsCode', 'soul-soldiers.nl');
-  ga('send', 'pageview');
-
-</script>
-
-CODE;
-
-    }
 }

@@ -13,6 +13,8 @@ return new \Phalcon\Config(
             'pluginsDir'     => APPLICATION_PATH . '/plugins/',
             'cacheDir'       => APPLICATION_PATH . '/cache/',
             'locales'        => APPLICATION_PATH .'/locales/',
+            'mediaDir'       => APPLICATION_PATH .'/../public/media',
+            'mediaUrl'       => '/media',
             'baseUri'        => '/',
             'baseTitle'      => 'Soul-Soldiers - Lan parties'
         ],
@@ -24,18 +26,18 @@ return new \Phalcon\Config(
             'controller' => 'error',
             'action' => 'index',
         ],
-        'mail' => array(
+        'mail' => [
             'fromName' => 'Soul-Soldiers',
             'fromEmail' => 'info@soul-soldiers.nl',
-            'smtp' => array(
+            'smtp' => [
                 'server' => 'smtp.gmail.com',
                 'port' => 587,
                 'security' => 'tls',
                 'username' => '',
                 'password' => ''
-            ),
+            ],
             'provider' => 'Swift'
-        ),
+        ],
         'crypt' => [
             'key' => ''
         ]

@@ -1,6 +1,45 @@
 
 // Soul-Soldiers javascript
 $(function() {
+
+    bootbox.setDefaults({
+        /**
+         * @optional String
+         * @default: en
+         * which locale settings to use to translate the three
+         * standard button labels: OK, CONFIRM, CANCEL
+         */
+        locale: "nl",
+
+        /**
+         * @optional Boolean
+         * @default: true
+         * whether the dialog should be shown immediately
+         */
+        show: true,
+
+        /**
+         * @optional Boolean
+         * @default: true
+         * whether the dialog should be have a backdrop or not
+         */
+        backdrop: true,
+
+        /**
+         * @optional Boolean
+         * @default: true
+         * show a close button
+         */
+        closeButton: true,
+
+        /**
+         * @optional Boolean
+         * @default: true
+         * animate the dialog in and out (not supported in < IE 10)
+         */
+        animate: true
+    });
+
     $('[role=form]').validate({
         errorElement: 'span',
         errorClass: 'form-error',
@@ -58,6 +97,20 @@ $(function() {
             }
         }
 
+    });
+
+    $('#registerEvent').click(function(e) {
+
+        e.preventDefault();
+
+        var eventName = $(this).attr('eventName'),
+            eventSystemName = $(this).attr('systemName');
+
+        bootbox.confirm("Weet je zeker dat je je wilt inschrijven voor " + eventName + "?", function(result) {
+            if (result) {
+                window.location = 'register/'+eventSystemName;
+            }
+        });
     });
 //
 //    var nextContainer = $('.container').closest('[col-md-*]')

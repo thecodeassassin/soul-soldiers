@@ -6,6 +6,7 @@ AddDefaultCharset UTF-8
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} !/doc.?
     RewriteCond %{REQUEST_URI} !/demo.?
+    RewriteCond %{REQUEST_URI} !/media.?
     RewriteCond %{REQUEST_URI} !/js.?
     RewriteCond %{REQUEST_URI} !/img.?
     RewriteCond %{REQUEST_URI} !/css.?

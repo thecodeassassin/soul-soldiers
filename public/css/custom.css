@@ -120,6 +120,21 @@ div.signup .register-submit {
     background: #303030;
 }
 
+/*Events*/
+div.entries {
+    min-height: 300px;
+}
+
+.mosaic5 article {
+    margin-right: 15px;
+}
+
+.mosaic5 a {
+    cursor: -webkit-zoom-in;
+    cursor: -moz-zoom-in;
+    cursor: zoom-in;
+}
+
 /* Curly brace support */
 
 .braces {
@@ -238,10 +253,23 @@ div.popover-content {
     margin-bottom: 30px;
 }
 
+.p40 {
+    padding: 40px;
+}
+
 .container [class^="col-"] .gutter {
     padding: 10px;
-    background-color: #eee;
+    background-color: #3c3b3b;
     border: 1px solid #ddd;
-    background-color: rgba(86,61,124,.15);
     border: 1px solid rgba(86,61,124,.2);
+}
+
+/** Modal **/
+
+.modal-content {
+    background: #3c3b3b;
+}
+
+.modal-body  {
+    background-color: #426d84;
 }

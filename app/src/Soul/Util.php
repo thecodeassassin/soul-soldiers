@@ -179,6 +179,52 @@ class Util {
         }
         return min($chr);
     }
+
+    /**
+     * Directory to array
+     *
+     * @param string $dir Directory
+     * @return array
+     */
+    public static function dirToArray($dir)
+    {
+
+        $result = [];
+
+        $cdir = scandir($dir);
+        foreach ($cdir as $value) {
+            if (!in_array($value, [".", ".."])) {
+                if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
+                    $result[$value] = static::dirToArray($dir . DIRECTORY_SEPARATOR . $value);
+                } else {
+                    $result[] = $value;
+                }
+            }
+        }
+
+        return $result;
+    }
+
+
+    /**
+     * Checks if a file is an image
+     *
+     * @param string $file path to the image
+     * @return bool
+     */
+    public static function isImage($file)
+    {
+        if (!is_readable($file)) {
+            return false;
+        }
+
+        $a = getimagesize($file);
+        $image_type = $a[2];
+
+        if (in_array($image_type, array(IMAGETYPE_GIF , IMAGETYPE_JPEG ,IMAGETYPE_PNG , IMAGETYPE_BMP))) {
+            return true;
+        }
+
+        return false;
+    }
 }
-
-

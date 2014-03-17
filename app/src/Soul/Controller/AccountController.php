@@ -26,11 +26,6 @@ use Soul\Util;
 class AccountController extends Base
 {
 
-    /**
-     * @var AuthService
-     */
-    protected $authService = null;
-
 
     /**
      * @return string
@@ -47,8 +42,6 @@ class AccountController extends Base
     public function initialize()
     {
         parent::initialize();
-
-        $this->authService = $this->di->get('auth');
 
         $this->setLastPage();
     }

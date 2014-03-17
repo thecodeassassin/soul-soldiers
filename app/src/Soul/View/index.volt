@@ -17,6 +17,7 @@
         {{ stylesheet_link("css/soul-color.css") }}
         {{ stylesheet_link("font-icons/custom-icons/css/custom-icons.css") }}
         {{ stylesheet_link("font-icons/custom-icons/css/custom-icons-ie7.css") }}
+        {{ stylesheet_link("js-plugin/magnific-popup/magnific-popup.css") }}
 
         {{ stylesheet_link("css/layout.css") }}
 
@@ -34,11 +35,11 @@
         {{ javascript_include("js-plugin/neko-contact-ajax-plugin/js/jquery.form.js") }}
         {{ javascript_include("js-plugin/neko-contact-ajax-plugin/js/jquery.validate.min.js") }}
         {{ javascript_include("js-plugin/appear/jquery.appear.js") }}
-        {#{{ javascript_include("js-plugin/ytplayer/jquery.mb.YTPlayer_modifed.js") }}#}
-        {#{{ javascript_include("js-plugin/parallax/js/jquery.stellar.min.js") }}#}
-        {#{{ javascript_include("js-plugin/toucheeffect/toucheffects.js") }}#}
+
         {{ javascript_include("js/jquery.loadmask.js") }}
         {{ javascript_include("js/jquery.validate.nl.js") }}
+        {{ javascript_include("js/magnificent.popup.min.js") }}
+        {{ javascript_include("js/bootbox.min.js") }}
         {{ javascript_include("js/neko.js") }}
         {{ javascript_include("js/bootstrap-remote-data.min.js") }}
         {{ javascript_include("js/modernizr-2.6.1.min.js") }}
@@ -185,5 +186,8 @@
 
         </div>
     </body>
-    {{ analyticsScript }}
+
+    <script type="text/javascript">
+        window.onload = function () { "use strict"; gaSSDSLoad("{{ analyticsCode }}"); }; //load after page onload
+    </script>
 </html>
