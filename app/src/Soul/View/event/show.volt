@@ -1,6 +1,6 @@
 {{ partial('event/' ~ event.systemName) }}
 <div class="row color0">
-    <div class="col-md-6 p40    ">
+    <div class="col-md-5 col-md-offset-1 pb15 pt15">
         <h2>Inschrijvingen ({{ event.entries|length }}/{{ event.maxEntries }})</h2>
 
         <table class="table table-condensed">
@@ -33,9 +33,9 @@
         </table>
     </div>
 
-    <div class="col-md-6 p40">
+    <div class="col-md-4 col-md-offset-1 pb15 pt15">
         <h2>Media</h2>
-        <div class="imgHover clearfix portfolioMosaic mosaic5 mosaicMoreLink">
+        <div class="imgHover clearfix portfolioMosaic mosaic5">
             {% for img in media['images'] %}
             <article>
                 <figure class="minimalBox">

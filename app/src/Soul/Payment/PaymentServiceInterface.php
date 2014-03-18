@@ -1,6 +1,8 @@
 <?php
 namespace Soul\Payment;
 
+use Soul\Model\Payment;
+
 /**  
  * @author Stephen Hoogendijk
  * @copyright Soul-Soldiers
@@ -8,5 +10,11 @@ namespace Soul\Payment;
 
 interface PaymentServiceInterface
 {
+
+    public function payAmount($amount, $reference);
+
+
+    public function confirmPayment(Payment $payment);
+
 
 } 
