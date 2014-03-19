@@ -1,10 +1,10 @@
 <div class="row color0">
     <div class="col-md-12">
         <div class="container pt30 pb30">
-            <h1>Entreeticket betalen voor {{ event.name }}</h1>
+            <h1>Entreeticket voor {{ event.name }}</h1>
 
-            <div class="pull-right">
-                <span class="price">&euro; {{ event.product.cost }}</span>
+            <div class="pull-left">
+                <span class="price">Prijs: &euro; {{ '%01.2f'|format(event.product.cost) }}</span>
             </div>
             <div class="row">
                 <div class="col-md-12">

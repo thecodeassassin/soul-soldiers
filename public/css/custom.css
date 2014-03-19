@@ -276,6 +276,10 @@ hr {
     text-shadow: none;
 }
 
+.price {
+    font-size: 24px;
+}
+
 /** Modal **/
 
 .modal-content {
