@@ -264,6 +264,18 @@ div.popover-content {
     border: 1px solid rgba(86,61,124,.2);
 }
 
+hr.lineStar:after, hr.lineX:after, hr.linePlus:after, hr.lineDot:after, hr.lineLines:after {
+    background: #3c3b3b;
+}
+
+hr {
+    border: 1px solid #4f4e4e;
+}
+
+.input-group-addon {
+    text-shadow: none;
+}
+
 /** Modal **/
 
 .modal-content {

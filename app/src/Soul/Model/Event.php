@@ -175,18 +175,41 @@ class Event extends Base
      */
     public function hasEntry($userId)
     {
-        if ($entry = Entry::findFirst(["userId = '$userId'", "systemName = '".$this->systemName."'"])) {
+        if ($entry = $this->findByUserIdAndSystemName($userId, $this->systemName)) {
 
-            $payed = false;
-
-            if ($entry->payment) {
-                $payed = (bool) $entry->payment->confirmed;
-            }
-
-            return compact('payed');
+            return true;
         }
 
         return false;
+    }
+
+    /**
+     * @param $userId
+     * @return bool
+     */
+    public function hasPayed($userId)
+    {
+        if ($entry = $this->findByUserIdAndSystemName($userId, $this->systemName)) {
+
+            if ($entry->payment) {
+                return (bool) $entry->payment->confirmed;
+            }
+
+        }
+
+        return false;
+
+    }
+
+    /**
+     * @param $userId
+     * @param $systemName
+     * @return \Phalcon\Mvc\Model
+     */
+    public function findByUserIdAndSystemName($userId, $systemName)
+    {
+
+        return Entry::findFirst(["userId = '$userId'", "systemName = '".$systemName."'"]);
     }
 
     /**

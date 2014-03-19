@@ -9,6 +9,7 @@ namespace Soul\Payment\Service;
 
 
  
+use Soul\Module;
 use Soul\Payment\PaymentServiceInterface;
 
 /**
@@ -16,7 +17,7 @@ use Soul\Payment\PaymentServiceInterface;
  *
  * @package Soul\Payment\Service
  */
-abstract class AbstractPaymentService implements PaymentServiceInterface
+abstract class AbstractPaymentService extends Module implements PaymentServiceInterface
 {
-    
-} 
+
+}

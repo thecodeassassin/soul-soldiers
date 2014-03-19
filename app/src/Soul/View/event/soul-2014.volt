@@ -12,7 +12,11 @@
             {% else %}
 
                 {% if not payed %}
-                    <p><a class="btn btn-primary btn-lg" role="button" href="{{ url('event/pay/' ~ event.systemName) }}">Entreeticket betalen</a></p>
+                    <p><a class="btn btn-primary btn-lg" role="button" href="{{ url('event/pay/' ~ event.systemName) }}">
+                            <span class="icon-euro"></span>
+                            Entreeticket betalen
+                       </a>
+                    </p>
                 {% else %}
                     <p><a class="btn btn-primary btn-lg disabled" role="button" href="javascript:void(0)">Bedankt voor je betaling!</a></p>
                 {% endif %}

@@ -40,7 +40,7 @@
             <article>
                 <figure class="minimalBox">
                     <a href="{{ url(img) }}" class="image-link">
-                        {{ image(img, {"class" : "img-responsive"}) }}
+                        {{ image(img, "class" : "img-responsive") }}
                     </a>
                 </figure>
             </article>

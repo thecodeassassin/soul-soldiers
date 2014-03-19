@@ -9,6 +9,7 @@ namespace Soul\Controller;
 
 use Phalcon\Mvc\View;
 use Soul\Model\Event;
+use Soul\Payment\Service\TargetPay;
 
 /**
  * Class EventController
@@ -48,7 +49,7 @@ class EventController extends Base
             $registered = $event->hasEntry($user->getUserId());
 
             // check if the user has payed for the event
-            if ($registered && array_key_exists('payed', $registered) && $registered['payed'] == true) {
+            if ($registered && $event->hasPayed($user->getUserId())) {
                 $payed = true;
             }
         }
@@ -77,6 +78,36 @@ class EventController extends Base
         }
 
         return $this->redirectToLastPage();
+    }
+
+    /**
+     * Pay for a given event
+     *
+     * @param $systemName
+     *
+     * @return \Phalcon\Http\ResponseInterface
+     */
+    public function payAction($systemName)
+    {
+        $paymentService = new TargetPay();
+
+        $event = Event::findBySystemName($systemName);
+        $user = $this->authService->getAuthData();
+        if ($event && $user) {
+
+            // check if a user has payed already
+            if ($event->hasPayed($user->getUserId()) || !$event->hasEntry($user->getUserId())) {
+                return $this->redirectToLastPage();
+            }
+
+        }
+
+        $issuers = $paymentService->getIssuers();
+
+
+        $this->view->event = $event;
+        $this->view->user = $user;
+        $this->view->issuers = $issuers;
     }
 
 } 
