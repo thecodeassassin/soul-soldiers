@@ -1,10 +1,11 @@
+{% set price = '%01.2f'|format(event.product.cost) %}
 <div class="row color0">
     <div class="col-md-12">
         <div class="container pt30 pb30">
             <h1>Entreeticket voor {{ event.name }}</h1>
 
             <div class="pull-left">
-                <span class="price">Prijs: &euro; {{ '%01.2f'|format(event.product.cost) }}</span>
+                <span class="price">Prijs: &euro; {{ price }}</span>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -49,10 +50,19 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4 col-md-offset-4">
+                <div class="col-md-5 col-md-offset-4">
                     <h3>Zelf overmaken</h3>
 
-                    Je kunt
+                    <p>
+                        Je kunt het totaalbedrag (&euro; {{ price }}) ook naar ons overmaken.
+                        <br />
+                        <br />
+                        Betaalgegevens:
+                        <br /><br />
+                        - IBAN:  NL63 INGB 0003 7831 47 <br />
+                        - T.n.v Soul-Soldiers te Hoofddorp <br />
+                        - Omschrijving: Betaling {{ user.getRealName() }} - {{ event.name }}
+                    </p>
                 </div>
             </div>
         </div>

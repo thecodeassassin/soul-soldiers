@@ -158,7 +158,8 @@ class Data
                  ->setUserId($user->userId)
                  ->setUserType($user->userType)
                  ->setNickName($user->nickName)
-                 ->setUserState($user->state);
+                 ->setUserState($user->state)
+                 ->setRealName($user->realName);
 
         return $instance;
 

@@ -1,9 +1,9 @@
 <?php
-/**  
+/**
  * @author Stephen Hoogendijk
  * @copyright Soul-Soldiers
- * @package EventController 
- */  
+ * @package EventController
+ */
 
 namespace Soul\Controller;
 
@@ -74,7 +74,7 @@ class EventController extends Base
         if ($user && $event) {
             if ($event->registerByUserId($user->getUserId())) {
                 $this->flashMessage(sprintf('Je bent nu ingeschreven voor %s!', $event->name), 'success', true);
-            }           
+            }
         }
 
         return $this->redirectToLastPage();
@@ -83,7 +83,7 @@ class EventController extends Base
     /**
      * Pay for a given event
      *
-     * @param $systemName
+     * @param string $systemName
      *
      * @return \Phalcon\Http\ResponseInterface
      */
@@ -100,14 +100,23 @@ class EventController extends Base
                 return $this->redirectToLastPage();
             }
 
+            if ($this->request->isPost()) {
+                $issuer = $this->request->get('issuer', 'string');
+
+                
+            }
+
+        }
+
+        if (!$user) {
+            return $this->redirectToLastPage();
         }
 
         $issuers = $paymentService->getIssuers();
-
 
         $this->view->event = $event;
         $this->view->user = $user;
         $this->view->issuers = $issuers;
     }
 
-} 
+}

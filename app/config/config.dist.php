@@ -21,6 +21,11 @@ return new \Phalcon\Config(
         'analytics' =>[
             'code' => '',
         ],
+        'paymentServices' => [
+            'targetpay' => [
+                'testMode' => true
+            ]
+        ],
         'error' => [
             'logger' => new \Phalcon\Logger\Adapter\File(APPLICATION_PATH . '/log/' . APPLICATION_ENV . '.log'),
             'controller' => 'error',
