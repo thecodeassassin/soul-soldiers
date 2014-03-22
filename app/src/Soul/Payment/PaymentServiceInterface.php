@@ -2,6 +2,7 @@
 namespace Soul\Payment;
 
 use Soul\Model\Payment;
+use Soul\Payment\Data\AbstractData as TransactionData;
 
 /**  
  * @author Stephen Hoogendijk
@@ -11,10 +12,19 @@ use Soul\Model\Payment;
 interface PaymentServiceInterface
 {
 
-    public function payAmount($amount, $reference);
+    /**
+     * @param TransactionData $data
+     * @param int|mixed       $userId
+     * @param int|mixed       $productId
+     *
+     * @return mixed
+     */
+    public function startTransaction(TransactionData $data, $userId, $productId);
 
-
-    public function confirmPayment(Payment $payment);
-
-
+    /**
+     * @param string $transactionId
+     *
+     * @return mixed
+     */
+    public function checkTransaction($transactionId);
 } 

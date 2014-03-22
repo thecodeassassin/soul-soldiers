@@ -112,6 +112,23 @@ $(function() {
             }
         });
     });
+
+    $('form[name=payment]').submit(function() {
+       if ($(this).valid()) {
+           ajaxLoad(true);
+       }
+
+    });
 //
 //    var nextContainer = $('.container').closest('[col-md-*]')
 });
+
+function ajaxLoad(mode){
+
+    if(mode) {
+        $.blockUI({ message: '<div class="ajax-loader center"><img src="/img/ajax-loader.gif" /> <br />Bezig met laden...&nbsp;</div>' });
+    } else {
+        $.unblockUI();
+    }
+
+}

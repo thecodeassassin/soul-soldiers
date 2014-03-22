@@ -22,19 +22,18 @@
                     <p>
                         Je kunt bij ons gemakkelijk je entreeticket betalen met iDeal.
                     </p>
-                    {{ form('event/pay/' ~ event.systemName, "method": "post", "name":"login", "class":"form-inline validate", "role":"form") }}
+                    {{ form('event/pay/' ~ event.systemName, "method": "post", "name":"payment", "class":"form-inline validate", "role":"form") }}
 
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon icon-credit-card">&nbsp;</span>
-                            <select id="issuer" name="issuer" class="form-control" required>
-                                <option value="">Selecteer uw bank</option>
-                                {% for issuer in issuers %}
-                                    <option value="{{ issuer['id'] }}">{{ issuer['name'] }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
+                    <div class="input-group">
+                        <span class="input-group-addon icon-credit-card">&nbsp;</span>
+                        <select id="issuer" name="issuer" class="form-control" required>
+                            <option value="">Selecteer uw bank</option>
+                            {% for issuer in issuers %}
+                                <option value="{{ issuer['id'] }}">{{ issuer['name'] }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
+
                     <div class="mt15">
                         <button type="submit" class="btn btn-primary btn-block">Start iDeal betaling</button>
                     </div>

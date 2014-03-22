@@ -56,6 +56,58 @@ class Payment extends Base
     }
 
     /**
+     * @param string|int $transactionId
+     *
+     * @return Payment
+     */
+    public static function findPaymentByTransactionId($transactionId)
+    {
+        return static::findFirstByTransactionId($transactionId);
+    }
+
+    /**
+     * Confirm this payment
+     */
+    public function confirmEntryPayment(Entry $entry)
+    {
+        $this->confirmed = 1;
+        $entry->paymentId = $this->paymentId;
+
+        $entry->save();
+        $this->save();
+    }
+
+    /**
+     * Create a payment
+     *
+     * @param int|float $amount
+     * @param string    $reference
+     * @param int       $userId
+     * @param int       $productId
+     * @return bool
+     */
+    public static function createPayment($amount, $reference, $userId, $productId)
+    {
+
+        // do not create a payment if one already exists with the given reference
+        if (static::findPaymentByTransactionId($reference)) {
+            return false;
+        }
+
+        $payment = new self();
+
+        $payment->amount = $amount;
+        $payment->transactionId = $reference;
+        $payment->productId = $productId;
+        $payment->userId = $userId;
+        $payment->confirmed = 0;
+
+        $payment->save();
+
+        return true;
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()

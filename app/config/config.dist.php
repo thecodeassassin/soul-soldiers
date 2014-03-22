@@ -22,8 +22,11 @@ return new \Phalcon\Config(
             'code' => '',
         ],
         'paymentServices' => [
-            'targetpay' => [
-                'testMode' => true
+            'targetPay' => [
+                'testMode' => true,
+                'layoutCode' => '',
+                'returnUrl' => BASE_URL . '/event/current',
+                'reportUrl' => ''
             ]
         ],
         'error' => [

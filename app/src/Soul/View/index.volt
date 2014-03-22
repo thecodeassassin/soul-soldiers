@@ -20,6 +20,7 @@
         {{ stylesheet_link("js-plugin/magnific-popup/magnific-popup.css") }}
 
         {{ stylesheet_link("css/layout.css") }}
+        {{ stylesheet_link("css/ajax-loader.css") }}
 
         {# Custom CSS #}
         {{ stylesheet_link("css/custom.css") }}
@@ -43,6 +44,8 @@
         {{ javascript_include("js/neko.js") }}
         {{ javascript_include("js/bootstrap-remote-data.min.js") }}
         {{ javascript_include("js/modernizr-2.6.1.min.js") }}
+
+        {{ javascript_include("js/blockui.js") }}
 
         {{ javascript_include("js/soul.js") }}
 

@@ -9,31 +9,31 @@
 
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-5 control-label">E-mail *</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-7 noaddon">
                         {{ form.render('email') }}
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-5 control-label">Volledige naam *</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-7 noaddon">
                         {{ form.render('realName') }}
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-5 control-label">Nickname (bijnaam) *</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-7 noaddon">
                         {{ form.render('nickName') }}
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-5 control-label">Wachtwoord *</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-7 noaddon">
                         {{ form.render('password') }}
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-5 control-label">Wachtwoord (opnieuw) *</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-7 noaddon">
                         {{ form.render('passwordRepeat') }}
                     </div>
                 </div>
@@ -47,25 +47,25 @@
                 <h2>Persoons gegevens</h2>
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-5 control-label">Telefoonnummer</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-7 noaddon">
                         {{ form.render('telephone') }}
                     </div>
                     <div class="form-group">
                 </div>
                     <label for="inputPassword3" class="col-sm-5 control-label">Adres</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-7 noaddon">
                         {{ form.render('address') }}
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-5 control-label">Postcode</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-7 noaddon">
                         {{ form.render('postalCode') }}
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-5 control-label">Woonplaats</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-7 noaddon">
                         {{ form.render('city') }}
                     </div>
                 </div>

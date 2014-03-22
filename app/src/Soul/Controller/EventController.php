@@ -9,6 +9,9 @@ namespace Soul\Controller;
 
 use Phalcon\Mvc\View;
 use Soul\Model\Event;
+use Soul\Model\Payment;
+use Soul\Payment\Data\TargetPay\IdealStart;
+use Soul\Payment\Service\Exception;
 use Soul\Payment\Service\TargetPay;
 
 /**
@@ -18,6 +21,22 @@ use Soul\Payment\Service\TargetPay;
  */
 class EventController extends Base
 {
+
+    /**
+     * @var TargetPay
+     */
+    protected $paymentService;
+
+    /**
+     * Constructor
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->paymentService = new TargetPay();
+    }
+
     /**
      * Show an event
      *
@@ -30,6 +49,7 @@ class EventController extends Base
         $pictures = array();
         $registered = false;
         $payed = false;
+        $transactionId = $this->request->get('trxid', 'string');
 
         if ($systemName == 'current') {
             $event = Event::getCurrent();
@@ -46,11 +66,25 @@ class EventController extends Base
 
         $user = $this->authService->getAuthData();
         if ($event && $user) {
-            $registered = $event->hasEntry($user->getUserId());
+            $userId = $user->getUserId();
+            $registered = $event->hasEntry($userId);
 
             // check if the user has payed for the event
-            if ($registered && $event->hasPayed($user->getUserId())) {
+            if ($registered && $event->hasPayed($userId)) {
                 $payed = true;
+            }
+        }
+
+        if ($transactionId) {
+            try {
+
+                if ($this->paymentService->checkTransaction($transactionId)) {
+                    $this->flashMessage('Uw betaling is successvol verwerkt, bedankt! U ontvangt een bevestiging per e-mail', 'success');
+                } else {
+                    throw new Exception('De betaling is mislukt of geannuleerd, probeer het later nogmaals.');
+                }
+            } catch (Exception $e) {
+                $this->flashMessage($e->getMessage(), 'error');
             }
         }
 
@@ -77,7 +111,7 @@ class EventController extends Base
             }
         }
 
-        return $this->redirectToLastPage();
+        return $this->response->redirect('event/current');
     }
 
     /**
@@ -89,21 +123,45 @@ class EventController extends Base
      */
     public function payAction($systemName)
     {
-        $paymentService = new TargetPay();
+
 
         $event = Event::findBySystemName($systemName);
         $user = $this->authService->getAuthData();
+        $userId = $user->getUserId();
+        $config = $this->getConfig();
+
         if ($event && $user) {
 
             // check if a user has payed already
-            if ($event->hasPayed($user->getUserId()) || !$event->hasEntry($user->getUserId())) {
+            if ($event->hasPayed($userId) || !$event->hasEntry($userId)) {
                 return $this->redirectToLastPage();
             }
 
             if ($this->request->isPost()) {
                 $issuer = $this->request->get('issuer', 'string');
+                $layoutCode = $config->paymentServices->targetPay->layoutCode;
+                $returnUrl = $config->paymentServices->targetPay->returnUrl;
+                $reportUrl = $config->paymentServices->targetPay->reportUrl;
+                $description = $event->product->description;
+                $amount = $event->product->cost * 100; // amount is in cents?!
+                $productId = $event->productId;
 
-                
+                // build the transaction
+                $idealStart = new IdealStart($layoutCode, $issuer, $description, $amount, $returnUrl, $reportUrl);
+
+                // start the transaction
+                $transactionDetails = $this->paymentService->startTransaction($idealStart, $userId, $productId);
+
+                if (!$transactionDetails) {
+                    $this->flashMessage('Er is iets mis gegaan met de iDeal betaling, probeer het later nogmaals', 'error', true);
+
+                    return $this->redirectToLastPage();
+                }
+
+                if (array_key_exists('url', $transactionDetails)) {
+                    return $this->response->redirect($transactionDetails['url'], true, 200);
+                }
+
             }
 
         }
@@ -112,7 +170,7 @@ class EventController extends Base
             return $this->redirectToLastPage();
         }
 
-        $issuers = $paymentService->getIssuers();
+        $issuers = $this->paymentService->getIssuers();
 
         $this->view->event = $event;
         $this->view->user = $user;

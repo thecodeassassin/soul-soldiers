@@ -195,13 +195,13 @@ div.entries {
     color: #000000;
 }
 
-.form-group div {
+.input-group, .form-group .noaddon {
     position: relative;
 }
-.form-group div input {
+.input-group input, .form-group .noaddon input {
     padding-right: 30px;
 }
-.form-group div span.form-error {
+.input-group span.form-error, .form-group .noaddon span.form-error {
     position: absolute;
     right: 0px;
     padding: 15px 17px;
