@@ -89,6 +89,7 @@ class EventController extends Base
         }
 
         $this->view->registered = $registered;
+        $this->view->archived = ($systemName != 'current');
         $this->view->payed = $payed;
         $this->view->event = $event;
         $this->view->media = $event->getMedia();

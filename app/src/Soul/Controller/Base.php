@@ -47,6 +47,7 @@ class Base extends Controller
         $this->view->setVar('menu', $this->getMenu()->outputHTML());
 
         $this->view->user = $this->authService->getAuthData();
+
     }
 
     /**

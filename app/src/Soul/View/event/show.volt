@@ -1,5 +1,7 @@
 {{ partial('event/' ~ event.systemName) }}
 <div class="row color0">
+
+    {% if not archived %}
     <div class="col-md-5 col-md-offset-1 pb15 pt15">
         <h2>Inschrijvingen ({{ event.entries|length }}/{{ event.maxEntries }})</h2>
 
@@ -32,8 +34,9 @@
             </tbody>
         </table>
     </div>
+    {% endif %}
 
-    <div class="col-md-4 col-md-offset-1 pb15 pt15">
+    <div class="{% if archived %} col-md-6 col-md-offset-3 {% else %}col-md-4 col-md-offset-1 {% endif %} pb15 pt15">
         <h2>Media</h2>
         <div class="imgHover clearfix portfolioMosaic mosaic5">
             {% for img in media['images'] %}

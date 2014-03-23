@@ -289,3 +289,26 @@ hr {
 .modal-body  {
     background-color: #426d84;
 }
+
+/**
+Index / news / tweets
+*/
+.news-container .gutter, .tweet-container .gutter {
+    min-height: 606px;
+}
+
+.news-container {
+    padding-right: 0;
+}
+
+.tweet-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+.tweet-container iframe {
+    width: 100%;
+}
+
+.news-container h2 {
+    padding-top: 10px;
+}
