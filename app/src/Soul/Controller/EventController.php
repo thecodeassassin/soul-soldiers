@@ -128,10 +128,11 @@ class EventController extends Base
 
         $event = Event::findBySystemName($systemName);
         $user = $this->authService->getAuthData();
-        $userId = $user->getUserId();
         $config = $this->getConfig();
 
+
         if ($event && $user) {
+            $userId = $user->getUserId();
 
             // check if a user has payed already
             if ($event->hasPayed($userId) || !$event->hasEntry($userId)) {
@@ -168,7 +169,9 @@ class EventController extends Base
         }
 
         if (!$user) {
-            return $this->redirectToLastPage();
+
+            $this->setLastPage(true);
+            return $this->response->redirect('login');
         }
 
         $issuers = $this->paymentService->getIssuers();

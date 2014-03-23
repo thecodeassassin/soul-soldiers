@@ -93,8 +93,8 @@
             <!-- 700px container (white background) -->
             <table border="0" width="700" cellpadding="0" cellspacing="0" class="container" bgcolor="#3c3b3b">
                 <tr>
-                    <td class="container-padding" bgcolor="#3c3b3b" style="background-color: #3c3b3b; padding-left: 30px; padding-right: 30px; font-size: 13px; line-height: 20px; font-family: Helvetica, sans-serif; color: #ffffff;" align="left">
-                        {{ embed_image('img/main-logo.png', 'Soul-Soldiers Logo') }}
+                    <td class="container-padding" bgcolor="#3c3b3b" style="background-color: #3c3b3b; padding: 30px; font-size: 13px; line-height: 20px; font-family: Helvetica, sans-serif; color: #ffffff;" align="left">
+                        <img src="{{ email_embed('img/main-logo.png') }}" alt="Soul-Soldiers logo">
                         <br><br>
 
                         {{ content() }}
@@ -105,7 +105,7 @@
 
                         <br><br>
                         <center>
-                            <p style="text-align:center;"><a href="{{ url('terms') }}">Algemene voorwaarden</a> {% if user.userId != 0 and user.state == 1 %} | <a href="{{ url('unsubscribe/' ~ user.email }}">Uitschrijven</a>{% endif %}</p>
+                            <p style="text-align:center;"><a href="{{ url('terms') }}">Algemene voorwaarden</a> {% if user.userId != 0 and user.state == 1 %} | <a href="{{ url('unsubscribe/' ~ user.email) }}">Uitschrijven</a>{% endif %}</p>
                         </center>
 
                     </td>

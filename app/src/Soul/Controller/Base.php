@@ -101,8 +101,14 @@ class Base extends Controller
         return $this->translate;
     }
 
-    protected function setLastPage()
+    protected function setLastPage($forceCurrent = false)
     {
+        if ($forceCurrent) {
+
+            $this->session->set('referer', Util::getCurrentUrl());
+            return true;
+        }
+
         if (array_key_exists('HTTP_REFERER', $_SERVER)) {
 
             $referer = $_SERVER['HTTP_REFERER'];
@@ -127,10 +133,13 @@ class Base extends Controller
      */
     protected function redirectToLastPage()
     {
+
+
         if (is_null($this->getLastPage()) || $this->getLastPage() == Util::getCurrentUrl()) {
-            return $this->response->redirect($this->url->get('home'));
+            return $this->response->redirect($this->url->get('home'), true);
         }
-        return $this->response->redirect($this->getLastPage(), true);
+
+        return $this->response->redirect($this->getLastPage(), true, 200);
     }
 
     /**

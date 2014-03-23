@@ -165,6 +165,15 @@ class Event extends Base
         $entry->eventId = $this->eventId;
         $entry->userId = (int) $userId;
         $entry->paymentId = null;
+        $event = Event::findByEventId($this->eventId);
+
+        // send an email to the user
+        $this->getMail()->sendToUser(
+            User::findFirstByUserId($userId),
+            'Inschrijving ' . $event->name,
+            'signedUp',
+            compact('event')
+        );
 
         return $entry->create();
     }
@@ -175,7 +184,7 @@ class Event extends Base
      */
     public function hasEntry($userId)
     {
-        if ($entry = $this->findByUserIdAndSystemName($userId, $this->systemName)) {
+        if ($entry = $this->findEntryByUserIdAndSystemName($userId, $this->systemName)) {
 
             return $entry;
         }
@@ -189,7 +198,7 @@ class Event extends Base
      */
     public function hasPayed($userId)
     {
-        if ($entry = static::findByUserIdAndSystemName($userId, $this->systemName)) {
+        if ($entry = static::findEntryByUserIdAndSystemName($userId, $this->systemName)) {
 
             if ($entry->payment) {
                 return (bool) $entry->payment->confirmed;
@@ -206,10 +215,19 @@ class Event extends Base
      * @param $systemName
      * @return \Phalcon\Mvc\Model
      */
-    public static function findByUserIdAndSystemName($userId, $systemName)
+    public static function findEntryByUserIdAndSystemName($userId, $systemName)
     {
 
         return Entry::findFirst(["userId = '$userId'", "systemName = '".$systemName."'"]);
+    }
+
+    /**
+     * @param $eventId
+     * @return Event
+     */
+    public static function findByEventId($eventId)
+    {
+        return Event::findFirst(["eventId = '$eventId'"]);
     }
 
     /**

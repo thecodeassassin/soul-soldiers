@@ -138,7 +138,7 @@ class TargetPay extends AbstractPaymentService
 
             $user = User::findFirstByUserId($payment->userId);
             $event = Event::findFirstByProductId($payment->productId);
-            $entry = Event::findByUserIdAndSystemName($payment->userId, $event->systemName);
+            $entry = Event::findEntryByUserIdAndSystemName($payment->userId, $event->systemName);
 
             $payment->confirmEntryPayment($entry);
 

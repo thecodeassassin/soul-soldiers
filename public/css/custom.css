@@ -293,7 +293,7 @@ hr {
 /**
 Index / news / tweets
 */
-.news-container .gutter, .tweet-container .gutter {
+.news-container .gutter, .tweet-container {
     min-height: 606px;
 }
 

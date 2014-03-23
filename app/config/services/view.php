@@ -35,10 +35,10 @@ $di->set('view', function() use ($config, $di) {
                         );
 
                         $compiler->addFunction(
-                            'embed_image',
+                            'email_embed',
                             function ($args, $params) use ($compiler, $di) {
 
-                                $image =  str_replace("'", "", $compiler->expression($params[0]['expr']));
+                                $image = str_replace("'", "", $compiler->expression($params[0]['expr']));
 
                                 $fullPath = sprintf('%s/../public/%s', APPLICATION_PATH, $image);
 
@@ -46,14 +46,7 @@ $di->set('view', function() use ($config, $di) {
                                     return '""';
                                 }
 
-                                $imageBase64 = base64_encode(file_get_contents($fullPath));
-                                $alt = '';
-
-                                if (isset($params[1])) {
-                                    $alt = $compiler->expression($params[1]['expr']);
-                                }
-
-                                return '"<img src=\'data:image/png;base64,'.$imageBase64.'\' alt='.$alt.'>"';
+                                return '"[embed]'.$fullPath.'[/embed]"';
                             }
                         );
 
