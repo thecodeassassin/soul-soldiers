@@ -14,8 +14,11 @@ $di->set(
         $auth = $di->get('auth');
         $cache = $di->get('cache');
 
-
-        $cacheKey = crc32(serialize($menuConfig));
+        if ($auth->isLoggedIn) {
+            $cacheKey = crc32(serialize($menuConfig).'_login');
+        } else {
+            $cacheKey = crc32(serialize($menuConfig));
+        }
 
         // disable translations cache in development
         $disableCache = (APPLICATION_ENV == \Phalcon\Error\Application::ENV_DEVELOPMENT ? true : false);
