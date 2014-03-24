@@ -12,6 +12,12 @@ return [
         "action" => "index"
     ],
 
+    '/static/(.*)' => [
+        "controller" => "static",
+        "action"     => "index",
+        "resource" => 1
+    ],
+
     /**
      * Account
      */

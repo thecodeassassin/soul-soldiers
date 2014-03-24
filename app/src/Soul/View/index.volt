@@ -5,10 +5,13 @@
 <!--[if (gt IE 7)|!(IE)]><!-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html lang="en-us">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<![endif]-->
     <head>
 
         <title>{{ title }}</title>
+
+        {#{{ assets.outputCss('main') }}#}
 
         {# Layout CSS #}
         {{ stylesheet_link("http://fonts.googleapis.com/css?family=Droid+Sans:400,700", false) }}

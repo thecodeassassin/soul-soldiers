@@ -25,7 +25,8 @@ return new \Phalcon\Config(
          */
         'publiccontrollers' => [
             'index',
-            'error'
+            'error',
+            'static'
         ],
         /**
          * <pre>
@@ -52,6 +53,7 @@ return new \Phalcon\Config(
                         'changePassword'
                     ],
                     'event' => ['show', 'register', 'pay']
+
                 ],
                 AclBuilder::ROLE_USER => [
                     'account' => ['logout', 'manage']

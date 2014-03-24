@@ -59,6 +59,9 @@ include __DIR__ . "/services/menu.php";
 // load the mailer
 include __DIR__ . "/services/mail.php";
 
+// load the assets manager
+include __DIR__ . "/services/assets.php";
+
 // load auth services
 
 // load the config into the DI
