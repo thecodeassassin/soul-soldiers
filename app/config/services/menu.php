@@ -13,8 +13,10 @@ $di->set(
 
         $auth = $di->get('auth');
         $cache = $di->get('cache');
+        $loggedIn = $auth->isLoggedIn();
 
-        if ($auth->isLoggedIn) {
+        // cache a different menu if the user is logged in
+        if ($loggedIn) {
             $cacheKey = crc32(serialize($menuConfig).'_login');
         } else {
             $cacheKey = crc32(serialize($menuConfig));
@@ -29,7 +31,7 @@ $di->set(
 
 
         foreach ($menuConfig as $name => $link) {
-            if ($auth->isLoggedIn()) {
+            if ($loggedIn) {
                 if (in_array($name, $guestOnly)) {
                     unset ($menuConfig[$name]);
                 }
