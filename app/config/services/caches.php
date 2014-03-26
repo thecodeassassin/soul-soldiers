@@ -1,4 +1,6 @@
 <?php
+use Soul\Kernel;
+
 $di->set('cache', function() use ($config){
 
 
@@ -7,8 +9,8 @@ $di->set('cache', function() use ($config){
         "lifetime" => 86400
     ));
 
-    if (APPLICATION_ENV != \Phalcon\Error\Application::ENV_DEVELOPMENT) {
-        
+    if (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT) {
+
         //Create the Cache setting memcached connection options
         $cache = new Phalcon\Cache\Backend\Memcache($backCache, array(
             'host' => 'localhost',

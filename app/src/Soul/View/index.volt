@@ -11,46 +11,10 @@
 
         <title>{{ title }}</title>
 
-        {#{{ assets.outputCss('main') }}#}
-
-        {# Layout CSS #}
-        {{ stylesheet_link("http://fonts.googleapis.com/css?family=Droid+Sans:400,700", false) }}
-        {{ stylesheet_link("http://fonts.googleapis.com/css?family=Roboto:400,300,500,700", false) }}
-        {{ stylesheet_link("//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", false) }}
-        {{ stylesheet_link("css/soul-color.css") }}
-        {{ stylesheet_link("font-icons/custom-icons/css/custom-icons.css") }}
-        {{ stylesheet_link("font-icons/custom-icons/css/custom-icons-ie7.css") }}
-        {{ stylesheet_link("js-plugin/magnific-popup/magnific-popup.css") }}
-
-        {{ stylesheet_link("css/layout.css") }}
-        {{ stylesheet_link("css/ajax-loader.css") }}
-
-        {# Custom CSS #}
-        {{ stylesheet_link("css/custom.css") }}
-        {{ stylesheet_link("css/bgstretcher.css") }}
-        {{ stylesheet_link("css/buttons.css") }}
-
-        {{ javascript_include("js-plugin/respond/respond.min.js") }}
-        {{ javascript_include("js-plugin/jquery/jquery-1.10.2.min.js") }}
-        {{ javascript_include("js-plugin/jquery-ui/jquery-ui-1.8.23.custom.min.js") }}
-        {{ javascript_include("//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js", false) }}
-        {{ javascript_include("js-plugin/easing/jquery.easing.1.3.js") }}
-
-        {{ javascript_include("js-plugin/neko-contact-ajax-plugin/js/jquery.form.js") }}
-        {{ javascript_include("js-plugin/neko-contact-ajax-plugin/js/jquery.validate.min.js") }}
-        {{ javascript_include("js-plugin/appear/jquery.appear.js") }}
-
-        {{ javascript_include("js/jquery.loadmask.js") }}
-        {{ javascript_include("js/jquery.validate.nl.js") }}
-        {{ javascript_include("js/magnificent.popup.min.js") }}
-        {{ javascript_include("js/bootbox.min.js") }}
-        {{ javascript_include("js/neko.js") }}
-        {{ javascript_include("js/bootstrap-remote-data.min.js") }}
-        {{ javascript_include("js/modernizr-2.6.1.min.js") }}
-
-        {{ javascript_include("js/blockui.js") }}
-
-        {{ javascript_include("js/soul.js") }}
+        {# Output js/css content #}
+        {{ assets.outputCss('fonts') }}
+        {{ assets.outputCss('main') }}
+        {{ assets.outputJs('scripts') }}
 
         {# Custom javascript #}
     </head>

@@ -34,6 +34,11 @@ class Base extends Controller
      */
     protected $authService = null;
 
+    /**
+     * @var Config
+     */
+    protected $config = null;
+
 
     public function initialize()
     {
@@ -47,6 +52,7 @@ class Base extends Controller
         $this->view->setVar('menu', $this->getMenu()->outputHTML());
 
         $this->view->user = $this->authService->getAuthData();
+        $this->config = $this->getConfig();
 
     }
 

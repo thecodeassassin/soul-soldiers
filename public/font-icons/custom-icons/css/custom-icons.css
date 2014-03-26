@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'custom-icons';
-  src: url('../font/custom-icons.eot?71446960');
-  src: url('../font/custom-icons.eot?71446960#iefix') format('embedded-opentype'),
-       url('../font/custom-icons.woff?71446960') format('woff'),
-       url('../font/custom-icons.ttf?71446960') format('truetype'),
-       url('../font/custom-icons.svg?71446960#custom-icons') format('svg');
+  src: url('../font-icons/custom-icons/font/custom-icons.eot?71446960');
+  src: url('../font-icons/custom-icons/font/custom-icons.eot?71446960#iefix') format('embedded-opentype'),
+       url('../font-icons/custom-icons/font/custom-icons.woff?71446960') format('woff'),
+       url('../font-icons/custom-icons/font/custom-icons.ttf?71446960') format('truetype'),
+       url('../font-icons/custom-icons/font/custom-icons.svg?71446960#custom-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -18,38 +18,38 @@
   }
 }
 */
- 
+
  [class^="icon-"]:before, [class*=" icon-"]:before {
   font-family: "custom-icons";
   font-style: normal;
   font-weight: normal;
   speak: none;
- 
+
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
   margin-right: .2em;
   text-align: center;
   /* opacity: .8; */
- 
+
   /* For safety - reset parent styles, that can break glyph codes*/
   font-variant: normal;
   text-transform: none;
-     
+
   /* fix buttons height, for twitter bootstrap */
   line-height: 1em;
- 
+
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
   margin-left: .2em;
- 
+
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
- 
+
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
- 
+
 .icon-glass:before { content: '\e807'; } /* '' */
 .icon-up-open-big:before { content: '\e806'; } /* '' */
 .icon-search:before { content: '\e809'; } /* '' */

@@ -8,7 +8,7 @@ defined('APPLICATION_PATH')
 // Define application environment
 // Change 'development' to 'production' once the application is up and running on the production site
 defined('APPLICATION_ENV')
-|| define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
+|| define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : \Soul\Kernel::ENV_DEVELOPMENT));
 
 defined('BASE_URL')
 || define('BASE_URL', sprintf('%s://%s', strpos(strtolower($_SERVER['SERVER_PROTOCOL']), 'https')
@@ -55,7 +55,7 @@ if ($config->count() != $configDist->count()) {
 include __DIR__ . "/../app/config/services.php";
 
 
-if (APPLICATION_ENV == 'development') {
+if (APPLICATION_ENV == \Soul\Kernel::ENV_DEVELOPMENT) {
     ini_set('display_errors', 1);
     (new Phalcon\Debug)->listen();
 

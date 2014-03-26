@@ -11,7 +11,7 @@ return new \Phalcon\Config(
         'application' => [
             'libraryDir'     => APPLICATION_PATH . '/src/',
             'pluginsDir'     => APPLICATION_PATH . '/plugins/',
-            'cacheDir'       => APPLICATION_PATH . '/cache/',
+            'cacheDir'       => APPLICATION_PATH . '/cache',
             'locales'        => APPLICATION_PATH .'/locales/',
             'mediaDir'       => APPLICATION_PATH .'/../public/media',
             'mediaUrl'       => '/media',

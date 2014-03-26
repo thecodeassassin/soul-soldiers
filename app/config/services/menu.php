@@ -22,10 +22,7 @@ $di->set(
             $cacheKey = crc32(serialize($menuConfig));
         }
 
-        // disable translations cache in development
-        $disableCache = (APPLICATION_ENV == \Phalcon\Error\Application::ENV_DEVELOPMENT ? true : false);
-
-        if ($cache->exists($cacheKey) && !$disableCache) {
+        if ($cache->exists($cacheKey)) {
             return $cache->get($cacheKey);
         }
 
