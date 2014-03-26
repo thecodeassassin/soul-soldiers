@@ -11,9 +11,9 @@ return new \Phalcon\Config(
 
         'fonts' => [
             'css' => [
-//                'https://fonts.googleapis.com/css?family=Droid+Sans:400,700',
-//                'https://fonts.googleapis.com/css?family=Roboto:400,300,500,700',
-//                'font-icons/custom-icons/css/custom-icons-ie7.css',
+                'https://fonts.googleapis.com/css?family=Droid+Sans:400,700',
+                'https://fonts.googleapis.com/css?family=Roboto:400,300,500,700',
+                'font-icons/custom-icons/css/custom-icons-ie7.css',
                 'font-icons/custom-icons/css/custom-icons.css'
             ]
         ],
