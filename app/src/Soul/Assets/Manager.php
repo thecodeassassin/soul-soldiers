@@ -109,7 +109,7 @@ class Manager extends \Phalcon\Assets\Manager
             $collection->join(true)
                 ->setFilters($filters)
                 ->setTargetPath(sprintf('%s/%s.%s', $this->config->application->cacheDir, $name, $type))
-                ->setTargetUri(sprintf('%s/static/%s.%s', BASE_URL, $name, $type));
+                ->setTargetUri(sprintf('static/%s.%s', $name, $type));
 
         }
 
