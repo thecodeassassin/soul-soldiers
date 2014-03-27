@@ -46,17 +46,17 @@ class Manager extends \Phalcon\Assets\Manager
      */
     public function __construct(DiInterface $di, Config $assetConfig)
     {
-        $this->cache = $di->get('cache');
+//        $this->cache = $di->get('cache');
         $this->config = $di->get('config');
-
-        $cacheKey = crc32(serialize($assetConfig));
-        // if the collection exists
-        if ($this->cache->exists($cacheKey)) {
-
-            $this->_collections = $this->cache->get($cacheKey);
-
-            return $this;
-        }
+//
+//        $cacheKey = crc32(serialize($assetConfig));
+//        // if the collection exists
+//        if ($this->cache->exists($cacheKey)) {
+//
+//            $this->_collections = $this->cache->get($cacheKey);
+//
+//            return $this;
+//        }
 
         foreach ($assetConfig as $collectionName => $collection) {
 
@@ -85,7 +85,7 @@ class Manager extends \Phalcon\Assets\Manager
         // build the collections
         $this->build();
 
-        $this->cache->save($cacheKey, $this->_collections);
+//        $this->cache->save($cacheKey, $this->_collections);
 
         return $this;
     }
@@ -101,10 +101,9 @@ class Manager extends \Phalcon\Assets\Manager
             $type = $this->collectionTypes[$name];
 
             if ($type == 'css') {
-//                 @todo find a better way to minify the CSS
+//                 @todo find a better way to minify the CSS or don't do it all
 //                $filters[] = new Cssmin();
-                //@todo horrible performance on dev, test this on dev
-                $filters[] = new CssCompressor();
+//                $filters[] = new CssCompressor();
 
             } elseif ($type == 'js') {
                 $filters[] = new Jsmin();
