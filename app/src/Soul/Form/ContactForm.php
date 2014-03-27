@@ -34,7 +34,7 @@ class ContactForm extends Base
         $email = $this->getEmailField('E-Mail');
 
         $realName = $this->getTextField('Uw naam', 'realName', true);
-        $content = $this->getTextArea('Uw vraag/opmerking', 'content', 10);
+        $content = $this->getTextArea('Uw vraag/opmerking', 'content', 10, true);
 
         $this->add($this->getCRSF())
              ->add($email)

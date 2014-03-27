@@ -315,6 +315,7 @@ Index / news / tweets
 
 /** Events **/
 .lan-info {
-    background-image: url('../img/rsz_lan-bg.jpg');
+    background-image: url('../img/lan-bg_3.png');
+    background-color: rgba(255,255,255,0);  
     background-size: 100%;
 }

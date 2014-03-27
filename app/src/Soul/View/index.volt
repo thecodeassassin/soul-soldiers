@@ -126,7 +126,7 @@
                                 <address>
                                     <p>
                                         <i class="icon-mail-alt"></i>&nbsp;<a href="{{ url('contact') }}">Contact</a> <br />
-                                        <i class="icon-phone"></i>&nbsp; 084-8727663 <br />
+                                        <i class="icon-phone"></i>&nbsp; 084-8727663 (Ma-Vr 09:00 - 19:00)<br />
                                         <i class="icon-briefcase"></i>&nbsp; KVK te Den Haag: 50981633
                                     </p>
                                 </address>

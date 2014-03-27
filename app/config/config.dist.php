@@ -44,7 +44,8 @@ return new \Phalcon\Config(
                 'username' => '',
                 'password' => ''
             ],
-            'provider' => 'Swift'
+            'provider' => 'Swift',
+            'adminAddress' => 'info@soul-soldiers.nl'
         ],
         'crypt' => [
             'key' => ''

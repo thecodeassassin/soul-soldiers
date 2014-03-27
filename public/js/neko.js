@@ -732,17 +732,16 @@ function toTop(mobile){
 
         $(window).scroll(function () {
             if ($(this).scrollTop() > 100) {
-                $('#nekoToTop').slideDown('fast');
+                $('#nekoToTop').fadeIn('fast');
             } else {
-                $('#nekoToTop').slideUp('fast');
+                $('#nekoToTop').fadeOut('fast');
             }
         });
 
         $('#nekoToTop').click(function (e) {
-            e.preventDefault();
-            $("html, body").animate({
-                scrollTop: 0
-            }, 800, 'easeInOutCirc');
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 700);
+            return false;
 
         });
     }else{

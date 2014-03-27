@@ -2,6 +2,11 @@
     <div class="container">
         <h1>Contact opnemen</h1>
         <div class="col-md-10 color0 pb15 pt15">
+            <h4>
+                U kunt middels dit formulier gemakkelijk contact met ons opnemen, wij zullen binnen 48 uur reageren op uw
+                bericht. Voor dringende zaken kunt u ons ook telefonisch bereiken, ons telefoonnummer vindt u onderaan de pagina.
+            </h4><br />
+
             {{ form('contact', "method": "post", "name":"contact", "class":"validate", "role":"form") }}
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-5 control-label">Uw E-mail adres *</label>
@@ -23,8 +28,11 @@
             </div>
 
             <div class="form-group">
-                {{ form.render('csrf', ['value': security.getToken()]) }}
-                {{ form.render('Versturen') }}
+                <div class="col-md-2 col-md-offset-10">
+                    <br />
+                    {{ form.render('csrf', ['value': security.getToken()]) }}
+                    {{ form.render('Versturen') }}
+                </div>
             </div>
             {{ endform }}
         </div>
