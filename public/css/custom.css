@@ -294,11 +294,11 @@ hr {
 Index / news / tweets
 */
 .news-container .gutter, .tweet-container {
-    min-height: 606px;
+    min-height: 600px;
 }
 
 .news-container {
-    padding-right: 40px;
+    padding-left: 0px;
 }
 
 .tweet-container {
@@ -311,4 +311,10 @@ Index / news / tweets
 
 .news-container h2 {
     padding-top: 10px;
+}
+
+/** Events **/
+.lan-info {
+    background-image: url('../img/rsz_lan-bg.jpg');
+    background-size: 100%;
 }

@@ -13,6 +13,7 @@ use Soul\Model\Payment;
 use Soul\Payment\Data\TargetPay\IdealStart;
 use Soul\Payment\Service\Exception;
 use Soul\Payment\Service\TargetPay;
+use Soul\Util;
 
 /**
  * Class EventController
@@ -65,16 +66,6 @@ class EventController extends Base
         }
 
         $user = $this->authService->getAuthData();
-        if ($event && $user) {
-            $userId = $user->getUserId();
-            $registered = $event->hasEntry($userId);
-
-            // check if the user has payed for the event
-            if ($registered && $event->hasPayed($userId)) {
-                $payed = true;
-            }
-        }
-
         if ($transactionId) {
             try {
 
@@ -84,7 +75,18 @@ class EventController extends Base
                     throw new Exception('De betaling is mislukt of geannuleerd, probeer het later nogmaals.');
                 }
             } catch (Exception $e) {
-                $this->flashMessage($e->getMessage(), 'error');
+                $this->flashMessage($e->getMessage(), 'error', true);
+                $this->response->redirect(Util::getCurrentUrl(true), true, 302);
+            }
+        }
+
+        if ($event && $user) {
+            $userId = $user->getUserId();
+            $registered = $event->hasEntry($userId);
+
+            // check if the user has payed for the event
+            if ($registered && $event->hasPayed($userId)) {
+                $payed = true;
             }
         }
 

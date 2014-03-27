@@ -50,9 +50,9 @@ class Manager extends \Phalcon\Assets\Manager
         $this->config = $di->get('config');
 
         $cacheKey = crc32(serialize($assetConfig));
-
         // if the collection exists
         if ($this->cache->exists($cacheKey)) {
+
             $this->_collections = $this->cache->get($cacheKey);
 
             return $this;
@@ -85,6 +85,8 @@ class Manager extends \Phalcon\Assets\Manager
         // build the collections
         $this->build();
 
+        $this->cache->save($cacheKey, $this->_collections);
+
         return $this;
     }
 
@@ -99,8 +101,11 @@ class Manager extends \Phalcon\Assets\Manager
             $type = $this->collectionTypes[$name];
 
             if ($type == 'css') {
-                // @todo find a better way to minify the CSS
+//                 @todo find a better way to minify the CSS
 //                $filters[] = new Cssmin();
+                //@todo horrible performance on dev, test this on dev
+                $filters[] = new CssCompressor();
+
             } elseif ($type == 'js') {
                 $filters[] = new Jsmin();
             }
@@ -113,7 +118,24 @@ class Manager extends \Phalcon\Assets\Manager
 
         }
 
+
     }
+//
+//    /**
+//     * Output already existing collections
+//     *
+//     * @param null|string $collection
+//     *
+//     * @return string|void
+//     */
+//    public function outputCss($collection)
+//    {
+//        if ($collectionObj = $this->get($collection)) {
+//            if (is_readable($collectionObj->getTargetPath())) {
+//                return \Phalcon\Tag::stylesheetLink([$collectionObj->getTargetUri()]);
+//            }
+//        }
+//    }
 
 
 

@@ -120,7 +120,6 @@ $(function() {
 
     });
 
-//    var nextContainer = $('.container').closest('[col-md-*]')
 });
 
 function ajaxLoad(mode){

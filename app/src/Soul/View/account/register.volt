@@ -1,7 +1,9 @@
-<div class="container">
-    {{ form('register', "method": "post", "name":"login", "class":"form-horizontal validate", "role":"form") }}
-    <h1>Registeren</h1>
-    <div class="row">
+<div class="row">
+
+    <div class="container">
+        {{ form('register', "method": "post", "name":"login", "class":"form-horizontal validate", "role":"form") }}
+        <h1>Registeren</h1>
+
         <div class="well-large color0 col-md-12 signup">
             <div class="col-md-6">
 
@@ -39,7 +41,7 @@
                 </div>
 
                 <div class="well mt30">
-                    {{ form.render('terms') }} Ik ga akkoord met de algemene voorwaarden
+                    {{ form.render('terms') }} Ik ga akkoord met het <a href="{{ url('content/rules') }}">regelement</a>
                 </div>
             </div>
             <div class="col-md-6">
@@ -76,12 +78,14 @@
                 {{ form.render('Registeren') }}
             </div>
         </div>
+
+        {{ endform }}
     </div>
-    <div class="row">
-        <div class="col-md-4 col-md-offset-9 pt10">
+</div>
+<div class="row">
+    <div class="container">
+        <div class="col-md-4">
             <span>Velden gemarkeerd met een * zijn verplicht.</span>
         </div>
     </div>
-
-    </form>
 </div>

@@ -60,11 +60,19 @@ class Util {
     /**
      * Returns the full current URL
      *
+     * @param bool $removeParameters strip off any parameters
+     *
      * @return string
      */
-    public static function getCurrentUrl()
+    public static function getCurrentUrl($removeParameters = false)
     {
-        return "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $uri = "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+        if ($removeParameters) {
+             $uri = array_shift(parse_url($uri));
+        }
+
+        return "http://$uri";
     }
 
     /**

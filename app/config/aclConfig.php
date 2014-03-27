@@ -26,7 +26,9 @@ return new \Phalcon\Config(
         'publiccontrollers' => [
             'index',
             'error',
-            'static'
+            'static',
+            'content',
+            'contact'
         ],
         /**
          * <pre>

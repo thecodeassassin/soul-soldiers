@@ -86,16 +86,20 @@
         </header>
         <!-- header -->
 
+        {% set flashContent = flash.output() %}
+        {% set flashSessionContent = flashSession.output() %}
 
-        <section id="content" class="color2 pt30 pb30">
+        <section id="content" class="color2 pb30 pt30">
+            {% if flashContent or flashSessionContent %}
             <div class="container">
-                <div class="row">
+                <div class="row pt30">
                     <div id="messages" class="col-md-8 col-md-offset-2">
                         {{ flash.output() }}
                         {{ flashSession.output() }}
                     </div>
                 </div>
             </div>
+            {% endif %}
             <div id="mainContent">
                 {{ content() }}
             </div>

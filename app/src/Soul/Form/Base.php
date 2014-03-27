@@ -9,6 +9,7 @@ namespace Soul\Form;
 use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Element\Password;
 use Phalcon\Forms\Element\Text;
+use Phalcon\Forms\Element\TextArea;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\Email;
 use Phalcon\Validation\Validator\Identical;
@@ -69,6 +70,35 @@ abstract class Base extends Form
         return $text;
     }
 
+    /**
+     * @param string $placeholder Placeholder
+     * @param string $name        Name of the field
+     * @param int    $rows        Number of rows
+     * @param bool   $required    Mandatory field or not
+     * @param string $filter      Pass a filter
+     *
+     * @return Text
+     */
+    protected function getTextArea($placeholder, $name, $rows = 5, $required = false, $filter = 'string')
+    {
+
+        $text = new TextArea($name, ['class' => 'form-control', 'placeholder' => $placeholder, 'rows' => $rows]);
+
+        if ($required) {
+            $text->addValidator(
+                new PresenceOf([
+                    'message' => sprintf('%s is verplicht', $placeholder)
+                ])
+            );
+            $text->setAttribute('required', '');
+        }
+
+        if (!empty($filter)) {
+            $text->addFilter($filter);
+        }
+
+        return $text;
+    }
 
     /**
      * @param string $placeholder Placeholder

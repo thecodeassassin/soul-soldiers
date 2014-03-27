@@ -7,6 +7,8 @@
 
 namespace Soul\Controller;
 
+use Phalcon\Mvc\View;
+
 
 /**
  * Class StaticController
@@ -22,7 +24,8 @@ class StaticController extends Base
      */
     public function indexAction($resource)
     {
-        $this->view->setRenderLevel(false);
+        $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
+
         $type = strtolower(array_pop(explode('.', $resource)));
         $this->response->setHeader('Content-Type', sprintf('text/%s', $type));
 

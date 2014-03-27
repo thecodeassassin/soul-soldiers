@@ -163,7 +163,7 @@ class Base extends Controller
 
         $output = '';
         foreach ($messages as $message) {
-            $output .= "&nbsp;<span class='glyphicon glyphicon-chevron-right'></span>&nbsp; $message <br />";
+            $output .= "&nbsp;<span class='icon-angle-circled-right'></span>&nbsp; $message <br />";
         }
         $this->flash->$type($output);
 

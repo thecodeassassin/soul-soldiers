@@ -1,14 +1,14 @@
 <?php
-/**  
+/**
  * @author Stephen Hoogendijk
  * @copyright Soul-Soldiers
- * @package TargetPay 
- */  
+ * @package TargetPay
+ */
 
 namespace Soul\Payment\Service;
 
 
- 
+
 use SimpleXMLElement;
 use Soul\Model\Entry;
 use Soul\Model\Event;
@@ -111,7 +111,7 @@ class TargetPay extends AbstractPaymentService
 
         $payment = Payment::findPaymentByTransactionId($transactionId);
 
-        if (!$payment) {
+        if (!$payment || $payment->confirmed) {
             return false;
         }
 
@@ -196,4 +196,4 @@ class TargetPay extends AbstractPaymentService
         }
 
     }
-} 
+}

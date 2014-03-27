@@ -18,6 +18,12 @@ return [
         "resource" => 1
     ],
 
+    '/content/(.*)' => [
+        "controller" => "content",
+        "action"     => "show",
+        "name" => 1
+    ],
+
     /**
      * Account
      */
