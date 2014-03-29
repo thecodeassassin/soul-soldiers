@@ -54,7 +54,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-03-18 00:12:48"
+            "time": "2014-02-12 12:13:53"
         },
         {
             "name": "swiftmailer/swiftmailer",

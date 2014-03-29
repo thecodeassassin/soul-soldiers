@@ -7,8 +7,11 @@
 
 namespace Soul\Menu;
 
+use Phalcon\DI;
 use Phalcon\Mvc\Url;
+use Soul\Auth\AuthService;
 use Soul\Menu;
+use Soul\Module;
 use Soul\Util;
 
 /**
@@ -19,23 +22,32 @@ use Soul\Util;
  * @package Soul\Menu
  *
  */
-class Builder
+class Builder extends Module
 {
 
     protected $links = [];
 
     /**
      * @param array $menuConfig Configuration of the menu
-     * @param bool  $subMenu    Is this menu a submenu
+     * @param bool $subMenu Is this menu a submenu
      *
+     * @param array $originalMenuConfig
      * @return Menu
      */
-    public static function build(array $menuConfig, $subMenu = false)
+    public static function build(array $menuConfig, $subMenu = false, $originalMenuConfig = array())
     {
         $menuObject = new Menu();
         $count = 0;
+        $auth = DI::getDefault()->get('auth');
 
-        foreach ($menuConfig as $name => $item) {
+        if (array_key_exists('menu', $menuConfig)) {
+            $menu = $menuConfig['menu'];
+        } else {
+            $menu = $menuConfig;
+            $menuConfig = $originalMenuConfig;
+        }
+
+        foreach ($menu as $name => $item) {
 
             $firstLevel = false;
             $link = $item;
@@ -52,17 +64,49 @@ class Builder
                 $firstLevel = true;
             }
 
-            // build the link
-            $menuObject->addLink($name, static::buildLink($link, $subMenu, $firstLevel));
+            if (static::isAllowed($menuConfig, $name, $auth)) {
+                // build the link
+                $menuObject->addLink($name, static::buildLink($link, $subMenu, $firstLevel));
+            }
 
             // build additional submenu's
             if (is_array($item)) {
-                $menuObject->addSubMenu($name, static::build($item, true));
+                $menuObject->addSubMenu($name, static::build($item, true, $menuConfig));
             }
 
         }
 
         return $menuObject;
+    }
+
+    /**
+     * @param array       $menuConfig
+     * @param $item
+     * @param AuthService $auth
+     * @return bool
+     */
+    public static function isAllowed(array $menuConfig, $item, AuthService $auth)
+    {
+        $loggedIn = $auth->isLoggedIn();
+
+        if ($loggedIn) {
+            if (in_array($item, $menuConfig['guest'])) {
+                return false;
+            }
+
+            if (in_array($item, $menuConfig['admin'])) {
+                if ($auth->getUserType != \Soul\AclBuilder::ROLE_ADMIN) {
+                    return false;
+                }
+            }
+
+        } else {
+            if (in_array($item, $menuConfig['authenticated'])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

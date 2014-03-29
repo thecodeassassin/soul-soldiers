@@ -12,7 +12,6 @@
         <title>{{ title }}</title>
 
         {# Output js/css content #}
-        {{ assets.outputCss('fonts') }}
         {{ assets.outputCss('main') }}
         {{ assets.outputJs('scripts') }}
 
@@ -86,11 +85,9 @@
         </header>
         <!-- header -->
 
-        {% set flashContent = flash.output() %}
-        {% set flashSessionContent = flashSession.output() %}
 
         <section id="content" class="color2 pb30 pt30">
-            {% if flashContent or flashSessionContent %}
+
             <div class="container">
                 <div class="row pt30">
                     <div id="messages" class="col-md-8 col-md-offset-2">
@@ -99,7 +96,7 @@
                     </div>
                 </div>
             </div>
-            {% endif %}
+
             <div id="mainContent">
                 {{ content() }}
             </div>

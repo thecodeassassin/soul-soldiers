@@ -8,19 +8,12 @@ use \Soul\AclBuilder as AclBuilder;
  */
 return new \Phalcon\Config(
     [
-
-        'fonts' => [
-            'css' => [
-                'https://fonts.googleapis.com/css?family=Droid+Sans:400,700',
-                'https://fonts.googleapis.com/css?family=Roboto:400,300,500,700',
-                'font-icons/custom-icons/css/custom-icons-ie7.css',
-                'font-icons/custom-icons/css/custom-icons.css'
-            ]
-        ],
-
         'main' => [
             'css' => [
-
+              'https://fonts.googleapis.com/css?family=Droid+Sans:400,700',
+              'https://fonts.googleapis.com/css?family=Roboto:400,300,500,700',
+              'font-icons/custom-icons/css/custom-icons-ie7.css',
+              'font-icons/custom-icons/css/custom-icons.css',
               'https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css',
               'css/soul-color.css',
               'js-plugin/magnific-popup/magnific-popup.css',

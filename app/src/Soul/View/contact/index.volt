@@ -1,3 +1,7 @@
+{% if submitted %}
+    {{ partial('contact/send') }}
+{% else %}
+
 <div class="row">
     <div class="container">
         <h1>Contact opnemen</h1>
@@ -34,7 +38,7 @@
                     {{ form.render('Versturen') }}
                 </div>
             </div>
-            {{ endform }}
+            {{ endform() }}
         </div>
     </div>
 </div>
@@ -45,3 +49,4 @@
         </div>
     </div>
 </div>
+{% endif %}

@@ -9,6 +9,7 @@ use Phalcon\Config;
 use Phalcon\Crypt;
 use Phalcon\Mvc\User\Plugin;
 use Phalcon\DI as DI;
+use Soul\Auth\AuthService;
 
 /**
  *
@@ -134,6 +135,13 @@ abstract class Module extends Plugin
         return $this->di->get('crypt');
     }
 
+    /**
+     * @return AuthService
+     */
+    public static function getAuthService()
+    {
+        return  $auth = DI::getDefault()->get('auth');
+    }
 }
 
 

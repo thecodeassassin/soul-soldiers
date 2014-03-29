@@ -105,7 +105,7 @@
 
                         <br><br>
                         <center>
-                            <p style="text-align:center;"><a href="{{ url('terms') }}">Algemene voorwaarden</a> {% if user.userId != 0 and user.state == 1 %} | <a href="{{ url('unsubscribe/' ~ user.email) }}">Uitschrijven</a>{% endif %}</p>
+                            <p style="text-align:center;"><a href="{{ url('terms') }}">Algemene voorwaarden</a> {% if user is defined and user.userId != 0 and user.state == 1 %} | <a href="{{ url('unsubscribe/' ~ user.email) }}">Uitschrijven</a>{% endif %}</p>
                         </center>
 
                     </td>

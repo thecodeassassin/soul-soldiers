@@ -38,6 +38,7 @@ class Manager extends \Phalcon\Assets\Manager
      */
     protected $config;
 
+
     /**
      * @param \Phalcon\DI|\Phalcon\DiInterface $di          Dependency injector
      * @param \Phalcon\Config                  $assetConfig Configuration
@@ -101,9 +102,11 @@ class Manager extends \Phalcon\Assets\Manager
             $type = $this->collectionTypes[$name];
 
             if ($type == 'css') {
-//                 @todo find a better way to minify the CSS or don't do it all
-//                $filters[] = new Cssmin();
-//                $filters[] = new CssCompressor();
+                // do not minify css on live!
+                if (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT) {
+                    $filters[] = new YuiCompressor();
+                }
+
 
             } elseif ($type == 'js') {
                 $filters[] = new Jsmin();
@@ -119,22 +122,36 @@ class Manager extends \Phalcon\Assets\Manager
 
 
     }
-//
-//    /**
-//     * Output already existing collections
-//     *
-//     * @param null|string $collection
-//     *
-//     * @return string|void
-//     */
-//    public function outputCss($collection)
-//    {
-//        if ($collectionObj = $this->get($collection)) {
-//            if (is_readable($collectionObj->getTargetPath())) {
-//                return \Phalcon\Tag::stylesheetLink([$collectionObj->getTargetUri()]);
-//            }
-//        }
-//    }
+
+    /**
+     * Output already existing collections
+     *
+     * @param null|string $collection
+     *
+     * @return string|void
+     */
+    public function outputCss($collection)
+    {
+
+        $this->cache = DI::getDefault()->get('cache');
+        $cacheKey = 'resource_collection_'.$collection;
+
+        if ($this->cache->exists($cacheKey)) {
+
+            if ($collectionObj = $this->get($collection)) {
+                if (is_readable($collectionObj->getTargetPath())) {
+                    return \Phalcon\Tag::stylesheetLink([$collectionObj->getTargetUri()]);
+                }
+            } else {
+                parent::outputCss($collection);
+            }
+        } else {
+            $this->cache->save($cacheKey, $collection, 86400);
+            parent::outputCss($collection);
+        }
+    }
+
+
 
 
 

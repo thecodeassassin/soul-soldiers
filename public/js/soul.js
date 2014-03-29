@@ -120,16 +120,19 @@ $(function() {
 
     });
 
-    var offset = 220;
+    var offset = 200;
     var duration = 500;
-    jQuery(window).scroll(function() {
-        if (jQuery(this).scrollTop() > offset) {
-            jQuery('.back-to-top').fadeIn(duration);
-        } else {
-            jQuery('.back-to-top').fadeOut(duration);
-        }
+    jQuery(window).animate({scrollTop: 0}, duration, function() {
+
     });
 
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > offset) {
+            $('.back-to-top').fadeIn(duration);
+        } else {
+            $('.back-to-top').fadeOut(duration);
+        }
+    });
 
 });
 

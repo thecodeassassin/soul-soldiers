@@ -2,13 +2,11 @@
 
 <p class="lead">
 
-    E-mail adres: {{ userEmail }}
-    Naam: {{ userFullName }}
-    Bericht:
+    <b>E-mail adres:</b> {{ userEmail }} <br />
+    <b>Naam:</b> {{ userFullName }} <br />
+    <b>Bericht:</b>
 </p>
 
 <p>
-
-    <br /><br />
     {{ emailContent }}
 </p>

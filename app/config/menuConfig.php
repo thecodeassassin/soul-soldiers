@@ -21,38 +21,39 @@ use Soul\Menu\Builder;
 
 // menu available for everybody
 $menuConfig = [
-    'Home' => BASE_URL . '/home',
-    'Archief' => [
-        'Soul-Soldiers: The Reunion 2013' => BASE_URL.'/event/the-reunion'
+    'menu' => [
+
+        'Home' => BASE_URL . '/home',
+        'Archief' => [
+            'Soul-Soldiers: The Reunion 2013' => BASE_URL.'/event/the-reunion'
+        ],
+        'Informatie' => [
+            'Regelement' => BASE_URL.'/content/rules',
+            'Lan-Party checklist' => BASE_URL.'/content/checklist',
+            'Wat is een lan party?' => BASE_URL.'/content/lan-description',
+            'Competities' => BASE_URL.'/content/compos'
+        ],
+        'Aankomend evenement' => BASE_URL.'/event/current',
+        'Contact' => BASE_URL.'/contact',
+//        'Downloads' => BASE_URL.'/content/downloads',
+        'Inloggen' => BASE_URL.'/login',
+        'Registreren' => BASE_URL.'/register',
+        'Uitloggen' => BASE_URL.'/logout',
+
+
     ],
-    'Informatie' => [
-        'Regelement' => BASE_URL.'/content/rules',
-        'Lan-Party checklist' => BASE_URL.'/content/checklist',
-        'Wat is een lan party?' => BASE_URL.'/content/lan-description',
-        'Competities' => BASE_URL.'/content/compos'
+    // guest only menu items
+    'guest' => [
+        'Inloggen',
+        'Registreren'
     ],
-    'Aankomend evenement' => BASE_URL.'/event/current',
-    'Inloggen' => BASE_URL.'/login',
-    'Uitloggen' => BASE_URL.'/logout',
-    'Registreren' => BASE_URL.'/register',
-    'Contact' => BASE_URL.'/contact',
-    'Downloads' => BASE_URL.'/content/downloads'
-];
-
-// guest only menu items
-$guestOnly = [
-    'Inloggen',
-    'Registreren'
-];
-
-// authenticated only menu items
-$authenticatedOnly = [
-    'Uitloggen',
-    'Downloads',
-    'Competities'
-];
-
-// Admin only menu items
-$adminOnly = [
-
+    // authenticated only menu items
+    'authenticated' => [
+        'Uitloggen',
+        'Downloads',
+        'Competities'
+    ],
+    // Admin only menu items
+    'admin' => [
+    ]
 ];
