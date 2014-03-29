@@ -28,8 +28,8 @@ $menuConfig = [
     'Informatie' => [
         'Regelement' => BASE_URL.'/content/rules',
         'Lan-Party checklist' => BASE_URL.'/content/checklist',
-        'Wat is een lan party?' => BASE_URL.'/content/lan-description'
-//        'Competities' => BASE_URL.'/compos'
+        'Wat is een lan party?' => BASE_URL.'/content/lan-description',
+        'Competities' => BASE_URL.'/content/compos'
     ],
     'Aankomend evenement' => BASE_URL.'/event/current',
     'Inloggen' => BASE_URL.'/login',
