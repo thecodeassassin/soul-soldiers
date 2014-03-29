@@ -35,7 +35,8 @@ $menuConfig = [
     'Inloggen' => BASE_URL.'/login',
     'Uitloggen' => BASE_URL.'/logout',
     'Registreren' => BASE_URL.'/register',
-    'Contact' => BASE_URL.'/contact'
+    'Contact' => BASE_URL.'/contact',
+    'Downloads' => BASE_URL.'/content/downloads'
 ];
 
 // guest only menu items
@@ -46,7 +47,9 @@ $guestOnly = [
 
 // authenticated only menu items
 $authenticatedOnly = [
-    'Uitloggen'
+    'Uitloggen',
+    'Downloads',
+    'Competities'
 ];
 
 // Admin only menu items

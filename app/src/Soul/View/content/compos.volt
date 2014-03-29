@@ -1,31 +1,37 @@
+
 <div class="row">
     <div class="container">
         <h1>Competities</h1>
         <div class="col-md-12 color0 pb15 pt15">
 
             <br />
-            <h4>Compo 1 </h4>
-            <p> RTS</p><br />
-            Inschrijven : <br />
-            <h4>Compo 2</h4>
-            <p> <p><br />
-            <h4>Wetgeving</h4>
-            <p> Deelnemers dienen zich te houden aan de Nederlandse wetgeving, indien deze overtreden wordt zal de Crew passende maatregelen nemen hierop.</p><br />
-            <h4>Wapenbezit</h4>
-            <p> Het is verboden om in het bezit van (vuur)wapens te zijn tijdens de LAN. Indien de Crew constateerd dat een deelnemer in bezit hiervan is zal de deelnemer van de LAN worden verwijderd en indien noodzakelijk zal de politie worden ingeschakeld. </p><br />
-            <h4>Software</h4>
-            <p> Het is niet toegestaan om software verkregen uit illegale bron te verspreiden tijdens de LAN.</p><br />
-            <h4>Verantwoordelijkheid</h4>
-            <p> Soul-Soldiers is nooit en te nimmer verandwoordelijk voor schade/diefstal aan/van uw apparatuur. </p><p>
 
-                <br />
-                Soul-Soldiers beschikt nooit over uw wachtwoord, het wachtwoord wordt versleuteld opgeslagen en naar ons netwerk verstuurd. Soul-Soldiers beschikt dus nooit en te nimmer over uw wachtwoord. <br />
-                Soul-Soldiers is daarom ook niet verantwoordelijk mocht uw wachtwoord gecompromitteerd worden.</p><p> Tevens is de website beveiligd via een geldig certificaat en wordt alle communicatie van- en naar<br />
-                ons netwerk versleuteld.
-
-                <br />
+            <p>Hieronder staan een overzicht van de competities die er tijdens de 2014 LAN zullen gaan spelen <br />
+            In het overzicht staan de spelregels per competitie uitgelegd en heb je de mogelijkheid om jezelf in te schrijven.<br />
+            Er gelieve wel rekening mee te houden dat je deelname pas geldig is vanaf het moment dat je ticket voor het evenement betaald is.<br />
+            <br /><br /><br /><br /><br />
             </p>
+
+
+            <h3>Compo 1 : Starcraft 2</h3>
+            <h4>De Prijs : Steam Gift Card t.w.v. 10 euro</h4>
+            <p> uitleg <br />
+            Inschrijven voor deze compo :</p> <br />
+
+
+            <h3>Compo 2 : Trackmania </h3>
+            <h4>De Prijs : Steam Gift Card t.w.v. 10 euro</h4>
+            <p> uitleg <br />
+            Inschrijven voor deze compo :</p> <br />
+
+
+            <h3>Compo 3 : Unreal Tournament 2004 </h3>
+            <h4>De Prijs : Steam Gift Card t.w.v. 20 euro</h4>
+            <p> uitleg <br />
+            Inschrijven voor deze compo :</p> <br />
+
+
+
         </div>
     </div>
-</div>
 </div>
