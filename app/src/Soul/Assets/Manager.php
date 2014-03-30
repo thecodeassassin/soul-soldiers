@@ -101,15 +101,17 @@ class Manager extends \Phalcon\Assets\Manager
             $filters = [];
             $type = $this->collectionTypes[$name];
 
-            if ($type == 'css') {
-                // do not minify css on live!
-                if (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT) {
-                    $filters[] = new YuiCompressor();
+            // do not minify css/js on dev (takes too much time and is not relevant)
+            if (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT) {
+                if ($type == 'css') {
+
+                    if (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT) {
+                        $filters[] = new YuiCompressor();
+                    }
+
+                } elseif ($type == 'js') {
+                    $filters[] = new Jsmin();
                 }
-
-
-            } elseif ($type == 'js') {
-                $filters[] = new Jsmin();
             }
 
             // create the scripts and add them
@@ -133,22 +135,16 @@ class Manager extends \Phalcon\Assets\Manager
     public function outputCss($collection)
     {
 
-        $this->cache = DI::getDefault()->get('cache');
-        $cacheKey = 'resource_collection_'.$collection;
-
-        if ($this->cache->exists($cacheKey)) {
-
-            if ($collectionObj = $this->get($collection)) {
-                if (is_readable($collectionObj->getTargetPath())) {
-                    return \Phalcon\Tag::stylesheetLink([$collectionObj->getTargetUri()]);
-                }
+        if ($collectionObj = $this->get($collection)) {
+            if (is_readable($collectionObj->getTargetPath())) {
+                return \Phalcon\Tag::stylesheetLink([$collectionObj->getTargetUri()]);
             } else {
                 parent::outputCss($collection);
             }
         } else {
-            $this->cache->save($cacheKey, $collection, 86400);
             parent::outputCss($collection);
         }
+
     }
 
 
