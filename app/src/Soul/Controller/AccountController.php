@@ -129,7 +129,7 @@ class AccountController extends Base
     public function logoutAction()
     {
         $this->authService->destroyAuthData();
-        $this->redirectToLastPage();
+        $this->response->redirect('home');
     }
 
     /**

@@ -38,6 +38,7 @@ class Manager extends \Phalcon\Assets\Manager
      */
     protected $config;
 
+
     /**
      * @param \Phalcon\DI|\Phalcon\DiInterface $di          Dependency injector
      * @param \Phalcon\Config                  $assetConfig Configuration
@@ -100,13 +101,17 @@ class Manager extends \Phalcon\Assets\Manager
             $filters = [];
             $type = $this->collectionTypes[$name];
 
-            if ($type == 'css') {
-//                 @todo find a better way to minify the CSS or don't do it all
-//                $filters[] = new Cssmin();
-//                $filters[] = new CssCompressor();
+            // do not minify css/js on dev (takes too much time and is not relevant)
+            if (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT) {
+                if ($type == 'css') {
 
-            } elseif ($type == 'js') {
-                $filters[] = new Jsmin();
+                    if (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT) {
+                        $filters[] = new YuiCompressor();
+                    }
+
+                } elseif ($type == 'js') {
+                    $filters[] = new Jsmin();
+                }
             }
 
             // create the scripts and add them
@@ -119,22 +124,30 @@ class Manager extends \Phalcon\Assets\Manager
 
 
     }
-//
-//    /**
-//     * Output already existing collections
-//     *
-//     * @param null|string $collection
-//     *
-//     * @return string|void
-//     */
-//    public function outputCss($collection)
-//    {
-//        if ($collectionObj = $this->get($collection)) {
-//            if (is_readable($collectionObj->getTargetPath())) {
-//                return \Phalcon\Tag::stylesheetLink([$collectionObj->getTargetUri()]);
-//            }
-//        }
-//    }
+
+    /**
+     * Output already existing collections
+     *
+     * @param null|string $collection
+     *
+     * @return string|void
+     */
+    public function outputCss($collection)
+    {
+
+        if ($collectionObj = $this->get($collection)) {
+            if (is_readable($collectionObj->getTargetPath())) {
+                return \Phalcon\Tag::stylesheetLink([$collectionObj->getTargetUri()]);
+            } else {
+                parent::outputCss($collection);
+            }
+        } else {
+            parent::outputCss($collection);
+        }
+
+    }
+
+
 
 
 

@@ -1,6 +1,5 @@
 <?php
 
-
 // Define path to application directory
 defined('APPLICATION_PATH')
 || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../app'));
@@ -8,7 +7,7 @@ defined('APPLICATION_PATH')
 // Define application environment
 // Change 'development' to 'production' once the application is up and running on the production site
 defined('APPLICATION_ENV')
-|| define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : \Soul\Kernel::ENV_DEVELOPMENT));
+|| define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
 
 defined('BASE_URL')
 || define('BASE_URL', sprintf('%s://%s', strpos(strtolower($_SERVER['SERVER_PROTOCOL']), 'https')

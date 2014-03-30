@@ -56,6 +56,8 @@ class Security extends Module
 
         if ($allowed != Acl::ALLOW) {
 
+
+
             //If he doesn't have access forward him to the index controller
             $this->response->redirect('error/notauthenticated')->send();
 
