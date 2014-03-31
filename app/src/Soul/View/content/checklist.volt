@@ -6,7 +6,7 @@
                 Soul-Soldiers zal zorgen voor een zitplaats (tafel en stoel) met 2 aansluitingen per persoon op een stekkerblok.
                 Overige zaken zal de deelnemer zelf moeten meenemen. Denk hierbij aan de onderstaande zaken.
             </p><br />
-            * PC of laptop <br />
+            * PC of laptop voorzien met een netwerkkaart (Wireless verbinding is niet mogelijk)<br />
             * Monitor <br />
             * Toetsenbord / muis <br />
             * Geaard stekkerblok (verlengd) <br />

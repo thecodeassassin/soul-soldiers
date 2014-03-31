@@ -79,7 +79,7 @@
             </div>
         </div>
 
-        {{ endform }}
+        {{ endform() }}
     </div>
 </div>
 <div class="row">
