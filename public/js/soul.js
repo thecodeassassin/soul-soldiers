@@ -57,16 +57,21 @@ $(function() {
                     var element = error.element,
                         message = error.message;
 
-                    $(element).popover('destroy');
-                    $(element).popover({
-                        html: true,
-                        placement: 'right',
-                        trigger: 'manual',
-                        content: message,
-                        container: 'body'
-                    });
-                    $(element).popover('show');
 
+                    if ($( document ).width() > 768) {
+
+                        $(element).popover('destroy');
+                        $(element).popover({
+                            html: true,
+                            placement: 'right',
+                            trigger: 'manual',
+                            content: message,
+                            container: 'body'
+                        });
+                        $(element).popover('show');
+                    } else {
+                        $(element).popover('hide');
+                    }
                 });
             } else {
 //
@@ -77,7 +82,9 @@ $(function() {
             $(element).siblings('.form-error').remove();
             $(element).addClass('error');
 
-            $(element).popover()
+            if ($( document ).width() > 768) {
+                $(element).popover()
+            }
         },
         unhighlight: function (element) {
 
@@ -127,6 +134,16 @@ $(function() {
             $('.back-to-top').fadeIn(duration);
         } else {
             $('.back-to-top').fadeOut(duration);
+        }
+    });
+
+    $(window).resize(function () {
+        if ($( document ).width() < 768) {
+            // disable click on main menu item once the mobile menu pops up
+            $('.hasSubMenu').click(function () {
+               return false;
+            });
+
         }
     });
 

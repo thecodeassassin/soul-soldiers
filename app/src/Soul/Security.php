@@ -36,6 +36,7 @@ class Security extends Module
         $auth = $this->session->get('auth');
         if (!$auth) {
             $role = AclBuilder::ROLE_GUEST;
+
         } else {
             $role = AclBuilder::ROLE_USER;
 
@@ -48,6 +49,7 @@ class Security extends Module
         $action = $dispatcher->getActionName();
 
 
+
         //Obtain the ACL list
         $acl = $this->getACL();
 
@@ -56,13 +58,16 @@ class Security extends Module
 
         if ($allowed != Acl::ALLOW) {
 
-
+            // if the user is allowed to perform the action, but simply needs to be logged in,
+            // save the page and let the user login
+            if (!$auth && $acl->isAllowed(AclBuilder::ROLE_USER, $controller, $action)) {
+                $this->session->set('referer', Util::getCurrentUrl());
+                return $this->response->redirect('login');
+            }
 
             //If he doesn't have access forward him to the index controller
-            $this->response->redirect('error/notauthenticated')->send();
+            return $this->response->redirect('error/notauthenticated')->send();
 
-            //Returning "false" we tell to the dispatcher to stop the current operation
-            return false;
         }
 
         return true;

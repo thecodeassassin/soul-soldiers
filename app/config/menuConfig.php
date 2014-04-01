@@ -33,6 +33,7 @@ $menuConfig = [
             'Wat is een lan party?' => BASE_URL.'/content/lan-description'
         ],
         'Aankomend evenement' => [
+            'link' => BASE_URL.'/event/current',
             'Soul-Soldiers 2014' => BASE_URL.'/event/current',
             'Competities' => BASE_URL.'/content/compos'
         ],

@@ -335,6 +335,14 @@ Index / news / tweets
     background-repeat: no-repeat;
 }
 
+@media (max-width: 768px) {
+    .lan-info {
+        background-image: none;
+        background-color: #3c3b3b;
+    }
+}
+
+
 .table.noborders td{
     border: none !important;
 }

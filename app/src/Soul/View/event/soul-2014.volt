@@ -103,7 +103,7 @@
             Er wordt een koelkast ter beschikking gesteld om producten die gekoeld dienen te worden in op te slaan. <br />
             De ruimte in de koelkast is beperkt, dus we willen aan iedereen vragen de volgende richtlijnen niet te overschrijden. <br /> <br />
 
-            * max 2 flessen/pakken drinken
+            * max 2 flessen/pakken drinken<br />
             * max 2 avond maaltijden/snacks (zoals broodjes bapau)
 
             <br /><br />
