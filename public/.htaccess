@@ -51,6 +51,6 @@ Header set Cache-Control "max-age=216000, private"
 <FilesMatch "\\.(x?html?|php)$">
 Header set Cache-Control "max-age=600, private, must-revalidate"
 </FilesMatch>
-Header unset ETag
-Header unset Last-Modified
+#Header unset ETag
+#Header unset Last-Modified
 </IfModule>

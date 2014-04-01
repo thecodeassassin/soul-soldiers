@@ -3,16 +3,6 @@
 /*jshint strict: true */
 
 
-
-
-/*************** GOOGLE ANALYTICS ***********/
-/*************** REPLACE WITH YOUR OWN UA NUMBER ***********/
-
-/*************** REPLACE WITH YOUR OWN UA NUMBER ***********/
-
-
-
-
 var isMobile = false;
 var isDesktop = false;
 
@@ -363,72 +353,6 @@ $(window).load(function() {
         $('body').delay(350).css({'overflow':'visible'});
     }
 
-
-    /*
-     |--------------------------------------------------------------------------
-     | ISOTOPE USAGE FILTERING
-     |--------------------------------------------------------------------------
-     */
-    if($('.isotopeWrapper').length){
-
-        var $container = $('.isotopeWrapper');
-        var $resize = $('.isotopeWrapper').attr('id');
-        // initialize isotope
-
-        $container.isotope({
-            layoutMode: 'sloppyMasonry',
-            itemSelector: '.isotopeItem',
-            resizable: false, // disable normal resizing
-            masonry: {
-                columnWidth: $container.width() / $resize
-            }
-
-        });
-
-        //var rightHeight = $('#works').height();
-        $('#filter a').click(function(e){
-
-
-            //$('#works').height(rightHeight);
-            $('#filter a').removeClass('current');
-
-
-            $(this).addClass('current');
-            var selector = $(this).attr('data-filter');
-
-            $container.isotope({
-                filter: selector,
-                animationOptions: {
-                    duration: 300,
-                    easing: 'easeOutQuart'
-                }
-            });
-
-            if (isDesktop === true && $('section[id^="paralaxSlice"]').length){
-                setTimeout(function(){
-                    $.stellar('refresh');
-                }, 1000);
-            }
-
-            e.preventDefault();
-            return false;
-        });
-
-
-        $(window).smartresize(function(){
-            $container.isotope({
-                // update columnWidth to a percentage of container width
-                masonry: {
-                    columnWidth: $container.width() / $resize
-                }
-            });
-        });
-
-
-    }
-
-
-
     /**PROCESS ICONS**/
     $('.iconBoxV3 a').hover(function() {
 
@@ -461,21 +385,6 @@ $(window).load(function() {
         }
 
     });
-
-
-
-
-    if (isDesktop === true && $('section[id^="paralaxSlice"]').length )
-    {
-
-        $(window).stellar({
-            horizontalScrolling: false,
-            responsive:true
-        });
-    }
-
-
-
 
 
 //END WINDOW LOAD

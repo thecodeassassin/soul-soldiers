@@ -9,6 +9,4 @@
 
     <b>Let op! Mocht je dit verzoek niet hebben aangevraagd neem dan direct contact met ons op. Je kunt reageren op deze mail.</b>
 
-
-
 </p>

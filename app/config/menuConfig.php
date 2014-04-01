@@ -28,12 +28,12 @@ $menuConfig = [
             'Soul-Soldiers: The Reunion 2013' => BASE_URL.'/event/the-reunion'
         ],
         'Informatie' => [
-            'Regelement' => BASE_URL.'/content/rules',
+            'Algemene voorwaarden' => BASE_URL.'/content/rules',
             'Lan-Party checklist' => BASE_URL.'/content/checklist',
             'Wat is een lan party?' => BASE_URL.'/content/lan-description'
         ],
         'Aankomend evenement' => [
-            'link' => BASE_URL.'/event/current',
+            'Soul-Soldiers 2014' => BASE_URL.'/event/current',
             'Competities' => BASE_URL.'/content/compos'
         ],
         'Contact' => BASE_URL.'/contact',

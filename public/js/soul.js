@@ -122,10 +122,6 @@ $(function() {
 
     var offset = 200;
     var duration = 500;
-    jQuery(window).animate({scrollTop: 0}, duration, function() {
-
-    });
-
     $(window).scroll(function () {
         if ($(this).scrollTop() > offset) {
             $('.back-to-top').fadeIn(duration);

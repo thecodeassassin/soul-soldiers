@@ -149,12 +149,15 @@ class User extends Base
 		$this->setSource('tblUser');
     }
 
+    /**
+     * Set some default values
+     */
     public function beforeValidationOnCreate()
     {
 
         // set default values
         $this->state = self::STATE_INACTIVE;
-        $this->isActive = 0;
+        $this->isActive = 1;
         $this->userType = AclBuilder::ROLE_USER;
         $this->password = sha1($this->password);
     }

@@ -54,6 +54,10 @@ class AccountController extends Base
 
         $loginForm = new LoginForm();
 
+        if ($this->authService->getAuthData() && ! $this->request->isPost()) {
+            return $this->redirectToLastPage();
+        }
+
         try {
             if ($this->request->isPost()) {
                 $email = $this->request->getPost('email', 'email');
@@ -67,13 +71,13 @@ class AccountController extends Base
                     $authUser = User::authenticate($email, $password);
 
                     if ($authUser->state == User::STATE_ACTIVE && $authUser->confirmKey != null) {
-                        $this->response->redirect('/change-password');
+//                      return $this->response->redirect('/change-password');
                     }
 
                     $this->flashMessage('Je bent nu ingelogd.', 'success', true);
 
                     // redirect the user to his last known location
-                    $this->redirectToLastPage();
+                    return $this->redirectToLastPage();
                 }
 
             }
@@ -90,6 +94,11 @@ class AccountController extends Base
     public function registerAction()
     {
         $registrationForm = new RegistrationForm();
+
+        if ($this->authService->getAuthData() && ! $this->request->isPost()) {
+            return $this->redirectToLastPage();
+        }
+
         $post = $this->request->getPost();
         $newUser = new User();
 
@@ -113,7 +122,8 @@ class AccountController extends Base
                     $newUser->save();
 
                     $this->flashMessage('Je registratie is gelukt, hou je e-mail in de gaten voor een bevestigings e-mail.', 'success', true);
-                    $this->redirectToLastPage();
+
+                    return $this->redirectToLastPage();
 
                 }
 
@@ -275,6 +285,14 @@ class AccountController extends Base
         }
 
         $this->redirectToLastPage();
+
+    }
+
+    /**
+     * @param $email
+     */
+    public function unsubscribeAction($email)
+    {
 
     }
 }

@@ -231,6 +231,24 @@ class Event extends Base
     }
 
     /**
+     * Get amount of payments for this event
+     *
+     * @return int
+     */
+    public function getAmountPayed()
+    {
+        $amountPayed = 0;
+
+        foreach ($this->entries as $entry) {
+            if ($entry->payment->confirmed) {
+                $amountPayed += 1;
+            }
+        }
+
+        return $amountPayed;
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()

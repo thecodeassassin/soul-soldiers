@@ -47,9 +47,9 @@ class EventController extends Base
      */
     public function showAction($systemName)
     {
-        $pictures = array();
         $registered = false;
         $payed = false;
+        $amountPayed = 0;
         $transactionId = $this->request->get('trxid', 'string');
 
         if ($systemName == 'current') {
@@ -90,9 +90,16 @@ class EventController extends Base
             }
         }
 
+        if ($event) {
+            $amountPayed = $event->getAmountPayed();
+        }
+
+        $this->view->pick('event/'.$event->systemName);
+
         $this->view->registered = $registered;
         $this->view->archived = ($systemName != 'current');
         $this->view->payed = $payed;
+        $this->view->amountPayed = $amountPayed;
         $this->view->event = $event;
         $this->view->media = $event->getMedia();
     }
@@ -109,6 +116,10 @@ class EventController extends Base
         $event = Event::findBySystemName($systemName);
 
         if ($user && $event) {
+            if ($event->getAmountPayed() >= $event->maxEntries) {
+                return $this->response->redirect('event/current');
+            }
+
             if ($event->registerByUserId($user->getUserId())) {
                 $this->flashMessage(sprintf('Je bent nu ingeschreven voor %s!', $event->name), 'success', true);
             }

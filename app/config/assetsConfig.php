@@ -43,6 +43,7 @@ return new \Phalcon\Config(
                 "js/neko.js",
                 "js/bootstrap-remote-data.min.js",
                 "js/modernizr-2.6.1.min.js",
+                "js/jquery.stellar.min.js",
 
                 "js/blockui.js",
 

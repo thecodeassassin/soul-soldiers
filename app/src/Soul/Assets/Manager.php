@@ -14,6 +14,7 @@ use Phalcon\Cache\BackendInterface;
 use Phalcon\Config;
 use Phalcon\DI;
 use Phalcon\DiInterface;
+use Phalcon\Tag;
 use Soul\Kernel;
 
 /**
@@ -135,9 +136,9 @@ class Manager extends \Phalcon\Assets\Manager
     public function outputCss($collection)
     {
 
-        if ($collectionObj = $this->get($collection)) {
+        if ($collectionObj = $this->get($collection) && (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT)) {
             if (is_readable($collectionObj->getTargetPath())) {
-                return \Phalcon\Tag::stylesheetLink([$collectionObj->getTargetUri()]);
+                return Tag::stylesheetLink([$collectionObj->getTargetUri()]);
             } else {
                 parent::outputCss($collection);
             }

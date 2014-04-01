@@ -1,13 +1,11 @@
 <div class="row">
     <div class="container">
-        <h1>Regelement</h1>
+        <h1>Algemene voorwaarden</h1>
         <div class="col-md-12 color0 pb15 pt15">
 
                 <br />
             <div class="grid_16">
 
-                <div class="center"><h1>Algemene Voorwaarden</h1></div>
-                <p></p>
                 <br />
                 <h4>Legitimatie </h4>
                 <p> Deelnemers dienen zich ten alle tijden te kunnen legitimeren. Indien de deelnemer niet in het bezit is van een geldig legitimatie bewijs, kan toegang tot de zaal worden geweigerd.</p><br />

@@ -1,11 +1,12 @@
 <?php
-/**  
+/**
  * @author Stephen Hoogendijk
  * @copyright Soul-Soldiers
- * @package Mail 
- */  
+ * @package Mail
+ */
 
 namespace Soul;
+use Phalcon\Crypt;
 use Phalcon\Validation\Validator\Email;
 use Soul\Mail\Exception;
 use Soul\Mail\Provider\ProviderInterface;
@@ -56,11 +57,10 @@ class Mail extends Module
             throw new Exception('Please set the user before sending e-mails');
         }
 
+        $unsubscribeLink = Util::encodeUrlSafe($user->email);
 
-        $templateParams = array_merge(['user' => $user], $templateParams);
-        $to = [
-           $user->email => $user->realName
-        ];
+        $templateParams = array_merge(compact('user', 'unsubscribeLink'), $templateParams);
+        $to = [ $user->email => $user->realName ];
 
         return $this->interface->send($to, $subject, $templateName, $templateParams);
     }

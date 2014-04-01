@@ -13,8 +13,6 @@
 
         {# Output js/css content #}
         {{ assets.outputCss('main') }}
-        {{ assets.outputJs('scripts') }}
-
         {# Custom javascript #}
     </head>
     <body>
@@ -157,6 +155,7 @@
 
         </div>
     </body>
+    {{ assets.outputJs('scripts') }}
 
     <script type="text/javascript">
         window.onload = function () { "use strict"; gaSSDSLoad("{{ analyticsCode }}"); }; //load after page onload

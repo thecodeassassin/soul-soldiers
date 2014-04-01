@@ -5,10 +5,7 @@
 <p>
     Bedankt voor je betaling, je bent nu verzekerd van een plaats bij {{ event.name }}!
     <br /><br />
-    Je kunt je nu aanmelden voor de competities, dit kan natuurlijk ook tijdens de lan party.
-    <br />
-    <br />
 
-    Nogmaals bedankt en tot snel!
+    <strong>Nogmaals bedankt en tot snel!</strong>
 
 </p>

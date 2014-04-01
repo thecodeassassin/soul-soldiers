@@ -1,12 +1,17 @@
 <div class="container">
     <div class="row">
         <div class="jumbotron color0">
-            <h1>Welkom</h1>
+            <h1>Welkom bij Soul-Soldiers</h1>
 
             <p>
-                Welkom op de nieuwe site van Soul-Soldiers. We zijn druk bezig met de voorbereidingen voor een nieuwe
-                lan party.
+                Wij organiseren sinds 2007 lan-party's met als enige doel zo veel mogelijk fun! <br /><br />
+
+                Wij hebben geen commerciële doelstelling en onze specialisatie zijn vooral kleinschalige,<br />
+                maar vooral gezellige lan-parties.
             </p>
+            <a href="{{ url('event/current') }}">
+                <div class="btn btn-lg btn-primary">Naar het aankomende evenement</div>
+            </a>
         </div>
     </div>
 
