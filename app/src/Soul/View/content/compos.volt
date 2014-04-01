@@ -17,8 +17,9 @@
             <p>Uitleg <br />
                 De Starcraft 2 competitie wordt gespeeld met het zogenoemde Double Elimination systeem.<br />
                 Dit houdt in dat je ingeloot wordt tegen een andere deelnemer waarbij de winnaar door gaat naar de volgende ronde.<br />
-                De verliezer ligt helaas uit de competitie. Dit gaat door tot er 2 spelers overblijven.<br />
-                Deze zullen een 'best of 3' games spelen om de uiteindelijke winnaar te bepalen.<br /><br />
+                De verliezer komt dan terecht in de verliezers competitie, deze werkt op dezelfde manier als de normale competitie. <br />
+                Dit gaat door tot er 2 spelers overblijven (de winnaar van de normale competitie en de winnaar van de verliezers competitie.)<br />
+                Deze spelers zullen een 'best of 3' games spelen om de uiteindelijke winnaar te bepalen.<br /><br />
                 {#Inschrijven voor deze compo :<a href="http://challonge.com/tournaments/signup/OPxeG1QZwl" target="_blank"> Inschijven voor Starcraft 2</a> </p> <br />#}
             <br /><br />
 

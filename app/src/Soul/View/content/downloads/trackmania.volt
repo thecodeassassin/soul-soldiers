@@ -1,5 +1,9 @@
 
 {#<div class="row">#}
+    {#{% set image_1 = 'img/downloads/trackmania_ingame.jpg' %}#}
+    {#{% set image_2 = 'img/downloads/trackmania_ingame2.jpg' %}#}
+    {#{% set image_3 = 'img/downloads/trackmania_ingame3.jpg' %}#}
+
     {#<div class="container">#}
         {#<h1>Trackmania Screenshots + Installatie instructies</h1>#}
         {#<div class="col-md-12 color0 pb15 pt15">#}
@@ -29,9 +33,19 @@
          {#<H1>Screenshots : </H1>#}
             {#<p>Klik op de plaatjes om ze in het groot te bekijken</p>#}
 
-            {#{{ image('img/downloads/trackmania_ingame.jpg' ,'height': 250, 'width': 250)}}#}
-            {#{{ image('img/downloads/trackmania_ingame2.jpg' ,'height': 250, 'width': 250)}}#}
-            {#{{ image('img/downloads/trackmania_ingame3.jpg' ,'height': 250, 'width': 250)}}#}
+
+            {#<a href="{{ url(image_1) }}" class="image-link">#}
+                {#{{ image(image_1 ,'height': 250, 'width': 250)}}#}
+            {#</a>#}
+
+            {#<a href="{{ url(image_2) }}" class="image-link">#}
+                {#{{ image(image_2 ,'height': 250, 'width': 250)}}#}
+            {#</a>#}
+
+            {#<a href="{{ url(image_3) }}" class="image-link">#}
+                {#{{ image(image_3 ,'height': 250, 'width': 250)}}#}
+            {#</a>#}
+
 
 
         {#</div>#}
