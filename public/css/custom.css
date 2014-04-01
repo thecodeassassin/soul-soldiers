@@ -7,7 +7,9 @@ body {
     font-weight: 500;
 }
 
-p a:link, p a:visited, p a:hover {
+p a:link, p a:visited, p a:hover,
+.well a:link, .well a:visited, .well a:hover,
+.panel a:link, .panel a:visited, .panel a:hover {
     text-decoration: none;
     border-bottom: #666666;
     border-width: 0px 0px 1px 0px;

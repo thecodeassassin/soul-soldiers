@@ -7,8 +7,11 @@
                 <h1>{{ event.name }}</h1>
 
                 <p>
+                    23, 24 en 25 maart is het weer zover! Een nieuwe editie van Soul-Soldiers! <br /><br />
+
                     Sinds het success van Soul-Soldiers: The Reunion hebben we besloten een nieuwe lan te organiseren!<br />
-                    Het beloofd weer een gezellige lan
+                    Het beloofd weer een gezellige lan te worden.
+
                 </p>
                 {% if amountPayed >= event.maxEntries %}
                 <p><a class="btn btn-primary btn-lg disabled" role="button" href="javascript:void(0)">Dit evenement is helaas volgeboekt.</a></p>
