@@ -136,7 +136,7 @@ class Manager extends \Phalcon\Assets\Manager
     public function outputCss($collection)
     {
 
-        if ($collectionObj = $this->get($collection) && (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT)) {
+        if ($collectionObj = $this->get($collection)) {
             if (is_readable($collectionObj->getTargetPath())) {
                 return Tag::stylesheetLink([$collectionObj->getTargetUri()]);
             } else {

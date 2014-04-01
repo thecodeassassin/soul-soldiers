@@ -13,6 +13,7 @@ use Soul\Model\Payment;
 use Soul\Payment\Data\TargetPay\IdealStart;
 use Soul\Payment\Service\Exception;
 use Soul\Payment\Service\TargetPay;
+use Soul\Auth\Data as AuthData;
 use Soul\Util;
 
 /**
