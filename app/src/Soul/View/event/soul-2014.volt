@@ -7,10 +7,10 @@
                 <h1>{{ event.name }}</h1>
 
                 <p>
-                    23, 24 en 25 maart is het weer zover! Een nieuwe editie van Soul-Soldiers! <br /><br />
+                    Op 23, 24 en 25 mei 2014 is het weer zover! Een nieuwe LAN editie van Soul-Soldiers! <br /><br />
 
-                    Sinds het success van Soul-Soldiers: The Reunion hebben we besloten een nieuwe lan te organiseren!<br />
-                    Het beloofd weer een gezellige lan te worden.
+                    Na het succes van Soul-Soldiers: The Reunion, hebben we besloten een nieuwe LAN te organiseren!<br />
+                    Het belooft weer een gezellige LAN te gaan worden!
 
                 </p>
                 {% if amountPayed >= event.maxEntries %}
@@ -88,7 +88,7 @@
         <table class="table noborders">
             <tr>
                 <td><strong>Datum</strong></td>
-                <td>24, 25 en 25 Mei 2014</td>
+                <td>Vrijdag 23 mei 2014 19:00 - Zondag 25 mei 2014 17:00</td>
             </tr>
             <tr>
                 <td><strong>Locatie</strong></td>
@@ -103,8 +103,9 @@
         <h3>Aanvullende informatie</h3>
         <p>
             Tijdens het evenement is het <strong>toegestaan</strong> om eigen eten en drinken mee te nemen. <br />
-            Er wordt een koelkast ter beschikking gesteld om producten die gekoeld dienen te worden in op te slaan. <br />
-            De ruimte in de koelkast is beperkt, dus we willen aan iedereen vragen de volgende richtlijnen niet te overschrijden. <br /> <br />
+            Er wordt een koelkast ter beschikking gesteld om producten die gekoeld dienen te worden <br /> in op te slaan.
+            Zorg dat je stickers mee neemt om je producten te markeren, zodat iemand niet per ongeluk iets van jou pakt.
+            De ruimte in de koelkast is beperkt, <br />dus we willen aan iedereen vragen de volgende richtlijnen niet te overschrijden: <br /> <br />
 
             * max 2 flessen/pakken drinken<br />
             * max 2 avond maaltijden/snacks (zoals broodjes bapau)

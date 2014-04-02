@@ -4,10 +4,10 @@
             <h1>Welkom bij Soul-Soldiers</h1>
 
             <p>
-                Wij organiseren sinds 2007 lan-party's met als enige doel zo veel mogelijk fun! <br /><br />
+                Wij organiseren sinds 2007 LAN-party's met als enige doel: zo veel mogelijk fun!  <br /><br />
 
-                Wij hebben geen commerciële doelstelling en onze specialisatie zijn vooral kleinschalige,<br />
-                maar vooral gezellige lan-parties.
+                Wij hebben geen commerciële doelstelling en onze specialisatie is het organiseren <br />
+                van kleinschalige maar vooral gezellige LAN-party's.
             </p>
             <a href="{{ url('event/current') }}">
                 <div class="btn btn-lg btn-primary">Naar het aankomende evenement</div>
