@@ -359,9 +359,10 @@ Index / news / tweets
     background-image: url('../img/lan-bg_3.png');
     background-color: rgba(255,255,255,0);
     background-size: 100%;
-    background-position: 10% 40% !important;
-    background-attachment: fixed;
+    background-position: 24% 43% !important;
+    /*background-attachment: fixed;*/
     background-repeat: no-repeat;
+    text-shadow: 2px 1px 1px #000000;
 }
 
 @media (max-width: 768px) {

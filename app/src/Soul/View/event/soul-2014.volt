@@ -36,7 +36,7 @@
                     {% else %}
                         <p>
                             <a class="btn btn-primary btn-lg" role="button" href="{{ url('register') }}">Maak nu je account aan!</a> of klik
-                            <a href="{{ url('login') }}">hier<a/> om in te loggen</a>
+                            <a href="{{ url('login') }}">hier</a> om in te loggen
                         </p>
                     {% endif %}
                 {% endif %}
