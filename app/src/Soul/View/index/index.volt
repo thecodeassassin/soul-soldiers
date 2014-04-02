@@ -20,21 +20,21 @@
             <div class="gutter color0">
                 <h2>Nieuws</h2>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Nieuwe website live! - 04/03/2014</div>
+                <div class="panel panel-default news">
+                    <div class="panel-heading"><h3>Nieuwe website live! - 04/03/2014</h3></div>
                     <div class="panel-body">
                         <p>
                             Het is eindelijk zover! De inschrijvingen voor Soul-Soldiers 2014 kunnen beginnen! <br /><br />
                             We gaan er alles aan doen om deze LAN nog leuker te maken dan de vorige editie! <br />
                         </p>
 
-                            <h3>Actie</h3>
                         <p>
-                            Tevens verloten we onder de eerste 20 inschrijvingen een gratis entreekaartje, <br />
-                            dus aarzel niet en schrijf je vandaag nog in!<br /><br />
+                            <strong>Actie!</strong> Schrijf je in en betaal voor 1 Mei 2014, en maak kans op teruggave van je  <br />
+                            entreegeld!* Dus aarzel niet en koop vandaag nog je kaartje!<br /><br />
 
                             Klik <a href="{{ url('event/current') }}">hier</a> om naar de pagina van het evenement te gaan. <br />
                         </p>
+                        <small class="pull-right">* Bij minimaal 18 betalingen</small>
 
                     </div>
                 </div>

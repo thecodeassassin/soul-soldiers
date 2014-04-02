@@ -59,10 +59,6 @@
                 <p> De organisatie beschikt nooit over uw wachtwoord, het wachtwoord wordt versleuteld opgeslagen en naar ons netwerk verstuurd. De organisatie beschikt dus nooit en te nimmer over uw wachtwoord. <br />
                     De organisatie is daarom ook niet verantwoordelijk mocht uw wachtwoord gecompromitteerd worden.</p>
                 <p> Tevens is de website beveiligd middels een geldig certificaat en wordt alle communicatie van- en naar ons netwerk versleuteld. <br />    </p>
-                <h4>Geld terug actie</h4>
-                <p>
-
-                </p>
 
             </div>
                 </p>
