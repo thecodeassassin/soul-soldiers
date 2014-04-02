@@ -1,6 +1,6 @@
 <div class="row">
     <div class="container">
-        <h1>Lan-party checklist</h1>
+        <h1>LAN-party checklist</h1>
         <div class="col-md-12 color0 pb15 pt15">
             <p>
                 Soul-Soldiers zal zorgen voor een zitplaats (tafel en stoel) met 2 aansluitingen per persoon op een stekkerblok.<br />

@@ -61,7 +61,8 @@ class EventController extends Base
                 $this->flashMessage('Dit evenement bestaat niet', 'error', true);
                 $this->setLastPage();
 
-                return $this->redirectToLastPage();
+//                return $this->redirectToLastPage();
+                return $this->response->redirect('/event/current');
             }
 
         }
@@ -150,7 +151,8 @@ class EventController extends Base
 
             // check if a user has payed already
             if ($event->hasPayed($userId) || !$event->hasEntry($userId)) {
-                return $this->redirectToLastPage();
+//                return $this->redirectToLastPage();
+                return $this->response->redirect('event/current');
             }
 
             if ($this->request->isPost()) {
@@ -171,7 +173,8 @@ class EventController extends Base
                 if (!$transactionDetails) {
                     $this->flashMessage('Er is iets mis gegaan met de iDeal betaling, probeer het later nogmaals', 'error', true);
 
-                    return $this->redirectToLastPage();
+//                    return $this->redirectToLastPage();
+                    return $this->response->redirect('event/current');
                 }
 
                 if (array_key_exists('url', $transactionDetails)) {

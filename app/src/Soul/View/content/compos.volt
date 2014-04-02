@@ -7,7 +7,7 @@
             <br />
             <p>Hieronder staat een overzicht van de competities die tijdens de 2014 LAN gespeeld zullen gaan worden.<br />
                 In het overzicht staan de spelregels per competitie uitgelegd.<br />
-                Houdt er rekening mee dat je pas de mogelijkheid hebt om jezelf in te schrijven nadat de betaling ontvangen en verwerkt is.<br />
+                Houd er rekening mee dat je pas de mogelijkheid hebt om jezelf in te schrijven tijdens de LAN.<br />
                 <br /><br /><br /><br /><br />
             </p>
 

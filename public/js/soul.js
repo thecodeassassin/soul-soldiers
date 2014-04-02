@@ -147,12 +147,15 @@ $(function() {
         }
     });
 
+    // preload the loader image
+    $('<img/>')[0].src = __loading_img;
+
 });
 
 function ajaxLoad(mode){
 
     if(mode) {
-        $.blockUI({ message: '<div class="ajax-loader center"><img src="/img/ajax-loader.gif" /> <br />Bezig met laden...&nbsp;</div>' });
+        $.blockUI({ message: '<div class="ajax-loader center"><img src="'+__loading_img+'" /> <br />Bezig met laden...&nbsp;</div>' });
     } else {
         $.unblockUI();
     }

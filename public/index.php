@@ -1,6 +1,7 @@
 <?php
 
 // Define path to application directory
+
 defined('APPLICATION_PATH')
 || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../app'));
 
@@ -48,11 +49,22 @@ if ($config->count() != $configDist->count()) {
     die('Fatal: It seems that the configuration file does not contain all the requirements set by the config.dist.php');
 }
 
+
 /**
  * Read services
  */
 include __DIR__ . "/../app/config/services.php";
 
+
+if (APPLICATION_ENV == \Soul\Kernel::ENV_STAGING) {
+    $stagingAccess = $config->stagingAccess->toArray();
+
+    // redirect an unauthorised user to soul-soldiers.nl
+    if (! in_array(\Soul\Util::getClientIp(), $stagingAccess)) {
+        header('Location: http://soul-soldiers.nl');
+        exit;
+    }
+}
 
 if (APPLICATION_ENV == \Soul\Kernel::ENV_DEVELOPMENT) {
     ini_set('display_errors', 1);
@@ -64,6 +76,8 @@ if (APPLICATION_ENV == \Soul\Kernel::ENV_DEVELOPMENT) {
 } else {
     $kernel = new \Soul\Kernel\Application($di);
 }
+
+
 
 /**
  * Handle the request

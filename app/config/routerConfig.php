@@ -24,6 +24,12 @@ return [
         "name" => 1
     ],
 
+    '/terms' => [
+        "controller" => "content",
+        "action"     => "show",
+        "name" => 'rules'
+    ],
+
     /**
      * Account
      */

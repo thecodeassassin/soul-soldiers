@@ -71,7 +71,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <!-- Logo -->
-                        <a class="navbar-brand" href="index.html"><img src="/img/main-logo.png" alt="Soul-Soldiers"/></a>
+                        <a class="navbar-brand" href="{{ url('home') }}"><img src="/img/main-logo.png" alt="Soul-Soldiers"/></a>
                     </div>
                     <!-- Main navigation -->
                     {{ menu }}
@@ -107,10 +107,8 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="footerWidget">
-                                {#<img src="/img/main-logo.png" alt="Soul-Soldiers" id="footerLogo">#}
-                                <p>
-                                    &copy; Soul-Soldiers 2014
-                                </p>
+                                <img src="/img/main-logo.png" alt="Soul-Soldiers" id="footerLogo">
+
                             </div>
                         </div>
 
@@ -155,6 +153,10 @@
 
         </div>
     </body>
+    <script type="text/javascript">
+        var __loading_img = '{{ url('img/ajax-loader.gif') }}';
+    </script>
+
     {{ assets.outputJs('scripts') }}
 
     <script type="text/javascript">

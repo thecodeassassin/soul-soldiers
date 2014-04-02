@@ -1,4 +1,4 @@
-<h1 style="text-align: center"><strong>Welkom bij Soul-Soldiers!</strong></h1>
+<h1 style="text-align: right"><strong>Welkom bij Soul-Soldiers!</strong></h1>
 
 <p class="lead">Beste {{ user.realName }},</p>
 

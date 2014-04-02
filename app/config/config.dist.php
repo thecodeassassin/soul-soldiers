@@ -18,6 +18,12 @@ return new \Phalcon\Config(
             'baseUri'        => '/',
             'baseTitle'      => 'Soul-Soldiers - Lan parties'
         ],
+        /**
+         * Controls who can access the staging environment (list of ips)
+         */
+        'stagingAccess' => [
+
+        ],
         'analytics' =>[
             'code' => '',
         ],

@@ -29,8 +29,8 @@ $menuConfig = [
         ],
         'Informatie' => [
             'Algemene voorwaarden' => BASE_URL.'/content/rules',
-            'Lan-Party checklist' => BASE_URL.'/content/checklist',
-            'Wat is een lan party?' => BASE_URL.'/content/lan-description'
+            'LAN-Party checklist' => BASE_URL.'/content/checklist',
+            'Wat is een LAN-party?' => BASE_URL.'/content/lan-description'
         ],
         'Aankomend evenement' => [
             'link' => BASE_URL.'/event/current',

@@ -87,7 +87,6 @@
     <div class="col-md-4 col-md-offset-1 pb15 pt15">
         <h2>Informatie</h2>
 
-        <h3>Datum en locatie</h3>
         <table class="table noborders">
             <tr>
                 <td><strong>Datum</strong></td>
@@ -100,6 +99,10 @@
                     Venneperweg 298, 2153 AE Nieuw-Vennep
                     </address>
                 </td>
+            </tr>
+            <tr>
+                <td><strong>Prijs entreeticket</strong></td>
+                <td>&euro; {{ '%01.2f'|format(event.product.cost) }} voor 3 dagen</td>
             </tr>
         </table>
 

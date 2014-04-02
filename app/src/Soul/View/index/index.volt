@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="jumbotron color0">
-            <h1>Welkom bij Soul-Soldiers</h1>
+            <h1>Welkom bij Soul-Soldiers!</h1>
 
             <p>
                 Wij organiseren sinds 2007 LAN-party's met als enige doel: zo veel mogelijk fun!  <br /><br />
@@ -21,7 +21,7 @@
                 <h2>Nieuws</h2>
 
                 <div class="panel panel-default news">
-                    <div class="panel-heading"><h3>Nieuwe website live! - 04/03/2014</h3></div>
+                    <div class="panel-heading"><h3>Nieuwe website live! - 02/04/2014</h3></div>
                     <div class="panel-body">
                         <p>
                             Het is eindelijk zover! De inschrijvingen voor Soul-Soldiers 2014 kunnen beginnen! <br /><br />

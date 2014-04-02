@@ -55,7 +55,8 @@ class AccountController extends Base
         $loginForm = new LoginForm();
 
         if ($this->authService->getAuthData() && ! $this->request->isPost()) {
-            return $this->redirectToLastPage();
+//            return $this->redirectToLastPage();
+            return $this->response->redirect('home');
         }
 
         try {
@@ -77,7 +78,8 @@ class AccountController extends Base
                     $this->flashMessage('Je bent nu ingelogd.', 'success', true);
 
                     // redirect the user to his last known location
-                    return $this->redirectToLastPage();
+//                    return $this->redirectToLastPage();
+                    return $this->response->redirect('home');
                 }
 
             }
@@ -96,7 +98,8 @@ class AccountController extends Base
         $registrationForm = new RegistrationForm();
 
         if ($this->authService->getAuthData() && ! $this->request->isPost()) {
-            return $this->redirectToLastPage();
+//            return $this->redirectToLastPage();
+            return $this->response->redirect('home');
         }
 
         $post = $this->request->getPost();
@@ -123,7 +126,8 @@ class AccountController extends Base
 
                     $this->flashMessage('Je registratie is gelukt, hou je e-mail in de gaten voor een bevestigings e-mail.', 'success', true);
 
-                    return $this->redirectToLastPage();
+//                    return $this->redirectToLastPage();
+                    return $this->response->redirect('home');
 
                 }
 
@@ -182,7 +186,8 @@ class AccountController extends Base
         $user = User::findFirstByConfirmKey($confirmKey);
 
         if (!$user) {
-            return $this->redirectToLastPage();
+//            return $this->redirectToLastPage();
+            return $this->response->redirect('home');
         }
 
         // reset failed attempts
@@ -204,7 +209,8 @@ class AccountController extends Base
                 $this->authService->setAuthData(AuthData::buildFromUser($user));
 
                 $this->flashMessage('Uw wachtwoord is gewijzigd, u bent nu ingelogd', 'success', true);
-                return $this->redirectToLastPage();
+                return $this->response->redirect('home');
+//                return $this->redirectToLastPage();
 
 
             }
@@ -244,7 +250,8 @@ class AccountController extends Base
                         $user->save();
 
                         $this->flashMessage('Er is een e-mail naar u gestuurd met instructies om uw wachtwoord te wijzigen',  'success', true);
-                        return $this->redirectToLastPage();
+
+                        return $this->response->redirect('home');
 
                     } catch (AuthException $e) {
                         $this->flashMessage('U heeft dit formulier te vaak geprobeerd te versturen, probeer het later nogmaals.', 'error');
@@ -277,14 +284,14 @@ class AccountController extends Base
                 $this->authService->sendConfirmationMail($user, true);
 
                 $this->flashMessage('Bevestigings email opnieuw verstuurd.', 'success', true);
-                $this->redirectToLastPage();
+                return $this->response->redirect('home');
             }
 
         } catch (\Exception $e) {
             $this->flashMessage('Bevestigings email kon niet worden vestuurd, gebruiker niet gevonden.', 'error', true);
         }
 
-        $this->redirectToLastPage();
+        return $this->response->redirect('home');
 
     }
 
