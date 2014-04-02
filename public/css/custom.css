@@ -134,7 +134,24 @@ div.signup .register-submit {
     background: #303030;
 }
 
-/*Events*/
+/**
+Panel
+**/
+.panel-default .panel-heading {
+    background: #304f5e !important;
+    color: #ffffff;
+}
+
+.panel-default>.panel-heading:hover {
+    color: #cccccc;
+}
+
+.panel-default {
+    border: none;
+    border-bottom: 1px dashed #cccccc;
+}
+
+    /*Events*/
 div.entries {
     min-height: 300px;
 }
