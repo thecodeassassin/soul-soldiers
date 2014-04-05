@@ -14,7 +14,6 @@
 
             <div class="tab-content">
                 <div class="tab-pane active" id="profile">
-                    <h2>Profiel informatie</h2>
                     {{ form('account/manage', "method": "post", "name":"profile-form", "class":"form-horizontal validate", "role":"form") }}
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">E-mail</label>
@@ -64,7 +63,6 @@
                     {{ endform() }}
                 </div>
                 <div class="tab-pane" id="change-password">
-                    <h2>Wachtwoord wijzigen</h2>
                     {{ form('account/manage', "method": "post", "name":"password-form", "class":"form-horizontal validate", "role":"form") }}
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-2 control-label">Huidige wachtwoord *</label>
