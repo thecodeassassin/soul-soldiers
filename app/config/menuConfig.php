@@ -37,6 +37,7 @@ $menuConfig = [
             'Soul-Soldiers 2014' => BASE_URL.'/event/current',
             'Competities' => BASE_URL.'/content/compos'
         ],
+        'Mijn account' => BASE_URL.'/account/manage',
         'Contact' => BASE_URL.'/contact',
 //        'Downloads' => BASE_URL.'/content/downloads',
         'Inloggen' => BASE_URL.'/login',
@@ -54,7 +55,8 @@ $menuConfig = [
     'authenticated' => [
         'Uitloggen',
         'Downloads',
-        'Competities'
+        'Competities',
+        'Mijn account'
     ],
     // Admin only menu items
     'admin' => [

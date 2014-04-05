@@ -147,6 +147,11 @@ $(function() {
         }
     });
 
+    if(window.location.hash) {
+        $("html, body").animate({scrollTop:0}, '500');
+    }
+
+
     // preload the loader image
     $('<img/>')[0].src = __loading_img;
 

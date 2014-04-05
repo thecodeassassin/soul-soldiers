@@ -380,3 +380,8 @@ Index / news / tweets
 strong {
     font-weight: 600;
 }
+
+.form-group .textonly {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}

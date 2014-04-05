@@ -45,9 +45,16 @@ class ChangePasswordForm extends Base
         $this->add($this->getCRSF())
              ->add($password)
              ->add($passwordRepeat)
-             ->add(new Submit('Opslaan', ['class' => 'btn btn-primary']));
+             ->add(new Submit('Opslaan', ['class' => 'btn btn-primary btn-lg']));
 
 
+    }
+
+    public function addCurrentPassword()
+    {
+        $current = $this->getPasswordField('Huidige wachtwoord', 'currentPassword');
+
+        $this->add($current);
     }
 
 }

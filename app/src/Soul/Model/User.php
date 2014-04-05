@@ -119,20 +119,27 @@ class User extends Base
             )
         );
 
-        $this->validate(new Uniqueness(
-            array(
-                "field"   => "email",
-                "message" => "Er bestaat al een account met dit e-mail adres"
-            )
-        ));
+        if (!$this->userId) {
 
-        $this->validate(new Uniqueness(
-            array(
-                "field"   => "nickName",
-                "message" => "Deze nickname is reeds gekozen"
-            )
-        ));
+            $this->validate(new Uniqueness(
+                array(
+                    "field"   => "email",
+                    "message" => "Er bestaat al een account met dit e-mail adres"
+                )
+            ));
 
+        }
+
+        $existing = self::findFirstByUserId($this->userId);
+
+        if ($existing->nickName != $this->nickName) {
+            $this->validate(new Uniqueness(
+                array(
+                    "field"   => "nickName",
+                    "message" => "Deze nickname is reeds gekozen"
+                )
+            ));
+        }
 
         if ($this->validationHasFailed() == true) {
             return false;
@@ -221,11 +228,22 @@ class User extends Base
     /**
      * Change the user's password
      */
-    public function changePassword($password)
+    public function changePassword($password, $setConfirmKey = true)
     {
-        $this->confirmKey = null;
+        if ($setConfirmKey) {
+            $this->confirmKey = null;
+        }
         $this->password = sha1($password);
         $this->save();
+    }
+
+    /**
+     * @param $userId
+     * @return User
+     */
+    public static function findFirstByUserId($userId)
+    {
+        return self::findFirst($userId);
     }
 
     /**

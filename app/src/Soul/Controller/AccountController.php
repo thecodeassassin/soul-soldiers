@@ -9,6 +9,7 @@ namespace Soul\Controller;
 
 use Soul\AclBuilder;
 use Soul\Auth\AuthService as AuthService;
+use Soul\Form\AccountInformationForm;
 use Soul\Form\ChangePasswordForm;
 use Soul\Form\ForgotPasswordForm;
 use Soul\Form\LoginForm;
@@ -301,5 +302,78 @@ class AccountController extends Base
     public function unsubscribeAction($email)
     {
 
+    }
+
+    public function manageAction()
+    {
+        $auth = $this->authService->getAuthData();
+        $post = $this->request->getPost();
+
+        $user = User::findFirstByUserId($auth->getUserId());
+
+        if (!$user) {
+            throw new \Exception(sprintf('User with id %s cannot be found.', $auth->getUserId()));
+        }
+
+        $changepasswordForm = new ChangePasswordForm();
+        $changepasswordForm->addCurrentPassword();
+        $changepasswordForm->remove('csrf');
+
+        $accountInformationForm = new AccountInformationForm();
+        $accountInformationForm->setEntity($user);
+
+        if ($this->request->isPost()) {
+
+            if (array_key_exists('profile-form', $post)) {
+
+
+                $accountInformationForm->bind($post, $user);
+                if ($accountInformationForm->isValid($this->request->getPost()) == false) {
+                    $this->flashMessages($accountInformationForm->getMessages(), 'error');
+                } else {
+
+                    // if validation fails, show messages
+                    if ($user->validation() === false) {
+
+                        $this->flashMessages($user->getMessages(), 'error');
+                    } else {
+                        // create the new user
+                        $user->save();
+
+                        $this->flashMessage('Uw profiel informatie is gewijzigd', 'success');
+
+                    }
+                }
+            }
+
+            if (array_key_exists('password-form', $post)) {
+                $currentPassword = $this->request->get('currentPassword', 'string');
+                $newPassword = $this->request->get('password', 'string');
+
+                if ($user->password !== sha1($currentPassword)) {
+                    $this->flashMessage('Het huidige wachtwoord wat u heeft opgegeven klopt niet.', 'error', true);
+                    $this->response->redirect('account/manage#change-password');
+
+                } else {
+                    if ($changepasswordForm->isValid($this->request->getPost()) == false) {
+                        $this->flashMessages($changepasswordForm->getMessages(), 'error', true);
+                        $this->response->redirect('account/manage#change-password');
+                    } else {
+
+                        // form is valid, change the password
+                        $user->changePassword($newPassword, false);
+
+
+                        $this->flashMessage('Uw wachtwoord is gewijzigd', 'success', true);
+
+                        $this->response->redirect('account/manage#change-password');
+                    }
+                }
+            }
+        }
+
+        $this->view->user = $user;
+        $this->view->chpass = $changepasswordForm;
+        $this->view->form = $accountInformationForm;
     }
 }
