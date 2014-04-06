@@ -44,7 +44,7 @@ class AccountController extends Base
     {
         parent::initialize();
 
-        $this->setLastPage();
+//        $this->setLastPage();
     }
 
     /**
@@ -79,7 +79,11 @@ class AccountController extends Base
                     $this->flashMessage('Je bent nu ingelogd.', 'success', true);
 
                     // redirect the user to his last known location
-//                    return $this->redirectToLastPage();
+                    if ($this->getLastPage()) {
+                        return $this->redirectToLastPage();
+                    }
+
+
                     return $this->response->redirect('home');
                 }
 

@@ -134,18 +134,27 @@ class Base extends Controller
         return $this->session->get('referer');
     }
 
+    /*
+     *
+     */
+    protected function removeLastPage()
+    {
+        $this->session->remove('referer');
+    }
+
     /**
      * Redirect to the last known page
      */
     protected function redirectToLastPage()
     {
+        $lastPage = $this->getLastPage();
+        $this->removeLastPage();
 
-
-        if (is_null($this->getLastPage()) || $this->getLastPage() == Util::getCurrentUrl()) {
+        if (is_null($lastPage) || $lastPage == Util::getCurrentUrl()) {
             return $this->response->redirect($this->url->get('home'), true);
         }
 
-        return $this->response->redirect($this->getLastPage(), true, 200);
+        return $this->response->redirect($lastPage, true, 200);
     }
 
     /**

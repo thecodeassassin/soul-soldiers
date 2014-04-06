@@ -62,7 +62,7 @@ return new \Phalcon\Config(
                     'event' => ['pay', 'register']
                 ],
                 AclBuilder::ROLE_ADMIN => [
-                    'admin' => 'index',
+                    'admin' => '*',
                     'index' => 'generate',
                 ]
             ]

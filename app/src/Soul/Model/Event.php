@@ -240,7 +240,8 @@ class Event extends Base
         $amountPayed = 0;
 
         foreach ($this->entries as $entry) {
-            if ($entry->payment->confirmed) {
+
+            if ($entry->payment && $entry->payment->confirmed) {
                 $amountPayed += 1;
             }
         }

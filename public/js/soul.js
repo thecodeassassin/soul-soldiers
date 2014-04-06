@@ -147,6 +147,11 @@ $(function() {
         }
     });
 
+    setTimeout(function() {
+        // hide alerts after 8 seconds (only success messages)
+        $('#messages .alert.alert-success').fadeOut('slow');
+    }, 8000);
+
     if(window.location.hash) {
         $("html, body").animate({scrollTop:0}, '500');
     }

@@ -38,13 +38,12 @@ $menuConfig = [
             'Competities' => BASE_URL.'/content/compos'
         ],
         'Mijn account' => BASE_URL.'/account/manage',
+        'Admin' => BASE_URL.'/admin',
         'Contact' => BASE_URL.'/contact',
 //        'Downloads' => BASE_URL.'/content/downloads',
         'Inloggen' => BASE_URL.'/login',
         'Registreren' => BASE_URL.'/register',
-        'Uitloggen' => BASE_URL.'/logout',
-
-
+        'Uitloggen' => BASE_URL.'/logout'
     ],
     // guest only menu items
     'guest' => [
@@ -60,5 +59,6 @@ $menuConfig = [
     ],
     // Admin only menu items
     'admin' => [
+        'Admin'
     ]
 ];

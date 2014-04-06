@@ -29,18 +29,22 @@ class Security extends Module
      *
      * @return bool
      */
-    public function beforeExecuteRoute(Event $event, Dispatcher $dispatcher)
+    public function beforeDispatch(Event $event, Dispatcher $dispatcher)
     {
 
         //Check whether the "auth" variable exists in session to define the active role
-        $auth = $this->session->get('auth');
+        $auth = $this->getAuthService()->getAuthData();
+
         if (!$auth) {
             $role = AclBuilder::ROLE_GUEST;
 
         } else {
             $role = AclBuilder::ROLE_USER;
 
-            //@todo check admin role
+
+            if ($auth->getUserType() == AclBuilder::ROLE_ADMIN) {
+                $role = AclBuilder::ROLE_ADMIN;
+            }
         }
 
 
@@ -61,12 +65,17 @@ class Security extends Module
             // if the user is allowed to perform the action, but simply needs to be logged in,
             // save the page and let the user login
             if (!$auth && $acl->isAllowed(AclBuilder::ROLE_USER, $controller, $action)) {
+
                 $this->session->set('referer', Util::getCurrentUrl());
-                return $this->response->redirect('login');
+                $this->response->redirect('login');
+
+                return false;
             }
 
             //If he doesn't have access forward him to the index controller
-            return $this->response->redirect('error/notauthenticated')->send();
+            $this->response->redirect('error/notauthenticated')->send();
+
+            return false;
 
         }
 

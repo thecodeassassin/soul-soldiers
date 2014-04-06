@@ -385,3 +385,22 @@ strong {
     padding-top: 7px;
     padding-bottom: 7px;
 }
+
+.admin-container > div {
+    min-height: 350px;
+}
+
+/*Nav pill styling*/
+
+ul.nav-pills li {
+    margin-right: 5px;
+}
+
+ul.nav-pills li a {
+    background-color: #5A5858;
+}
+
+ul.nav-pills li a:hover {
+    background-color: #3d5d71;
+    color: #ffffff
+}

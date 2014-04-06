@@ -4,11 +4,12 @@
  */
 $di->setShared('session', function() {
 
-    $session = new \Phalcon\Session\Adapter\Memcache([
-            'host' => 'localhost'
+    $session = new \Phalcon\Session\Adapter\Memcache(
+        [
+            'host' => 'localhost',
+            'lifetime' => 43200 // store for 12 hours
         ]
     );
-//    $session = new Phalcon\Session\Adapter\Files();
 
     $session->start();
 

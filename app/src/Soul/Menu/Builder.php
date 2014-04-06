@@ -89,22 +89,26 @@ class Builder extends Module
     {
         $loggedIn = $auth->isLoggedIn();
 
-        if ($loggedIn) {
-            if (in_array($item, $menuConfig['guest'])) {
-                return false;
-            }
-
-            if (in_array($item, $menuConfig['admin'])) {
-                if ($auth->getUserType != \Soul\AclBuilder::ROLE_ADMIN) {
-                    return false;
-                }
-            }
-
-        } else {
-            if (in_array($item, $menuConfig['authenticated'])) {
-                return false;
-            }
+        if (in_array($item, $menuConfig['guest']) && $loggedIn) {
+            return false;
         }
+
+        if (in_array($item, $menuConfig['admin'])) {
+
+            if (!$loggedIn) {
+                return false;
+            }
+
+            if ($loggedIn && $auth->getAuthData()->getUserType() < \Soul\AclBuilder::ROLE_ADMIN) {
+                return false;
+            }
+
+        }
+
+        if (in_array($item, $menuConfig['authenticated']) && !$loggedIn) {
+            return false;
+        }
+
 
         return true;
     }
