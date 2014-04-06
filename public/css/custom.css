@@ -372,6 +372,10 @@ Index / news / tweets
     }
 }
 
+.imgHover figure {
+    width: 160px;
+    height: 140px;
+}
 
 .table.noborders td{
     border: none !important;
