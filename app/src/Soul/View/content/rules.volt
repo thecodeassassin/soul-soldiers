@@ -55,10 +55,10 @@
                     2. De organisatie kan niet aansprakelijk worden gesteld voor letsel aan de ogen bij het te lang achtereen gebruik maken van de computer. De deelnemer is er zelf verantwoordelijk om regelmatig pauzes te nemen. <br /></p>
                 <P STYLE="margin-left: 30px">	- Aanbevolen is om per 2 uur minimaal 10 minuten pauze te nemen. </p>
                 <P STYLE="margin-left: 15px">	3. De deelnemer dient zelf te zorgen voor slaapspullen (bv. luchtbed, slaapmatje, stretcher, dekens, slaapzak en/of kussen). De organisatie kan niet aansprakelijk worden gesteld voor enig letsel ontstaan tijdens het slapen. </p></p><br />
-                <h4>Beveiliging</h4>
-                <p> De organisatie beschikt nooit over uw wachtwoord, het wachtwoord wordt versleuteld opgeslagen en naar ons netwerk verstuurd. De organisatie beschikt dus nooit en te nimmer over uw wachtwoord. <br />
-                    De organisatie is daarom ook niet verantwoordelijk mocht uw wachtwoord gecompromitteerd worden.</p>
-                <p> Tevens is de website beveiligd middels een geldig certificaat en wordt alle communicatie van- en naar ons netwerk versleuteld. <br />    </p>
+                {#<h4>Beveiliging</h4>#}
+                {#<p> De organisatie beschikt nooit over uw wachtwoord, het wachtwoord wordt versleuteld opgeslagen en naar ons netwerk verstuurd. De organisatie beschikt dus nooit en te nimmer over uw wachtwoord. <br />#}
+                    {#De organisatie is daarom ook niet verantwoordelijk mocht uw wachtwoord gecompromitteerd worden.</p>#}
+                {#<p> Tevens is de website beveiligd middels een geldig certificaat en wordt alle communicatie van- en naar ons netwerk versleuteld. <br />    </p>#}
 
             </div>
                 </p>

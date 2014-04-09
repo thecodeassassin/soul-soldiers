@@ -21,16 +21,24 @@
                 <h2>Nieuws</h2>
 
                 <div class="panel panel-default news">
-                    <div class="panel-heading"><h3>Update inzake slaapruimte - 09/04/2014</h3></div>
+                    <div class="panel-heading">
+                        <h3 class="news-title">Update inzake slaapruimte</h3>
+                        <h3 class="news-date">09/04/2014</h3>
+                    </div>
                     <div class="panel-body">
                         <p>
-                            Er is een aparte slaapruimte aanwezig tijdens deze
+                            Er is een aparte slaapruimte aanwezig tijdens Soul-Soldiers 2014! <br />
+                            Echter is de ruimte wel beperkt dus we willen iedereen graag verzoeken <strong>GEEN</strong> 2 persoons luchtbed <br />
+                            mee te nemen (tenzij er daadwerkelijk 2 personen op slapen).
                         </p>
                     </div>
                 </div>
 
                 <div class="panel panel-default news">
-                    <div class="panel-heading"><h3>Nieuwe website live! - 02/04/2014</h3></div>
+                    <div class="panel-heading">
+                        <h3 class="news-title">Nieuwe website live!</h3>
+                        <h3 class="news-date">02/04/2014</h3>
+                    </div>
                     <div class="panel-body">
                         <p>
                             Het is eindelijk zover! De inschrijvingen voor Soul-Soldiers 2014 kunnen beginnen! <br /><br />
