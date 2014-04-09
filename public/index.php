@@ -11,8 +11,8 @@ defined('APPLICATION_ENV')
 || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
 
 defined('BASE_URL')
-|| define('BASE_URL', sprintf('%s://%s', strpos(strtolower($_SERVER['SERVER_PROTOCOL']), 'https')
-    === false ? 'http' : 'https', $_SERVER['HTTP_HOST']));
+|| define('BASE_URL', sprintf('%s://%s', $_SERVER['HTTPS'] == null ? 'http' : 'https', $_SERVER['HTTP_HOST']));
+
 
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APPLICATION_PATH . '/library'),
