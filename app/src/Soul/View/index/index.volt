@@ -21,6 +21,15 @@
                 <h2>Nieuws</h2>
 
                 <div class="panel panel-default news">
+                    <div class="panel-heading"><h3>Update inzake slaapruimte - 09/04/2014</h3></div>
+                    <div class="panel-body">
+                        <p>
+                            Er is een aparte slaapruimte aanwezig tijdens deze
+                        </p>
+                    </div>
+                </div>
+
+                <div class="panel panel-default news">
                     <div class="panel-heading"><h3>Nieuwe website live! - 02/04/2014</h3></div>
                     <div class="panel-body">
                         <p>

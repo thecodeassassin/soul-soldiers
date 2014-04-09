@@ -119,6 +119,9 @@
             <br /><br />
             Het nuttigen van alcohol is <strong>niet toegestaan</strong> tijdens het evenement. <br/>
             Tijdens dit evenement gelden onze <a href="{{ url('content/rules') }}">algemene voorwaarden.</a>
+            <br /><br />
+            Er is een aparte slaapruimte, de ruimte is echter beperkt dus het is <strong>NIET</strong> toegestaan <br />
+            een 2 persoons luchtbed mee te nemen, tenzij je de luchtbed deelt met een andere deelnemer.
         </p>
     </div>
 </div>
