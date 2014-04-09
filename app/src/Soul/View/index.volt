@@ -1,13 +1,12 @@
-<!doctype html>
 <!--[if IE 6 ]><html lang="en-us" class="ie6"> <![endif]-->
 <!--[if IE 7 ]><html lang="en-us" class="ie7"> <![endif]-->
 <!--[if IE 8 ]><html lang="en-us" class="ie8"> <![endif]-->
 <!--[if (gt IE 7)|!(IE)]><!-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html lang="en-us">
-<meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<![endif]-->
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>{{ title }}</title>
 
@@ -152,14 +151,14 @@
         </footer>
 
         </div>
+        <script type="text/javascript">
+            var __loading_img = '{{ url('img/ajax-loader.gif') }}';
+        </script>
+
+        {{ assets.outputJs('scripts') }}
+
+        <script type="text/javascript">
+            window.onload = function () { "use strict"; gaSSDSLoad("{{ analyticsCode }}"); }; //load after page onload
+        </script>
     </body>
-    <script type="text/javascript">
-        var __loading_img = '{{ url('img/ajax-loader.gif') }}';
-    </script>
-
-    {{ assets.outputJs('scripts') }}
-
-    <script type="text/javascript">
-        window.onload = function () { "use strict"; gaSSDSLoad("{{ analyticsCode }}"); }; //load after page onload
-    </script>
 </html>

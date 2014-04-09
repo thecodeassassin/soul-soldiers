@@ -194,10 +194,10 @@ class Menu
         }
 
         if (!$isSubMenu) {
-            $output = sprintf($menu->menuWrapper, $output);
+            $output = sprintf($menu->menuWrapper, $output . "</ul>");
+        } else {
+            $output .= '</ul>';
         }
-
-        $output .= '</ul>';
 
         return $output;
     }
