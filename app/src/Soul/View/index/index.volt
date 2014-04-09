@@ -27,7 +27,7 @@
                     </div>
                     <div class="panel-body">
                         <p>
-                            Er is een aparte slaapruimte aanwezig tijdens Soul-Soldiers 2014! <br />
+                            Er is een aparte slaapruimte aanwezig tijdens Soul-Soldiers 2014 op verzoek van onze deelnemers. <br /><br />
                             Echter is de ruimte wel beperkt dus we willen iedereen graag verzoeken <strong>GEEN</strong> 2 persoons luchtbed <br />
                             mee te nemen (tenzij er daadwerkelijk 2 personen op slapen).
                         </p>

@@ -22,7 +22,11 @@ p a:link, p a:visited, p a:hover,
 }
 
 h1,h2,h3,h4,h5 {
-    text-shadow: 0px 1px rgba(0, 0, 0, 0.31);
+    text-shadow: 1px 0 4px rgba(0, 0, 0, 0.45)
+}
+
+p, small, table, ul li, label, a {
+    text-shadow: 1px 1px 0 #141414;
 }
 
 /*Menu Fix*/
@@ -352,7 +356,7 @@ hr {
 Index / news / tweets
 */
 .news-container .gutter, .tweet-container {
-    min-height: 600px;
+    min-height: 606px;
 }
 
 .news-container {
@@ -379,6 +383,9 @@ Index / news / tweets
     background-position: 24% 43% !important;
     /*background-attachment: fixed;*/
     background-repeat: no-repeat;
+}
+
+.lan-info p {
     text-shadow: 2px 1px 1px #000000;
 }
 

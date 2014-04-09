@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="well mt30">
-                    {{ form.render('terms') }} Ik ga akkoord met de <a href="{{ url('content/rules') }}" target="_blank">algemene voorwaarden</a>
+                    <p style="margin-bottom: 0">{{ form.render('terms') }} Ik ga akkoord met de <a href="{{ url('content/rules') }}" target="_blank">algemene voorwaarden</a></p>
                 </div>
             </div>
             <div class="col-md-6">
