@@ -6,6 +6,7 @@
 namespace Soul\Controller;
 
 use Soul\Form\ContactForm;
+use Soul\Model\User;
 
 /**
  * Class ContactController
@@ -21,9 +22,16 @@ class ContactController extends Base
     {
         $contactForm = new ContactForm();
         $submitted = false;
+        $user = $this->authService->getAuthData();
 
+        if ($user) {
+            $userModel = User::findFirstByUserId($user->getUserId());
+
+            $contactForm->setEntity($userModel);
+        }
 
         if ($this->request->isPost()) {
+
             $userEmail = $this->request->getPost('email', 'email');
             $userFullName = $this->request->getPost('realName', 'string');
             $emailContent = $this->request->getPost('content', 'string');

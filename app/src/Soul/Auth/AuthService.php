@@ -190,4 +190,6 @@ class AuthService extends ServiceBase
     {
         return $this->session;
     }
+
+
 }

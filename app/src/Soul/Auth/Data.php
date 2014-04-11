@@ -15,12 +15,12 @@ use Soul\Model\User;
  */
 class Data
 {
-    protected $userId = null;
-    protected $nickName = null;
-    protected $email = null;
-    protected $realName = null;
-    protected $userType = null;
-    protected $userState = null;
+    public $userId = null;
+    public $nickName = null;
+    public $email = null;
+    public $realName = null;
+    public $userType = null;
+    public $userState = null;
 
 
     /**
@@ -164,4 +164,12 @@ class Data
         return $instance;
 
     }
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return (array) get_object_vars($this);
+    }
+
 }
