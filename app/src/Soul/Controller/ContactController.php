@@ -24,12 +24,6 @@ class ContactController extends Base
         $submitted = false;
         $user = $this->authService->getAuthData();
 
-        if ($user) {
-            $userModel = User::findFirstByUserId($user->getUserId());
-
-            $contactForm->setEntity($userModel);
-        }
-
         if ($this->request->isPost()) {
 
             $userEmail = $this->request->getPost('email', 'email');
@@ -55,6 +49,12 @@ class ContactController extends Base
 
             }
 
+        } else {
+            if ($user) {
+                $userModel = User::findFirstByUserId($user->getUserId());
+
+                $contactForm->setEntity($userModel);
+            }
         }
 
         $this->view->submitted = $submitted;
