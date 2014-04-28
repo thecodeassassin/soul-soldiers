@@ -55,6 +55,9 @@
             <tr>
                 <th>Naam</th>
                 <th>Nickname</th>
+                {% if user and user.userType == 3 %}
+                <th>Email</th>
+                {% endif %}
                 {% if user and registered %}
                 <th>Betaald</th>
                 {% endif %}
@@ -65,6 +68,9 @@
                 <tr>
                     <td>{{ entry.user.realName}}</td>
                     <td>{{ entry.user.nickName}}</td>
+                    {% if user and user.userType == 3 %}
+                    <td>{{ entry.user.email }}</td>
+                    {% endif %}
                     {% if user and registered %}
                     <td>
                         {% if entry.payment and entry.payment.confirmed %}
