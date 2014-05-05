@@ -24,10 +24,8 @@ $di->set('menu', function () use ($menuConfig, $di) {
             return $cache->get($cacheKey);
         }
 
-
-
         // build the menu and save it in the cache
-        $menu = Builder::build($menuConfig);
+        $menu = Builder::build($menuConfig[ACTIVE_MODULE]);
         $cache->save($cacheKey, $menu);
 
 

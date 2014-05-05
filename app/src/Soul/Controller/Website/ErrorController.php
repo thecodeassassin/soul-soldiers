@@ -1,12 +1,12 @@
 <?php
-namespace Soul\Controller;
+namespace Soul\Controller\Website;
 
 use Phalcon\Error\Application;
 
 /**
  * Class ErrorController
  */
-class ErrorController extends Base
+class ErrorController extends \Soul\Controller\Base
 {
 
 

@@ -5,7 +5,7 @@
  * @package AccountController
  */
 
-namespace Soul\Controller;
+namespace Soul\Controller\Website;
 
 use Soul\AclBuilder;
 use Soul\Auth\AuthService as AuthService;
@@ -24,7 +24,7 @@ use Soul\Util;
  * Class Account
  * @package Soul\Controller
  */
-class AccountController extends Base
+class AccountController extends \Soul\Controller\Base
 {
 
 

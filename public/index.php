@@ -13,7 +13,7 @@ defined('APPLICATION_ENV')
 || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
 
 defined('BASE_URL')
-|| define('BASE_URL', sprintf('%s://%s', $_SERVER['HTTPS'] == null ? 'http' : 'https', $_SERVER['HTTP_HOST']));
+|| define('BASE_URL', sprintf('%s://%s', array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] == null ? 'http' : 'https', $_SERVER['HTTP_HOST']));
 
 
 if (strpos(BASE_URL, 'intranet')) {
@@ -67,11 +67,10 @@ include __DIR__ . '/../app/config/services/loader.php';
  */
 $di = new FactoryDefault();
 
+include __DIR__ . "/../app/config/services.php";
+
 // load the config into the DI
 $di->set('config', $config);
-
-//include __DIR__ . "/../app/config/services.php";
-
 
 if (APPLICATION_ENV == \Soul\Kernel::ENV_STAGING) {
     $stagingAccess = $config->stagingAccess->toArray();
@@ -101,12 +100,11 @@ $kernel->registerModules(
             'className' => 'Soul\Module\Website',
             'path'      => __DIR__ . '/../app/src/Soul/Module/Website.php'
         ],
-        'intranet' => function($di) use ($view, $config) {
-            $di->setShared('view', function() use ($view, $config) {
-                $view->setViewsDir($config->application->libraryDir.'Soul/View/Intranet');
-                return $view;
-            });
-        }
+
+        'intranet' => [
+            'className' => 'Soul\Module\Intranet',
+            'path'      => __DIR__ . '/../app/src/Soul/Module/Intranet.php'
+        ]
     ]
 );
 
@@ -114,8 +112,7 @@ $kernel->registerModules(
  * Handle the request
  */
 
-
-//echo $kernel->handle()->getContent();
+echo $kernel->handle()->getContent();
 // exception/404 managed from the dispatcher event
 
 

@@ -4,7 +4,11 @@ namespace Soul\Module;
 use Phalcon\Loader,
     Phalcon\Mvc\Dispatcher,
     Phalcon\Mvc\View,
-    Phalcon\Mvc\ModuleDefinitionInterface;
+    Phalcon\Mvc\ModuleDefinitionInterface,
+    Phalcon\DI,
+    Soul\Translate,
+    Phalcon\Mvc\View\Engine\Volt as VoltEngine;
+
 
 /**
  * Class Intranet
@@ -17,19 +21,9 @@ class Intranet implements ModuleDefinitionInterface
     /**
      * Register a specific autoloader for the module
      */
-    public function registerAutoloaders()
+    public function registerAutoloaders($di)
     {
 
-        $loader = new Loader();
-
-        $loader->registerNamespaces(
-            array(
-                'Multiple\Backend\Controllers' => '../apps/backend/controllers/',
-                'Multiple\Backend\Models'      => '../apps/backend/models/',
-            )
-        );
-
-        $loader->register();
     }
 
     /**
@@ -37,12 +31,39 @@ class Intranet implements ModuleDefinitionInterface
      */
     public function registerServices($di)
     {
-        die('anal');
-//        $config = $di->get('config');
-//        $viewDir = $config->application->libraryDir.'Soul/View/';
-//
-//        include __DIR__. '/../../config/intranetServices.php';
 
+        $config = $di->get('config');
+
+        /*
+         * Setting up the view component
+         */
+        $di->setShared('view', function() use ($config, $di) {
+
+                $view = new View();
+
+                if (!is_readable($config->application->libraryDir.'Soul/View/'.ucfirst(ACTIVE_MODULE))) {
+                    throw new \Exception('View directory not readable');
+                }
+
+                $view->setViewsDir($config->application->libraryDir.'Soul/View/'.ucfirst(ACTIVE_MODULE));
+                $view->registerEngines([
+                        '.volt' => function ($view, $di) use ($config) {
+
+                                $volt = new VoltEngine($view, $di);
+
+                                $volt->setOptions([
+                                    'compiledPath' => $config->application->cacheDir,
+                                    'compiledSeparator' => '_',
+                                    'compileAlways' => true
+                                ]);
+
+                                return $volt;
+                            },
+                        '.phtml' => 'Phalcon\Mvc\View\Engine\Php' // Generate Template files uses PHP itself as the template engine
+                    ]);
+
+                return $view;
+            });
 
 
     }

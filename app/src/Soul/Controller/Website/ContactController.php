@@ -3,7 +3,7 @@
  * @author Stephen "TheCodeAssassin" Hoogendijk <admin@tca0.nl>
  */
 
-namespace Soul\Controller;
+namespace Soul\Controller\Website;
 
 use Soul\Form\ContactForm;
 use Soul\Model\User;
@@ -13,7 +13,7 @@ use Soul\Model\User;
  *
  * @package Soul\Controller
  */
-class ContactController extends Base
+class ContactController extends \Soul\Controller\Base
 {
     /**
      *

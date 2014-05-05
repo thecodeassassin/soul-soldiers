@@ -3,7 +3,7 @@
  * @author Stephen "TheCodeAssassin" Hoogendijk <admin@tca0.nl>
  */
 
-namespace Soul\Controller;
+namespace Soul\Controller\Website;
 
 
 /**
@@ -11,7 +11,7 @@ namespace Soul\Controller;
  * i
  * @package Soul\Controller
  */
-class ContentController extends Base
+class ContentController extends \Soul\Controller\Base
 {
     /**
      * @param $name

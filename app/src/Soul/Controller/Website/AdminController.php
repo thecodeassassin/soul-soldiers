@@ -3,7 +3,7 @@
  * @author Stephen "TheCodeAssassin" Hoogendijk <admin@tca0.nl>
  */
 
-namespace Soul\Controller;
+namespace Soul\Controller\Website;
 
 use Soul\Util;
 
@@ -12,7 +12,7 @@ use Soul\Util;
  *
  * @package Soul\Controller
  */
-class AdminController extends Base
+class AdminController extends \Soul\Controller\Base
 {
     public function initialize()
     {

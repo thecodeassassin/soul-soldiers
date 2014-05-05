@@ -5,7 +5,7 @@
  * @package EventController
  */
 
-namespace Soul\Controller;
+namespace Soul\Controller\Website;
 
 use Phalcon\Mvc\View;
 use Soul\Model\Event;
@@ -21,7 +21,7 @@ use Soul\Util;
  *
  * @package Soul\Controller
  */
-class EventController extends Base
+class EventController extends \Soul\Controller\Base
 {
 
     /**

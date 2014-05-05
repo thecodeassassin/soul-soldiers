@@ -102,7 +102,15 @@ return [
 
         '/home' => [
             "controller" => "index",
-            "action" => "index"
+            "action" => "index",
+            "module" => 'intranet'
+        ],
+
+        '/:module/:controller/:action/:params' => [
+            'controller' => 2,
+            'action' => 3,
+            'params' => 4,
+            'module' => 1
         ]
     ]
 

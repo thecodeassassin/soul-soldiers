@@ -42,17 +42,17 @@ class Base extends Controller
 
     public function initialize()
     {
-        $this->title = $this->getConfig()->application->baseTitle;
-        $this->setTitle($this->title);
-        $this->setMenu($this->di->get('menu'));
-
-        $this->authService = $this->di->get('auth');
-
-        $this->view->setVar('analyticsCode', $this->getConfig()->analytics->code);
-        $this->view->setVar('menu', $this->getMenu()->outputHTML());
-
-        $this->view->user = $this->authService->getAuthData();
-        $this->config = $this->getConfig();
+//        $this->title = $this->getConfig()->application->baseTitle;
+//        $this->setTitle($this->title);
+//        $this->setMenu($this->di->get('menu'));
+//
+//        $this->authService = $this->di->get('auth');
+//
+//        $this->view->setVar('analyticsCode', $this->getConfig()->analytics->code);
+//        $this->view->setVar('menu', $this->getMenu()->outputHTML());
+//
+//        $this->view->user = $this->authService->getAuthData();
+//        $this->config = $this->getConfig();
 
     }
 

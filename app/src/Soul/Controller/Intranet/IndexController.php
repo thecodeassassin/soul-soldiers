@@ -1,5 +1,5 @@
 <?php
-namespace Soul\Controller;
+namespace Soul\Controller\Intranet;
 
 /**
  * Class IndexController
@@ -7,7 +7,7 @@ namespace Soul\Controller;
  * @package Soul\Controller
  *
  */
-class IndexController extends Base
+class IndexController extends \Soul\Controller\Base
 {
 
 
@@ -16,9 +16,6 @@ class IndexController extends Base
      */
     public function indexAction()
     {
-//        $users = new User();
-//
-//        die(var_dump($users->find()->toArray()));
 
     }
 

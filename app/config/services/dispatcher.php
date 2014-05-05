@@ -17,7 +17,7 @@ $di->set('dispatcher', function() use ($di) {
     $eventsManager->attach('dispatch', $security);
 
     $dispatcher = new Phalcon\Mvc\Dispatcher();
-    $dispatcher->setDefaultNamespace('Soul\Controller');
+    $dispatcher->setDefaultNamespace('Soul\Controller\\'.ucfirst(ACTIVE_MODULE));
 
     //Bind the EventsManager to the Dispatcher
     $dispatcher->setEventsManager($eventsManager);

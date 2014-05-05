@@ -5,7 +5,7 @@
  * @package StyleController
  */
 
-namespace Soul\Controller;
+namespace Soul\Controller\Website;
 
 use Phalcon\Mvc\View;
 
@@ -15,7 +15,7 @@ use Phalcon\Mvc\View;
  *
  * @package Soul\Controller
  */
-class StaticController extends Base
+class StaticController extends \Soul\Controller\Base
 {
     /**
      * Parse the requested static resource
