@@ -2,6 +2,8 @@
 
 // Define path to application directory
 
+use Phalcon\DI\FactoryDefault;
+
 defined('APPLICATION_PATH')
 || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../app'));
 
@@ -13,6 +15,12 @@ defined('APPLICATION_ENV')
 defined('BASE_URL')
 || define('BASE_URL', sprintf('%s://%s', $_SERVER['HTTPS'] == null ? 'http' : 'https', $_SERVER['HTTP_HOST']));
 
+
+if (strpos(BASE_URL, 'intranet')) {
+    define('ACTIVE_MODULE', 'intranet');
+} else {
+    define('ACTIVE_MODULE', 'website');
+}
 
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APPLICATION_PATH . '/library'),
@@ -49,18 +57,27 @@ if ($config->count() != $configDist->count()) {
     die('Fatal: It seems that the configuration file does not contain all the requirements set by the config.dist.php');
 }
 
+/**
+ * Require core services
+ */
+include __DIR__ . '/../app/config/services/loader.php';
 
 /**
- * Read services
+ * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
  */
-include __DIR__ . "/../app/config/services.php";
+$di = new FactoryDefault();
+
+// load the config into the DI
+$di->set('config', $config);
+
+//include __DIR__ . "/../app/config/services.php";
 
 
 if (APPLICATION_ENV == \Soul\Kernel::ENV_STAGING) {
     $stagingAccess = $config->stagingAccess->toArray();
 
     // redirect an unauthorised user to soul-soldiers.nl
-    if (! in_array(\Soul\Util::getClientIp(), $stagingAccess)) {
+    if (!in_array(\Soul\Util::getClientIp(), $stagingAccess)) {
         header('Location: http://soul-soldiers.nl');
         exit;
     }
@@ -77,14 +94,28 @@ if (APPLICATION_ENV == \Soul\Kernel::ENV_DEVELOPMENT) {
     $kernel = new \Soul\Kernel\Application($di);
 }
 
-
+// Register the installed modules
+$kernel->registerModules(
+    [
+        'website' => [
+            'className' => 'Soul\Module\Website',
+            'path'      => __DIR__ . '/../app/src/Soul/Module/Website.php'
+        ],
+        'intranet' => function($di) use ($view, $config) {
+            $di->setShared('view', function() use ($view, $config) {
+                $view->setViewsDir($config->application->libraryDir.'Soul/View/Intranet');
+                return $view;
+            });
+        }
+    ]
+);
 
 /**
  * Handle the request
  */
 
 
-echo $kernel->handle()->getContent();
+//echo $kernel->handle()->getContent();
 // exception/404 managed from the dispatcher event
 
 

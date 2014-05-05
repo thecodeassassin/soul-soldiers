@@ -8,11 +8,11 @@ use Phalcon\Mvc\View,
 /**
  * Setting up the view component
  */
-$di->set('view', function() use ($config, $di) {
+$di->set('view', function() use ($config, $di, $viewDir) {
 
         $view = new View();
 
-        $view->setViewsDir($config->application->libraryDir.'Soul/View/');
+        $view->setViewsDir($viewDir);
 
         $view->registerEngines([
                 '.volt' => function ($view, $di) use ($config) {

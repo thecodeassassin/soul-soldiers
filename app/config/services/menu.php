@@ -7,9 +7,7 @@ include __DIR__ . '/../menuConfig.php';
 
 use Soul\Menu\Builder;
 
-$di->set(
-    'menu',
-    function () use ($menuConfig, $di) {
+$di->set('menu', function () use ($menuConfig, $di) {
 
         $auth = $di->get('auth');
         $cache = $di->get('cache');

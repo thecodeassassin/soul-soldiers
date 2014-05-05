@@ -9,11 +9,6 @@ use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 
 /**
- * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
- */
-$di = new FactoryDefault();
-
-/**
  * Read auto-loader
  */
 include __DIR__ . "/services/loader.php";
@@ -63,7 +58,4 @@ include __DIR__ . "/services/mail.php";
 include __DIR__ . "/services/assets.php";
 
 // load auth services
-
-// load the config into the DI
-$di->set('config', $config);
 include __DIR__ . "/services/auth.php";
