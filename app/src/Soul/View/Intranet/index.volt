@@ -1,45 +1,14 @@
-<!DOCTYPE html>
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
+{% extends 'layout.volt' %}
 
-        <title>{{ title }}</title>
-
-        <meta name="description" content="uAdmin is a Professional, Responsive and Flat Admin Template created by pixelcave and published on Themeforest">
-        <meta name="author" content="pixelcave">
-        <meta name="robots" content="noindex, nofollow">
-
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-
-        <!-- Icons -->
-        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <link rel="apple-touch-icon" href="img/icon57.png" sizes="57x57">
-        <link rel="apple-touch-icon" href="img/icon72.png" sizes="72x72">
-        <link rel="apple-touch-icon" href="img/icon76.png" sizes="76x76">
-        <link rel="apple-touch-icon" href="img/icon114.png" sizes="114x114">
-        <link rel="apple-touch-icon" href="img/icon120.png" sizes="120x120">
-        <link rel="apple-touch-icon" href="img/icon144.png" sizes="144x144">
-        <link rel="apple-touch-icon" href="img/icon152.png" sizes="152x152">
-        <!-- END Icons -->
-
-        <!-- Stylesheets -->
-        {# Output js/css content #}
-        {{ assets.outputCss('main') }}
-        {# Custom javascript #}
-    </head>
-
+{% block body %}
     <!-- Add the class .fixed to <body> for a fixed layout on large resolutions (min: 1200px) -->
     <!-- <body class="fixed"> -->
-    <body>
         <!-- Page Container -->
         <div id="page-container">
             <!-- Header -->
             <!-- Add the class .navbar-fixed-top or .navbar-fixed-bottom for a fixed header on top or bottom respectively -->
-            <!-- <header class="navbar navbar-inverse navbar-fixed-top"> -->
+            <header class="navbar navbar-inverse navbar-fixed-top">
             <!-- <header class="navbar navbar-inverse navbar-fixed-bottom"> -->
-            <header class="navbar navbar-inverse">
                 <!-- Mobile Navigation, Shows up  on smaller screens -->
                 <ul class="navbar-nav-custom pull-right hidden-md hidden-lg">
                     <li class="divider-vertical"></li>
@@ -53,7 +22,7 @@
                 <!-- END Mobile Navigation -->
 
                 <!-- Logo -->
-                <a href="index.html" class="navbar-brand"><img src="img/template/logo.png" alt="logo"></a>
+                <a href="{{ url('home') }}" class="navbar-brand"><img src="img/template/logo.png" alt="logo"></a>
 
                 <!-- Loading Indicator, Used for demostrating how loading of widgets could happen, check main.js - uiDemo() -->
                 <div id="loading" class="pull-left"><i class="fa fa-certificate fa-spin"></i></div>
@@ -331,7 +300,7 @@
 
                 <!-- Footer -->
                 <footer>
-                    <span id="year-copy"></span> &copy; <strong><a href="http://goo.gl/9QhXQ">uAdmin 1.6.1</a></strong> - Crafted with <i class="fa fa-heart text-danger"></i> by <strong><a href="http://goo.gl/vNS3I" target="_blank">pixelcave</a></strong>
+                    <span id="year-copy"></span> &copy; Soul-Soldiers 2014
                 </footer>
                 <!-- END Footer -->
             </div>
@@ -340,17 +309,6 @@
         <!-- END Page Container -->
 
         <!-- Scroll to top link, check main.js - scrollToTop() -->
-        <a href="javascript:void(0)" id="to-top"><i class="fa fa-chevron-up"></i></a>
+        <a href="javascript:void(0)" id="to-top"><span class="glyphicon glyphicon-chevron-up"></span></a>
 
-
-        <script type="text/javascript">
-            var __loading_img = '{{ url('img/ajax-loader.gif') }}';
-        </script>
-
-        {{ assets.outputJs('scripts') }}
-
-        <script type="text/javascript">
-            window.onload = function () { "use strict"; gaSSDSLoad("{{ analyticsCode }}"); }; //load after page onload
-        </script>
-    </body>
-</html>
+{% endblock %}

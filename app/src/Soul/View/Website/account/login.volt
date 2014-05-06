@@ -21,7 +21,7 @@
                     {{ form.render('Inloggen') }}
 
                     {{ form.render('csrf', ['value': security.getToken()]) }}
-                    </form>
+                    {{ endform() }}
                 </div>
                 <div class="panel-footer login-footer">
 

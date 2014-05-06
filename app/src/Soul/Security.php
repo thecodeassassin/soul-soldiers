@@ -32,6 +32,8 @@ class Security extends Module
     public function beforeDispatch(Event $event, Dispatcher $dispatcher)
     {
 
+
+
         //Check whether the "auth" variable exists in session to define the active role
         $auth = $this->getAuthService()->getAuthData();
 

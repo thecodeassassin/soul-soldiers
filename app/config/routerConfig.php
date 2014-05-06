@@ -8,22 +8,15 @@ return [
      */
     'general' => [
 
+        /**
+         * Content
+         */
+
         '/static/(.*)' => [
             "controller" => "static",
             "action"     => "index",
             "resource" => 1
-        ]
-    ],
-
-    /**
-     * Website routing
-     */
-
-    'website' => [
-
-        /**
-         * General
-         */
+        ],
 
         '/home' => [
             "controller" => "index",
@@ -34,12 +27,6 @@ return [
             "controller" => "content",
             "action"     => "show",
             "name" => 1
-        ],
-
-        '/terms' => [
-            "controller" => "content",
-            "action"     => "show",
-            "name" => 'rules'
         ],
 
         /**
@@ -56,14 +43,37 @@ return [
             "action"     => 'logout'
         ],
 
-        '/register' =>  [
-            "controller" => "account",
-            "action"     => "register"
-        ],
-
         '/forgot-password' =>  [
             "controller" => "account",
             "action"     => "forgotPassword"
+        ],
+
+
+    ],
+
+    /**
+     * Website routing
+     */
+
+    'website' => [
+
+        /**
+         * General
+         */
+
+        '/terms' => [
+            "controller" => "content",
+            "action"     => "show",
+            "name" => 'rules'
+        ],
+
+        /**
+         * Account
+         */
+
+        '/register' =>  [
+            "controller" => "account",
+            "action"     => "register"
         ],
 
         '/change-password/(.*)' =>  [

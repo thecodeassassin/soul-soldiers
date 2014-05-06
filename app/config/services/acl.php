@@ -11,7 +11,7 @@ $cache = \Phalcon\DI::getDefault()->get('cache');
 /**
  * if the aclconfig has been changed or the cache no longer holds the acl, rebuild it
  */
-$aclConfigKey = crc32(serialize($aclConfig));
+$aclConfigKey = crc32(serialize($aclConfig[ACTIVE_MODULE]));
 
 // disable translations cache in development
 $disableCache = (APPLICATION_ENV == \Phalcon\Error\Application::ENV_DEVELOPMENT ? true : false);
@@ -23,8 +23,12 @@ if (!$cache->exists($aclConfigKey) || $disableCache) {
     // Default action is deny access
     $acl->setDefaultAction(Phalcon\Acl::DENY);
 
+    if (!array_key_exists(ACTIVE_MODULE, $aclConfig)) {
+        throw new \Exception(sprintf('No ACL rules found for %s', ACTIVE_MODULE));
+    }
+
     // build the ACL
-    \Soul\AclBuilder::build($acl, $aclConfig);
+    \Soul\AclBuilder::build($acl, $aclConfig[ACTIVE_MODULE]);
 
     if (!$disableCache) {
         $cache->save($aclConfigKey, $acl);

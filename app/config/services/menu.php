@@ -24,6 +24,10 @@ $di->set('menu', function () use ($menuConfig, $di) {
             return $cache->get($cacheKey);
         }
 
+        if (!class_exists('\Soul\Menu\\'.ucfirst(ACTIVE_MODULE))) {
+            throw new \Exception(sprintf('No menu class exists for %s', ACTIVE_MODULE));
+        }
+
         // build the menu and save it in the cache
         $menu = Builder::build($menuConfig[ACTIVE_MODULE], false, array(), '\Soul\Menu\\'.ucfirst(ACTIVE_MODULE));
         $cache->save($cacheKey, $menu);

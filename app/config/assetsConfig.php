@@ -68,7 +68,9 @@ return new \Phalcon\Config(
             'main' => [
                 'css' => [
                     'https://fonts.googleapis.com/css?family=Roboto:400,300,500,700',
-                    'css/intranet/bootstrap.css',
+                    'https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css',
+                    'font-icons/custom-icons/css/custom-icons-ie7.css',
+                    'font-icons/custom-icons/css/custom-icons.css',
                     'css/intranet/plugins.css',
                     'css/intranet/themes/deepblue.css',
                     'css/intranet/main.css',
