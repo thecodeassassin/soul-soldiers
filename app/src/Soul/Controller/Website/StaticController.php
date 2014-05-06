@@ -24,20 +24,6 @@ class StaticController extends \Soul\Controller\Base
      */
     public function indexAction($resource)
     {
-        $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
-
-        $type = strtolower(array_pop(explode('.', $resource)));
-        $this->response->setHeader('Content-Type', sprintf('text/%s', $type));
-
-        $cacheDir = $this->config->application->cacheDir;
-
-        $resourceLocation = sprintf('%s/%s', $cacheDir, $resource);
-
-        if (file_exists($resourceLocation)) {
-            echo file_get_contents($resourceLocation);
-        } else {
-
-            echo '<!-- file not available -->';
-        }
+        parent::staticResource($resource);
     }
 }

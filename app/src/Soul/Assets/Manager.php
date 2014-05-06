@@ -118,8 +118,8 @@ class Manager extends \Phalcon\Assets\Manager
             // create the scripts and add them
             $collection->join(true)
                 ->setFilters($filters)
-                ->setTargetPath(sprintf('%s/%s.%s', $this->config->application->cacheDir, $name, $type))
-                ->setTargetUri(sprintf('static/%s.%s', $name, $type));
+                ->setTargetPath(sprintf('%s/%s.%s', $this->config->application->cacheDir, ACTIVE_MODULE, $type))
+                ->setTargetUri(sprintf('static/%s.%s', ACTIVE_MODULE, $type));
 
         }
 

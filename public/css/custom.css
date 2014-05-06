@@ -292,33 +292,6 @@ div.popover-content {
     padding: 20px 10px;
 }
 
-.pt10 {
-    padding-top: 10px;
-}
-.pb10 {
-    padding-bottom: 10px;
-}
-
-.mt10 {
-    margin-top: 10px;
-}
-
-.mb10 {
-    margin-bottom: 10px;
-}
-
-.mt30 {
-    margin-top: 30px;
-}
-
-.mb30 {
-    margin-bottom: 30px;
-}
-
-.p40 {
-    padding: 40px;
-}
-
 .container [class^="col-"] .gutter {
     padding: 10px;
     background-color: #3c3b3b;

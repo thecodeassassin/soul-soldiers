@@ -5,6 +5,7 @@ namespace Soul\Controller;
 use Phalcon\Config;
 use Phalcon\Crypt;
 use Phalcon\Mvc\Controller;
+use Phalcon\Mvc\View;
 use Soul\Auth\AuthService;
 use Soul\Mail;
 use Soul\Menu;
@@ -42,17 +43,17 @@ class Base extends Controller
 
     public function initialize()
     {
-//        $this->title = $this->getConfig()->application->baseTitle;
-//        $this->setTitle($this->title);
-//        $this->setMenu($this->di->get('menu'));
-//
-//        $this->authService = $this->di->get('auth');
-//
-//        $this->view->setVar('analyticsCode', $this->getConfig()->analytics->code);
-//        $this->view->setVar('menu', $this->getMenu()->outputHTML());
-//
-//        $this->view->user = $this->authService->getAuthData();
-//        $this->config = $this->getConfig();
+        $this->title = $this->getConfig()->application->{ACTIVE_MODULE}->baseTitle;
+        $this->setTitle($this->title);
+        $this->setMenu($this->di->get('menu'));
+
+        $this->authService = $this->di->get('auth');
+
+        $this->view->setVar('analyticsCode', $this->getConfig()->analytics->code);
+        $this->view->setVar('menu', $this->getMenu()->outputHTML());
+
+        $this->view->user = $this->authService->getAuthData();
+        $this->config = $this->getConfig();
 
     }
 
@@ -202,6 +203,28 @@ class Base extends Controller
     protected function getCrypt()
     {
         return $this->di->get('crypt');
+    }
+
+    /**
+     * @param $resource
+     */
+    protected function staticResource($resource)
+    {
+        $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
+
+        $type = strtolower(array_pop(explode('.', $resource)));
+        $this->response->setHeader('Content-Type', sprintf('text/%s', $type));
+
+        $cacheDir = $this->config->application->cacheDir;
+
+        $resourceLocation = sprintf('%s/%s', $cacheDir, $resource);
+
+        if (file_exists($resourceLocation)) {
+            echo file_get_contents($resourceLocation);
+        } else {
+
+            echo '<!-- file not available -->';
+        }
     }
 
 }

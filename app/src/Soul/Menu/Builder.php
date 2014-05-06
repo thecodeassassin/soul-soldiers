@@ -28,15 +28,17 @@ class Builder extends Module
     protected $links = [];
 
     /**
-     * @param array $menuConfig Configuration of the menu
-     * @param bool $subMenu Is this menu a submenu
+     * @param array             $menuConfig Configuration of the menu
+     * @param bool              $subMenu    Is this menu a submenu
      *
-     * @param array $originalMenuConfig
+     * @param array             $originalMenuConfig
+     * @param \Soul\Menu|string $menuClass
+     *
      * @return Menu
      */
-    public static function build(array $menuConfig, $subMenu = false, $originalMenuConfig = array())
+    public static function build(array $menuConfig, $subMenu = false, $originalMenuConfig = array(), $menuClass = 'Menu')
     {
-        $menuObject = new Menu();
+        $menuObject = new $menuClass;
         $count = 0;
         $auth = DI::getDefault()->get('auth');
 
@@ -71,7 +73,7 @@ class Builder extends Module
 
             // build additional submenu's
             if (is_array($item)) {
-                $menuObject->addSubMenu($name, static::build($item, true, $menuConfig));
+                $menuObject->addSubMenu($name, static::build($item, true, $menuConfig, $menuClass));
             }
 
         }

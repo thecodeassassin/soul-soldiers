@@ -25,7 +25,7 @@ $di->set('menu', function () use ($menuConfig, $di) {
         }
 
         // build the menu and save it in the cache
-        $menu = Builder::build($menuConfig[ACTIVE_MODULE]);
+        $menu = Builder::build($menuConfig[ACTIVE_MODULE], false, array(), '\Soul\Menu\\'.ucfirst(ACTIVE_MODULE));
         $cache->save($cacheKey, $menu);
 
 

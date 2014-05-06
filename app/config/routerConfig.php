@@ -1,7 +1,19 @@
 <?php
 
-// Custom routes
 return [
+
+
+    /**
+     * General routes
+     */
+    'general' => [
+
+        '/static/(.*)' => [
+            "controller" => "static",
+            "action"     => "index",
+            "resource" => 1
+        ]
+    ],
 
     /**
      * Website routing
@@ -16,12 +28,6 @@ return [
         '/home' => [
             "controller" => "index",
             "action" => "index"
-        ],
-
-        '/static/(.*)' => [
-            "controller" => "static",
-            "action"     => "index",
-            "resource" => 1
         ],
 
         '/content/(.*)' => [
@@ -102,15 +108,7 @@ return [
 
         '/home' => [
             "controller" => "index",
-            "action" => "index",
-            "module" => 'intranet'
-        ],
-
-        '/:module/:controller/:action/:params' => [
-            'controller' => 2,
-            'action' => 3,
-            'params' => 4,
-            'module' => 1
+            "action" => "index"
         ]
     ]
 

@@ -16,7 +16,12 @@ return new \Phalcon\Config(
             'mediaDir'       => APPLICATION_PATH .'/../public/media',
             'mediaUrl'       => '/media',
             'baseUri'        => '/',
-            'baseTitle'      => 'Soul-Soldiers - Lan parties'
+            'intranet' => [
+                'baseTitle' => 'Soul-Soldiers Intranet'
+            ],
+            'website' => [
+                'baseTitle' => 'Soul-Soldiers - Lan parties',
+            ]
         ],
         /**
          * Controls who can access the staging environment (list of ips)

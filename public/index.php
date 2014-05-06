@@ -13,7 +13,7 @@ defined('APPLICATION_ENV')
 || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
 
 defined('BASE_URL')
-|| define('BASE_URL', sprintf('%s://%s', array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] == null ? 'http' : 'https', $_SERVER['HTTP_HOST']));
+|| define('BASE_URL', sprintf('%s://%s', (array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] != null) ? 'https' : 'http', $_SERVER['HTTP_HOST']));
 
 
 if (strpos(BASE_URL, 'intranet')) {
@@ -92,21 +92,6 @@ if (APPLICATION_ENV == \Soul\Kernel::ENV_DEVELOPMENT) {
 } else {
     $kernel = new \Soul\Kernel\Application($di);
 }
-
-// Register the installed modules
-$kernel->registerModules(
-    [
-        'website' => [
-            'className' => 'Soul\Module\Website',
-            'path'      => __DIR__ . '/../app/src/Soul/Module/Website.php'
-        ],
-
-        'intranet' => [
-            'className' => 'Soul\Module\Intranet',
-            'path'      => __DIR__ . '/../app/src/Soul/Module/Intranet.php'
-        ]
-    ]
-);
 
 /**
  * Handle the request
