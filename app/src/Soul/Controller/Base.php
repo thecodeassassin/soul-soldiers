@@ -6,10 +6,13 @@ use Phalcon\Config;
 use Phalcon\Crypt;
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\View;
+use Soul\AclBuilder;
 use Soul\Auth\AuthService;
+use Soul\Cms\Editor;
 use Soul\Mail;
 use Soul\Menu;
 use Soul\Menu\Builder;
+use Soul\Model\User;
 use Soul\Translate;
 use Soul\Util;
 
@@ -46,6 +49,10 @@ class Base extends Controller
      */
     protected $userMenu;
 
+    /**
+     * @var bool
+     */
+    protected $editable = false;
 
     public function initialize()
     {
@@ -60,6 +67,7 @@ class Base extends Controller
 
         $this->view->user = $this->authService->getAuthData();
         $this->config = $this->getConfig();
+        $this->view->module = ACTIVE_MODULE;
 
         if (ACTIVE_MODULE == 'intranet') {
             $menuConfig = $this->di->get('menuconfig');
@@ -68,6 +76,22 @@ class Base extends Controller
             $this->view->usermenu = $this->userMenu->outputHTML();
         }
 
+
+        if ($this->authService->isLoggedIn()) {
+
+            if ($this->editable && $this->authService->getUserType() == AclBuilder::ROLE_ADMIN) {
+                $editor = new Editor($this);
+
+                if ($this->request->has('edit')) {
+                    $editor->edit();
+                }
+
+                if ($this->request->isPost() && $this->request->hasPost('content')) {
+                    $editor->save();
+                }
+            }
+
+        }
     }
 
     /**

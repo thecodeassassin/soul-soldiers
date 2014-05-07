@@ -31,7 +31,7 @@
     {# Custom javascript #}
 </head>
 {% endblock %}
-    <body class="{{ router.getActionName() }}">
+    <body class="{% if router.getActionName() in ['login','forgotPassword']  %}login{% endif %}">
     {% block body %}
 
     {% endblock %}

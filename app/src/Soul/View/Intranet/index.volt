@@ -21,7 +21,7 @@
             <!-- END Mobile Navigation -->
 
             <!-- Logo -->
-            <a href="{{ url('home') }}" class="navbar-brand"><img src="img/template/logo.png" alt="logo"></a>
+            <a href="{{ url('home') }}" class="navbar-brand">Soul-Soldiers Intranet</a>
 
             <!-- Loading Indicator, Used for demostrating how loading of widgets could happen, check main.js - uiDemo() -->
             <div id="loading" class="pull-left"><img src="img/ajax-loader.gif" alt="loading" /></div>

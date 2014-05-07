@@ -75,7 +75,7 @@ class Security extends Module
             }
 
             //If he doesn't have access forward him to the index controller
-            $this->response->redirect('error/notauthenticated')->send();
+//            $this->response->redirect('error/notauthenticated')->send();
 
             return false;
 

@@ -1,7 +1,8 @@
+{% if module == 'website' %}
 <div class="row">
 
     <div class="container">
-
+{% endif %}
         <h1>Mijn account</h1>
 
         <div class="col-md-12 color0 pt15 pb15">
@@ -18,7 +19,7 @@
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">E-mail</label>
                         <div class="col-sm-7 textonly noaddon">
-                            {{ user.email }}
+                            {{ userObject.email }}
                         </div>
                     </div>
                     <div class="form-group">
@@ -92,12 +93,19 @@
             </div>
 
         </div>
+{% if module == 'website' %}
     </div>
 </div>
+{% endif %}
+
+{% if module == 'website' %}
 <div class="row">
     <div class="container">
+{% endif %}
         <div class="col-md-4">
             <span>Velden gemarkeerd met een * zijn verplicht.</span>
         </div>
+{% if module == 'website' %}
     </div>
 </div>
+{% endif %}

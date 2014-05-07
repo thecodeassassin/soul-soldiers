@@ -8,6 +8,7 @@ use Soul\Form\AccountInformationForm;
 use Soul\Form\ChangePasswordForm;
 use Soul\Form\ForgotPasswordForm;
 use Soul\Form\LoginForm;
+use Soul\Model\FailedAttempt;
 use Soul\Model\User;
 
 
@@ -208,7 +209,7 @@ class AccountBase extends Base
             }
         }
 
-        $this->view->user = $user;
+        $this->view->userObject = $user;
         $this->view->chpass = $changepasswordForm;
         $this->view->form = $accountInformationForm;
     }

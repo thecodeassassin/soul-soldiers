@@ -26,10 +26,25 @@ class AccountController extends AccountBase
 
     public function loginAction()
     {
-        $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+        $this->view->setMainView('layouts/login');
 
+        parent::loginAction();
+    }
 
-        AccountBase::loginAction();
+    public function manageAction()
+    {
+        parent::manageAction();
+
+        $this->view->partial('../Website/account/manage');
+    }
+
+    public function forgotPasswordAction()
+    {
+
+        parent::forgotPasswordAction();
+
+        $this->view->setMainView('layouts/login');
+
     }
 
 }

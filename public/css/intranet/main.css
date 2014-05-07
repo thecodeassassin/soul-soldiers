@@ -59,7 +59,7 @@ h1,h2,h3,h4,h5,h6 {
 
 body {
     background-color: #f9f9f9;
-    color: #333;
+    color: #FFFFEE;
     font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -96,7 +96,7 @@ body {
 #page-content {
     margin: 0 0 0 200px;
     padding: 20px;
-    background-color: #fff;
+    background-color: #426d84;
     border-left: 1px solid #ccc;
     min-height: 1200px;
 }
@@ -119,6 +119,7 @@ body {
 (#m03hws) HEADER WIDGETS
 =================================================================
 */
+
 
 .widget {
     padding: 0;
@@ -338,7 +339,7 @@ body {
 #primary-nav li a.active {
     padding-left: 35px;
     color: #333;
-    background-color: #fff;
+    background-color: #7dbbda;
     border-left: 5px solid #db4a39;
 }
 
@@ -1691,6 +1692,7 @@ header.navbar .navbar-brand {
     border-top: none;
     padding: 12px;
     background: #fff;
+    color: #363636;
 }
 
 .tab-content-default {

@@ -7,6 +7,7 @@ namespace Soul\Security;
 
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Dispatcher;
+use Phalcon\Mvc\View;
 use Soul\Security;
 use Soul\Util;
 
@@ -26,7 +27,8 @@ class Intranet extends Security
     public function beforeDispatch(Event $event, Dispatcher $dispatcher)
     {
 
-        if (!$this->getAuthService()->isLoggedIn() && !preg_match('/(\/login|\/static)/', Util::getCurrentUrl())) {
+        if (!$this->getAuthService()->isLoggedIn() && !preg_match('/(\/login|\/static|\/forgot-password)/', Util::getCurrentUrl())) {
+            $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
             return $this->response->redirect('login');
         }
 

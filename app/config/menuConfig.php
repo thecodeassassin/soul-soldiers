@@ -76,7 +76,13 @@ $menuConfig = [
     'intranet' => [
 
         'menu'=> [
-            'Home' => BASE_URL . '/home'
+            '<span class="icon-home"></span> Home' => BASE_URL . '/home',
+            '<span class="icon-user-1"></span> Account beheren' => BASE_URL . '/account/manage',
+            '<span class="icon-award"></span> Tournooien' => [
+                'Unreal Tournament 2004' => BASE_URL . '/tournaments/unreal-tournament',
+
+            ],
+            '<span class="icon-logout"></span> Uitloggen' => BASE_URL . '/logout',
         ],
         // guest only menu items
         'guest' => [
@@ -84,10 +90,7 @@ $menuConfig = [
         ],
         // authenticated only menu items
         'authenticated' => [
-            'Tournooien' => [
-                'Unreal Tournament 2004' => BASE_URL . '/tournaments/unreal-tournament',
-                
-            ]
+            'Tournooien'
         ],
         // Admin only menu items
         'admin' => [
