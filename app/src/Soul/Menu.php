@@ -87,7 +87,7 @@ class Menu
     public function addSubMenu($mainMenu, Menu $subMenu)
     {
         $this->links[$mainMenu]['subMenu'] = $subMenu;
-        $this->links[$mainMenu]['class'][] ='hasSubMenu';
+        $this->links[$mainMenu]['class'][] = 'hasSubMenu';
 
         return $this;
     }

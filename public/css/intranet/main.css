@@ -403,7 +403,7 @@ body {
 }
 
 /* Navigation info */
-#nav-info {
+.nav-info {
     list-style: none;
     margin: -20px -20px 20px;
     padding: 0;
@@ -411,12 +411,12 @@ body {
     background-color: #f6f6f6;
 }
 
-#nav-info > li:first-child {
+.nav-info > li:first-child {
     background: none;
     padding: 0 15px;
 }
 
-#nav-info > li {
+.nav-info > li {
     float: left;
     padding: 0 15px 0 20px;
     height: 30px;
@@ -429,15 +429,15 @@ body {
     background-size: 5px 30px;
 }
 
-#nav-info > li > a {
+.nav-info > li > a {
     color: #555;
 }
 
-#nav-info > li.active {
+.nav-info > li.active {
     color: #555;
 }
 
-#nav-info > li.active a {
+.nav-info > li.active a {
     color: #db4a39;
 }
 
@@ -1605,8 +1605,8 @@ header.navbar .navbar-brand {
 }
 
 .navbar.navbar-inverse .divider-vertical {
-    border-right-color: #3b3b3b;
-    border-left-color: #5b5b5b;
+    border-right-color: #cccccc;
+    border-left-color: #000000;
 }
 
 .navbar-fixed-bottom .dropdown .dropdown-menu {
@@ -2395,7 +2395,7 @@ a:focus {
         margin: 15px -15px;
     }
 
-    #nav-info,
+    .nav-info,
     .page-header-top {
         margin: -15px -15px 15px;
     }
@@ -2564,7 +2564,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
         background-image: url('../../img/intranet/template/login_bg@2x.png');
     }
 
-    #nav-info > li {
+    .nav-info > li {
         background-image: url('../../img/intranet/template/nav_info_seperator@2x.png');
     }
 

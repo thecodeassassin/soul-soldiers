@@ -84,12 +84,22 @@ $menuConfig = [
         ],
         // authenticated only menu items
         'authenticated' => [
-
+            'Tournooien' => [
+                'Unreal Tournament 2004' => BASE_URL . '/tournaments/unreal-tournament',
+                
+            ]
         ],
         // Admin only menu items
         'admin' => [
-
+            'Tournooien beheren' => BASE_URL . '/tournaments/manage'
         ]
     ],
+
+    'intranet-user' => [
+        'menu' => [
+            'Mijn account' => BASE_URL . '/account/manage',
+            'Uitloggen' => BASE_URL.'/logout'
+        ]
+    ]
 
 ];

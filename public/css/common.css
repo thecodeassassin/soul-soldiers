@@ -1,4 +1,4 @@
-
+/*** utilies classes ***/
 .pt10 {
     padding-top: 10px;
 }
@@ -24,4 +24,42 @@
 
 .p40 {
     padding: 40px;
+}
+
+.mb15 {
+    margin-bottom:0.75em;
+}
+.mb30 {
+    margin-bottom:1.5em;
+}
+.mb40 {
+    margin-bottom:2em;
+}
+.mt15 {
+    margin-top:0.75em;
+}
+.mt30 {
+    margin-top:1.5em;
+}
+.mt40 {
+    margin-top:2em;
+}
+
+.pb15 {
+    padding-bottom:0.75em;
+}
+.pb30 {
+    padding-bottom:1.5em;
+}
+.pb40 {
+    padding-bottom:2em;
+}
+.pt15 {
+    padding-top:0.75em;
+}
+.pt30 {
+    padding-top:1.5em;
+}
+.pt40 {
+    padding-top:2em;
 }

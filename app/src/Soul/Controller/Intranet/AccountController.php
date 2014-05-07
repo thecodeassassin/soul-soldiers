@@ -23,12 +23,13 @@ use Soul\Util;
 class AccountController extends AccountBase
 {
 
+
     public function loginAction()
     {
         $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
 
 
-        parent::loginAction();
+        AccountBase::loginAction();
     }
 
 }

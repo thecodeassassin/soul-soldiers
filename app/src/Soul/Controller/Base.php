@@ -9,6 +9,7 @@ use Phalcon\Mvc\View;
 use Soul\Auth\AuthService;
 use Soul\Mail;
 use Soul\Menu;
+use Soul\Menu\Builder;
 use Soul\Translate;
 use Soul\Util;
 
@@ -40,6 +41,11 @@ class Base extends Controller
      */
     protected $config = null;
 
+    /**
+     * @var Menu
+     */
+    protected $userMenu;
+
 
     public function initialize()
     {
@@ -54,6 +60,13 @@ class Base extends Controller
 
         $this->view->user = $this->authService->getAuthData();
         $this->config = $this->getConfig();
+
+        if (ACTIVE_MODULE == 'intranet') {
+            $menuConfig = $this->di->get('menuconfig');
+            $this->userMenu = Builder::build($menuConfig['intranet-user'], false, array(),'\Soul\Menu\Dropdown');
+
+            $this->view->usermenu = $this->userMenu->outputHTML();
+        }
 
     }
 

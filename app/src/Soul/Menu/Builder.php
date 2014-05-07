@@ -28,6 +28,11 @@ class Builder extends Module
     protected $links = [];
 
     /**
+     * @var null
+     */
+    protected $breadcrumbs = null;
+
+    /**
      * @param array             $menuConfig Configuration of the menu
      * @param bool              $subMenu    Is this menu a submenu
      *
@@ -36,7 +41,7 @@ class Builder extends Module
      *
      * @return Menu
      */
-    public static function build(array $menuConfig, $subMenu = false, $originalMenuConfig = array(), $menuClass = 'Menu')
+    public static function build(array $menuConfig, $subMenu = false, $originalMenuConfig = array(), $menuClass = 'Menu', $breadcrumbs = null)
     {
         $menuObject = new $menuClass;
         $count = 0;
@@ -67,6 +72,7 @@ class Builder extends Module
             }
 
             if (static::isAllowed($menuConfig, $name, $auth)) {
+
                 // build the link
                 $menuObject->addLink($name, static::buildLink($link, $subMenu, $firstLevel));
             }
@@ -91,11 +97,11 @@ class Builder extends Module
     {
         $loggedIn = $auth->isLoggedIn();
 
-        if (in_array($item, $menuConfig['guest']) && $loggedIn) {
+        if (array_key_exists('guest', $menuConfig) && in_array($item, $menuConfig['guest']) && $loggedIn) {
             return false;
         }
 
-        if (in_array($item, $menuConfig['admin'])) {
+        if (array_key_exists('admin', $menuConfig) && in_array($item, $menuConfig['admin'])) {
 
             if (!$loggedIn) {
                 return false;
@@ -107,7 +113,7 @@ class Builder extends Module
 
         }
 
-        if (in_array($item, $menuConfig['authenticated']) && !$loggedIn) {
+        if (array_key_exists('authenticated', $menuConfig) && in_array($item, $menuConfig['authenticated']) && !$loggedIn) {
             return false;
         }
 

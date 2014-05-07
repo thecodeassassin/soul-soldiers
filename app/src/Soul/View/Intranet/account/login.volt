@@ -13,7 +13,7 @@
     <div id="login-container" class="col-md-2">
         <div id="login-logo">
             <a href="">
-                <img src="img/main-logo.png" alt="logo">
+                <img src="img/logo-only.png" alt="logo">
             </a>
             <h3>Intranet</h3>
         </div>

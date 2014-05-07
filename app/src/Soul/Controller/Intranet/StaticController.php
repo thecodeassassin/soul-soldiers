@@ -8,6 +8,7 @@
 namespace Soul\Controller\Intranet;
 
 use Phalcon\Mvc\View;
+use Soul\Controller\Base;
 
 
 /**
@@ -15,7 +16,7 @@ use Phalcon\Mvc\View;
  *
  * @package Soul\Controller
  */
-class StaticController extends \Soul\Controller\Base
+class StaticController extends Base
 {
     /**
      * Parse the requested static resource

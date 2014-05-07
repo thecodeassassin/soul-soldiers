@@ -2,6 +2,7 @@
 
 namespace Soul\Controller;
 
+use Phalcon\Mvc\View;
 use Soul\Controller\Base;
 use Soul\Form\AccountInformationForm;
 use Soul\Form\ChangePasswordForm;
@@ -44,7 +45,8 @@ class AccountBase extends Base
 
         $loginForm = new LoginForm();
 
-        if ($this->authService->getAuthData() && ! $this->request->isPost()) {
+        if ($this->authService->getAuthData() && !$this->request->isPost()) {
+            $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
             return $this->response->redirect('home');
         }
 
