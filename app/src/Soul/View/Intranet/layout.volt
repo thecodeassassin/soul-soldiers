@@ -37,11 +37,18 @@
     {% endblock %}
 
     {% block footer %}
-    <script type="text/javascript">
-        var __loading_img = '{{ url('img/ajax-loader.gif') }}';
-    </script>
 
     {{ assets.outputJs('scripts') }}
+    <script type="text/javascript">
+        var __loading_img = '{{ url('img/ajax-loader.gif') }}';
+
+        // set min height to browser height
+
+        $(window).resize(function() {
+            $('#page-content').css('min-height', $(window).height() - $('header').height() - 30);
+        });
+        $(window).resize();
+    </script>
 
     {% endblock %}
     </body>

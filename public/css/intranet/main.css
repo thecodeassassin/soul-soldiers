@@ -98,7 +98,7 @@ body {
     padding: 20px;
     background-color: #426d84;
     border-left: 1px solid #ccc;
-    min-height: 1200px;
+    /*min-height: 800px;*/
 }
 
 #page-content + footer {
@@ -1469,14 +1469,21 @@ a.btn-theme-options.open {
 .page-header {
     margin: 20px -20px;
     padding: 10px 20px 9px;
-    background-color: #f3f3f3;
+    background-color: #C0C0C0;
     border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #615F5F;
+    color: #0c0c0c;
+}
+
+.page-header h4 {
+    color: #2E3947;
+    margin-top: 0;
 }
 
 .page-header-top {
-    margin: -20px -20px 20px;
+    margin: -22px -20px 20px;
     border-top: none;
+    color: #2E3947;
 }
 
 .page-header-sub {
@@ -1495,7 +1502,7 @@ h1, h2, h3 {
 }
 
 .well {
-    background-color: #f9f9f9;
+    background-color: #3c3b3b;
 }
 
 .navbar a > .badge {
