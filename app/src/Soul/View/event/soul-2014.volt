@@ -112,22 +112,37 @@
             </tr>
         </table>
 
-        <h3>Aanvullende informatie</h3>
-        <p>
-            Tijdens het evenement is het <strong>toegestaan</strong> om eigen eten en drinken mee te nemen. <br />
-            Er wordt een koelkast ter beschikking gesteld om producten die gekoeld dienen te worden <br /> in op te slaan.
-            Zorg dat je stickers mee neemt om je producten te markeren, zodat iemand niet per ongeluk iets van jou pakt.
-            De ruimte in de koelkast is beperkt, <br />dus we willen aan iedereen vragen de volgende richtlijnen niet te overschrijden: <br /> <br />
+        <div class="row">
+            <div class="sponsors">
+                <h3>Sponsors</h3>
+                <div class="sponsor-logo">
+                     <a href="http://www.leaseweb.com" target="_blank">{{ image('img/leaseweb_logo.png', 'title': 'Leaseweb - Reliable Hosting') }}</a>
+                </div>
+                <div class="sponsor-logo clearfix-right">
+                    <a href="http://www.gigabyte.com" target="_blank">{{ image('img/gigabyte_logo.png', 'title': 'Gigabyte Technologies') }}</a>
+                </div>
+            </div>
+        </div>
 
-            * max 2 flessen/pakken drinken<br />
-            * max 2 avond maaltijden/snacks (zoals broodjes bapau)
+        <div class="row">
 
-            <br /><br />
-            Het nuttigen van alcohol is <strong>niet toegestaan</strong> tijdens het evenement. <br/>
-            Tijdens dit evenement gelden onze <a href="{{ url('content/rules') }}">algemene voorwaarden.</a>
-            <br /><br />
-            Er is een aparte slaapruimte, de ruimte is echter beperkt dus het is <strong>NIET</strong> toegestaan <br />
-            een 2 persoons luchtbed mee te nemen, tenzij je de luchtbed deelt met een andere deelnemer.
-        </p>
+            <h3>Aanvullende informatie</h3>
+            <p>
+                Tijdens het evenement is het <strong>toegestaan</strong> om eigen eten en drinken mee te nemen. <br />
+                Er wordt een koelkast ter beschikking gesteld om producten die gekoeld dienen te worden <br /> in op te slaan.
+                Zorg dat je stickers mee neemt om je producten te markeren, zodat iemand niet per ongeluk iets van jou pakt.
+                De ruimte in de koelkast is beperkt, <br />dus we willen aan iedereen vragen de volgende richtlijnen niet te overschrijden: <br /> <br />
+
+                * max 2 flessen/pakken drinken<br />
+                * max 2 avond maaltijden/snacks (zoals broodjes bapau)
+
+                <br /><br />
+                Het nuttigen van alcohol is <strong>niet toegestaan</strong> tijdens het evenement. <br/>
+                Tijdens dit evenement gelden onze <a href="{{ url('content/rules') }}">algemene voorwaarden.</a>
+                <br /><br />
+                Er is een aparte slaapruimte, de ruimte is echter beperkt dus het is <strong>NIET</strong> toegestaan <br />
+                een 2 persoons luchtbed mee te nemen, tenzij je de luchtbed deelt met een andere deelnemer.
+            </p>
+        </div>
     </div>
 </div>

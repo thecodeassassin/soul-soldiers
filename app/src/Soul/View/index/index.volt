@@ -20,6 +20,28 @@
             <div class="gutter color0">
                 <h2>Nieuws</h2>
 
+
+                <div class="panel panel-default news">
+                    <div class="panel-heading">
+                        <h3 class="news-title">Sponsors zijn bekend!</h3>
+                        <h3 class="news-date">09/05/2014</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Het is bekend welke partijen ons dit jaar zullen gaan sponsoren, zoals voorgaande edities is <br />
+                            Gigabyte natuurlijk weer van de partij. Maar dit jaar zal ook <a href="http://leaseweb.com" target="_blank">Leaseweb</a> ons gaan sponsoren!<br /><br />
+
+                            Natuurlijk is dit goed nieuws voor onze deelnemers omdat, en dat gaan jullie tijdens de LAN meemaken!. <br /> <br />
+
+                            Tot snel! <br />
+
+                            <div class="sponsor-logo">
+                                {{ image('img/leaseweb_logo.png', 'title': 'Leaseweb - Reliable Hosting') }}
+                            </div>
+                        </p>
+                    </div>
+                </div>
+
                 <div class="panel panel-default news">
                     <div class="panel-heading">
                         <h3 class="news-title">Update betreffende slaapruimte</h3>

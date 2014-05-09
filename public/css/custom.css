@@ -145,6 +145,9 @@ Panel
     color: #cccccc;
 }
 
+.clearfix-right {
+    clear: right;
+}
 
 /**
     News
@@ -177,6 +180,20 @@ Panel
     font-weight: 700;
 }
 
+.sponsor-logo {
+    padding: 10px;
+    background-color: #cccccc;
+    border: 1px solid #101010;
+    width: 180px;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    float: left;
+}
+
+.sponsor-logo img {
+    width: 150px;
+    height: 40px;
+}
 
 /*.panel-default.news .panel-body {*/
     /*border-bottom: 1px dashed #cccccc;*/
