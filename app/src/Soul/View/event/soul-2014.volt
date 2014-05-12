@@ -91,27 +91,28 @@
     </div>
 
     <div class="col-md-4 col-md-offset-1 pb15 pt15">
-        <h2>Informatie</h2>
+        <div class="row">
+            <h2>Informatie</h2>
 
-        <table class="table noborders">
-            <tr>
-                <td><strong>Datum</strong></td>
-                <td>Vrijdag 23 mei 2014 19:00 - Zondag 25 mei 2014 17:00</td>
-            </tr>
-            <tr>
-                <td><strong>Locatie</strong></td>
-                <td><address>
-                    JC de Stip <br />
-                    Venneperweg 298, 2153 AE Nieuw-Vennep
-                    </address>
-                </td>
-            </tr>
-            <tr>
-                <td><strong>Prijs entreeticket</strong></td>
-                <td>&euro; {{ '%01.2f'|format(event.product.cost) }} voor 3 dagen</td>
-            </tr>
-        </table>
-
+            <table class="table noborders">
+                <tr>
+                    <td><strong>Datum</strong></td>
+                    <td>Vrijdag 23 mei 2014 19:00 - Zondag 25 mei 2014 17:00</td>
+                </tr>
+                <tr>
+                    <td><strong>Locatie</strong></td>
+                    <td><address>
+                        JC de Stip <br />
+                        Venneperweg 298, 2153 AE Nieuw-Vennep
+                        </address>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Prijs entreeticket</strong></td>
+                    <td>&euro; {{ '%01.2f'|format(event.product.cost) }} voor 3 dagen</td>
+                </tr>
+            </table>
+        </div>
         <div class="row">
             <div class="sponsors">
                 <h3>Sponsors</h3>
