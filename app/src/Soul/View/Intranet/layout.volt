@@ -45,7 +45,22 @@
         // set min height to browser height
 
         $(window).resize(function() {
-            $('#page-content').css('min-height', $(window).height() - $('header').height() - 30);
+            var totalHeight = 0;
+            $("#page-content > .inner > div").each(function(){
+                totalHeight += $(this).height();
+            });
+
+//            totalHeight += $('header').height();
+            totalHeight += $('#page-sidebar').height();
+
+            console.log(totalHeight);
+
+            if (totalHeight < $(window).height()) {
+                $('#page-content').css('min-height', $(window).height() - $('header').height() - 30);
+            } else {
+                $('#page-content').css('min-height', totalHeight - 80);
+            }
+
         });
         $(window).resize();
     </script>

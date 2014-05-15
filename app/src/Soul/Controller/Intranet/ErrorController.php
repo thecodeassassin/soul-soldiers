@@ -1,5 +1,5 @@
 <?php
-namespace Soul\Controller\Website;
+namespace Soul\Controller\Intranet;
 
 use Phalcon\Error\Application;
 use Soul\Controller\ErrorBase;

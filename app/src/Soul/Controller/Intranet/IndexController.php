@@ -13,6 +13,8 @@ use Soul\Util;
 class IndexController extends Base
 {
 
+    protected $hasNews = true;
+
     /**
      * Index action
      */

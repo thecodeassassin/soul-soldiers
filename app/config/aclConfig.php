@@ -30,7 +30,7 @@ return new \Phalcon\Config(
              * Then only that role (and it's children) will inherit the rights to access it.
              */
             'publiccontrollers' => [
-                'index',
+//                'index',
                 'error',
                 'static',
                 'content',
@@ -69,7 +69,7 @@ return new \Phalcon\Config(
                 ],
                 AclBuilder::ROLE_ADMIN => [
                     'admin' => '*',
-                    'index' => 'generate',
+                    'index' => ['generate', 'addNews', 'deleteNews', 'editNews']
                 ]
             ]
         ],
@@ -125,7 +125,8 @@ return new \Phalcon\Config(
                         'account' => ['logout', 'manage']
                     ],
                     AclBuilder::ROLE_ADMIN => [
-                        'admin' => '*'
+                        'admin' => '*',
+                        'index' => ['generate', 'addNews', 'deleteNews', 'editNews']
                     ]
                 ]
         ]

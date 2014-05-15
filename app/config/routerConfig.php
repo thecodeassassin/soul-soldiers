@@ -29,6 +29,22 @@ return [
             "name" => 1
         ],
 
+        '/news/add' => [
+            "controller" => "index",
+            "action"     => "addNews"
+        ],
+
+        '/news/delete/([0-9])' => [
+            "controller" => "index",
+            "action"     => "deleteNews",
+            "newsId" => 1
+        ],
+
+        '/news/edit' => [
+            "controller" => "index",
+            "action"     => "editNews"
+        ],
+
         /**
          * Account
          */

@@ -125,15 +125,24 @@
                     {#<li><a href="index.php"><i class="fa fa-home"></i></a></li>#}
                     {#<li class="active"><a href="">Dashboard</a></li>#}
                 {#</ul>#}
-                <div class="row">
-                    <div id="messages" class="col-md-12">
-                        {{ flash.output() }}
-                        {{ flashSession.output() }}
+
+                <div class="inner">
+
+                    <div class="page-header page-header-top clearfix">
+                        <h4 class="pull-left">{{ pageTitle|default(router.getActionName())|capitalize }}</h4>
                     </div>
+
+
+                    <div class="row">
+                        <div id="messages" class="col-md-12">
+                            {{ flash.output() }}
+                            {{ flashSession.output() }}
+                        </div>
+                    </div>
+
+
+                    {{ content() }}
                 </div>
-
-
-                {{ content() }}
             </div>
             <!-- END Page Content -->
 

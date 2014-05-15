@@ -5,6 +5,7 @@
 
 namespace Soul\Auth;
 
+use Soul\AclBuilder;
 use Soul\Model\User;
 
 /**
@@ -170,6 +171,14 @@ class Data
     public function toArray()
     {
         return (array) get_object_vars($this);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->userType == AclBuilder::ROLE_ADMIN;
     }
 
 }

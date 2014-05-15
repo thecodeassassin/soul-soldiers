@@ -5,10 +5,6 @@
 {% endif %}
         {% if module == 'website' %}
         <h1>Mijn account</h1>
-        {% else %}
-            <div class="page-header page-header-top clearfix">
-                <h4 class="pull-left"><i class="icon-user-1"></i> Mijn account</h4>
-            </div>
         {% endif %}
         <div class="col-md-12 color0 pt15 pb15">
             <ul class="nav nav-pills mb15">
