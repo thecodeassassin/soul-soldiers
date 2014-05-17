@@ -80,6 +80,7 @@ class Base extends Controller
         $this->view->user = $this->authService->getAuthData();
         $this->config = $this->getConfig();
         $this->view->module = ACTIVE_MODULE;
+        $this->view->editMode = ($this->request->has('editMode') ? true : false);
 
         if ($this->hasNews) {
             $this->view->news = News::getByModule(ACTIVE_MODULE);

@@ -1318,6 +1318,10 @@ body {
     color: #fff;
 }
 
+.table-unstyled > tbody > tr > th, .table-unstyled > tbody > tr > td {
+    border: none;
+}
+
 /* Forum */
 .table.forum th,
 .table.forum td {
@@ -1695,11 +1699,9 @@ header.navbar .navbar-brand {
 }
 
 .tab-content {
-    border: 1px solid #ddd;
-    border-top: none;
     padding: 12px;
-    background: #fff;
-    color: #363636;
+    background: transparent;
+    border: none;
 }
 
 .tab-content-default {
@@ -2144,6 +2146,14 @@ table.table thead .sorting_desc_disabled {
 }
 
 
+.container [class^="col-"] .gutter {
+    padding: 10px;
+    background-color: #3c3b3b;
+    border: 1px solid #ddd;
+    border: 1px solid rgba(86,61,124,.2);
+}
+
+
 /**
 News
 */
@@ -2157,7 +2167,7 @@ News
 }
 
 .news-wrapper .panel-heading {
-    padding: 20px;
+    padding: 10px 15px;
     font-size: 18px;
     border-bottom: 1px dashed #005580;
     color: #00396A;
@@ -2201,6 +2211,9 @@ News
 /* List Group */
 a.list-group-item {
     color: #db4a39;
+}
+.list-group-item {
+    background: transparent;
 }
 
 /* Links */

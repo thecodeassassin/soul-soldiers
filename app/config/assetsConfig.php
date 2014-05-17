@@ -89,6 +89,7 @@ return new \Phalcon\Config(
                     "js/bootbox.min.js",
                     "js-plugin/jquery-ui/jquery-ui-1.8.23.custom.min.js",
                     "js/intranet/plugins.js",
+                    "js/intranet/main.js",
                     "https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
                 ]
             ]

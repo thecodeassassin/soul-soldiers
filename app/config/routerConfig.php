@@ -135,6 +135,17 @@ return [
         '/home' => [
             "controller" => "index",
             "action" => "index"
+        ],
+
+        '/tournaments' => [
+            "controller" => "tournament",
+            "action" => "index"
+        ],
+
+        '/tournament/signup/([a-zA-Z0-9_-]+)' => [
+            "controller" => "tournament",
+            "action" => 'signup',
+            "systemName" => 1
         ]
     ]
 

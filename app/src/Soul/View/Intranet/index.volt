@@ -148,7 +148,7 @@
 
             <!-- Footer -->
             <footer>
-                <span id="year-copy"></span> &copy; Soul-Soldiers 2014
+               &copy; Soul-Soldiers 2014
             </footer>
             <!-- END Footer -->
         </div>

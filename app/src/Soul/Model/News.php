@@ -53,6 +53,11 @@ class News extends Base
         $this->published = date('d-m-Y H:i:s', strtotime($this->published));
     }
 
+    public function beforeSave()
+    {
+        $this->published =date('Y-m-d H:i:s', strtotime($this->published));
+    }
+
     /**
      * Find news items by module
      *
