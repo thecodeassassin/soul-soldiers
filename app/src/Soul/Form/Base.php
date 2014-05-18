@@ -72,17 +72,18 @@ abstract class Base extends Form
 
     /**
      * @param string $placeholder Placeholder
-     * @param string $name        Name of the field
-     * @param int    $rows        Number of rows
-     * @param bool   $required    Mandatory field or not
-     * @param string $filter      Pass a filter
+     * @param string $name Name of the field
+     * @param int $rows Number of rows
+     * @param bool $required Mandatory field or not
+     * @param string $filter Pass a filter
      *
+     * @param string $class
      * @return Text
      */
-    protected function getTextArea($placeholder, $name, $rows = 5, $required = false, $filter = 'string')
+    protected function getTextArea($placeholder, $name, $rows = 5, $required = false, $filter = 'string', $class = 'form-control')
     {
 
-        $text = new TextArea($name, ['class' => 'form-control', 'placeholder' => $placeholder, 'rows' => $rows]);
+        $text = new TextArea($name, ['class' => $class, 'placeholder' => $placeholder, 'rows' => $rows]);
 
         if ($required) {
             $text->addValidator(

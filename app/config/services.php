@@ -59,3 +59,11 @@ include __DIR__ . "/services/assets.php";
 
 // load auth services
 include __DIR__ . "/services/auth.php";
+
+if (ACTIVE_MODULE == 'intranet') {
+
+    // enable challonge for the intranet site
+    $di->setShared('challonge' , function() use ($config) {
+        return new \Soul\Tournaments\Challonge($config->challonge->apiKey, $config->challonge->subdomain);
+    });
+}

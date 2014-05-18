@@ -146,6 +146,18 @@ return [
             "controller" => "tournament",
             "action" => 'signup',
             "systemName" => 1
+        ],
+
+        '/tournament/score/add/([0-9]+)' => [
+            "controller" => "tournament",
+            "action" => 'addScore',
+            "userId" => 1
+        ],
+
+        '/tournament/remove/([0-9]+)' => [
+            "controller" => "tournament",
+            "action" => 'removeUser',
+            "userId" => 1
         ]
     ]
 

@@ -25,13 +25,35 @@ class Challonge
     public $verify_ssl = true;
     public $result = false;
 
-    /*
-      Class Constructor
-      $api_key - String
-    */
-    public function __construct($api_key = '')
+    public $subDomain = null;
+
+    /**
+     * @param null $subDomain
+     */
+    public function setSubDomain($subDomain)
+    {
+        $this->subDomain = $subDomain;
+    }
+
+    /**
+     * @return null
+     */
+    public function getSubDomain()
+    {
+        return $this->subDomain;
+    }
+
+    /**
+     * @param string $api_key
+     * @param null $subDomain
+     */
+    public function __construct($api_key = '', $subDomain = null)
     {
         $this->api_key = $api_key;
+
+        if ($subDomain) {
+            $this->setSubDomain($subDomain);
+        }
     }
 
     /*
@@ -157,6 +179,8 @@ class Challonge
      */
     public function getTournament($tournament_id, $params = array())
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         return $this->makeCall("tournaments/$tournament_id", $params, "get");
     }
 
@@ -180,6 +204,8 @@ class Challonge
      */
     public function updateTournament($tournament_id, $params = array())
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         return $this->makeCall("tournaments/$tournament_id", $params, "put");
     }
 
@@ -189,6 +215,8 @@ class Challonge
      */
     public function deleteTournament($tournament_id)
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         return $this->makeCall("tournaments/$tournament_id", array(), "delete");
     }
 
@@ -199,6 +227,8 @@ class Challonge
      */
     public function publishTournament($tournament_id, $params = array())
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         return $this->makeCall("tournaments/publish/$tournament_id", $params, "post");
     }
 
@@ -209,6 +239,8 @@ class Challonge
      */
     public function startTournament($tournament_id, $params = array())
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         return $this->makeCall("tournaments/start/$tournament_id", $params, "post");
     }
 
@@ -219,6 +251,8 @@ class Challonge
      */
     public function resetTournament($tournament_id, $params = array())
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         return $this->makeCall("tournaments/reset/$tournament_id", $params, "post");
     }
 
@@ -228,6 +262,8 @@ class Challonge
      */
     public function getParticipants($tournament_id)
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         return $this->makeCall("tournaments/$tournament_id/participants");
     }
 
@@ -239,6 +275,8 @@ class Challonge
      */
     public function getParticipant($tournament_id, $participant_id, $params = array())
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         return $this->makeCall("tournaments/$tournament_id/participants/$participant_id", $params);
     }
 
@@ -264,6 +302,8 @@ class Challonge
      */
     public function updateParticipant($tournament_id, $participant_id, $params = array())
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         return $this->makeCall("tournaments/$tournament_id/participants/$participant_id", $params, "put");
     }
 
@@ -274,6 +314,8 @@ class Challonge
      */
     public function deleteParticipant($tournament_id, $participant_id)
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         return $this->makeCall("tournaments/$tournament_id/participants/$participant_id", array(), "delete");
     }
 
@@ -283,6 +325,8 @@ class Challonge
      */
     public function randomizeParticipants($tournament_id)
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         return $this->makeCall("tournaments/$tournament_id/participants/randomize", array(), "post");
     }
 
@@ -293,6 +337,8 @@ class Challonge
      */
     public function getMatches($tournament_id, $params = array())
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         return $this->makeCall("tournaments/$tournament_id/matches", $params);
     }
 
@@ -303,6 +349,8 @@ class Challonge
      */
     public function getMatch($tournament_id, $match_id)
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         return $this->makeCall("tournaments/$tournament_id/matches/$match_id");
     }
 
@@ -314,11 +362,25 @@ class Challonge
      */
     public function updateMatch($tournament_id, $match_id, $params = array())
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         if (sizeof($params) == 0) {
             $this->errors = array('$params empty');
             return false;
         }
         return $this->makeCall("tournaments/$tournament_id/matches/$match_id", $params, "put");
+    }
+
+    /**
+     * @param $tournamentId
+     * @return string
+     */
+    protected function getRealTournamentId($tournamentId) {
+        if ($this->subDomain) {
+            return sprintf('%s-%s', $this->subDomain, $tournamentId);
+        }
+
+        return $tournamentId;
     }
 
 } 

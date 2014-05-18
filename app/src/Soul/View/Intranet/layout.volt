@@ -38,11 +38,14 @@
 
     {% block footer %}
 
-    {{ assets.outputJs('scripts') }}
-    <script type="text/javascript">
-        var __loading_img = '{{ url('img/ajax-loader.gif') }}';
-    </script>
+        <script type="text/javascript">
+            var __loading_img = '{{ url('img/ajax-loader.gif') }}';
+            var CKEDITOR_BASEPATH = '/js/intranet/ckeditor/'
+        </script>
+
+        {{ assets.outputJs('scripts') }}
 
     {% endblock %}
+    {% block javascript %}{% endblock %}
     </body>
 </html>

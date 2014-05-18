@@ -98,7 +98,7 @@ body {
     padding: 20px;
     background-color: #426d84;
     border-left: 1px solid #ccc;
-    /*min-height: 800px;*/
+    min-height: 1200px;
 }
 
 #page-content + footer {
@@ -1688,6 +1688,44 @@ header.navbar .navbar-brand {
     color: #db4a39;
 }
 
+/** Tournaments **/
+.tournament-tabs .tab-content {
+    padding: 0;
+    margin-top: 15px;
+}
+
+.tournament-container .well {
+    min-height: 600px;
+}
+
+.scoreCount {
+    width: 45px;
+    padding: 1px 2px;
+    text-align: center;
+}
+
+.tournament-container form {
+    display: inline;
+    position: absolute;
+    right: 50px;
+    top: 8px;
+}
+
+.list-group-item.disabled {
+    background-color: #bd362f;
+    text-decoration: line-through
+}
+
+.tournament-container form .form-control, .tournament-container form button {
+    height: 25px;
+    float: left;
+}
+
+.tournament-container form button {
+    padding: 1px 5px;
+}
+
+
 /* Tabs */
 .nav-tabs.nav-right > li {
     float: right;
@@ -1697,6 +1735,8 @@ header.navbar .navbar-brand {
     margin-right: 0;
     margin-left: 2px;
 }
+
+
 
 .tab-content {
     padding: 12px;
@@ -2395,6 +2435,7 @@ a:focus {
     #page-content {
         margin: 0;
         border: none;
+
     }
 
     #page-content + footer {

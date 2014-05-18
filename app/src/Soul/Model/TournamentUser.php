@@ -70,6 +70,15 @@ class TournamentUser extends Base
     }
 
     /**
+     * @param $userId
+     * @return TournamentUser
+     */
+    public static function findFirstByTournamentUserId($userId)
+    {
+        return self::findFirst('tournamentUserId = \''.$userId.'\'');
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()

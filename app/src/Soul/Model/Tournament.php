@@ -1,6 +1,8 @@
 <?php
 namespace Soul\Model;
 
+use Soul\Tournaments\Challonge;
+
 /**
  * Class Tournament
  */
@@ -58,9 +60,19 @@ class Tournament extends Base
      */
     public $playersArray;
 
+    /**
+     * @var bool
+     */
+    public $started = false;
+
     const TYPE_TOP_SCORE = 1;
     const TYPE_SINGLE_ELIMINATION = 2;
     const TYPE_DOUBLE_ELIMINATION = 3;
+
+    /**
+     * @var Challonge
+     */
+    protected $challonge;
 
     /**
      * Initialize method for model.
@@ -70,6 +82,9 @@ class Tournament extends Base
 		$this->setSource('tblTournament');
 
         $this->hasMany('tournamentId', '\Soul\Model\TournamentUser', 'tournamentId', ['alias' => 'players']);
+
+        // retrieve the challonge object
+        $this->challonge = $this->getDI()->get('challonge');
     }
 
     /**
@@ -88,6 +103,13 @@ class Tournament extends Base
             self::TYPE_DOUBLE_ELIMINATION => 'Double elimination'
         ];
 
+        if ($this->challongeId) {
+
+            $tournamentObject = $this->challonge->getTournament($this->challongeId, []);
+            die(var_dump($tournamentObject));
+
+        }
+
         $this->typeString = $types[$this->type];
         $this->startDateString = date('d-m-y H:i', strtotime($this->startDate));
         $this->playersArray = $this->players->toArray();
@@ -95,30 +117,35 @@ class Tournament extends Base
 
 
         array_walk($this->playersArray, function(&$player) {
-            $player['user'] = User::findFirstByUserId($player['userId'])->toArray();
+                $player['user'] = User::findFirstByUserId($player['userId'])->toArray();
 
-            $scoreResult = $this->players->filter(function($obj) use ($player){
-                if($obj->userId == $player['userId']) {
-                    return $obj;
+                $scoreResult = $this->players->filter(function($obj) use ($player){
+                    if ($obj->userId == $player['userId']) {
+                        return $obj;
+                    }
+                    return null;
+                });
+
+                if (count($scoreResult) == 1) {
+                    $player['totalScore'] = $scoreResult[0]->totalScore;
+                } else {
+                    $player['totalScore'] = 0;
                 }
-            });
-
-            if (count($scoreResult) == 1) {
-                $player['totalScore'] = $scoreResult[0]->totalScore;
-            } else {
-                $player['totalScore'] = 0;
-            }
 
             });
 
-        usort($this->playersArray, function($left, $right) {
+        if ($this->type == self::TYPE_TOP_SCORE) {
 
-            if ($left['totalScore'] == $right['totalScore']) {
-               return 0;
-            }
+            usort($this->playersArray, function ($left, $right) {
 
-            return ($left['totalScore'] > $right['totalScore'] ? -1 : 1);
-        });
+                if ($left['totalScore'] == $right['totalScore']) {
+                    return 0;
+                }
+
+                return ($left['totalScore'] > $right['totalScore'] ? -1 : 1);
+            });
+
+        }
 
     }
 

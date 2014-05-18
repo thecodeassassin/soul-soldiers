@@ -62,6 +62,9 @@ return new \Phalcon\Config(
         ],
         'crypt' => [
             'key' => ''
+        ],
+        'challonge' => [
+            'apiKey' => ''
         ]
     ]
 );
