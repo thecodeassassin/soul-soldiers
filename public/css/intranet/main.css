@@ -1711,6 +1711,10 @@ header.navbar .navbar-brand {
     top: 8px;
 }
 
+.tournament-container .table {
+    margin-left: -8px;
+}
+
 .list-group-item.disabled {
     background-color: #bd362f;
     text-decoration: line-through

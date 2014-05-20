@@ -2,6 +2,7 @@
 namespace Soul\Model;
 
 use Soul\Tournaments\Challonge;
+use Soul\Tournaments\Challonge\Tournament as ChallongeTournament;
 
 /**
  * Class Tournament
@@ -63,28 +64,24 @@ class Tournament extends Base
     /**
      * @var bool
      */
-    public $started = false;
+    public $isChallonge = false;
 
     const TYPE_TOP_SCORE = 1;
     const TYPE_SINGLE_ELIMINATION = 2;
     const TYPE_DOUBLE_ELIMINATION = 3;
 
     /**
-     * @var Challonge
+     * @var ChallongeTournament
      */
-    protected $challonge;
+    public $challonge;
 
     /**
      * Initialize method for model.
      */
     public function initialize()
     {
-		$this->setSource('tblTournament');
-
+        $this->setSource('tblTournament');
         $this->hasMany('tournamentId', '\Soul\Model\TournamentUser', 'tournamentId', ['alias' => 'players']);
-
-        // retrieve the challonge object
-        $this->challonge = $this->getDI()->get('challonge');
     }
 
     /**
@@ -105,8 +102,8 @@ class Tournament extends Base
 
         if ($this->challongeId) {
 
-            $tournamentObject = $this->challonge->getTournament($this->challongeId, []);
-            die(var_dump($tournamentObject));
+            $this->challonge = new ChallongeTournament($this->challongeId);
+            $this->isChallonge = true;
 
         }
 
@@ -146,6 +143,29 @@ class Tournament extends Base
             });
 
         }
+
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCompleted()
+    {
+        // a top score tournament ends when there is only 1 contestent left
+        if ($this->type == self::TYPE_TOP_SCORE) {
+
+            $players = TournamentUser::query()
+                ->where("tournamentId = :id:")
+                ->andWhere("active = 1")
+                ->bind(array("id" => $this->tournamentId))
+                ->execute();
+
+            return count($this->playersArray) > 1 && count($players) == 1;
+
+        } elseif ($this->isChallonge) {
+            return $this->challonge->isCompleted();
+        }
+
 
     }
 

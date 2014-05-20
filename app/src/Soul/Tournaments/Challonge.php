@@ -27,6 +27,7 @@ class Challonge
 
     public $subDomain = null;
 
+
     /**
      * @param null $subDomain
      */

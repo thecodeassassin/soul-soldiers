@@ -87,6 +87,49 @@ class TournamentController extends Base
     }
 
     /**
+     * @param $systemName
+     */
+    public function startAction($systemName)
+    {
+        $tournament = Tournament::findFirstBySystemName($systemName);
+
+
+        if ($tournament) {
+
+        }
+    }
+
+    /**
+     * @param $systemName
+     */
+    public function endAction($systemName)
+    {
+        $tournament = Tournament::findFirstBySystemName($systemName);
+
+
+        if ($tournament) {
+
+        }
+    }
+
+
+    /**
+     * @param string     $systemName
+     * @param string|int $matchId
+     */
+    public function selectWinnerAction($systemName, $matchId)
+    {
+        $tournament = Tournament::findFirstBySystemName($systemName);
+
+        if ($tournament) {
+            $match = $tournament->challonge->getMatchById($matchId);
+
+            die(var_dump($match));
+        }
+    }
+
+
+    /**
      * @param $userId
      */
     public function removeUserAction($userId)

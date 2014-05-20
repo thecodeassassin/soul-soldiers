@@ -158,6 +158,24 @@ return [
             "controller" => "tournament",
             "action" => 'removeUser',
             "userId" => 1
+        ],
+
+        '/tournament/start/([0-9]+)' => [
+            "controller" => "tournament",
+            "action" => 'start',
+            "systemName" => 1
+        ],
+
+        '/tournament/end/([0-9]+)' => [
+            "controller" => "tournament",
+            "action" => 'end',
+            "systemName" => 1
+        ],
+
+        '/tournament/select-winner/([0-9]+)' => [
+            "controller" => "tournament",
+            "action" => 'selectWinner',
+            "systemName" => 1
         ]
     ]
 
