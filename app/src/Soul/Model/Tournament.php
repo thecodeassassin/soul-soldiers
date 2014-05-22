@@ -115,10 +115,6 @@ class Tournament extends Base
             $this->challonge = new ChallongeTournament($this->challongeId);
             $this->isChallonge = true;
 
-            if (!$this->challonge->isQuickAdvance()) {
-                throw new \Exception(sprintf('Please select quick advance for tournament %s', $this->name));
-            }
-
         }
 
         $this->typeString = $types[$this->type];
