@@ -6,3 +6,4 @@ app/log/*
 vendor/*
 public/doc
 public/demo
+public/img/tournaments/*
