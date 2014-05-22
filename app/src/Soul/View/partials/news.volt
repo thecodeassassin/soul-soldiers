@@ -45,6 +45,6 @@
         {% endif %}
 
     {% else %}
-        <h4>Geen niews</h4>
+        <h4>Geen nieuws</h4>
     {% endfor %}
 </div>
