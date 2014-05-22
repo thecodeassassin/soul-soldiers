@@ -134,6 +134,32 @@ class Tournament extends Module
             if ($matches) {
                 return $matches;
             }
+
+            return array();
+
+        } catch (\Exception $e) {
+            throw new Exception(sprintf('Could not get matches for tournament with ID %s.', $this->challongeId));
+        }
+
+    }
+
+
+    /**
+     * @return bool|\SimpleXMLElement
+     * @throws Exception
+     */
+    public function getMatchesByParticipantId($id)
+    {
+        try {
+
+            $matches = $this->api->getParticipant($this->challongeId, $id, ['include_matches' => 1]);
+
+            if ($matches) {
+                return $matches;
+            }
+
+            return array();
+
         } catch (\Exception $e) {
             throw new Exception(sprintf('Could not get matches for tournament with ID %s.', $this->challongeId));
         }
@@ -154,6 +180,89 @@ class Tournament extends Module
 
         } catch (\Exception $e) {
             throw new Exception(sprintf('No match with ID %s.', $matchId));
+        }
+    }
+
+    public function getOverviewImage()
+    {
+        return $this->tournamentObject->{'live-image-url'};
+    }
+
+    /**
+     * Get the players for this tournament
+     *
+     * @return bool|\SimpleXMLElement
+     *
+     * @throws Exception
+     */
+    public function getPlayers()
+    {
+        try {
+            return $this->api->getParticipants($this->challongeId);
+
+        } catch (\Exception $e) {
+            throw new Exception(sprintf('No participants found for tournament %s', $this->challongeId));
+        }
+
+    }
+
+    /**
+     * @param $name
+     * @throws Exception
+     */
+    public function addPlayer($name)
+    {
+        try {
+
+            $this->api->createParticipant(
+                $this->challongeId,
+                [
+                    'participant[name]' => $name
+                ]
+            );
+
+        } catch (\Exception $e) {
+            throw new Exception(sprintf('No participants found for tournament %s', $this->challongeId));
+        }
+    }
+
+    public function start()
+    {
+        try {
+
+            return$this->api->startTournament($this->challongeId);
+
+        } catch (\Exception $e) {
+            throw new Exception(sprintf('Cannot start %s', $this->challongeId));
+        }
+    }
+
+    public function end()
+    {
+        try {
+
+            return $this->api->endTournament($this->challongeId);
+
+        } catch (\Exception $e) {
+            throw new Exception(sprintf('Cannot end %s', $this->challongeId));
+        }
+    }
+
+    /**
+     * Randomize seeds
+     *
+     * @throws Exception
+     */
+    public function randomize()
+    {
+        try {
+
+            if (!$this->hasStarted()) {
+                $this->api->randomizeParticipants($this->challongeId);
+            }
+
+        } catch (\Exception $e) {
+            throw new Exception(sprintf('Cannot randomize %s', $this->challongeId));
         }
     }
 

@@ -66,7 +66,12 @@ class News extends Base
      */
     public static function getByModule($module)
     {
-        return static::findByModule($module);
+        return static::find(
+            [
+               'module = \''.$module.'\'',
+               'order' => 'published DESC'
+            ]
+        );
     }
 
     /**

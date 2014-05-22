@@ -250,6 +250,18 @@ class Challonge
      * @param array $params
      * @return bool|SimpleXMLElement
      */
+    public function endTournament($tournament_id, $params = array())
+    {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
+        return $this->makeCall("tournaments/finalize/$tournament_id", $params, "post");
+    }
+
+    /**
+     * @param $tournament_id
+     * @param array $params
+     * @return bool|SimpleXMLElement
+     */
     public function resetTournament($tournament_id, $params = array())
     {
         $tournament_id = $this->getRealTournamentId($tournament_id);
@@ -288,6 +300,8 @@ class Challonge
      */
     public function createParticipant($tournament_id, $params = array())
     {
+        $tournament_id = $this->getRealTournamentId($tournament_id);
+
         if (sizeof($params) == 0) {
             $this->errors = array('$params empty');
             return false;

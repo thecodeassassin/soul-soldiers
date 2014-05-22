@@ -11,6 +11,7 @@
 {% set scoreType = tournament.type == 1 %}
 
 {% set complete = tournament.isCompleted() %}
+{% set pending = true %}
 
 {% if isChallonge %}
     {% set pending = tournament.challonge.isPending() %}
@@ -40,14 +41,14 @@
             </div>
 
             <div class="mt30">
-                {% if not entered %}
+                {% if not entered and pending %}
                     <a class="btn btn-block btn-success" href="{{ url('tournament/signup/' ~ tournament.systemName ) }}">Inschrijven</a>
                 {% endif %}
 
                 {% if isChallonge and isAdmin and not scoreType %}
 
                     {% if pending %}
-                        <a class="btn btn-block btn-success" href="{{ url('tournament/start/' ~ tournament.systemName ) }}">Start toernooi</a>
+                        <a class="btn btn-block btn-primary" href="{{ url('tournament/start/' ~ tournament.systemName ) }}">Start toernooi</a>
                     {% elseif awaitingReview %}
                         <a class="btn btn-block btn-danger" href="{{ url('tournament/end/' ~ tournament.systemName ) }}">Beeindig toernooi</a>
                     {% endif %}
@@ -67,7 +68,7 @@
                     <li><a href="#regels{{ id }}" data-toggle="tab">Regels</a></li>
                     <li><a href="#prijzen{{ id }}" data-toggle="tab">Prijzen</a></li>
                     {% if isChallonge and not scoreType %}
-                    <li><a href="#matches{{ id }}" data-toggle="tab">Matches</a></li>
+                    <li><a href="#matches{{ id }}" class="matchLink" data-tournament-id="{{ tournament.systemName }}">Matches</a></li>
                     {% endif %}
                 </ul>
 
@@ -82,7 +83,9 @@
 
                             <li class="list-group-item {% if removed %} disabled{% endif %}">
 
-                                {% if scoreType %}{{ place + 1 }}.&nbsp;{% endif %}{{ player['user']['nickName'] }}
+                                {% if scoreType %}{{ place + 1 }}.&nbsp;{% endif %}
+                                {% if isChallonge and player['rank'] %}{{ player['rank'] }}.&nbsp;{% endif %}
+                                {{ player['user']['nickName'] }}
 
                                 {% if scoreType %}
                                     <span class="badge">{{ player['totalScore'] }}</span>
@@ -91,7 +94,7 @@
                                 {% if isAdmin and scoreType and not removed %}
                                     {{ form('tournament/score/add/' ~ player['tournamentUserId'], "method": "post", "name":"addScore", "class":"validate scoreAdd", "role":"form") }}
 
-                                    <input type="number"  min='0' max="999" value="0" name="scoreCount" class="form-control scoreCount">
+                                    <input type="number"  max="999" value="0" name="scoreCount" class="form-control scoreCount">
                                     <button type="submit" class="btn btn-sm btn-success"><i class="icon-plus"></i></button>
                                     <button type="button" data-url="{{ url('tournament/remove/' ~ player['tournamentUserId']) }}" class="btn btn-sm btn-danger removeUser"><i class="icon-trash"></i></button>
 
@@ -102,7 +105,7 @@
                             </li>
                             {% else %}
                         </ul>
-                        <h5>Geen inschrijvingen</h5>
+                        <h5>Er zijn nog geen inschrijvingen</h5>
                         {% endfor %}
                     </div>
                     <div class="tab-pane" id="regels{{ id }}">

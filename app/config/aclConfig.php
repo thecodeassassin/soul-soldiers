@@ -122,7 +122,7 @@ return new \Phalcon\Config(
                     ],
                     AclBuilder::ROLE_USER => [
                         'account' => ['logout', 'manage'],
-                        'tournament' => ['index', 'signup']
+                        'tournament' => ['index', 'signup', 'overview']
                     ],
                     AclBuilder::ROLE_ADMIN => [
                         'admin' => '*',

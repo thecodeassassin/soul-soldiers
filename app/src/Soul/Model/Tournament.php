@@ -59,7 +59,17 @@ class Tournament extends Base
     /**
      * @var array
      */
-    public $playersArray;
+    public $playersArray = [];
+
+    /**
+     * @var array
+     */
+    public $entries = [];
+
+    /**
+     * @var array
+     */
+    public $matches = [];
 
     /**
      * @var bool
@@ -105,42 +115,85 @@ class Tournament extends Base
             $this->challonge = new ChallongeTournament($this->challongeId);
             $this->isChallonge = true;
 
+            if (!$this->challonge->isQuickAdvance()) {
+                throw new \Exception(sprintf('Please select quick advance for tournament %s', $this->name));
+            }
+
         }
 
         $this->typeString = $types[$this->type];
         $this->startDateString = date('d-m-y H:i', strtotime($this->startDate));
-        $this->playersArray = $this->players->toArray();
+
+        if (!$this->isChallonge) {
+            $this->playersArray = $this->players->toArray();
 
 
+            array_walk($this->playersArray, function(&$player) {
+                    $player['user'] = User::findFirstByUserId($player['userId'])->toArray();
 
-        array_walk($this->playersArray, function(&$player) {
-                $player['user'] = User::findFirstByUserId($player['userId'])->toArray();
+                    $scoreResult = $this->players->filter(function($obj) use ($player){
+                            if ($obj->userId == $player['userId']) {
+                                return $obj;
+                            }
+                            return null;
+                        });
 
-                $scoreResult = $this->players->filter(function($obj) use ($player){
-                    if ($obj->userId == $player['userId']) {
-                        return $obj;
+                    if (count($scoreResult) == 1) {
+                        $player['totalScore'] = $scoreResult[0]->totalScore;
+                    } else {
+                        $player['totalScore'] = 0;
                     }
-                    return null;
+
                 });
 
-                if (count($scoreResult) == 1) {
-                    $player['totalScore'] = $scoreResult[0]->totalScore;
-                } else {
-                    $player['totalScore'] = 0;
+            if ($this->type == self::TYPE_TOP_SCORE) {
+
+                usort($this->playersArray, function ($left, $right) {
+
+                        if ($left['totalScore'] == $right['totalScore']) {
+                            return 0;
+                        }
+
+                        return ($left['totalScore'] > $right['totalScore'] ? -1 : 1);
+                    });
+
+            }
+        } else {
+            $players = $this->challonge->getPlayers();
+
+            if ($players) {
+                foreach ($players->participant as $player) {
+
+                    $name = (string)$player->name;
+
+                    $playerData = [
+                        'user' => ['nickName' => $name],
+                        'active' => $player->active
+                    ];
+
+                    if (is_numeric($player->{'final-rank'})) {
+                        $playerData['rank'] = $player->{'final-rank'};
+                    } else {
+                        $playerData['rank'] = null;
+                    }
+
+                    $this->playersArray[] = $playerData;
+                    $this->entries[] = $name;
+
                 }
 
-            });
+            }
 
-        if ($this->type == self::TYPE_TOP_SCORE) {
+            // generate an image for this tournament
+            if ($image =  $this->challonge->getOverviewImage()) {
+                $tmpFile = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
+                file_put_contents($tmpFile, file_get_contents($image));
 
-            usort($this->playersArray, function ($left, $right) {
 
-                if ($left['totalScore'] == $right['totalScore']) {
-                    return 0;
-                }
-
-                return ($left['totalScore'] > $right['totalScore'] ? -1 : 1);
-            });
+                $original = new \Phalcon\Image\Adapter\GD($tmpFile);
+                $original->crop($original->getWidth(), $original->getHeight(), 0, 100);
+                $original->save(APPLICATION_PATH . '/../public/img/tournaments/'.$this->systemName.'.png');
+            }
 
         }
 
@@ -175,7 +228,7 @@ class Tournament extends Base
      */
     public function hasEntered($userId)
     {
-        if (!empty($this->players)) {
+        if (!$this->challonge && !empty($this->players)) {
 
             foreach ($this->players as $player) {
                 if ($player->userId == $userId) {
@@ -183,6 +236,16 @@ class Tournament extends Base
                 }
             }
         }
+
+
+        if ($this->isChallonge) {
+            $user = User::findFirstByUserId($userId);
+
+            if ($user) {
+                return in_array($user->nickName, $this->entries);
+            }
+        }
+
         return false;
     }
 

@@ -36,16 +36,23 @@ class TournamentController extends Base
 
         if ($tournament) {
 
-            // sign the user up for the given tournament
-            $tournamentUser = new TournamentUser();
-            $tournamentUser->userId = $this->authService->getAuthData()->userId;
-            $tournamentUser->tournamentId = $tournament->tournamentId;
-            $tournamentUser->active = 1;
+            if ($tournament->isChallonge) {
+                $tournament->challonge->addPlayer($this->view->user->getNickName());
 
-            $tournamentUser->save();
+            } else {
+
+                // sign the user up for the given tournament
+                $tournamentUser = new TournamentUser();
+                $tournamentUser->userId = $this->authService->getAuthData()->userId;
+                $tournamentUser->tournamentId = $tournament->tournamentId;
+                $tournamentUser->active = 1;
+
+                $tournamentUser->save();
+
+            }
 
             $this->flashMessage(sprintf('Successvol ingeschreven voor %s', $tournament->name), 'success', true);
-            $this->response->redirect('tournament/index');
+            $this->response->redirect('tournaments');
         }
     }
 
@@ -63,7 +70,7 @@ class TournamentController extends Base
         if ($tournamentUser) {
             $scoreCount = $this->request->getPost('scoreCount');
 
-            if (is_numeric($scoreCount) && $scoreCount > 0) {
+            if (is_numeric($scoreCount) && $scoreCount != 0) {
                 $score->tournamentUserId = $tournamentUser->tournamentUserId;
                 $score->score = $scoreCount;
                 $score->save();
@@ -82,7 +89,7 @@ class TournamentController extends Base
             $tournamentUser = TournamentUser::findFirstByTournamentUserId($userId);
             echo $tournamentUser->getTotalScore();
         } else {
-            $this->response->redirect('tournament/index');
+            $this->response->redirect('tournaments');
         }
     }
 
@@ -91,12 +98,20 @@ class TournamentController extends Base
      */
     public function startAction($systemName)
     {
+        $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
         $tournament = Tournament::findFirstBySystemName($systemName);
 
+        die;
 
-        if ($tournament) {
+        if ($tournament && !$tournament->challonge->hasStarted()) {
+            if ($tournament->challonge->start()) {
+                $this->flashMessage(sprintf('Toernooi %s is gestart.', $tournament->name), 'success', true);
+            } else {
+                $this->flashMessage(sprintf('Toernooi %s kan niet worden gestart.', $tournament->name), 'error', true);
+            }
 
         }
+        $this->response->redirect('tournaments');
     }
 
     /**
@@ -104,12 +119,19 @@ class TournamentController extends Base
      */
     public function endAction($systemName)
     {
+        $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
         $tournament = Tournament::findFirstBySystemName($systemName);
 
 
-        if ($tournament) {
-
+        if ($tournament && $tournament->challonge->isAwaitingReview()) {
+            if ($tournament->challonge->end()) {
+                $this->flashMessage(sprintf('Toernooi %s is beeindigd.', $tournament->name), 'success', true);
+            } else {
+                $this->flashMessage(sprintf('Toernooi %s kan niet worden beeindigd.', $tournament->name), 'error', true);
+            }
         }
+
+        $this->response->redirect('tournaments');
     }
 
 
@@ -145,4 +167,33 @@ class TournamentController extends Base
         }
 
     }
+
+    /**
+     * @param $systemName
+     */
+    public function overviewAction($systemName)
+    {
+
+//        $tournament = Tournament::findFirstBySystemName($systemName);
+//
+//        if ($tournament) {
+//
+//            if ($image = (string)$tournament->challonge->getOverviewImage()) {
+//                $this->response->resetHeaders();
+//                $this->response->setHeader('Content-Type', 'image/png');
+//
+//                $tmpFile = $this->config->application->cacheDir . $systemName . '.png';
+//                file_put_contents($tmpFile, file_get_contents($image));
+//
+//
+//                $original = new \Phalcon\Image\Adapter\GD($tmpFile);
+//                $original->crop($original->getWidth(), $original->getHeight() - 150);
+//                $original->save();
+//
+//                readfile($tmpFile);
+//            }
+//        }
+
+    }
+
 }
