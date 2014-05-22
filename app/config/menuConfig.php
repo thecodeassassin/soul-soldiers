@@ -78,6 +78,7 @@ $menuConfig = [
         'menu'=> [
             '<span class="icon-home"></span> Home' => BASE_URL . '/home',
             '<span class="icon-award"></span> Toernooien' => BASE_URL . '/tournaments',
+            '<span class="icon-download"></span> Downloads' => BASE_URL . '/content/downloads',
             '<span class="icon-user-1"></span> Account beheren' => BASE_URL . '/account/manage',
             '<span class="icon-logout"></span> Uitloggen' => BASE_URL . '/logout',
         ],

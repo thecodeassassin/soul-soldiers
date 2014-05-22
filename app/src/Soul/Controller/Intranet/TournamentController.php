@@ -174,25 +174,25 @@ class TournamentController extends Base
     public function overviewAction($systemName)
     {
 
-//        $tournament = Tournament::findFirstBySystemName($systemName);
-//
-//        if ($tournament) {
-//
-//            if ($image = (string)$tournament->challonge->getOverviewImage()) {
-//                $this->response->resetHeaders();
-//                $this->response->setHeader('Content-Type', 'image/png');
-//
-//                $tmpFile = $this->config->application->cacheDir . $systemName . '.png';
-//                file_put_contents($tmpFile, file_get_contents($image));
-//
-//
-//                $original = new \Phalcon\Image\Adapter\GD($tmpFile);
-//                $original->crop($original->getWidth(), $original->getHeight() - 150);
-//                $original->save();
-//
-//                readfile($tmpFile);
-//            }
-//        }
+        $tournament = Tournament::findFirstBySystemName($systemName);
+
+        if ($tournament) {
+
+            if ($image = (string)$tournament->challonge->getOverviewImage()) {
+                $this->response->resetHeaders();
+                $this->response->setHeader('Content-Type', 'image/png');
+
+                $tmpFile = $this->config->application->cacheDir . $systemName . '.png';
+                file_put_contents($tmpFile, file_get_contents($image));
+
+
+                $original = new \Phalcon\Image\Adapter\GD($tmpFile);
+                $original->crop($original->getWidth(), $original->getHeight() - 150);
+                $original->save();
+
+                readfile($tmpFile);
+            }
+        }
 
     }
 
