@@ -49,8 +49,14 @@ body.login {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    color: #FFFFFF;
+    color: #5495F7;
+    text-shadow: 0 0 1px #000;
 }
+
+#login-container {
+   width: 350px;
+}
+
 /*
 =================================================================
 (#m02mls) MAIN LAYOUT

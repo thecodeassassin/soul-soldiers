@@ -13,6 +13,7 @@
     <h3>Regels</h3>
 
     <p>Cheaten, afkijken en andere vormen van oneerlijk spelen resulteren in diskwalificeren.</p>
+    <p>Het maken van een replay is verplicht. De deelnemers dienen aan de crew mee te delen wie de ronde(s) heeft gwonnen.</p>
 
     <p>Alleen volgende mappen mogen worden gekozen: </p>
     <ul>

@@ -1,4 +1,4 @@
-
+{% set pageTitle = '<i class="icon-download"></i>&nbsp;Age of Empires 3' %}
 <div class="row">
     {% set image_1 = 'img/downloads/aoe_ingame.jpg' %}
     {% set image_2 = 'img/downloads/aoe_ingame2.jpg' %}
@@ -21,7 +21,7 @@
                 <br /></p>
 
 
-            <H1>Screenshots : </H1>
+            <H1>Screenshots</H1>
             <p>Klik op de plaatjes om ze in het groot te bekijken</p>
 
 

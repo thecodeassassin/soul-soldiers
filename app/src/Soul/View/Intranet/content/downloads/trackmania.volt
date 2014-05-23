@@ -1,12 +1,11 @@
-
+{% set pageTitle = '<i class="icon-download"></i>&nbsp;TrackMania' %}
+{% set image_1 = 'img/downloads/trackmania_ingame.jpg' %}
+{% set image_2 = 'img/downloads/trackmania_ingame2.jpg' %}
+{% set image_3 = 'img/downloads/trackmania_ingame3.jpg' %}
 <div class="row">
-    {% set image_1 = 'img/downloads/trackmania_ingame.jpg' %}
-    {% set image_2 = 'img/downloads/trackmania_ingame2.jpg' %}
-    {% set image_3 = 'img/downloads/trackmania_ingame3.jpg' %}
 
-    <div class="container">
-        <h1>Trackmania </h1>
-        <div class="col-md-12 color0 pb15 pt15">
+    <div class="col-md-12">
+        <div class="gutter well">
 
             <h1>Installatie instructies</h1>
            <br />
@@ -30,7 +29,7 @@
                 Indien je deze niet heb kan je deze hier gratis downloaden :<a href="http://store.steampowered.com/about/" target="_blank"> Download Steam</a>
             </p>
 
-         <H1>Screenshots : </H1>
+         <H1>Screenshots</H1>
             <p>Klik op de plaatjes om ze in het groot te bekijken</p>
 
 
