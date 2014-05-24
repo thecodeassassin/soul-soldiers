@@ -120,6 +120,8 @@ class Tournament extends Base
         $this->typeString = $types[$this->type];
         $this->startDateString = date('d-m-y H:i', strtotime($this->startDate));
 
+
+        // todo fix this logic
         if (!$this->isChallonge) {
             $this->playersArray = $this->players->toArray();
 
@@ -180,6 +182,14 @@ class Tournament extends Base
 
             }
 
+            // always remove the old image
+            $newImage = APPLICATION_PATH . '/../public/img/tournaments/'.$this->systemName.'.png';
+
+
+            if (file_exists($newImage)) {
+                unlink($newImage);
+            }
+
             // generate an image for this tournament
             if ($image =  $this->challonge->getOverviewImage()) {
                 $tmpFile = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
@@ -188,7 +198,8 @@ class Tournament extends Base
 
                 $original = new \Phalcon\Image\Adapter\GD($tmpFile);
                 $original->crop($original->getWidth(), $original->getHeight(), 0, 100);
-                $original->save(APPLICATION_PATH . '/../public/img/tournaments/'.$this->systemName.'.png');
+                $original->save($newImage);
+                chmod($newImage, 0777);
             }
 
         }

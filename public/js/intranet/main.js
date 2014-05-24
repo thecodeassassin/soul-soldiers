@@ -42,22 +42,24 @@ $(function() {
 
         });
 
-        $('.matchLink').click(function(e) {
-            e.preventDefault();
-
-            var tournamentId = $(this).attr('data-tournament-id');
-
-            $.magnificPopup.open({
-                type:'image',
-                mainClass: 'mfp-fade',
-                items: {src: '/img/tournaments/'+tournamentId+'.png'},
-                gallery: {
-                    enabled: true
-                }
-            });
-
-        });
     }
+    $('.matchLink').click(function(e) {
+        e.preventDefault();
+
+        var tournamentId = $(this).attr('data-tournament-id');
+        console.log('/img/tournaments/'+tournamentId+'.png');
+
+
+        $.magnificPopup.open({
+            type:'image',
+            mainClass: 'mfp-fade',
+            items: {src: '/img/tournaments/'+tournamentId+'.png'},
+            gallery: {
+                enabled: true
+            }
+        });
+
+    });
 });
 
 
