@@ -157,6 +157,6 @@
     <!-- END Page Container -->
 
     <!-- Scroll to top link, check main.js - scrollToTop() -->
-    <a href="javascript:void(0)" id="to-top"><span class="glyphicon glyphicon-chevron-up"></span></a>
+    <a href="javascript:void(0)" id="to-top"><span class="icon-up"></span></a>
 
 {% endblock %}

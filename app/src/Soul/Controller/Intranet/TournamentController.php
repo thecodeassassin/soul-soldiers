@@ -29,12 +29,19 @@ class TournamentController extends Base
 
     /**
      * @param $systemName
+     * @return \Phalcon\Http\ResponseInterface
      */
     public function signupAction($systemName)
     {
         $tournament = Tournament::findFirstBySystemName($systemName);
 
         if ($tournament) {
+
+            if ($tournament->hasEntered($this->view->user->getUserId())) {
+                $this->flashMessage(sprintf('Je bent al ingeschreven voor %s', $tournament->name), 'error', true);
+
+                return $this->response->redirect('tournaments');
+            }
 
             if ($tournament->isChallonge) {
                 $tournament->challonge->addPlayer($this->view->user->getNickName());
@@ -52,7 +59,7 @@ class TournamentController extends Base
             }
 
             $this->flashMessage(sprintf('Successvol ingeschreven voor %s', $tournament->name), 'success', true);
-            $this->response->redirect('tournaments');
+            return $this->response->redirect('tournaments');
         }
     }
 
@@ -100,8 +107,6 @@ class TournamentController extends Base
     {
         $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
         $tournament = Tournament::findFirstBySystemName($systemName);
-
-        die;
 
         if ($tournament && !$tournament->challonge->hasStarted()) {
             if ($tournament->challonge->start()) {
@@ -174,25 +179,25 @@ class TournamentController extends Base
     public function overviewAction($systemName)
     {
 
-        $tournament = Tournament::findFirstBySystemName($systemName);
-
-        if ($tournament) {
-
-            if ($image = (string)$tournament->challonge->getOverviewImage()) {
-                $this->response->resetHeaders();
-                $this->response->setHeader('Content-Type', 'image/png');
-
-                $tmpFile = $this->config->application->cacheDir . $systemName . '.png';
-                file_put_contents($tmpFile, file_get_contents($image));
-
-
-                $original = new \Phalcon\Image\Adapter\GD($tmpFile);
-                $original->crop($original->getWidth(), $original->getHeight() - 150);
-                $original->save();
-
-                readfile($tmpFile);
-            }
-        }
+//        $tournament = Tournament::findFirstBySystemName($systemName);
+//
+//        if ($tournament) {
+//
+//            if ($image = (string)$tournament->challonge->getOverviewImage()) {
+//                $this->response->resetHeaders();
+//                $this->response->setHeader('Content-Type', 'image/png');
+//
+//                $tmpFile = $this->config->application->cacheDir . $systemName . '.png';
+//                file_put_contents($tmpFile, file_get_contents($image));
+//
+//
+//                $original = new \Phalcon\Image\Adapter\GD($tmpFile);
+//                $original->crop($original->getWidth(), $original->getHeight() - 150);
+//                $original->save();
+//
+//                readfile($tmpFile);
+//            }
+//        }
 
     }
 
