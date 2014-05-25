@@ -9,9 +9,9 @@
                 Wij hebben geen commerciële doelstelling en onze specialisatie is het organiseren <br />
                 van kleinschalige maar vooral gezellige LAN-party's.
             </p>
-            <a href="{{ url('event/current') }}">
-                <div class="btn btn-lg btn-primary">Naar het aankomende evenement</div>
-            </a>
+            {#<a href="{{ url('event/current') }}">#}
+                {#<div class="btn btn-lg btn-primary">Naar het aankomende evenement</div>#}
+            {#</a>#}
         </div>
     </div>
 
@@ -20,6 +20,20 @@
             <div class="gutter color0">
                 <h2>Nieuws</h2>
 
+                <div class="panel panel-default news">
+                    <div class="panel-heading">
+                        <h3 class="news-title">Soul-Soldiers 2014 is weer voorbij!</h3>
+                        <h3 class="news-date">25/05/2014</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                        ]Helaas, het zit er alweer op. Soul-Soldiers 2014 is tot een einde gekomen. <br />
+                         We willen alle deelnemers en onze sponsoren bedanken voor een fantastisch weekend! <br /><br />
+
+                         <strong>Tot de volgende keer!</strong>
+                        </p>
+                    </div>
+                </div>
 
                 <div class="panel panel-default news">
                     <div class="panel-heading">
