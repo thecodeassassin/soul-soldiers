@@ -152,21 +152,12 @@ Panel
 /**
     News
 **/
-.panel-default.news {
+.panel.news {
     border: none;
 }
 
-.panel-default.news .panel-heading .news-title {
-    position: absolute;
-    left: 15px;
-}
 
-.panel-default.news .panel-heading .news-date {
-    position: absolute;
-    right: 15px;
-}
-
-.panel-default.news .panel-heading {
+.panel.news .panel-heading {
     background: none !important;
     color: #ffffff;
     border-bottom: 1px dashed #cccccc;
@@ -174,10 +165,20 @@ Panel
     height: 45px;
 }
 
-.panel-default.news h3 {
-    margin-bottom: 0;
+.panel.news .news-title {
     color: #5e8ea8;
     font-weight: 700;
+    font-size: 16px;
+}
+
+.panel.news .news-date {
+    color: #5e8ea8;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.panel.news .news-body {
+    border-bottom: 1px dashed #cccccc;
 }
 
 .sponsor-logo {

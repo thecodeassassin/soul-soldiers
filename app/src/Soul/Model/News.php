@@ -14,31 +14,31 @@ class News extends Base
      * @var integer
      */
     public $newsId;
-     
+
     /**
      *
      * @var string
      */
     public $module;
-     
+
     /**
      *
      * @var string
      */
     public $published;
-     
+
     /**
      *
      * @var string
      */
     public $title;
-     
+
     /**
      *
      * @var string
      */
     public $body;
-     
+
     /**
      * Initialize method for model.
      */
@@ -48,14 +48,20 @@ class News extends Base
 
     }
 
+    /**
+     *
+     */
     public function afterFetch()
     {
-        $this->published = date('d-m-Y H:i:s', strtotime($this->published));
+        $this->published = date('d-m-Y H:i', strtotime($this->published));
     }
 
+    /**
+     *
+     */
     public function beforeSave()
     {
-        $this->published =date('Y-m-d H:i:s', strtotime($this->published));
+        $this->published = date('Y-m-d H:i:s', strtotime($this->published));
     }
 
     /**
@@ -80,10 +86,10 @@ class News extends Base
     public function columnMap()
     {
         return array(
-            'newsId' => 'newsId', 
-            'module' => 'module', 
-            'published' => 'published', 
-            'title' => 'title', 
+            'newsId' => 'newsId',
+            'module' => 'module',
+            'published' => 'published',
+            'title' => 'title',
             'body' => 'body'
         );
     }

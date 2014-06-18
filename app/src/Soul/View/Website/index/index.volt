@@ -20,77 +20,7 @@
             <div class="gutter color0">
                 <h2>Nieuws</h2>
 
-                <div class="panel panel-default news">
-                    <div class="panel-heading">
-                        <h3 class="news-title">Soul-Soldiers 2014 is weer voorbij!</h3>
-                        <h3 class="news-date">25/05/2014</h3>
-                    </div>
-                    <div class="panel-body">
-                        <p>
-                         Helaas, het zit er alweer op. Soul-Soldiers 2014 is tot een einde gekomen. <br />
-                         We willen alle deelnemers en onze sponsoren bedanken voor een fantastisch weekend! <br /><br />
-
-                         <strong>Tot de volgende keer!</strong>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="panel panel-default news">
-                    <div class="panel-heading">
-                        <h3 class="news-title">Sponsors zijn bekend!</h3>
-                        <h3 class="news-date">09/05/2014</h3>
-                    </div>
-                    <div class="panel-body">
-                        <p>
-                            Het is bekend welke partijen ons dit jaar zullen gaan sponsoren, zoals voorgaande edities is <br />
-                            Gigabyte natuurlijk weer van de partij. Maar dit jaar zal ook <a href="http://leaseweb.com" target="_blank">Leaseweb</a> ons gaan sponsoren!<br /><br />
-
-                            Natuurlijk is dit goed nieuws voor onze deelnemers, en dat gaan jullie tijdens de LAN meemaken!. <br /> <br />
-
-                            Tot snel! <br />
-
-                            <div class="sponsor-logo">
-                                {{ image('img/leaseweb_logo.png', 'title': 'Leaseweb - Reliable Hosting') }}
-                            </div>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="panel panel-default news">
-                    <div class="panel-heading">
-                        <h3 class="news-title">Update betreffende slaapruimte</h3>
-                        <h3 class="news-date">09/04/2014</h3>
-                    </div>
-                    <div class="panel-body">
-                        <p>
-                            Er is een aparte slaapruimte aanwezig tijdens Soul-Soldiers 2014 op verzoek van onze deelnemers. <br /><br />
-                            Echter is de ruimte wel beperkt dus we willen iedereen graag verzoeken <strong>GEEN</strong> 2 persoons luchtbed <br />
-                            mee te nemen (tenzij er daadwerkelijk 2 personen op slapen).
-                        </p>
-                    </div>
-                </div>
-
-                <div class="panel panel-default news">
-                    <div class="panel-heading">
-                        <h3 class="news-title">Nieuwe website live!</h3>
-                        <h3 class="news-date">02/04/2014</h3>
-                    </div>
-                    <div class="panel-body">
-                        <p>
-                            Het is eindelijk zover! De inschrijvingen voor Soul-Soldiers 2014 kunnen beginnen! <br /><br />
-                            We gaan er alles aan doen om deze LAN nog leuker te maken dan de vorige editie! <br />
-                        </p>
-
-                        <p>
-                            <strong>Actie!</strong> Schrijf je in en betaal voor 1 Mei 2014, en maak kans op teruggave van je  <br />
-                            entreegeld!* Dus aarzel niet en koop vandaag nog je kaartje!<br /><br />
-
-                            Klik <a href="{{ url('event/current') }}">hier</a> om naar de pagina van het evenement te gaan. <br />
-                        </p>
-                        <small class="pull-right">* Bij minimaal 18 betalingen</small>
-
-                    </div>
-                </div>
+                {{ partial("../partials/news") }}
             </div>
         </div>
         <div class="col-md-4 gutter tweet-container color0">

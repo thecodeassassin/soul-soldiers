@@ -10,6 +10,7 @@ namespace Soul\Controller\Website;
 class IndexController extends \Soul\Controller\Base
 {
 
+    protected $hasNews = true;
 
     /**
      * Index action

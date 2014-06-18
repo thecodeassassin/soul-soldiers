@@ -1,8 +1,10 @@
+{% set admin = user is defined and user.isAdmin()|default(false) %}
+
 <div class="news-admin-wrapper">
-    {% if user.isAdmin() and editMode %}
+    {% if admin and editMode %}
         <a href="{{ router.getRewriteUri() }}" class="btn btn-primary">Nieuws bekijken</a>
         {{ partial('../partials/newsAdmin') }}
-    {% elseif user.isAdmin() and not editMode %}
+    {% elseif admin and not editMode %}
         <a href="{{ router.getRewriteUri() ~ '?editMode' }}" class="btn btn-primary">Nieuws aanpassen</a>
     {% endif %}
 </div>
@@ -10,23 +12,23 @@
 <div class="news-wrapper">
     {% for item in news %}
 
-        {% if user.isAdmin() and editMode %}
+        {% if admin and editMode %}
             {{ form('news/edit', "method": "post", "name":"editItem", "class":"validate", "role":"form") }}
         {% endif %}
-        <div class="panel">
+        <div class="panel news">
             <div class="panel-heading">
 
-                {% if user.isAdmin() and editMode %}
+                {% if admin and editMode %}
                     <input type="text" value="{{ item.title }}" name="title" style="width: 500px;"/>
                 {% else %}
-                    {{ item.title }}
+                    <span class="news-title">{{ item.title }}</span>
                 {% endif %}
 
 
-                <div class="pull-right"> {{ item.published }}</div></div>
-            <div class="panel-body">
+                <div class="pull-right" class="news-date"> {{ item.published }}</div></div>
+            <div class="panel-body news-body">
 
-                {% if user.isAdmin() and editMode %}
+                {% if admin and editMode %}
                     <textarea class="form-control" name="content" class="news-content" data-news-id="{{ item.newsId }}">{{ item.body }}</textarea>
                     <input type="hidden" name="newsId" value="{{ item.newsId }}" />
                     <button type="submit" class="btn btn-primary">Aanpassen</button>
@@ -40,7 +42,7 @@
             </div>
         </div>
 
-        {% if user.isAdmin() and editMode %}
+        {% if admin and editMode %}
             {{ endform() }}
         {% endif %}
 

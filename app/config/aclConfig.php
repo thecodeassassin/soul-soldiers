@@ -30,7 +30,7 @@ return new \Phalcon\Config(
              * Then only that role (and it's children) will inherit the rights to access it.
              */
             'publiccontrollers' => [
-//                'index',
+                'index',
                 'error',
                 'static',
                 'content',
