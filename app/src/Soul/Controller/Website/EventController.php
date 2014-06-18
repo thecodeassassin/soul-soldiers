@@ -55,6 +55,10 @@ class EventController extends \Soul\Controller\Base
 
         if ($systemName == 'current') {
             $event = Event::getCurrent();
+
+            if ($event && strtotime($event->endDate) < time()) {
+                return $this->response->redirect('event/'.$event->systemName);
+            }
         } else {
 
             if (!$event = Event::findBySystemName($systemName)) {

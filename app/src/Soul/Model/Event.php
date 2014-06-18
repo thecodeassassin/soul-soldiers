@@ -77,7 +77,7 @@ class Event extends Base
     /**
      * Return the current event
      *
-     * @return \Phalcon\Mvc\Model
+     * @return Event
      */
     public static function getCurrent()
     {
