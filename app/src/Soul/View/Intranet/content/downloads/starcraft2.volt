@@ -1,12 +1,12 @@
+{% set pageTitle = '<i class="icon-download"></i>&nbsp;Starcraft 2' %}
+{% set image_1 = 'img/downloads/starcraft_2_ingame.jpg' %}
+{% set image_2 = 'img/downloads/starcraft_2_ingame2.jpg' %}
+{% set image_3 = 'img/downloads/starcraft_2_ingame3.jpg' %}
 
 <div class="row">
-    {% set image_1 = 'img/downloads/starcraft_2_ingame.jpg' %}
-    {% set image_2 = 'img/downloads/starcraft_2_ingame2.jpg' %}
-    {% set image_3 = 'img/downloads/starcraft_2_ingame3.jpg' %}
 
-    <div class="container">
-        <h1>Starcraft 2</h1>
-        <div class="col-md-12 color0 pb15 pt15">
+    <div class="col-md-12">
+        <div class="gutter well">
 
          <h1>Installatie instructies</h1>
          <p><br />
@@ -18,7 +18,7 @@
          Indien je deze niet heb kan je deze hier gratis aanmaken :<a href="https://eu.battle.net/account/creation/tos.html" target="_blank"> Battlenet account Creatie</a>
          </p>
 
-         <H1>Screenshots : </H1>
+         <H1>Screenshots</H1>
          <p>Klik op de plaatjes om ze in het groot te bekijken</p>
 
 

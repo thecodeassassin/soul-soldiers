@@ -9,9 +9,11 @@ use Phalcon\Mvc\View;
 use Soul\AclBuilder;
 use Soul\Auth\AuthService;
 use Soul\Cms\Editor;
+use Soul\Form\NewsAddForm;
 use Soul\Mail;
 use Soul\Menu;
 use Soul\Menu\Builder;
+use Soul\Model\News;
 use Soul\Model\User;
 use Soul\Translate;
 use Soul\Util;
@@ -54,6 +56,16 @@ class Base extends Controller
      */
     protected $editable = false;
 
+    /**
+     * @var bool page has news
+     */
+    protected $hasNews = false;
+
+    /**
+     * @var NewsAddForm
+     */
+    protected $newsAddForm;
+
     public function initialize()
     {
         $this->title = $this->getConfig()->application->{ACTIVE_MODULE}->baseTitle;
@@ -68,6 +80,14 @@ class Base extends Controller
         $this->view->user = $this->authService->getAuthData();
         $this->config = $this->getConfig();
         $this->view->module = ACTIVE_MODULE;
+        $this->view->editMode = ($this->request->has('editMode') ? true : false);
+
+        if ($this->hasNews) {
+            $this->view->news = News::getByModule(ACTIVE_MODULE);
+
+            $this->newsAddForm = new NewsAddForm();
+            $this->view->newsaddform = $this->newsAddForm;
+        }
 
         if (ACTIVE_MODULE == 'intranet') {
             $menuConfig = $this->di->get('menuconfig');
@@ -91,6 +111,74 @@ class Base extends Controller
                 }
             }
 
+        }
+    }
+
+    /**
+     * @return \Phalcon\Http\ResponseInterface
+     */
+    public function addNewsAction()
+    {
+        $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
+
+        $post = $this->request->getPost();
+        $newPost = new News();
+
+        $this->newsAddForm->bind($post, $newPost);
+
+        if ($this->request->isPost()) {
+            if ($this->newsAddForm->isValid($this->request->getPost()) == false) {
+                $this->flashMessages($this->newsAddForm->getMessages(), 'error');
+            } else {
+
+                // create the new user
+                $newPost->module = ACTIVE_MODULE;
+
+                $newPost->published = date('Y-m-d H:i:s', time());
+                if (!$newPost->save()) {
+                    $this->flashMessages($newPost->newsAddForm->getMessages(), 'error');
+                }
+
+                $this->flashMessage('Nieuws artikel geplaatst', 'success', true);
+
+                return $this->response->redirect('home');
+
+            }
+        }
+    }
+
+    public function editNewsAction()
+    {
+        $postData = $this->request->getPost();
+
+        if (array_key_exists('newsId', $postData)) {
+
+            if ($newsItem = News::findFirstByNewsId($postData['newsId'])) {
+
+                $newsItem->body = $postData['content'];
+                $newsItem->title = $postData['title'];
+
+                $newsItem->save();
+
+                $this->flashMessage('Nieuws item succesvol aangepast', 'success', true);
+                return $this->response->redirect('home');
+            }
+        }
+    }
+
+    /**
+     * @param $newsId
+     */
+    public function deleteNewsAction($newsId)
+    {
+        if ($newsItem = News::findFirstByNewsId($newsId)) {
+
+            // delete the news item
+            $newsItem->delete();
+
+            $this->flashMessage('Nieuws item verwijderd', 'success', true);
+
+            return $this->response->redirect('home');
         }
     }
 

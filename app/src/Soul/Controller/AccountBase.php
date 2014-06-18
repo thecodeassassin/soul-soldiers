@@ -10,6 +10,7 @@ use Soul\Form\ForgotPasswordForm;
 use Soul\Form\LoginForm;
 use Soul\Model\FailedAttempt;
 use Soul\Model\User;
+use Soul\Auth\Exception as AuthException;
 
 
 /**

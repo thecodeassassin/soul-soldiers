@@ -24,9 +24,10 @@
  *    Changing this file will not change your CKEditor configuration.
  */
 
+
 var CKBUILDER_CONFIG = {
 	skin: 'moono',
-	preset: 'full',
+	preset: 'standard',
 	ignore: [
 		'dev',
 		'.gitignore',

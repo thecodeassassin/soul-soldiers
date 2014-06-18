@@ -72,6 +72,7 @@ return new \Phalcon\Config(
                     'css/intranet/bootstrap.css',
                     'font-icons/custom-icons/css/custom-icons-ie7.css',
                     'font-icons/custom-icons/css/custom-icons.css',
+                    'js-plugin/magnific-popup/magnific-popup.css',
                     'css/intranet/plugins.css',
                     'css/intranet/themes/deepblue.css',
                     'css/intranet/main.css',
@@ -82,13 +83,17 @@ return new \Phalcon\Config(
             'scripts' => [
                 'js' => [
                     "js-plugin/jquery/jquery-1.10.2.min.js",
+                    "js/intranet/ckeditor/ckeditor.js",
+                    "js/intranet/plugins.js",
+                    "js/intranet/challonge.js",
                     'js/modernizr-2.6.1.min.js',
+                    "js/magnificent.popup.min.js",
                     "js/jquery.loadmask.js",
                     "js-plugin/neko-contact-ajax-plugin/js/jquery.validate.min.js",
                     "js/jquery.validate.nl.js",
                     "js/bootbox.min.js",
                     "js-plugin/jquery-ui/jquery-ui-1.8.23.custom.min.js",
-                    "js/intranet/plugins.js",
+                    "js/intranet/main.js",
                     "https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
                 ]
             ]

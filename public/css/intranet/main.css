@@ -49,8 +49,14 @@ body.login {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    color: #FFFFFF;
+    color: #5495F7;
+    text-shadow: 0 0 1px #000;
 }
+
+#login-container {
+   width: 350px;
+}
+
 /*
 =================================================================
 (#m02mls) MAIN LAYOUT
@@ -98,7 +104,7 @@ body {
     padding: 20px;
     background-color: #426d84;
     border-left: 1px solid #ccc;
-    /*min-height: 800px;*/
+    min-height: 1200px;
 }
 
 #page-content + footer {
@@ -1318,6 +1324,10 @@ body {
     color: #fff;
 }
 
+.table-unstyled > tbody > tr > th, .table-unstyled > tbody > tr > td {
+    border: none;
+}
+
 /* Forum */
 .table.forum th,
 .table.forum td {
@@ -1468,7 +1478,7 @@ a.btn-theme-options.open {
 /* Page header */
 .page-header {
     margin: 20px -20px;
-    padding: 10px 20px 9px;
+    padding: 10px 20px 2px;
     background-color: #C0C0C0;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #615F5F;
@@ -1481,7 +1491,7 @@ a.btn-theme-options.open {
 }
 
 .page-header-top {
-    margin: -22px -20px 20px;
+    margin: -20px -20px 20px;
     border-top: none;
     color: #2E3947;
 }
@@ -1684,6 +1694,48 @@ header.navbar .navbar-brand {
     color: #db4a39;
 }
 
+/** Tournaments **/
+.tournament-tabs .tab-content {
+    padding: 0;
+    margin-top: 15px;
+}
+
+.tournament-container .well {
+    min-height: 600px;
+}
+
+.scoreCount {
+    width: 45px;
+    padding: 1px 2px;
+    text-align: center;
+}
+
+.tournament-container form {
+    display: inline;
+    position: absolute;
+    right: 50px;
+    top: 8px;
+}
+
+.tournament-container .table {
+    margin-left: -8px;
+}
+
+.list-group-item.disabled {
+    background-color: #bd362f;
+    text-decoration: line-through
+}
+
+.tournament-container form .form-control, .tournament-container form button {
+    height: 25px;
+    float: left;
+}
+
+.tournament-container form button {
+    padding: 1px 5px;
+}
+
+
 /* Tabs */
 .nav-tabs.nav-right > li {
     float: right;
@@ -1694,12 +1746,12 @@ header.navbar .navbar-brand {
     margin-left: 2px;
 }
 
+
+
 .tab-content {
-    border: 1px solid #ddd;
-    border-top: none;
     padding: 12px;
-    background: #fff;
-    color: #363636;
+    background: transparent;
+    border: none;
 }
 
 .tab-content-default {
@@ -2139,10 +2191,50 @@ table.table thead .sorting_desc_disabled {
     line-height: 10px;
 }
 
+.page-content .inner {
+
+}
+
+
+.container [class^="col-"] .gutter {
+    padding: 10px;
+    background-color: #3c3b3b;
+    border: 1px solid #ddd;
+    border: 1px solid rgba(86,61,124,.2);
+}
+
+
+/**
+News
+*/
+
+.news-wrapper {
+    margin-top: 30px;
+}
+
+.news-wrapper .panel {
+    margin-bottom: 25px;
+}
+
+.news-wrapper .panel-heading {
+    padding: 10px 15px;
+    font-size: 18px;
+    border-bottom: 1px dashed #005580;
+    color: #00396A;
+    background: #a9a9a9;
+    text-shadow: 0 0 1px #000000;
+}
+
+.news-wrapper .panel-body {
+    min-height: 100px;
+}
+
 /* Panel */
 .panel {
     -webkit-box-shadow: none;
     box-shadow: none;
+    background-color: transparent;
+    border: 1px solid #cccccc;
 }
 
 .panel-group .panel + .panel {
@@ -2169,6 +2261,9 @@ table.table thead .sorting_desc_disabled {
 /* List Group */
 a.list-group-item {
     color: #db4a39;
+}
+.list-group-item {
+    background: transparent;
 }
 
 /* Links */
@@ -2350,6 +2445,7 @@ a:focus {
     #page-content {
         margin: 0;
         border: none;
+
     }
 
     #page-content + footer {

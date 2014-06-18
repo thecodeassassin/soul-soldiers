@@ -1,12 +1,11 @@
-
+{% set pageTitle = '<i class="icon-download"></i>&nbsp;Freespace 2' %}
+{% set image_1 = 'img/downloads/fs2_ingame.jpg' %}
+{% set image_2 = 'img/downloads/fs2_ingame2.jpg' %}
+{% set image_3 = 'img/downloads/fs2_ingame3.jpg' %}
 <div class="row">
-    {% set image_1 = 'img/downloads/fs2_ingame.jpg' %}
-    {% set image_2 = 'img/downloads/fs2_ingame2.jpg' %}
-    {% set image_3 = 'img/downloads/fs2_ingame3.jpg' %}
 
-    <div class="container">
-        <h1>Freespace 2</h1>
-        <div class="col-md-12 color0 pb15 pt15">
+    <div class="col-md-12">
+        <div class="gutter well">
 
 
             <h1>Installatie instructies</h1>
@@ -26,7 +25,7 @@
             <br /></p>
 
 
-            <H1>Screenshots : </H1>
+            <H1>Screenshots</H1>
             <p>Klik op de plaatjes om ze in het groot te bekijken</p>
 
 

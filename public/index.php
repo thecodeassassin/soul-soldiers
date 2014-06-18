@@ -1,5 +1,4 @@
 <?php
-
 // Define path to application directory
 
 use Phalcon\DI\FactoryDefault;

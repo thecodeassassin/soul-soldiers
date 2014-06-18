@@ -7,10 +7,10 @@
     </div>
 </div>
 <!-- Login Container -->
-<div id="login-container" class="col-md-2">
+<div id="login-container">
     <div id="login-logo">
         <a href="">
-            <img src="img/logo-only.png" alt="logo">
+            <img src="img/logo-only.png" alt="logo" width="100">
         </a>
         <h3>Intranet</h3>
     </div>

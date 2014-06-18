@@ -38,18 +38,14 @@
 
     {% block footer %}
 
-    {{ assets.outputJs('scripts') }}
-    <script type="text/javascript">
-        var __loading_img = '{{ url('img/ajax-loader.gif') }}';
+        <script type="text/javascript">
+            var __loading_img = '{{ url('img/ajax-loader.gif') }}';
+            var CKEDITOR_BASEPATH = '/js/intranet/ckeditor/'
+        </script>
 
-        // set min height to browser height
-
-        $(window).resize(function() {
-            $('#page-content').css('min-height', $(window).height() - $('header').height() - 30);
-        });
-        $(window).resize();
-    </script>
+        {{ assets.outputJs('scripts') }}
 
     {% endblock %}
+    {% block javascript %}{% endblock %}
     </body>
 </html>

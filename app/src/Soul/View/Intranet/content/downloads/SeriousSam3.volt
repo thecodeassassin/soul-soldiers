@@ -1,13 +1,12 @@
+{% set pageTitle = '<i class="icon-download"></i>&nbsp;Serious Sam III' %}
+{% set image_1 = 'img/downloads/ss3_ingame.jpg' %}
+{% set image_2 = 'img/downloads/ss3_ingame2.jpg' %}
+{% set image_3 = 'img/downloads/ss3_ingame3.jpg' %}
 
 <div class="row">
-    {% set image_1 = 'img/downloads/ss3_ingame.jpg' %}
-    {% set image_2 = 'img/downloads/ss3_ingame2.jpg' %}
-    {% set image_3 = 'img/downloads/ss3_ingame3.jpg' %}
 
-    <div class="container">
-        <h1>Serious Sam 3</h1>
-        <div class="col-md-12 color0 pb15 pt15">
-
+    <div class="col-md-12">
+        <div class="gutter well">
             <h1>Installatie instructies</h1>
             <p><br />
                 Download beide delen die op de download pagina te vinden zijn.<br />
@@ -16,7 +15,7 @@
 
             </p>
 
-            <H1>Screenshots : </H1>
+            <H1>Screenshots</H1>
             <p>Klik op de plaatjes om ze in het groot te bekijken</p>
 
 

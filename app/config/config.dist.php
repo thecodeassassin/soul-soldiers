@@ -9,11 +9,12 @@ return new \Phalcon\Config(
             'dbname'      => '',
         ],
         'application' => [
-            'libraryDir'     => APPLICATION_PATH . '/src/',
-            'pluginsDir'     => APPLICATION_PATH . '/plugins/',
-            'cacheDir'       => APPLICATION_PATH . '/cache',
-            'locales'        => APPLICATION_PATH .'/locales/',
-            'mediaDir'       => APPLICATION_PATH .'/../public/media',
+            'libraryDir'     => __DIR__ . '/../src/',
+            'pluginsDir'     => __DIR__ . '/../plugins/',
+            'modelsDir'     => __DIR__ . '/../src/Soul/Model',
+            'cacheDir'       => __DIR__ . '/../cache/',
+            'locales'        => __DIR__ . '/../locales/',
+            'mediaDir'       => __DIR__ .'/../../public/media',
             'mediaUrl'       => '/media',
             'baseUri'        => '/',
             'intranet' => [
@@ -61,6 +62,9 @@ return new \Phalcon\Config(
         ],
         'crypt' => [
             'key' => ''
+        ],
+        'challonge' => [
+            'apiKey' => ''
         ]
     ]
 );

@@ -36,6 +36,7 @@ class AccountController extends AccountBase
         parent::manageAction();
 
         $this->view->partial('../Website/account/manage');
+        $this->view->pageTitle = '<i class="icon-user-1"></i> Mijn account';
     }
 
     public function forgotPasswordAction()

@@ -29,6 +29,22 @@ return [
             "name" => 1
         ],
 
+        '/news/add' => [
+            "controller" => "index",
+            "action"     => "addNews"
+        ],
+
+        '/news/delete/([0-9])' => [
+            "controller" => "index",
+            "action"     => "deleteNews",
+            "newsId" => 1
+        ],
+
+        '/news/edit' => [
+            "controller" => "index",
+            "action"     => "editNews"
+        ],
+
         /**
          * Account
          */
@@ -119,6 +135,53 @@ return [
         '/home' => [
             "controller" => "index",
             "action" => "index"
+        ],
+
+        '/tournaments' => [
+            "controller" => "tournament",
+            "action" => "index"
+        ],
+
+        '/tournament/signup/([a-zA-Z0-9_-]+)' => [
+            "controller" => "tournament",
+            "action" => 'signup',
+            "systemName" => 1
+        ],
+
+        '/tournament/score/add/([0-9]+)' => [
+            "controller" => "tournament",
+            "action" => 'addScore',
+            "userId" => 1
+        ],
+
+        '/tournament/remove/([0-9]+)' => [
+            "controller" => "tournament",
+            "action" => 'removeUser',
+            "userId" => 1
+        ],
+
+        '/tournament/start/([0-9]+)' => [
+            "controller" => "tournament",
+            "action" => 'start',
+            "systemName" => 1
+        ],
+
+        '/tournament/end/([0-9]+)' => [
+            "controller" => "tournament",
+            "action" => 'end',
+            "systemName" => 1
+        ],
+
+        '/tournament/select-winner/([0-9]+)' => [
+            "controller" => "tournament",
+            "action" => 'selectWinner',
+            "systemName" => 1
+        ],
+
+        '/tournament/overview/([0-9]+)' => [
+            "controller" => "tournament",
+            "action" => 'overview',
+            "systemName" => 1
         ]
     ]
 
