@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="jumbotron color0">
+        <div class="jumbotron color0 homepage">
             <h1>Welkom bij Soul-Soldiers!</h1>
 
             <p>

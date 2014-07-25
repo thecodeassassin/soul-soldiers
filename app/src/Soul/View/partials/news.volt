@@ -13,13 +13,13 @@
     {% for item in news %}
 
         {% if admin and editMode %}
-            {{ form('news/edit', "method": "post", "name":"editItem", "class":"validate", "role":"form") }}
+            {{ form('news/edit', "method": "post", "name":"editItem") }}
         {% endif %}
         <div class="panel news">
-            <div class="panel-heading">
+            <div class="panel-heading {% if editMode %}edit{% endif %}">
 
                 {% if admin and editMode %}
-                    <input type="text" value="{{ item.title }}" name="title" style="width: 500px;"/>
+                    <input type="text" class="form-control" value="{{ item.title }}" name="title" style="width: 500px;"/>
                 {% else %}
                     <span class="news-title">{{ item.title }}</span>
                 {% endif %}
@@ -31,9 +31,9 @@
                 {% if admin and editMode %}
                     <textarea class="form-control" name="content" class="news-content" data-news-id="{{ item.newsId }}">{{ item.body }}</textarea>
                     <input type="hidden" name="newsId" value="{{ item.newsId }}" />
-                    <button type="submit" class="btn btn-primary">Aanpassen</button>
+                    <button type="submit" class="btn btn-primary"><i class="icon-edit"></i></button>
                     <a href="{{ url('/news/delete/' ~ item.newsId) }}">
-                        <button type="button" class="btn btn-danger" onclick="return confirm('Zeker weten?')"><i class="icon-trash"></i> Verwijderen</button>
+                        <button type="button" class="btn btn-danger" onclick="return confirm('Zeker weten?')"><i class="icon-trash"></i></button>
                     </a>
 
                 {% else %}

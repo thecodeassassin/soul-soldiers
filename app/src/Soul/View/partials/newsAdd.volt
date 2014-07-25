@@ -1,5 +1,5 @@
-<div class="newsAdmin">
-    {{ form('news/add', "method": "post", "name":"additem", "class":"validate", "role":"form") }}
+<div class="newsAdmin add">
+    {{ form('news/add', "method": "post", "name":"additem") }}
     <div class="form-group">
         <label for="title" class="control-label">Titel *</label>
         <div class="noaddon">
@@ -12,6 +12,8 @@
             {{ newsaddform.render('body') }}
         </div>
     </div>
-    {{ newsaddform.render('Aanmaken') }}
+    <div class="form-group">
+        {{ newsaddform.render('Aanmaken') }}
+    </div>
     {{ endform() }}
 </div>

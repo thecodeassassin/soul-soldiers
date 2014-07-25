@@ -118,6 +118,14 @@ div.signup .register-submit {
 
 /* End Form Elements */
 
+div.homepage {
+    background: url('../img/background_home_b.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 #mainMenu .navbar-nav li {
     margin-right: 5px;
 }
@@ -154,6 +162,14 @@ Panel
 **/
 .panel.news {
     border: none;
+}
+
+.newsAdmin.add {
+    margin-bottom: 15px;
+}
+
+.panel.news .panel-heading.edit {
+    min-height: 60px;
 }
 
 

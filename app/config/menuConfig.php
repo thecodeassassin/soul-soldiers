@@ -57,9 +57,15 @@ $menuConfig = [
         // Admin only menu items
         'admin' => [
             'Admin'
-        ]
-
-    ],
+        ],
+         // authenticated only menu items
+         'authenticated' => [
+             'Uitloggen',
+             'Downloads',
+             'Competities',
+             'Mijn account'
+         ]
+     ],
     /**
      * Intranet menu
      */

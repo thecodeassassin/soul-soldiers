@@ -1,13 +1,15 @@
 <?php
 namespace Soul\Controller\Website;
 
+use Soul\Controller\Base;
+
 /**
  * Class IndexController
  *
  * @package Soul\Controller
  *
  */
-class IndexController extends \Soul\Controller\Base
+class IndexController extends Base
 {
 
     protected $hasNews = true;
@@ -17,9 +19,6 @@ class IndexController extends \Soul\Controller\Base
      */
     public function indexAction()
     {
-//        $users = new User();
-//
-//        die(var_dump($users->find()->toArray()));
 
     }
 
