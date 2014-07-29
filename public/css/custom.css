@@ -162,6 +162,7 @@ Panel
 **/
 .panel.news {
     border: none;
+    margin-bottom: 30px;
 }
 
 .newsAdmin.add {
@@ -191,10 +192,6 @@ Panel
     color: #5e8ea8;
     font-weight: 700;
     font-size: 14px;
-}
-
-.panel.news .news-body {
-    border-bottom: 1px dashed #cccccc;
 }
 
 .sponsor-logo {

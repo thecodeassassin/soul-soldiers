@@ -25,7 +25,7 @@
                 {% endif %}
 
 
-                <div class="pull-right" class="news-date"> {{ item.published }}</div></div>
+                <div class="pull-right news-date">{{ item.published }}</div></div>
             <div class="panel-body news-body">
 
                 {% if admin and editMode %}
