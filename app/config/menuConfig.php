@@ -41,6 +41,7 @@ $menuConfig = [
 //                'Soul-Soldiers 2014' => BASE_URL.'/event/current',
 //                'Competities' => BASE_URL.'/content/compos'
 //            ],
+            'Forum' => BASE_URL.'/forum',
             'Mijn account' => BASE_URL.'/account/manage',
             'Admin' => BASE_URL.'/admin',
             'Contact' => BASE_URL.'/contact',

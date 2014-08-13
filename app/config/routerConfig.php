@@ -123,7 +123,15 @@ return [
             "controller" => "event",
             "action" => "register",
             "systemName" => 1
-        ]
+        ],
+
+        /*
+         * Forum
+         */
+//        '/forum' => [
+//            'controller' => 'forum',
+//            'action' => 'index'
+//        ]
     ],
 
     /**

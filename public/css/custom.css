@@ -436,3 +436,11 @@ ul.nav-pills li a:hover {
     background-color: #3d5d71;
     color: #ffffff
 }
+
+/**Lists **/
+
+a.list-group-item, a.list-group-item:hover {
+   background-color: #DDDDDD;
+   text-shadow: none;
+   color: #0c0c0c;
+}

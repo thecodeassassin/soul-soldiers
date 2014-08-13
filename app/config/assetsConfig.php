@@ -54,7 +54,8 @@ return new \Phalcon\Config(
 
                     "js/blockui.js",
 
-                    "js/soul.js"
+                    "js/soul.js",
+                    "js/forum.js"
               ]
           ]
         ],

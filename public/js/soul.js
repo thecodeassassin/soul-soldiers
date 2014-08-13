@@ -2,6 +2,8 @@
 // Soul-Soldiers javascript
 $(function() {
 
+
+
     bootbox.setDefaults({
         /**
          * @optional String
@@ -160,7 +162,9 @@ $(function() {
     // preload the loader image
     $('<img/>')[0].src = __loading_img;
 
+
 });
+
 
 function ajaxLoad(mode){
 

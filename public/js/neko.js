@@ -53,53 +53,6 @@ $(document).ready(function() {
     /** INIT FUNCTIONS **/
     initializeMainMenu();
 
-    /*
-     |--------------------------------------------------------------------------
-     |  fullwidth image
-     |--------------------------------------------------------------------------
-     */
-    /** FULLSCREEN IMAGE **/
-
-    function fullscreenImage(){
-        $('#homeFullScreen').css({height:$(window).height()});
-        $('#homeFullScreen').css({width:$(window).width()});
-    }
-
-    $(window).on("resize",function(e){
-
-        if ($('#homeFullScreen').length)
-        {
-            fullscreenImage();
-        }
-    });
-
-    if ($('#homeFullScreen').length)
-    {
-        fullscreenImage();
-    }
-
-
-    if ($('#onePage').length)
-    {
-
-        $("#mainHeader").sticky({ topSpacing: 0 });
-
-
-        if($('.scrollMenu').length){
-
-            $('#mainHeader .nav li a, .scrollLink').bind('click', function(event) {
-                var $anchor = $(this);
-                var headerH = $('#mainHeader').outerHeight() -1;
-
-                $('html, body').stop().animate({
-                    scrollTop : $($anchor.attr('href')).offset().top - headerH + "px"
-                }, 1200, 'easeInOutExpo');
-
-                event.preventDefault();
-            });
-
-        }
-    }
 
 
 
@@ -577,28 +530,28 @@ function initializeMainMenu() {
     }
 }
 
-
-/*
- |--------------------------------------------------------------------------
- | Menu shrink
- |--------------------------------------------------------------------------
- */
-
-$(window).scroll(function () {
-
-    if($(window).width() > 1024 && !$('#onePage').length){
-
-        if($(window).scrollTop() > 0){
-            $('#mainHeader').addClass('fixedHeader');
-            /* $('body').css('margin-top', $('#mainHeader').outerHeight(true));*/
-
-        }else{
-            $('#mainHeader').removeClass('fixedHeader');
-            /*$('body').css('margin-top', 0);*/
-
-        }
-    }
-});
+//
+///*
+// |--------------------------------------------------------------------------
+// | Menu shrink
+// |--------------------------------------------------------------------------
+// */
+//
+//$(window).scroll(function () {
+//
+//    if($(window).width() > 1024 && !$('#onePage').length){
+//
+//        if($(window).scrollTop() > 0){
+//            $('#mainHeader').addClass('fixedHeader');
+//            /* $('body').css('margin-top', $('#mainHeader').outerHeight(true));*/
+//
+//        }else{
+//            $('#mainHeader').removeClass('fixedHeader');
+//            /*$('body').css('margin-top', 0);*/
+//
+//        }
+//    }
+//});
 
 
 

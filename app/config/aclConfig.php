@@ -34,7 +34,8 @@ return new \Phalcon\Config(
                 'error',
                 'static',
                 'content',
-                'contact'
+                'contact',
+                'forum'
             ],
             /**
              * <pre>
