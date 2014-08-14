@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="container">
+<div class="container">
+    <div class="row">
         <h1>Forum</h1>
 
         <div class="col-md-4 color0 pb15 pt15">

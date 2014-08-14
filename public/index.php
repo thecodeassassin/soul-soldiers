@@ -73,12 +73,22 @@ $di->set('config', $config);
 
 if (APPLICATION_ENV == \Soul\Kernel::ENV_STAGING) {
     $stagingAccess = $config->stagingAccess->toArray();
+    $ip = \Soul\Util::getClientIp();
 
-    // redirect an unauthorised user to soul-soldiers.nl
-    if (!in_array(\Soul\Util::getClientIp(), $stagingAccess)) {
-        header('Location: http://soul-soldiers.nl');
-        exit;
+    if (strpos($ip, ',') !== false) {
+        $ips = explode(',', $ip);
+    } else {
+        $ips = array($ip);
     }
+
+    foreach ($ips as $checkIp) {
+        // redirect an unauthorised user to soul-soldiers.nl
+        if (!in_array($checkIp, $stagingAccess)) {
+            header('Location: http://soul-soldiers.nl');
+            exit;
+        }
+    }
+
 }
 
 if (APPLICATION_ENV == \Soul\Kernel::ENV_DEVELOPMENT) {
