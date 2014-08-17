@@ -36,6 +36,13 @@ $di->setShared('view', function() use ($config, $di) {
                         }
                     );
 
+                    $compiler->addFilter('date', function($resolvedArgs, $exprArgs) use($compiler)
+                    {
+                        $firstArgument = $compiler->expression($exprArgs[0]['expr']);
+                        $secondArgument = $compiler->expression($exprArgs[1]['expr']);
+                        return  'date(' . $secondArgument . ', strtotime('.$firstArgument.'))';
+                    });
+
                     $compiler->addFunction(
                         'email_embed',
                         function ($args, $params) use ($compiler, $di) {

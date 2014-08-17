@@ -7,6 +7,7 @@
 
 namespace Soul\Controller\Website;
 
+use Phalcon\Mvc\View;
 use Soul\AclBuilder;
 use Soul\Auth\AuthService as AuthService;
 use Soul\Controller\AccountBase;
@@ -52,6 +53,9 @@ class ForumController extends AccountBase
             );
         }
 
+        $firstCategory = $categories->getFirst();
+
+        $this->view->posts = $firstCategory->posts;
         $this->view->categories = $categories;
     }
 
@@ -67,20 +71,17 @@ class ForumController extends AccountBase
             throw new \Exception('Ajax only content!');
         }
 
-        // ajax action, disable view
-        $this->view->disable();
-
+        $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
         $category = ForumCategory::findFirst(array("categoryId = $categoryId"));
 
         if ($category->isAdminOnly() && !$this->isAdmin) {
             $this->response->setStatusCode(401, 'Not authenticated');
         } else {
 
-            $this->response->setJsonContent($category->posts->toArray());
+            $this->view->pick('forum/topics');
+            $this->view->posts = $category->posts;
 
         }
-
-        $this->response->send();
 
     }
 

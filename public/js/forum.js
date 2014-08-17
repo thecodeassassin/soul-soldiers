@@ -15,8 +15,7 @@ $(function() {
         });
     });
 
-    categories.find('a:first').click();
-
+    categories.find('a:first').addClass('active');
 });
 
 function loadCategory(id) {
@@ -25,7 +24,7 @@ function loadCategory(id) {
 
     $.ajax( '/forum/posts/'+id)
         .done(function(data) {
-            console.log(data);
+            $('#topics').find('tbody').html(data);
         })
         .fail(function(req) {
 

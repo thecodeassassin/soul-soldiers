@@ -2,7 +2,7 @@
     <div class="row">
         <h1>Forum</h1>
 
-        <div class="col-md-4 color0 pb15 pt15">
+        <div class="col-md-3 color0 pb15 pt15">
             <h2>Categorieen</h2>
 
             <div class="list-group" id="forum-categories">
@@ -12,6 +12,22 @@
                     </a>
                 {% endfor %}
             </div>
+        </div>
+
+        <div class="col-md-9 color0 pb15 pt15">
+            <table class="table" id="topics">
+                <thead>
+                    <tr>
+                        <th class="col-md-3">Onderwerp</th>
+                        <th class="col-md-1"># Bekeken</th>
+                        <th class="col-md-2">Gepost</th>
+                        <th class="col-md-2">Laatste post</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% include 'forum/topics.volt' %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
