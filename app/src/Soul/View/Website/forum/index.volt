@@ -19,6 +19,10 @@
                 <h4>Ons forum is afhankelijk van javascript. Om het forum te kunnen gebruik dien je javascript aan te zetten.</h4>
             </noscript>
 
+            <div class="mb15">
+                <button class="btn btn-primary"><i class="icon-plus-circled"></i> Nieuw onderwerp</button>
+            </div>
+
             <table class="table" id="topics">
                 <thead>
                     <tr>
