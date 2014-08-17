@@ -15,6 +15,10 @@
         </div>
 
         <div class="col-md-9 color0 pb15 pt15">
+            <noscript>
+                <h4>Ons forum is afhankelijk van javascript. Om het forum te kunnen gebruik dien je javascript aan te zetten.</h4>
+            </noscript>
+
             <table class="table" id="topics">
                 <thead>
                     <tr>

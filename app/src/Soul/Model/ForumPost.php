@@ -1,14 +1,14 @@
 <?php
-/**  
+/**
  * @author Stephen Hoogendijk
  * @copyright Soul-Soldiers
- * @package ForumPost 
- */  
+ * @package ForumPost
+ */
 
 namespace Soul\Model;
 
 
- 
+
 use Phalcon\Paginator\Adapter\QueryBuilder;
 
 class ForumPost extends Base
@@ -96,6 +96,22 @@ class ForumPost extends Base
     }
 
     /**
+     * @return \Phalcon\Mvc\Model\ResultsetInterface
+     */
+    public function getReplies()
+    {
+        return self::find("replyId = $this->postId");
+    }
+
+    /**
+     * @return \Phalcon\Mvc\Model
+     */
+    public function getLastReply()
+    {
+        return self::findFirst(["replyId = $this->postId", "order" => 'postDate DESC']);
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()
@@ -113,4 +129,4 @@ class ForumPost extends Base
             'isSticky' => 'isSticky'
         );
     }
-} 
+}

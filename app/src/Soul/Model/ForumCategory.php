@@ -1,14 +1,14 @@
 <?php
-/**  
+/**
  * @author Stephen Hoogendijk
  * @copyright Soul-Soldiers
- * @package ForumCategory 
- */  
+ * @package ForumCategory
+ */
 
 namespace Soul\Model;
 
 
- 
+
 class ForumCategory extends Base
 {
     /**
@@ -58,6 +58,14 @@ class ForumCategory extends Base
     }
 
     /**
+     * @return \Phalcon\Mvc\Model\ResultsetInterface
+     */
+    public function getPosts()
+    {
+        return ForumPost::find(["categoryId = $this->categoryId", "replyId = null"]);
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()
@@ -68,4 +76,4 @@ class ForumCategory extends Base
             'adminOnly' => 'adminOnly'
         );
     }
-} 
+}

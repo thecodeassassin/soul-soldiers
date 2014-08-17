@@ -16,15 +16,24 @@ $(function() {
     });
 
     categories.find('a:first').addClass('active');
+
+    $('#topics').find('tr.topic').click(loadPost);
 });
+
+function loadPost() {
+    document.location.href = '/forum/read/' + $(this).attr('data-post-id');
+}
 
 function loadCategory(id) {
     ajaxLoad(true);
 
-
     $.ajax( '/forum/posts/'+id)
         .done(function(data) {
-            $('#topics').find('tbody').html(data);
+
+            // load the topics and rebind the clicks
+            var topics = $('#topics');
+            topics.find('tbody').html(data);
+            topics.find('tr.topic').click(loadPost);
         })
         .fail(function(req) {
 

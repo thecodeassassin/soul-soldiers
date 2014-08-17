@@ -48,14 +48,12 @@ class ForumController extends AccountBase
         if ($this->isAdmin) {
             $categories = ForumCategory::find();
         } else {
-            $categories = ForumCategory::find(
-                array("adminOnly = 0")
-            );
+            $categories = ForumCategory::find([("adminOnly = 0")]);
         }
 
         $firstCategory = $categories->getFirst();
 
-        $this->view->posts = $firstCategory->posts;
+        $this->view->posts = $firstCategory->getPosts();
         $this->view->categories = $categories;
     }
 

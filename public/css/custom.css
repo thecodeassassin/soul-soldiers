@@ -444,3 +444,15 @@ a.list-group-item, a.list-group-item:hover {
    text-shadow: none;
    color: #0c0c0c;
 }
+
+/** Forum **/
+
+#topics tbody tr:hover {
+    pointer: hand;
+    cursor: pointer;
+    background-color: #428bca;
+}
+
+#topics tbody h4 {
+    margin-top: 15px;
+}
