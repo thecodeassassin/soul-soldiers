@@ -83,7 +83,7 @@ if (APPLICATION_ENV == \Soul\Kernel::ENV_STAGING) {
     }
 
     foreach ($ips as $checkIp) {
-        if (!in_array($checkIp, $stagingAccess)) {
+        if (in_array($checkIp, $stagingAccess)) {
             $access = true;
         }
     }
