@@ -119,6 +119,8 @@
 
         <h3>Aanvullende informatie</h3>
         <p>
+            <strong>Let op! Per persoon is er maar 1 monitor toegestaan!</strong><br /><br />
+
             Tijdens het evenement is het <strong>toegestaan</strong> om eigen eten en drinken mee te nemen. <br />
             Er wordt een koelkast ter beschikking gesteld om producten die gekoeld dienen te worden <br /> in op te slaan.
             Zorg dat je stickers mee neemt om je producten te markeren, zodat iemand niet per ongeluk iets van jou pakt.
