@@ -184,7 +184,7 @@ class Event extends Base
      */
     public function hasEntry($userId)
     {
-        if ($entry = $this->findEntryByUserIdAndSystemName($userId, $this->systemName)) {
+        if ($entry = $this->findEntryByUserIdAndEventId($userId, $this->eventId)) {
 
             return $entry;
         }
@@ -198,7 +198,7 @@ class Event extends Base
      */
     public function hasPayed($userId)
     {
-        if ($entry = static::findEntryByUserIdAndSystemName($userId, $this->systemName)) {
+        if ($entry = static::findEntryByUserIdAndEventId($userId, $this->eventId)) {
 
             if ($entry->payment) {
                 return (bool) $entry->payment->confirmed;
@@ -212,13 +212,12 @@ class Event extends Base
 
     /**
      * @param $userId
-     * @param $systemName
+     * @param $eventId
      * @return \Phalcon\Mvc\Model
      */
-    public static function findEntryByUserIdAndSystemName($userId, $systemName)
+    public static function findEntryByUserIdAndEventId($userId, $eventId)
     {
-
-        return Entry::findFirst(["userId = '$userId'", "systemName = '".$systemName."'"]);
+        return Entry::findFirst(["userId = $userId AND eventId = ".$eventId.""]);
     }
 
     /**

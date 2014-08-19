@@ -29,10 +29,15 @@ $di->setShared('view', function() use ($config, $di) {
 
                     $compiler = $volt->getCompiler();
 
-                    $compiler->addFunction(
-                        't',
+                    $compiler->addFunction('t',
                         function ($key) {
                             return Translate::translate($key);
+                        }
+                    );
+
+                    $compiler->addFunction('rand',
+                        function ($resolvedArgs) {
+                            return 'mt_rand('.$resolvedArgs.')';
                         }
                     );
 

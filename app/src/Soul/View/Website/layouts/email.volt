@@ -1,3 +1,7 @@
+{% if newsletter is not defined %}
+{% set newsletter = null %}
+{% endif %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -75,6 +79,10 @@
             h1 {
                 text-align: right;
             }
+        }
+
+        h1 {
+            font-size: 23px;
         }
 
 

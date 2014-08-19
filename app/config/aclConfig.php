@@ -35,7 +35,7 @@ return new \Phalcon\Config(
                 'static',
                 'content',
                 'contact',
-                'forum'
+//                'forum'
             ],
             /**
              * <pre>
@@ -70,7 +70,8 @@ return new \Phalcon\Config(
                 ],
                 AclBuilder::ROLE_ADMIN => [
                     'admin' => '*',
-                    'index' => ['generate', 'addNews', 'deleteNews', 'editNews']
+                    'index' => ['generate', 'addNews', 'deleteNews', 'editNews'],
+                    'forum' => '*' //disable when forum goes live
                 ]
             ]
         ],

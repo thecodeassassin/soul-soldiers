@@ -381,13 +381,30 @@ Index / news / tweets
 
 /** Events **/
 .lan-info {
-    background-image: url('../img/lan-bg_3.png');
+    background-image: url('../img/lan_bg_1.png');
     background-color: rgba(255,255,255,0);
     background-size: 100%;
-    background-position: 24% 43% !important;
+    background-position: 24% 10% !important;
     /*background-attachment: fixed;*/
     background-repeat: no-repeat;
 }
+
+.lan-info-1 {
+    background-image: url('../img/lan_bg_1.png');
+}
+
+.lan-info-2 {
+    background-image: url('../img/lan_bg_2.png');
+}
+
+.lan-info-3 {
+    background-image: url('../img/lan_bg_3.png');
+}
+
+.lan-info-4 {
+    background-image: url('../img/lan_bg_4.png');
+}
+
 
 .lan-info p {
     text-shadow: 2px 1px 1px #000000;

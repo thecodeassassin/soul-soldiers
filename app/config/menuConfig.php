@@ -36,11 +36,11 @@ $menuConfig = [
                 'LAN-Party checklist' => BASE_URL.'/content/checklist',
                 'Wat is een LAN-party?' => BASE_URL.'/content/lan-description'
             ],
-//            'Aankomend evenement' => [
-//                'link' => BASE_URL.'/event/current',
-//                'Soul-Soldiers 2014' => BASE_URL.'/event/current',
+            'Aankomend evenement' => [
+                'link' => BASE_URL.'/event/current',
+                'Soul-Soldiers 2014: Autumn edition' => BASE_URL.'/event/current'
 //                'Competities' => BASE_URL.'/content/compos'
-//            ],
+            ],
             'Forum' => BASE_URL.'/forum',
             'Mijn account' => BASE_URL.'/account/manage',
             'Admin' => BASE_URL.'/admin',
@@ -57,7 +57,8 @@ $menuConfig = [
         ],
         // Admin only menu items
         'admin' => [
-            'Admin'
+            'Admin',
+            'Forum'
         ],
          // authenticated only menu items
          'authenticated' => [
