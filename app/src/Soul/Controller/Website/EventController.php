@@ -102,6 +102,8 @@ class EventController extends \Soul\Controller\Base
             $amountPayed = $event->getAmountPayed();
         }
 
+
+
         $this->view->pick('event/'.$event->systemName);
 
         $this->view->registered = $registered;
@@ -148,9 +150,16 @@ class EventController extends \Soul\Controller\Base
 
         $this->view->dinnerPrice = self::DINNER_OPTION_PRICE;
 
+
         $event = Event::findBySystemName($systemName);
         $user = $this->authService->getAuthData();
         $config = $this->getConfig();
+        $dinerAvailable = false;
+
+        // 604800 seconds is one week
+        if ((strtotime($event->startDate) - 604800) > time()) {
+            $dinerAvailable = true;
+        }
 
 
         if ($event && $user) {
@@ -208,6 +217,7 @@ class EventController extends \Soul\Controller\Base
         $this->view->event = $event;
         $this->view->user = $user;
         $this->view->issuers = $issuers;
+        $this->view->dinerAvailable = $dinerAvailable;
     }
 
 }
