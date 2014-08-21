@@ -21,8 +21,18 @@
 
                     <p>
                         Je kunt bij ons gemakkelijk je entreeticket betalen met iDeal.
+                        Tevens kun je er voor kiezen om het buffet op zaterdag bij te wonen.
                     </p>
                     {{ form('event/pay/' ~ event.systemName, "method": "post", "name":"payment", "class":"form-inline validate", "role":"form") }}
+
+                    <div class="mt15 mb30">
+                        <div class="checkbox form-group">
+                            <label data-toggle="tooltip" data-placement="top" title="Het buffet bestaat uit Nasi, kipsate en sla. Drinken is tevens beschikbaar.">
+                                <input type="checkbox" value="yes" class="input-control" name="dinner_option" />
+                                <strong> Buffet op zaterdagavond (&euro; {{ '%01.2f'|format(dinnerPrice) }} extra)</strong>
+                            </label>
+                        </div>
+                    </div>
 
                     <div class="input-group">
                         <span class="input-group-addon icon-credit-card">&nbsp;</span>

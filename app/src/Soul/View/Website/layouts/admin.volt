@@ -14,6 +14,11 @@
                         Mass mail
                     </a>
                 </li>
+                <li {% if page is 'users' %} class="active" {% endif %}>
+                    <a href="{{ url('admin/users') }}">
+                        Gebruikers
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="col-md-9 color0 pb15 pt15">

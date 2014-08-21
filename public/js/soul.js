@@ -2,6 +2,7 @@
 // Soul-Soldiers javascript
 $(function() {
 
+    $("[data-toggle='tooltip']").tooltip();
 
 
     bootbox.setDefaults({

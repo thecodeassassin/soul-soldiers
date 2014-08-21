@@ -24,6 +24,8 @@ use Soul\Util;
 class EventController extends \Soul\Controller\Base
 {
 
+    const DINNER_OPTION_PRICE = 10;
+
     /**
      * @var TargetPay
      */
@@ -144,6 +146,7 @@ class EventController extends \Soul\Controller\Base
     public function payAction($systemName)
     {
 
+        $this->view->dinnerPrice = self::DINNER_OPTION_PRICE;
 
         $event = Event::findBySystemName($systemName);
         $user = $this->authService->getAuthData();
@@ -167,6 +170,11 @@ class EventController extends \Soul\Controller\Base
                 $description = $event->product->description;
                 $amount = $event->product->cost * 100; // amount is in cents?!
                 $productId = $event->productId;
+
+                if ($this->request->get('dinner_option', 'string') == 'yes') {
+                    $amount = $amount + (self::DINNER_OPTION_PRICE * 100);
+                    $description .= ' plus buffet';
+                }
 
                 // build the transaction
                 $idealStart = new IdealStart($layoutCode, $issuer, $description, $amount, $returnUrl, $reportUrl);

@@ -426,6 +426,10 @@ Index / news / tweets
     border: none !important;
 }
 
+.table-striped>tbody>tr:nth-child(odd)>td {
+    background-color: #144150;
+}
+
 strong {
     font-weight: 600;
 }
