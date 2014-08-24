@@ -94,88 +94,90 @@ class AdminController extends \Soul\Controller\Base
         $this->view->userId = $userId;
         $this->view->payedForBuffet = $payedForBuffet;
 
-        if ($this->request->isPost()) {
-            $post = $this->request->getPost();
-
-            // bind the user to the formData
-            $editUserForm->bind($post, $user);
-
+        try {
             if ($this->request->isPost()) {
-                if ($editUserForm->isValid($this->request->getPost()) == false) {
-                    $this->flashMessages($editUserForm->getMessages(), 'error', true);
-                } else {
+                $post = $this->request->getPost();
 
-                    // if validation fails, show messages
-                    if ($user->validation() === false) {
+                // bind the user to the formData
+                $editUserForm->bind($post, $user);
 
-                        $this->flashMessages($user->getMessages(), 'error');
+                if ($this->request->isPost()) {
+                    if ($editUserForm->isValid($this->request->getPost()) == false) {
+                        $this->flashMessages($editUserForm->getMessages(), 'error', true);
                     } else {
 
-                        $formPayed = $this->request->get('payed');
-                        $buffetSelected = $this->request->get('buffet');
-                        $entry = $event->hasEntry($userId);
+                        // if validation fails, show messages
+                        if ($user->validation() === false) {
 
-                        if (!$hasPayed && $formPayed || ($hasPayed && $buffetSelected)) {
+                            $this->flashMessages($user->getMessages(), 'error');
+                        } else {
 
-                            if (!$hasPayed) {
-                                $paymentReference = $this->request->get('paymentReference');
+                            $formPayed = $this->request->get('payed');
+                            $buffetSelected = $this->request->get('buffet');
+                            $entry = $event->hasEntry($userId);
 
-                                if(!$paymentReference) {
-                                    $this->flashMessage('Betaling referentie is verplicht!', 'error', true);
-                                    return false;
+                            if (!$hasPayed && $formPayed || ($hasPayed && $buffetSelected)) {
+
+                                if (!$hasPayed) {
+                                    $paymentReference = $this->request->get('paymentReference');
+
+                                    if(!$paymentReference) {
+                                        throw new \Exception('Betaling referentie is verplicht!');
+                                    }
+
+                                    $amount = $event->getEventCost();
+
+                                    // if the buffet option has been selected, add it
+                                    if ($buffetSelected && !$payedForBuffet) {
+                                        $amount += EventController::DINNER_OPTION_PRICE;
+                                    }
+
+                                    if(!$newPayment = Payment::createPayment($amount, $paymentReference, $userId, $event->productId)) {
+                                        throw new \Exception('Registreren van betaling mislukt');
+                                    }
+
+                                    $newPayment->confirmed = 1;
+                                    $newPayment->save();
+
+                                    $entry->paymentId = $newPayment->paymentId;
+                                    $entry->save();
+
+                                    // confirm the payment with the user
+                                    $this->getMail()->sendToUser(
+                                        User::findFirstByUserId($userId),
+                                        'Bedankt voor je betaling',
+                                        'paymentConfirmed',
+                                        compact('event')
+                                    );
+
+
+                                } else {
+
+                                    if ($buffetSelected) {
+
+                                        $payment = $entry->payment;
+
+                                        $payment->amount += EventController::DINNER_OPTION_PRICE;
+                                        $payment->save();
+                                    }
                                 }
 
-                                $amount = $event->getEventCost();
-
-                                // if the buffet option has been selected, add it
-                                if ($buffetSelected && !$payedForBuffet) {
-                                    $amount += EventController::DINNER_OPTION_PRICE;
-                                }
-
-                                if(!$newPayment = Payment::createPayment($amount, $paymentReference, $userId, $event->productId)) {
-                                    $this->flashMessage('Registreren van betaling mislukt', 'error', true);
-                                }
-
-                                $newPayment->confirmed = 1;
-                                $newPayment->save();
-
-                                $entry->paymentId = $newPayment->paymentId;
-                                $entry->save();
-
-                                // confirm the payment with the user
-                                $this->getMail()->sendToUser(
-                                    User::findFirstByUserId($userId),
-                                    'Bedankt voor je betaling',
-                                    'paymentConfirmed',
-                                    compact('event')
-                                );
-
-
-                            } else {
-
-                                if ($buffetSelected) {
-
-                                    $payment = $entry->payment;
-
-                                    $payment->amount += EventController::DINNER_OPTION_PRICE;
-                                    $payment->save();
-                                }
                             }
 
+                            // save the user
+                            $user->save();
+                            $this->flashMessage(sprintf('Gebruiker %s succesvol aangepast', $user->nickName), 'success', true);
+
+                            $this->response->redirect('admin/edituser/'.$userId);
                         }
 
-                        // save the user
-                        $user->save();
-                        $this->flashMessage(sprintf('Gebruiker %s succesvol aangepast', $user->nickName), 'success', true);
-
-                        $this->response->redirect('admin/edituser/'.$userId);
                     }
-
                 }
+
             }
-
+        } catch (\Exception $e) {
+            $this->flashMessage($e->getMessage(), 'error');
         }
-
 
     }
 
