@@ -102,8 +102,6 @@ class EventController extends \Soul\Controller\Base
             $amountPayed = $event->getAmountPayed();
         }
 
-
-
         $this->view->pick('event/'.$event->systemName);
 
         $this->view->registered = $registered;
@@ -160,7 +158,6 @@ class EventController extends \Soul\Controller\Base
         if ((strtotime($event->startDate) - 604800) > time()) {
             $dinerAvailable = true;
         }
-
 
         if ($event && $user) {
             $userId = $user->getUserId();

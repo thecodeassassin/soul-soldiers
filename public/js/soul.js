@@ -163,8 +163,8 @@ $(function() {
     // preload the loader image
     $('<img/>')[0].src = __loading_img;
 
-
 });
+
 
 
 function ajaxLoad(mode){

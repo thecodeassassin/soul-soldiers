@@ -84,7 +84,7 @@ class Payment extends Base
      * @param string    $reference
      * @param int       $userId
      * @param int       $productId
-     * @return bool
+     * @return bool|Payment
      */
     public static function createPayment($amount, $reference, $userId, $productId)
     {
@@ -104,7 +104,7 @@ class Payment extends Base
 
         $payment->save();
 
-        return true;
+        return $payment;
     }
 
     /**

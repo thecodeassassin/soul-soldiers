@@ -212,6 +212,25 @@ class Event extends Base
 
     /**
      * @param $userId
+     *
+     * @return bool|float
+     */
+    public function getUserPayment($userId)
+    {
+        if ($entry = static::findEntryByUserIdAndEventId($userId, $this->eventId)) {
+
+            if ($entry->payment) {
+                return (float) $entry->payment->amount;
+            }
+
+        }
+
+        return false;
+
+    }
+
+    /**
+     * @param $userId
      * @param $eventId
      * @return \Phalcon\Mvc\Model
      */
@@ -246,6 +265,14 @@ class Event extends Base
         }
 
         return $amountPayed;
+    }
+
+    /**
+     * @return float
+     */
+    public function getEventCost()
+    {
+        return (float) $this->product->cost;
     }
 
     /**

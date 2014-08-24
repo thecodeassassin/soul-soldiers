@@ -12,7 +12,7 @@
             <ul>
 
                 <li> PC of laptop voorzien met een netwerkkaart (Wireless verbinding is niet mogelijk)</li>
-                <li> Monitor <strong>Let op! Per persoon is er maar 1 monitor toegestaan!</strong></li>
+                <li> Monitor <strong>Let op! Per persoon is er maar 1 monitor per plek toegestaan!</strong></li>
                 <li> Toetsenbord / muis </li>
                 <li> Kabels (bijvoorbeeld stroom- en videokabels) </li>
                 <li> Netwerkkabel van minimaal 5 meter </li>

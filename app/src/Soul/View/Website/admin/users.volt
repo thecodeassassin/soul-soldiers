@@ -5,6 +5,7 @@
         <table class="table table-striped table-condensed">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Naam</th>
                     <th>Nickname</th>
                     <th>Email</th>
@@ -14,6 +15,7 @@
             <tbody>
             {% for user in users %}
                 <tr>
+                    <td>{{ user.userId}}</td>
                     <td>{{ user.realName}}</td>
                     <td>{{ user.nickName}}</td>
                     <td>{{ user.email }}</td>
@@ -37,6 +39,13 @@
                     <td colspan="3">Geen gebruikers gevonden</td>
                 </tr>
             {% endfor %}
+            <tr>
+                <td colspan="5">
+                    <p class="text-center">
+                        Totaal aantal gebruikers: {{ users|length }}
+                    </p>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

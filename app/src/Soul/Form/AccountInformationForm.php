@@ -31,12 +31,14 @@ class AccountInformationForm extends Base
         $realName = $this->getTextField('Volledige naam', 'realName', true);
         $nickName = $this->getTextField('Nickname (bijnaam)', 'nickName', true);
         $telephone = $this->getTextField('Telefoonnummer', 'telephone');
+        $email = $this->getEmailField('E-mail');
         $address = $this->getTextField('Adres', 'address');
         $city = $this->getTextField('Woonplaats', 'city');
         $postalCode = $this->getPostalCodeField('Postcode', 'postalCode');
 
         $this->add($realName)
              ->add($nickName)
+             ->add($email)
              ->add($telephone)
              ->add($address)
              ->add($postalCode)
