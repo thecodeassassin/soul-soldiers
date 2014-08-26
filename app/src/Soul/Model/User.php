@@ -149,6 +149,47 @@ class User extends Base
     }
 
     /**
+     * @param $stateId
+     *
+     * @return string|bool
+     */
+    public function getUserState() {
+        switch($this->state) {
+            case self::STATE_REQUIRES_PASSWORD_CHANGE:
+                return 'Requires password change';
+            case self::STATE_INACTIVE:
+                return 'Inactive';
+            case self::STATE_ACTIVE:
+                return 'Actief';
+            case self::STATE_BANNED:
+                return 'Banned';
+            default:
+                return false;
+
+        }
+    }
+
+    /**
+     * @return bool|string
+     */
+    public function getUserType()
+    {
+        switch($this->userType) {
+            case AclBuilder::ROLE_ADMIN:
+                return 'Admin';
+            case AclBuilder::ROLE_GUEST:
+                return 'Guest';
+            case AclBuilder::ROLE_MODERATOR:
+                return 'Moderator';
+            case AclBuilder::ROLE_USER:
+                return 'User';
+            default:
+                return false;
+
+        }
+    }
+
+    /**
      * Initialize method for model.
      */
     public function initialize()

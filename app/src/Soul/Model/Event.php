@@ -3,6 +3,7 @@ namespace Soul\Model;
 
 use Phalcon\DI;
 use Phalcon\Mvc\Model\Query;
+use Soul\Controller\Website\EventController;
 use Soul\Util;
 
 /**
@@ -213,6 +214,16 @@ class Event extends Base
     /**
      * @param $userId
      *
+     * @return bool
+     */
+    public function hasPayedForBuffet($userId)
+    {
+        return ($this->hasPayed($userId) && $this->getUserPayment($userId) >= ($this->getEventCost() + EventController::DINNER_OPTION_PRICE) ? true : false);
+    }
+
+    /**
+     * @param $userId
+     *
      * @return bool|float
      */
     public function getUserPayment($userId)
@@ -273,6 +284,23 @@ class Event extends Base
     public function getEventCost()
     {
         return (float) $this->product->cost;
+    }
+
+    /**
+     * Returns a list of payed users
+     *
+     * @return array
+     */
+    public function getPayedUsers()
+    {
+        $users = [];
+        foreach ($this->entries as $entry) {
+            if ($this->hasPayed($entry->userId)) {
+                $users[] = $entry->user;
+            }
+        }
+
+        return $users;
     }
 
     /**

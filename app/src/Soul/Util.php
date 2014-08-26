@@ -12,7 +12,7 @@ use Phalcon\Forms\Element\Hidden;
 use Phalcon\Validation\Validator\Identical;
 
 /**
-@package Hosting
+ *
  *
  * This is a utility class
  *
@@ -234,5 +234,44 @@ class Util {
         }
 
         return false;
+    }
+
+    /**
+     * @param array  $fields
+     * @param string $delimiter
+     * @param string $enclosure
+     * @param bool   $encloseAll
+     * @param bool   $nullToMysqlNull
+     *
+     * @return string
+     */
+    public static function arrayToCSV(array &$fields, $delimiter = ';', $enclosure = '"', $encloseAll = false, $nullToMysqlNull = false)
+    {
+        $delimiter_esc = preg_quote($delimiter, '/');
+        $enclosure_esc = preg_quote($enclosure, '/');
+
+        $output = array();
+        foreach ( $fields as $field ) {
+            if ($field === null && $nullToMysqlNull) {
+                $output[] = 'NULL';
+                continue;
+            }
+
+            // how to handle real 1 or 0 values?
+            if (is_bool($field)) {
+                $output[] = ($field ? 'Yes' : 'No');
+                continue;
+            }
+
+            // Enclose fields containing $delimiter, $enclosure or whitespace
+            if ( $encloseAll || preg_match( "/(?:${delimiter_esc}|${enclosure_esc}|\s)/", $field ) ) {
+                $output[] = $enclosure . str_replace($enclosure, $enclosure . $enclosure, $field) . $enclosure;
+            }
+            else {
+                $output[] = $field;
+            }
+        }
+
+        return implode( $delimiter, $output );
     }
 }

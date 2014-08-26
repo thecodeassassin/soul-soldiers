@@ -2,6 +2,17 @@
 
     <div class="col-md-12">
         <h2>Gebruikers administratie</h2>
+
+        <form action="{{ url('admin/users' ) }}" method="post">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="icon-search"></i> </div>
+                    <input class="form-control" type="search" name="search" placeholder="Search" value="{{ search }}">
+                </div>
+            </div>
+
+        </form>
+
         <table class="table table-striped table-condensed">
             <thead>
                 <tr>

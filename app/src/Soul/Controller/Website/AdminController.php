@@ -5,11 +5,14 @@
 
 namespace Soul\Controller\Website;
 
+use Phalcon\Http\Response;
 use Phalcon\Mvc\View;
 use Soul\AclBuilder;
 use Soul\Form\EditUserForm;
 use Soul\Model\Event;
 use Soul\Model\Payment;
+use Soul\Model\StaticModel\DataList;
+use Soul\Model\StaticModel\Exception as StaticModelException;
 use Soul\Model\User;
 use Soul\Util;
 
@@ -42,15 +45,65 @@ class AdminController extends \Soul\Controller\Base
     public function usersAction()
     {
         $this->view->page = 'users';
+        $search = $this->request->get('search', 'string', null);
 
         $event = Event::getCurrent();
 
-        $users = User::find();
+        if ($search != null) {
+            $users = User::find([
+                "conditions" => "nickName LIKE :query:
+                                 OR realName LIKE :query:
+                                 OR address LIKE :query:
+                                 OR city LIKE :query:
+                                 OR email LIKE :query:",
+                "bind"       => ['query' => '%'.$search.'%']
+            ]);
+        } else {
+            $users = User::find();
+        }
 
         $this->view->event = $event;
         $this->view->users = $users;
+        $this->view->search = $search;
     }
 
+    /**
+     * @param null $selected
+     *
+     * @return \Phalcon\Http\ResponseInterface
+     */
+    public function listsAction($selected = null)
+    {
+        $availableLists = DataList::getAvailableListsStatic();
+
+        try {
+
+            if ($selected) {
+                // get the list and offer the download
+                $list = new DataList($selected);
+
+                $csv = $list->outputAsCSV();
+
+                $response = new Response();
+                $response->setContentType('text/csv');
+                $response->setHeader("Content-Disposition", "attachment; filename=$selected.csv");
+                $response->setHeader("Pragma", "no-cache");
+                $response->setHeader("Expires", "0");
+                $response->setExpires(new \DateTime('now'));
+
+                $response->setContent($csv);
+
+                return $response->send();
+            }
+
+        } catch(StaticModelException $e) {
+            $this->flashMessage(sprintf("Download of list failed: %s", $e->getMessage()), 'error');
+        }
+
+        $this->view->availableLists = $availableLists;
+        $this->view->page = 'lists';
+
+    }
 
     public function deleteUserAction($userId)
     {
@@ -81,7 +134,7 @@ class AdminController extends \Soul\Controller\Base
         $editUserForm = new EditUserForm($user);
         $hasPayed = $event->hasPayed($userId);
         $hasEntry = (bool)$event->hasEntry($userId);
-        $payedForBuffet = ($hasPayed && $event->getUserPayment($userId) >= ($event->getEventCost() + EventController::DINNER_OPTION_PRICE) ? true : false);
+        $payedForBuffet = $event->hasPayedForBuffet($userId);
 
         if (!$user) {
             return false;

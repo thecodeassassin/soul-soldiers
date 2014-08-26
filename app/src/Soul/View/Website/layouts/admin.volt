@@ -19,6 +19,11 @@
                         Gebruikers
                     </a>
                 </li>
+                <li {% if page is 'lists' %} class="active" {% endif %}>
+                    <a href="{{ url('admin/lists') }}">
+                        Lijsten genereren
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="col-md-9 color0 pb15 pt15">
