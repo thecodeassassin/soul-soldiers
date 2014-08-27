@@ -14,7 +14,8 @@ class DataList extends Module
 {
 
     protected  $availableLists = [
-        'PayedUsers' => 'Lijst van betalende gebruikers (voor volgend evenement)'
+        'PayedUsers' => 'Lijst van betalende gebruikers voor volgend evenement.',
+        'EventUsers' => 'Lijst van inschrijvingen voor het volgende evenement. '
     ];
 
     protected  $listName = '';
