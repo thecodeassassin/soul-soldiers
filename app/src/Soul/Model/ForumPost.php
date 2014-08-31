@@ -9,6 +9,7 @@ namespace Soul\Model;
 
 
 
+use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Phalcon\Paginator\Adapter\QueryBuilder;
 
 class ForumPost extends Base
@@ -73,6 +74,29 @@ class ForumPost extends Base
      * @var integer
      */
     public $isSticky;
+
+    /**
+     * Validations and business logic
+     *
+     * @return bool
+     */
+    public function validation()
+    {
+
+
+        $this->validate(new Uniqueness(
+            array(
+                "field"   => "title",
+                "message" => "Er bestaat al een topic met deze titel"
+            )
+        ));
+
+        if ($this->validationHasFailed() == true) {
+            return false;
+        }
+
+        return true;
+    }
 
     /**
      * Initialize method for model.

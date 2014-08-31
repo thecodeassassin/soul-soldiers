@@ -477,3 +477,7 @@ a.list-group-item, a.list-group-item:hover {
 #topics tbody h4 {
     margin-top: 15px;
 }
+
+.forum-container {
+    padding-left: 0;
+}
