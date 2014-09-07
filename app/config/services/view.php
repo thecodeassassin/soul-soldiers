@@ -64,6 +64,23 @@ $di->setShared('view', function() use ($config, $di) {
                         }
                     );
 
+                    $compiler->addFunction('gravatar_url', function($args, $params) use ($compiler, $di)  {
+
+                        $email = str_replace("'", "", $compiler->expression($params[0]['expr']));
+
+                        if (isset($params[1])) {
+                            $size = 80;
+                        } else {
+                            $size = $compiler->expression($params[1]['expr']);
+                        }
+
+                        $url = 'http://www.gravatar.com/avatar/';
+                        $url .= md5( strtolower( trim( $email ) ) );
+                        $url .= "?s=$size&d=mmd&r=r";
+
+                        return $url;
+                    });
+
                     return $volt;
                 },
                 '.phtml' => 'Phalcon\Mvc\View\Engine\Php' // Generate Template files uses PHP itself as the template engine

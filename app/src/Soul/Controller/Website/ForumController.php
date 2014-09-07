@@ -23,6 +23,7 @@ use Soul\Model\User;
 use Soul\Auth\Exception as AuthException;
 use Soul\Auth\Data as AuthData;
 use Soul\Util;
+use Soul\Security\Exception as SecurityException;
 
 /**
  * Class ForumController
@@ -80,6 +81,33 @@ class ForumController extends AccountBase
             $this->view->posts = $category->posts;
 
         }
+
+    }
+
+    public function readAction($title)
+    {
+
+        try {
+            $title = urldecode($this->filter->sanitize($title, 'string'));
+
+            $forumPost = ForumPost::findByTitle($title);
+
+            if (!$forumPost || $forumPost->replyId != null) {
+                throw new SecurityException('Dit artikel bestaat niet');
+            }
+
+            if ($forumPost->category->isAdminOnly() && !$this->isAdmin ) {
+                throw new SecurityException('U heeft geen toegang om dit bericht te bekijken');
+            }
+
+            $this->view->post = $forumPost;
+
+
+        } catch (SecurityException $e) {
+            $this->flashMessage($e->getMessage(), 'error', true);
+            return $this->response->redirect('forum');
+        }
+
 
     }
 

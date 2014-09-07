@@ -17,7 +17,7 @@ use Soul\Model\News;
 use Soul\Model\User;
 use Soul\Translate;
 use Soul\Util;
-
+use Soul\Security\Exception as SecurityException;
 /**
  * Base controller for all controllers
  *

@@ -75,6 +75,11 @@ class ForumPost extends Base
      */
     public $isSticky;
 
+//    /**
+//     * @var ForumCategory
+//     */
+//    public $category;
+
     /**
      * Validations and business logic
      *
@@ -133,6 +138,16 @@ class ForumPost extends Base
     public function getLastReply()
     {
         return self::findFirst(["replyId = $this->postId", "order" => 'postDate DESC']);
+    }
+
+    /**
+     * @param $title
+     *
+     * @return ForumPost
+     */
+    public static function findByTitle($title)
+    {
+        return self::findFirst(["title = '$title'"]);
     }
 
     /**
