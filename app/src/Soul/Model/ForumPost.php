@@ -110,7 +110,7 @@ class ForumPost extends Base
     {
         $this->setSource('tblForumPost');
         $this->belongsTo('categoryId', '\Soul\Model\ForumCategory', 'categoryId', ['alias' => 'category']);
-
+        $this->hasOne('userId', '\Soul\Model\User', 'userId', ['alias' => 'user']);
 
     }
 

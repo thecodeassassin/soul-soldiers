@@ -68,17 +68,16 @@ $di->setShared('view', function() use ($config, $di) {
 
                         $email = str_replace("'", "", $compiler->expression($params[0]['expr']));
 
+
+                        $size = 80;
+
                         if (isset($params[1])) {
-                            $size = 80;
-                        } else {
                             $size = $compiler->expression($params[1]['expr']);
                         }
 
-                        $url = 'http://www.gravatar.com/avatar/';
-                        $url .= md5( strtolower( trim( $email ) ) );
-                        $url .= "?s=$size&d=mmd&r=r";
+                        $url = "http://www.gravatar.com/avatar/%s?s=$size&d=mm&r=r";
 
-                        return $url;
+                        return "sprintf('$url', md5(strtolower(trim($email))))";
                     });
 
                     return $volt;

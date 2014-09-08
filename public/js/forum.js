@@ -18,6 +18,23 @@ $(function() {
     categories.find('a:first').addClass('active');
 
     $('#topics').find('tr.topic').click(loadPost);
+
+    $('.editPost').click(function() {
+        var postContent = $(this).parent().siblings('.postContent'),
+            body = postContent.html();
+
+        if (postContent.find('textarea').length == 0) {
+
+            postContent.html('');
+            postContent.append($('<textarea class="form-control" />').attr('name', 'postContent').html(body));
+
+
+            $(this).parent().parent().append($('<input type="button" class="btn btn-primary" value="Opslaan">').click(function() {
+                alert('save');
+            }));
+        }
+
+    });
 });
 
 function loadPost() {

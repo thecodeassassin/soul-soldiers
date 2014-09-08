@@ -481,3 +481,26 @@ a.list-group-item, a.list-group-item:hover {
 .forum-container {
     padding-left: 0;
 }
+
+.post-right {
+    margin-left: 10px;
+}
+
+.postbox {
+    min-height: 100px;
+    position: relative;
+}
+
+.postbox .editbox {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.postbox .editbox a:hover, .postbox .editbox a:active {
+    text-decoration: none;
+}
+
+.postContent textarea {
+    margin-top: 18px;
+}
