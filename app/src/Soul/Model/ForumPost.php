@@ -157,7 +157,7 @@ class ForumPost extends Base
      */
     public static function findFirstByPostId($postId)
     {
-        return self::findFirst(['postId' => (int) $postId]);
+        return self::findFirst(['postId = '.(int) $postId]);
     }
 
     /**

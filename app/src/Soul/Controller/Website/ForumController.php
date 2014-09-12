@@ -95,7 +95,7 @@ class ForumController extends AccountBase
     public function readAction($postId)
     {
         try {
-            $title = urldecode($this->filter->sanitize($title, 'string'));
+
 
             $forumPost = ForumPost::findFirstByPostId($postId);
 
