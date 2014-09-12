@@ -4,6 +4,9 @@ namespace Soul\Controller;
 
 use Phalcon\Config;
 use Phalcon\Crypt;
+use Phalcon\DI;
+use Phalcon\Logger;
+use Phalcon\Logger\Adapter;
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\View;
 use Soul\AclBuilder;
@@ -350,6 +353,14 @@ class Base extends Controller
 
             echo '<!-- file not available -->';
         }
+    }
+
+    /**
+     * @return Adapter
+     */
+    protected function getLogger()
+    {
+        return $this->di->get('logger');
     }
 
 }

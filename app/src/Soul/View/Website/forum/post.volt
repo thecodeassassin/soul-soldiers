@@ -12,7 +12,7 @@
     </div>
     <div class="col-md-8 pb15 pt15">
         <div class="gutter color0 postbox">
-            {% if post.user.userId == user.userId %}
+            {% if post.user.userId == user.userId or isAdmin %}
                 <div class="editbox">
                     <a href="javascript:void(0)" class="editPost" data-post-id="{{ post.postId }}"><i class="icon-pencil-squared"></i> </a>
                     <a href="{{ url('forum/delete/' ~ post.postId) }}" onclick="return confirm('Weet je het zeker dat je deze post wilt verwijderen?')" id="editPost"><i class="icon-trash"></i> </a>

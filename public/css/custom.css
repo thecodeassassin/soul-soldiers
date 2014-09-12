@@ -504,3 +504,24 @@ a.list-group-item, a.list-group-item:hover {
 .postContent textarea {
     margin-top: 18px;
 }
+
+div.postTitle {
+    float: left;
+    font-size: 36px;
+}
+
+div.postTitle input {
+    margin-right: 10px;
+    width: 450px;
+}
+
+span.editIcon {
+    display: inline-block;
+    float: left;
+    margin: 3px 0 0 10px
+}
+
+.btn.action-btn {
+    padding: 5px 5px 5px 8px;
+    margin: 5px 0 0 5px;
+}

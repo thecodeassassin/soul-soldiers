@@ -66,4 +66,9 @@ if (ACTIVE_MODULE == 'intranet') {
     $di->setShared('challonge' , function() use ($config) {
         return new \Soul\Tournaments\Challonge($config->challonge->apiKey, $config->challonge->subdomain);
     });
+
 }
+
+$di->setShared('logger', function() use ($config) {
+    return $config->error->logger;
+});

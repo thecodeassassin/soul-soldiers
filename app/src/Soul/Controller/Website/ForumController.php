@@ -7,6 +7,7 @@
 
 namespace Soul\Controller\Website;
 
+use Phalcon\Logger;
 use Phalcon\Mvc\View;
 use Soul\AclBuilder;
 use Soul\Auth\AuthService as AuthService;
@@ -38,9 +39,11 @@ class ForumController extends AccountBase
     {
         parent::initialize();
 
-        if ($this->authService->getAuthData()->userType == AclBuilder::ROLE_ADMIN) {
+        if ($this->view->user->userType == AclBuilder::ROLE_ADMIN) {
             $this->isAdmin = true;
         }
+
+        $this->view->isAdmin = $this->isAdmin;
     }
 
     public function indexAction()
@@ -84,13 +87,17 @@ class ForumController extends AccountBase
 
     }
 
-    public function readAction($title)
+    /**
+     * @param $title
+     *
+     * @return \Phalcon\Http\ResponseInterface
+     */
+    public function readAction($postId)
     {
-
         try {
             $title = urldecode($this->filter->sanitize($title, 'string'));
 
-            $forumPost = ForumPost::findByTitle($title);
+            $forumPost = ForumPost::findFirstByPostId($postId);
 
             if (!$forumPost || $forumPost->replyId != null) {
                 throw new SecurityException('Dit artikel bestaat niet');
@@ -106,6 +113,46 @@ class ForumController extends AccountBase
         } catch (SecurityException $e) {
             $this->flashMessage($e->getMessage(), 'error', true);
             return $this->response->redirect('forum');
+        }
+
+
+    }
+
+    public function changeAction()
+    {
+        $logger = $this->getLogger();
+
+        try {
+            $postId = $this->request->get('postId', 'int');
+            $postTitle = $this->request->get('postTitle', 'string');
+
+            $forumPost = ForumPost::findFirstByPostId($postId);
+
+            if (!$forumPost) {
+                throw new \Exception(sprintf('Post with id %d not found!', $postId));
+            }
+
+            if (!$this->isAdmin && $forumPost->userId != $this->view->user->userId ) {
+                throw new SecurityException('Je bent niet bevoegd om deze post aan te passen!');
+            }
+
+            if ($postTitle == $forumPost->title || empty($postTitle)) {
+                throw new \Soul\Form\Exception('De titel is hetzelfde of de titel is niet in orde.');
+            }
+
+            $forumPost->title = $postTitle;
+            $forumPost->save();
+
+            $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
+            echo $postTitle;
+
+        } catch (SecurityException $e) {
+            $this->response->setStatusCode(401, $e->getMessage());
+        } catch (\Soul\Form\Exception $e) {
+            $this->response->setStatusCode(500, $e->getMessage());
+        } catch (\Exception $e) {
+            $this->response->setStatusCode(401, 'Helaas, het opslaan van de titel is niet gelukt. Probeer het a.u.b. nogmaals of neem contact met ons op.');
+            $logger->log(Logger::ALERT, $e->getMessage());
         }
 
 

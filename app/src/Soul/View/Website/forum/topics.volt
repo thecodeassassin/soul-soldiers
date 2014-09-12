@@ -1,6 +1,6 @@
 {% if posts is defined %}
     {% for post in posts %}
-        <tr data-post-id="{{ post.title|url_encode }}" class="topic">
+        <tr data-post-id="{{ post.postId }}" class="topic">
             <td>{{ post.title }}</td>
             <td>{{ post.viewCount }}</td>
             <td>{{ post.postDate|date('d-m-Y H:i:s') }}</td>

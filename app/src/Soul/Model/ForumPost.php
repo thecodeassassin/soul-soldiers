@@ -151,6 +151,16 @@ class ForumPost extends Base
     }
 
     /**
+     * @param $postId
+     *
+     * @return ForumPost
+     */
+    public static function findFirstByPostId($postId)
+    {
+        return self::findFirst(['postId' => (int) $postId]);
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()

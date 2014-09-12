@@ -9,6 +9,7 @@ namespace Soul;
 
 use Phalcon\DI;
 use Phalcon\Forms\Element\Hidden;
+use Phalcon\Logger\Adapter;
 use Phalcon\Validation\Validator\Identical;
 
 /**
@@ -273,5 +274,13 @@ class Util {
         }
 
         return implode( $delimiter, $output );
+    }
+
+    /**
+     * @return Adapter
+     */
+    public static function getDefaultLogger()
+    {
+        return DI::getDefault()->get('logger');
     }
 }
