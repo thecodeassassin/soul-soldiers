@@ -43,9 +43,10 @@ $(function() {
             me = this,
             editElement = generateEditElement('text', 'postTitle'),
             saveBtn = getActionElement(function() {
+
+                // save the new title
                 postAjax('/forum/change/title', {'postTitle' : editElement.val(), 'postId' : postId},
                 function(data) {
-                    console.log(data);
                     title = data;
                     cleanUp();
                 },
@@ -56,6 +57,8 @@ $(function() {
             cancelBtn = getActionElement(function() {
                 cleanUp();
             }, 'icon-cancel', 'btn-danger'),
+
+            // cleanup function for cancel/save action
             cleanUp = function() {
                 editElement.remove();
                 titleObj.html(title);
@@ -69,14 +72,10 @@ $(function() {
 
             $(me).hide();
             titleObj.html('');
-            titleObj.append(
-                editElement.val(title)
-            );
+            titleObj.append(editElement.val(title));
 
-
-            $(this).parent().parent().append(saveBtn).append(
-              cancelBtn
-            );
+            // add cancel and save buttons
+            $(this).parent().parent().append(saveBtn).append(cancelBtn);
         }
 
     });
