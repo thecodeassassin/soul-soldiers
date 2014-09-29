@@ -156,6 +156,7 @@ class AccountBase extends Base
         $changepasswordForm = new ChangePasswordForm();
         $changepasswordForm->addCurrentPassword();
         $changepasswordForm->remove('csrf');
+        $updateEmail =  ($post['email'] != $user->email ? true : false);
 
         $accountInformationForm = new AccountInformationForm();
         $accountInformationForm->setEntity($user);
@@ -164,21 +165,39 @@ class AccountBase extends Base
 
             if (array_key_exists('profile-form', $post)) {
 
-
                 $accountInformationForm->bind($post, $user);
                 if ($accountInformationForm->isValid($this->request->getPost()) == false) {
                     $this->flashMessages($accountInformationForm->getMessages(), 'error');
                 } else {
+
+                    if ($updateEmail) {
+                        
+                        // set email update mode to true to ensure the email address is unique
+                        $user->setEmailUpdateMode(true);
+                    }
 
                     // if validation fails, show messages
                     if ($user->validation() === false) {
 
                         $this->flashMessages($user->getMessages(), 'error');
                     } else {
+
+                        // if the user's email address was changed, logout the user and resend the confirmation email
+                        if ($updateEmail) {
+
+                            // send the user a confirmation email
+                            $this->authService->sendConfirmationMail($user);
+
+                            $this->flashMessage('Uw profiel informatie is gewijzigd, uw email adres dient echter wel opnieuw bevestigd te worden.', 'success', true);
+                            $this->authService->destroyAuthData();
+                            $this->response->redirect('home');
+
+                        } else {
+                            $this->flashMessage('Uw profiel informatie is gewijzigd', 'success');
+                        }
+
                         // create the new user
                         $user->save();
-
-                        $this->flashMessage('Uw profiel informatie is gewijzigd', 'success');
 
                     }
                 }

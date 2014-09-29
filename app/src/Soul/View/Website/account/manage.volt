@@ -16,11 +16,15 @@
 
             <div class="tab-content">
                 <div class="tab-pane active" id="profile">
+
+                    <div class="alert alert-info">
+                        <i class="icon-attention"></i>&nbsp; Let op! Als u uw email adres wijzigt dient u uw email adres opnieuw te bevestigen voordat u weer kunt inloggen.
+                    </div>
                     {{ form('account/manage', "method": "post", "name":"profile-form", "class":"form-horizontal validate", "role":"form") }}
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">E-mail</label>
-                        <div class="col-sm-7 textonly noaddon">
-                            {{ userObject.email }}
+                        <label for="inputEmail3" class="col-sm-2 control-label">E-mail *</label>
+                        <div class="col-sm-7 noaddon">
+                            {{ form.render('email') }}
                         </div>
                     </div>
                     <div class="form-group">

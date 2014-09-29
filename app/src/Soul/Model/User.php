@@ -103,6 +103,13 @@ class User extends Base
     const STATE_BANNED = 3;
 
     /**
+     * Email update mode
+     *
+     * @var bool
+     */
+    protected $emailUpdate = false;
+
+    /**
      * Validations and business logic
      *
      * @return bool
@@ -119,7 +126,7 @@ class User extends Base
             )
         );
 
-        if (!$this->userId) {
+        if (!$this->userId || $this->emailUpdate) {
 
             $this->validate(new Uniqueness(
                 array(
@@ -167,6 +174,14 @@ class User extends Base
                 return false;
 
         }
+    }
+
+    /**
+     * @param bool $mode
+     */
+    public function setEmailUpdateMode($mode)
+    {
+        $this->emailUpdate = (bool)$mode;
     }
 
     /**
