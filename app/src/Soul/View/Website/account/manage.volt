@@ -17,14 +17,18 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="profile">
 
-                    <div class="alert alert-info">
+                    <div class="alert alert-info email-info-field hidden">
                         <i class="icon-attention"></i>&nbsp; Let op! Als u uw email adres wijzigt dient u uw email adres opnieuw te bevestigen voordat u weer kunt inloggen.
                     </div>
                     {{ form('account/manage', "method": "post", "name":"profile-form", "class":"form-horizontal validate", "role":"form") }}
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">E-mail *</label>
-                        <div class="col-sm-7 noaddon">
-                            {{ form.render('email') }}
+                        <div class="col-sm-7 textonly noaddon email-display-field">
+                            {{ userObject.email }}&nbsp; <a class="btn-link edit-email"><i class="icon-pencil">Aanpassen</i></a>
+                            {{ hidden_field('email', 'value': userObject.email) }}
+                        </div>
+                        <div class="col-sm-7 noaddon hidden email-field">
+                            {{ form.render('email', {'disabled':'disabled'}) }} &nbsp; <a class="btn-link text-danger edit-email"><i class="icon-cancel-circled">Annuleren</i></a>
                         </div>
                     </div>
                     <div class="form-group">

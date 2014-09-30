@@ -4,6 +4,25 @@ $(function() {
 
     $("[data-toggle='tooltip']").tooltip();
 
+    var emailEdit = $('.edit-email');
+    emailEdit.click(function() {
+        var emailField = $('.email-field'),
+            inputField = emailField.find('input'),
+            emailInfoField =  $('.email-info-field'),
+            emailHiddenField = emailInfoField.find('input');
+        emailInfoField.toggleClass('hidden');
+        emailField.toggleClass('hidden');
+        $('.email-display-field').toggleClass('hidden');
+        inputField.toggle();
+
+        if (emailField.is(':visible')) {
+            inputField.removeAttr('disabled');
+            emailHiddenField.attr('disabled', 'disabled');
+        } else {
+            inputField.attr('disabled', 'disabled');
+            emailHiddenField.removeAttr('disabled');
+        }
+    });
 
     bootbox.setDefaults({
         /**

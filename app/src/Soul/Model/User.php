@@ -131,7 +131,7 @@ class User extends Base
             $this->validate(new Uniqueness(
                 array(
                     "field"   => "email",
-                    "message" => "Er bestaat al een account met dit e-mail adres"
+                    "message" => sprintf("Er bestaat al een account met email adres '%s'", $this->email)
                 )
             ));
 

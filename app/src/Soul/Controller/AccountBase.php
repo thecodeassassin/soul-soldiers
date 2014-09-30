@@ -2,6 +2,7 @@
 
 namespace Soul\Controller;
 
+use Phalcon\Forms\Element\Hidden;
 use Phalcon\Mvc\View;
 use Soul\Controller\Base;
 use Soul\Form\AccountInformationForm;
@@ -156,7 +157,8 @@ class AccountBase extends Base
         $changepasswordForm = new ChangePasswordForm();
         $changepasswordForm->addCurrentPassword();
         $changepasswordForm->remove('csrf');
-        $updateEmail =  ($post['email'] != $user->email ? true : false);
+        $userEmail = $user->email;
+        $updateEmail =  ($post['email'] != $userEmail ? true : false);
 
         $accountInformationForm = new AccountInformationForm();
         $accountInformationForm->setEntity($user);
@@ -171,15 +173,17 @@ class AccountBase extends Base
                 } else {
 
                     if ($updateEmail) {
-                        
+
                         // set email update mode to true to ensure the email address is unique
                         $user->setEmailUpdateMode(true);
                     }
 
                     // if validation fails, show messages
                     if ($user->validation() === false) {
-
                         $this->flashMessages($user->getMessages(), 'error');
+
+                        // reset the user's email in the form
+                        $accountInformationForm->bind(['email' => $userEmail], $user);
                     } else {
 
                         // if the user's email address was changed, logout the user and resend the confirmation email

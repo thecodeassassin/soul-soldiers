@@ -525,3 +525,22 @@ span.editIcon {
     padding: 5px 5px 5px 8px;
     margin: 5px 0 0 5px;
 }
+
+/**
+* Account manage
+*/
+
+.btn-link {
+    text-decoration: underline;
+}
+
+.email-field input {
+    width: 80%;
+    float: left;
+    display: none;
+}
+
+.email-field .edit-email {
+    float: left;
+    margin: 10px;
+}
