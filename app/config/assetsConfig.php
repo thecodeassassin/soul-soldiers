@@ -47,6 +47,7 @@ return new \Phalcon\Config(
                     "js/jquery.validate.nl.js",
                     "js/magnificent.popup.min.js",
                     "js/bootbox.min.js",
+                    "js/remote-modal.js",
                     "js/neko.js",
                     "js/bootstrap-remote-data.min.js",
                     "js/modernizr-2.6.1.min.js",

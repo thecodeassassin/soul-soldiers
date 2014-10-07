@@ -62,6 +62,25 @@ class Event extends Base
      */
     public $productId;
 
+    /**
+     * @var integer
+     */
+    public $tableRowSize;
+
+    /**
+     * @var integer
+     */
+    public $tableBlockSize;
+
+    /**
+     * @var integer
+     */
+    public $tableCellSizePx;
+
+    /**
+     * @var integer
+     */
+    public $seatImagePos;
 
     /**
      * Initialize method for model.
@@ -316,8 +335,13 @@ class Event extends Base
             'startDate' => 'startDate',
             'endDate' => 'endDate',
             'maxEntries' => 'maxEntries',
-            'productId' => 'productId'
+            'productId' => 'productId',
+            'tableBlockSize' => 'tableBlockSize',
+            'tableRowSize' => 'tableRowSize',
+            'tableCellSizePx' => 'tableCellSizePx',
+            'seatImagePos' => 'seatImagePos'
         );
+
     }
 
 }

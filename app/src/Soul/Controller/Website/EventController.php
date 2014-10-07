@@ -115,6 +115,37 @@ class EventController extends \Soul\Controller\Base
     /**
      * @param $systemName
      *
+     * @throws \Exception
+     */
+    public function seatAction($systemName)
+    {
+        $user = $this->authService->getAuthData();
+        $event = Event::findBySystemName($systemName);
+
+        if (!$event) {
+            throw new \Exception(sprintf('Event %s not found', $systemName));
+        }
+
+        $entry = $event->hasEntry($user->userId);
+
+        if (!$entry) {
+            throw new \Exception(sprintf('User %s doesn\'t have an entry', $user->getNickName()));
+        }
+
+        if (!$event->hasPayed($user->userId)) {
+            throw new \Exception(sprintf('User %s did not pay yet', $user->getNickName()));
+        }
+
+
+        $this->view->event = $event;
+
+        $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+
+    }
+
+    /**
+     * @param $systemName
+     *
      * @return \Phalcon\Http\ResponseInterface
      */
     public function registerAction($systemName)

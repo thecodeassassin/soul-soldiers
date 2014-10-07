@@ -31,7 +31,11 @@
                                     </a>
                                 </p>
                             {% else %}
-                                <p><a class="btn btn-primary btn-lg disabled" role="button" href="javascript:void(0)">Bedankt voor je betaling!</a></p>
+                                {#<p><a class="btn btn-primary btn-lg disabled" role="button" href="javascript:void(0)">Bedankt voor je betaling!</a></p>#}
+                                <p><a class="btn btn-primary btn-lg" rel="remote-modal" role="button" href="{{ url('event/seat/' ~ event.systemName) }}">
+                                        Plek reserveren
+                                    </a>
+                                </p>
                             {% endif %}
 
 

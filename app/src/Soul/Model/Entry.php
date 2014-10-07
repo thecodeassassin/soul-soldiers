@@ -34,6 +34,11 @@ class Entry extends Base
     public $paymentId;
 
     /**
+     * @var integer
+     */
+    public $seat;
+
+    /**
      * Initialize method for model.
      */
     public function initialize()
@@ -54,7 +59,8 @@ class Entry extends Base
             'entryId' => 'entryId',
             'eventId' => 'eventId',
             'userId' => 'userId',
-            'paymentId' => 'paymentId'
+            'paymentId' => 'paymentId',
+            'seat' => 'seat'
         );
     }
 

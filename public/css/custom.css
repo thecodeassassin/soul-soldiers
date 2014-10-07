@@ -443,6 +443,16 @@ strong {
     min-height: 350px;
 }
 
+/** Seating **/
+
+.seating-table .seatmap {
+    background-repeat: no-repeat;
+    background-size: 560px 350px;
+    height: 350px;
+    width: 560px;
+
+}
+
 /*Nav pill styling*/
 
 ul.nav-pills li {

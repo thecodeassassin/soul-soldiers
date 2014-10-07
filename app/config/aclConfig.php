@@ -66,7 +66,7 @@ return new \Phalcon\Config(
                 ],
                 AclBuilder::ROLE_USER => [
                     'account' => ['logout', 'manage'],
-                    'event' => ['pay', 'register']
+                    'event' => ['pay', 'register', 'seat']
                 ],
                 AclBuilder::ROLE_ADMIN => [
                     'admin' => '*',
