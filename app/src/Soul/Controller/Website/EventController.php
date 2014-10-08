@@ -15,6 +15,7 @@ use Soul\Payment\Service\Exception;
 use Soul\Payment\Service\TargetPay;
 use Soul\Auth\Data as AuthData;
 use Soul\Util;
+use Soul\Security\Exception as SecurityException;
 
 /**
  * Class EventController
@@ -122,26 +123,88 @@ class EventController extends \Soul\Controller\Base
         $user = $this->authService->getAuthData();
         $event = Event::findBySystemName($systemName);
 
-        if (!$event) {
-            throw new \Exception(sprintf('Event %s not found', $systemName));
+        $this->verifyEventAndUser($event, $user);
+
+        $takenSeats = [];
+        $userSeat = 0;
+
+        foreach ($event->entries as $eventEntry) {
+            if ($eventEntry->seat != 0 && $eventEntry->seat != null) {
+
+                if ($eventEntry->userId == $user->getUserId()) {
+                    $userSeat = $eventEntry->seat;
+                    continue;
+                }
+
+                $takenSeats[] = (float)$eventEntry->seat;
+                $seatMap[$eventEntry->seat] = $eventEntry->user->nickName;
+            }
         }
 
-        $entry = $event->hasEntry($user->userId);
-
-        if (!$entry) {
-            throw new \Exception(sprintf('User %s doesn\'t have an entry', $user->getNickName()));
-        }
-
-        if (!$event->hasPayed($user->userId)) {
-            throw new \Exception(sprintf('User %s did not pay yet', $user->getNickName()));
-        }
-
-
+        $this->view->userSeat = $userSeat;
         $this->view->event = $event;
+        $this->view->takenSeats = $takenSeats;
+        $this->view->seatMap = $seatMap;
+        $this->view->seatingAvailable = $this->seatingAvailable($event);
 
         $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
 
     }
+
+    /**
+     * @param $seat
+     */
+    public function reserveSeatAction($systemName, $reserveSeat)
+    {
+
+        try {
+
+            $user = $this->authService->getAuthData();
+            $event = Event::findBySystemName($systemName);
+
+            $this->verifyEventAndUser($event, $user);
+
+            if (!$this->seatingAvailable($event)) {
+                throw new SecurityException('U kunt geen plek meer reserveren!');
+            }
+
+            $validSeatTable = [];
+            $numRows = ($event->maxEntries - $event->crewSize) / ($event->tableBlockSize * 2);
+
+            for ($row = 1; $row <= $numRows; $row++) {
+                for ($seat = 1; $seat <= $event->tableBlockSize * 2; $seat++) {
+                    $validSeatTable[] = (float) $row.'.'.$seat;
+                }
+            }
+
+
+
+            if (!in_array($reserveSeat, $validSeatTable)) {
+                throw new SecurityException('Deze plaats bestaat niet!');
+            }
+
+
+            foreach ($event->entries as $eventEntry) {
+                if ($eventEntry->seat == $reserveSeat) {
+                    throw new SecurityException('U heeft geprobeerd een plek te reserveren die al is gereserveerd!');
+                }
+            }
+
+            // if the seat is indeed available, save the seat to the user
+            $entry = Event::findEntryByUserIdAndEventId($user->getUserId(), $event->eventId);
+            $entry->seat = $reserveSeat;
+            $entry->save();
+
+            $this->flashMessage(sprintf('U heeft plek %s gereserveerd', $reserveSeat), 'success', true);
+
+        } catch (SecurityException $e) {
+            $this->flashMessage($e->getMessage(), 'error', true);
+        }
+
+        $this->response->redirect('event/current');
+
+    }
+
 
     /**
      * @param $systemName
@@ -247,5 +310,42 @@ class EventController extends \Soul\Controller\Base
         $this->view->issuers = $issuers;
         $this->view->dinerAvailable = $dinerAvailable;
     }
+
+    /**
+     * @param Event    $event
+     * @param AuthData $user
+     *
+     * @throws \Exception
+     */
+    protected function verifyEventAndUser(Event $event, AuthData $user)
+    {
+        if (!$event) {
+            throw new \Exception(sprintf('Event %s not found', $event->systemName));
+        }
+
+        $entry = $event->hasEntry($user->userId);
+
+        if (!$entry) {
+            throw new \Exception(sprintf('User %s doesn\'t have an entry', $user->getNickName()));
+        }
+
+        if (!$event->hasPayed($user->userId)) {
+            throw new \Exception(sprintf('User %s did not pay yet', $user->getNickName()));
+        }
+
+    }
+
+    /**
+     * Check if seating is still available for this event
+     *
+     * @param Event $event
+     *
+     * @return bool
+     */
+    protected function seatingAvailable(Event $event)
+    {
+        return  ((strtotime($event->startDate) - 604800) > time());
+    }
+
 
 }

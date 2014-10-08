@@ -445,12 +445,52 @@ strong {
 
 /** Seating **/
 
-.seating-table .seatmap {
+.seating-table .seatmap-wrapper {
+    position: relative;
     background-repeat: no-repeat;
     background-size: 560px 350px;
     height: 350px;
     width: 560px;
 
+}
+
+.seat-row-wrapper {
+    float: left;
+}
+
+.seatmap-wrapper .seat-row {
+    float: left;
+    border: 1px solid #000;
+}
+
+.seatmap-wrapper .seat {
+    float: left;
+    color: #ffffff;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+}
+
+.seatmap .seat-table {
+    margin-right: 25px;
+    margin-bottom: 5px;
+    float: left;
+}
+
+.seat a, .seat a:hover, .seat a:visited {
+    color: #ffffff;
+}
+
+.seat.yours {
+    background-color: #0a2d4d;
+}
+
+.seat.taken {
+    background-color: red;
+}
+
+.seat.free {
+    background-color: darkgreen;
 }
 
 /*Nav pill styling*/

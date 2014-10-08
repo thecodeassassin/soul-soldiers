@@ -75,12 +75,17 @@ class Event extends Base
     /**
      * @var integer
      */
-    public $tableCellSizePx;
+    public $crewSize;
 
     /**
      * @var integer
      */
-    public $seatImagePos;
+    public $seatImagePosX;
+
+    /**
+     * @var integer
+     */
+    public $seatImagePosY;
 
     /**
      * Initialize method for model.
@@ -338,8 +343,9 @@ class Event extends Base
             'productId' => 'productId',
             'tableBlockSize' => 'tableBlockSize',
             'tableRowSize' => 'tableRowSize',
-            'tableCellSizePx' => 'tableCellSizePx',
-            'seatImagePos' => 'seatImagePos'
+            'crewSize' => 'crewSize',
+            'seatImagePosX' => 'seatImagePosX',
+            'seatImagePosY' => 'seatImagePosY'
         );
 
     }

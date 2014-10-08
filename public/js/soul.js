@@ -2,7 +2,7 @@
 // Soul-Soldiers javascript
 $(function() {
 
-    $("[data-toggle='tooltip']").tooltip();
+    activateToolTips();
 
     var emailEdit = $('.edit-email');
     emailEdit.click(function() {
@@ -194,4 +194,24 @@ function ajaxLoad(mode){
         $.unblockUI();
     }
 
+}
+
+/**
+ * Activate tooltips
+ */
+function activateToolTips(){
+    $("[data-toggle='tooltip']").tooltip();
+}
+
+/**
+ * Reserve a seat confirmation message
+ * @returns {*}
+ */
+function reserveSeat() {
+    var confirmed = confirm('Weet u zeker dat u deze plek wilt reserveren?');
+
+    if (confirmed) {
+        ajaxLoad(true);
+    }
+    return confirmed;
 }

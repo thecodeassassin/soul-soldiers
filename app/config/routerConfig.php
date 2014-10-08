@@ -125,6 +125,14 @@ return [
             "systemName" => 1
         ],
 
+        '/event/([a-zA-Z0-9_-]+)/reserve-seat/([0-9\.]+)' => [
+            "controller" => "event",
+            "action" => "reserveSeat",
+            "systemName" => 1,
+            "seat" => 2
+        ],
+
+
         /*
          * Forum
          */

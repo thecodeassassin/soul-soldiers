@@ -34,7 +34,7 @@ class Entry extends Base
     public $paymentId;
 
     /**
-     * @var integer
+     * @var float
      */
     public $seat;
 
