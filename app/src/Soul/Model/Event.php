@@ -190,6 +190,7 @@ class Event extends Base
         $entry->eventId = $this->eventId;
         $entry->userId = (int) $userId;
         $entry->paymentId = null;
+        $entry->seat = 0;
         $event = Event::findByEventId($this->eventId);
 
         // send an email to the user
