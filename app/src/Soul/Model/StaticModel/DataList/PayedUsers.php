@@ -23,8 +23,12 @@ class PayedUsers implements ListInterface
         if (count($users) > 0) {
             foreach ($users as $user) {
                 $userArr = $user->toArray();
+                $entry = $event->hasEntry($user->userId);
+
+
                 $userArr['Betaald voor buffet'] = $event->hasPayedForBuffet($user->userId);
                 $userArr['isActive'] = (bool)$user->isActive;
+                $userArr['Zitplaats'] = (float)$entry->seat;
                 $userArr['Type gebruiker'] = (string)$user->getUserType();
                 $userArr['Status'] = (string)$user->getUserState();
 
