@@ -63,3 +63,29 @@
 .pt40 {
     padding-top:2em;
 }
+
+.bootbox-body h4.title {
+    display: none;
+}
+
+/** Modal **/
+
+.modal-content {
+    background: #3c3b3b;
+}
+
+.modal-body  {
+    background-color: #426d84;
+}
+
+.modal-content .modal-header {
+    background: none;
+}
+
+.modal-content .modal-footer {
+    background: none;
+}
+
+.modal-header .modal-title {
+    margin-bottom: 5px;
+}

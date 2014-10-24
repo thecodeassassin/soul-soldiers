@@ -64,7 +64,8 @@ return new \Phalcon\Config(
             'key' => ''
         ],
         'challonge' => [
-            'apiKey' => ''
+            'apiKey' => '',
+            'subdomain' => ''
         ]
     ]
 );

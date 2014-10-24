@@ -346,16 +346,6 @@ hr {
     font-size: 24px;
 }
 
-/** Modal **/
-
-.modal-content {
-    background: #3c3b3b;
-}
-
-.modal-body  {
-    background-color: #426d84;
-}
-
 /**
 Index / news / tweets
 */

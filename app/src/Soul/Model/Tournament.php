@@ -2,6 +2,7 @@
 namespace Soul\Model;
 
 use Soul\Tournaments\Challonge;
+use Soul\Tournaments\Challonge\Exception as ChallongeException;
 use Soul\Tournaments\Challonge\Tournament as ChallongeTournament;
 
 /**
@@ -15,19 +16,19 @@ class Tournament extends Base
      * @var integer
      */
     public $tournamentId;
-     
+
     /**
      *
      * @var string
      */
     public $name;
-     
+
     /**
      *
      * @var integer
      */
     public $type;
-     
+
     /**
      *
      * @var string
@@ -76,6 +77,11 @@ class Tournament extends Base
      */
     public $isChallonge = false;
 
+    /**
+     * @var bool
+     */
+    public $hasError = false;
+
     const TYPE_TOP_SCORE = 1;
     const TYPE_SINGLE_ELIMINATION = 2;
     const TYPE_DOUBLE_ELIMINATION = 3;
@@ -112,8 +118,15 @@ class Tournament extends Base
 
         if ($this->challongeId) {
 
-            $this->challonge = new ChallongeTournament($this->challongeId);
-            $this->isChallonge = true;
+            try {
+
+                $this->challonge = new ChallongeTournament($this->challongeId);
+                $this->isChallonge = true;
+
+            } catch(ChallongeException $e) {
+                $this->hasError = true;
+                $this->challonge = null;
+            }
 
         }
 
@@ -157,49 +170,53 @@ class Tournament extends Base
 
             }
         } else {
-            $players = $this->challonge->getPlayers();
 
-            if ($players) {
-                foreach ($players->participant as $player) {
+            if (!$this->hasError) {
+                $players = $this->challonge->getPlayers();
 
-                    $name = (string)$player->name;
+                if ($players) {
+                    foreach ($players->participant as $player) {
 
-                    $playerData = [
-                        'user' => ['nickName' => $name],
-                        'active' => $player->active
-                    ];
+                        $name = (string)$player->name;
 
-                    if (is_numeric($player->{'final-rank'})) {
-                        $playerData['rank'] = $player->{'final-rank'};
-                    } else {
-                        $playerData['rank'] = null;
+                        $playerData = [
+                            'user' => ['nickName' => $name],
+                            'active' => $player->active
+                        ];
+
+                        if (is_numeric($player->{'final-rank'})) {
+                            $playerData['rank'] = $player->{'final-rank'};
+                        } else {
+                            $playerData['rank'] = null;
+                        }
+
+                        $this->playersArray[] = $playerData;
+                        $this->entries[] = $name;
+
                     }
-
-                    $this->playersArray[] = $playerData;
-                    $this->entries[] = $name;
 
                 }
 
-            }
-
-            // always remove the old image
-            $newImage = APPLICATION_PATH . '/../public/img/tournaments/'.$this->systemName.'.png';
+                // always remove the old image
+                $newImage = APPLICATION_PATH . '/../public/img/tournaments/'.$this->systemName.'.png';
 
 
-            if (file_exists($newImage)) {
-                unlink($newImage);
-            }
+                if (file_exists($newImage)) {
+                    unlink($newImage);
+                }
 
-            // generate an image for this tournament
-            if ($image =  $this->challonge->getOverviewImage()) {
-                $tmpFile = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
-                file_put_contents($tmpFile, file_get_contents($image));
+                // generate an image for this tournament
+                if ($image =  $this->challonge->getOverviewImage()) {
+                    $tmpFile = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
+                    file_put_contents($tmpFile, file_get_contents($image));
 
 
-                $original = new \Phalcon\Image\Adapter\GD($tmpFile);
-                $original->crop($original->getWidth(), $original->getHeight(), 0, 100);
-                $original->save($newImage);
-                chmod($newImage, 0777);
+                    $original = new \Phalcon\Image\Adapter\GD($tmpFile);
+                    $original->crop($original->getWidth(), $original->getHeight(), 0, 100);
+                    $original->save($newImage);
+                    chmod($newImage, 0777);
+                }
+
             }
 
         }
@@ -271,10 +288,10 @@ class Tournament extends Base
     public function columnMap()
     {
         return array(
-            'tournamentId' => 'tournamentId', 
-            'name' => 'name', 
-            'type' => 'type', 
-            'startDate' => 'startDate', 
+            'tournamentId' => 'tournamentId',
+            'name' => 'name',
+            'type' => 'type',
+            'startDate' => 'startDate',
             'challongeId' => 'challongeId',
             'systemName' => 'systemName'
 

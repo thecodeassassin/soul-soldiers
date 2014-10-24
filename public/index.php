@@ -15,6 +15,10 @@ defined('BASE_URL')
 || define('BASE_URL', sprintf('%s://%s', (array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] != null) ? 'https' : 'http', $_SERVER['HTTP_HOST']));
 
 
+if (!extension_loaded('gd')) {
+    die('Please make sure GD is installed');
+}
+
 if (strpos(BASE_URL, 'intranet')) {
     define('ACTIVE_MODULE', 'intranet');
 } else {
@@ -89,7 +93,7 @@ if (APPLICATION_ENV == \Soul\Kernel::ENV_STAGING) {
     }
 
     if (!$access) {
-        
+
         // redirect an unauthorised user to soul-soldiers.nl
         header('Location: http://soul-soldiers.nl');
         exit;

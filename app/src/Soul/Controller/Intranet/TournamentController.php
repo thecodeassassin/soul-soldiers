@@ -59,8 +59,9 @@ class TournamentController extends Base
             }
 
             $this->flashMessage(sprintf('Successvol ingeschreven voor %s', $tournament->name), 'success', true);
-            return $this->response->redirect('tournaments');
         }
+
+        return $this->response->redirect('tournaments');
     }
 
     /**
