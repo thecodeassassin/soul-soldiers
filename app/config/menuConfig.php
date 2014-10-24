@@ -77,7 +77,7 @@ $menuConfig = [
             '<span class="icon-home"></span> Home' => BASE_URL . '/home',
             '<span class="icon-award"></span> Toernooien' => BASE_URL . '/tournaments',
             '<span class="icon-download"></span> Downloads' => BASE_URL . '/content/downloads',
-            '<span class="icon-user-1"></span> Account beheren' => BASE_URL . '/account/manage',
+            '<span class="icon-gauge"></span> Admin' => BASE_URL . '/admin/index',
             '<span class="icon-logout"></span> Uitloggen' => BASE_URL . '/logout',
         ],
         // guest only menu items
@@ -90,13 +90,13 @@ $menuConfig = [
         ],
         // Admin only menu items
         'admin' => [
-            'Tournooien beheren' => BASE_URL . '/tournaments/manage'
+            '<span class="icon-gauge"></span> Admin'
         ]
     ],
 
     'intranet-user' => [
         'menu' => [
-            'Mijn account' => BASE_URL . '/account/manage',
+//            'Mijn account' => BASE_URL . '/account/manage',
             'Uitloggen' => BASE_URL.'/logout'
         ]
     ]

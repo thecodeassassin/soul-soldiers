@@ -133,11 +133,17 @@ class Challonge
                 case 401: // Bad API Key
                 case 422: // Validation errors
                 case 404: // Not found/Not in scope of account
-                    $return = $this->result = new SimpleXMLElement($curl_result);
-                    foreach ($return->error as $error) {
-                        $this->errors[] = $error;
+
+                    if (strpos($curl_result,'Access denied') !== false) {
+                        $this->errors[] = $curl_result;
+                    } else {
+
+                        $return = $this->result = new SimpleXMLElement($curl_result);
+                        foreach ($return->error as $error) {
+                            $this->errors[] = $error;
+                        }
+                        $return = false;
                     }
-                    $return = false;
                     break;
 
                 case 500: // Oh snap!
@@ -398,4 +404,4 @@ class Challonge
         return $tournamentId;
     }
 
-} 
+}

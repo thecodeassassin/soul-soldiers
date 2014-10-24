@@ -36,6 +36,8 @@ return new \Phalcon\Config(
 
                     "js-plugin/respond/respond.min.js",
                     "js-plugin/jquery/jquery-1.10.2.min.js",
+                    "js/blockui.js",
+                    "js/common.js",
                     "js-plugin/jquery-ui/jquery-ui-1.8.23.custom.min.js",
                     "https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js",
                     "js-plugin/easing/jquery.easing.1.3.js",
@@ -53,7 +55,6 @@ return new \Phalcon\Config(
                     "js/modernizr-2.6.1.min.js",
                     "js/jquery.stellar.min.js",
 
-                    "js/blockui.js",
 
                     "js/soul.js",
                     "js/forum.js"
@@ -78,6 +79,7 @@ return new \Phalcon\Config(
                     'css/intranet/plugins.css',
                     'css/intranet/themes/deepblue.css',
                     'css/intranet/main.css',
+                    'css/ajax-loader.css',
                     'css/common.css'
                 ]
             ],
@@ -85,6 +87,8 @@ return new \Phalcon\Config(
             'scripts' => [
                 'js' => [
                     "js-plugin/jquery/jquery-1.10.2.min.js",
+                    "js/blockui.js",
+                    "js/common.js",
                     "js/intranet/ckeditor/ckeditor.js",
                     "js/intranet/plugins.js",
                     "js/intranet/challonge.js",
@@ -94,6 +98,7 @@ return new \Phalcon\Config(
                     "js-plugin/neko-contact-ajax-plugin/js/jquery.validate.min.js",
                     "js/jquery.validate.nl.js",
                     "js/bootbox.min.js",
+                    "js/remote-modal.js",
                     "js-plugin/jquery-ui/jquery-ui-1.8.23.custom.min.js",
                     "js/intranet/main.js",
                     "https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"

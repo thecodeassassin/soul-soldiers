@@ -34,7 +34,7 @@
     <div class="clearfix">
         <div class="btn-group btn-group-sm pull-right">
             {#<a href="{{ url('forgot-password') }}" class="btn btn-warning" data-toggle="tooltip" title="Forgot pass?"><i class="icon-lock"></i>Wachtwoord vergeten</a>#}
-            <button type="submit" id="login" class="btn btn-success" data-toggle="tooltip" title="Inloggen"><i class="icon-login"></i>Inloggen</button>
+            <button type="submit" id="login" class="btn btn-success"><i class="icon-login"></i>Inloggen</button>
 
         </div>
     </div>
