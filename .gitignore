@@ -7,3 +7,4 @@ vendor/*
 public/doc
 public/demo
 public/img/tournaments/*
+params.sh
