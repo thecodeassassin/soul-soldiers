@@ -262,7 +262,7 @@ class User extends Base
 
             $authService->setAuthData(AuthData::buildFromUser($authUser));
 
-            FailedAttempt::reset();
+            FailedAttempt::resetAll();
 
             return $authUser;
         }

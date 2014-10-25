@@ -121,7 +121,7 @@ class AccountController extends AccountBase
         }
 
         // reset failed attempts
-        FailedAttempt::reset();
+        FailedAttempt::resetAll();
 
         $changePasswordForm = new ChangePasswordForm();
 

@@ -127,7 +127,7 @@ class FailedAttempt extends Base
     /**
      * @return bool
      */
-    public static function reset()
+    public static function resetAll()
     {
         $ipAddress = Util::getClientIp();
 
