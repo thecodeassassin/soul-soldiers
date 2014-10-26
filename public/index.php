@@ -19,7 +19,7 @@ if (!extension_loaded('gd')) {
     die('Please make sure GD is installed');
 }
 
-if (strpos(BASE_URL, 'intranet')) {
+if (strpos(BASE_URL, '.lan')) {
     define('ACTIVE_MODULE', 'intranet');
 } else {
     define('ACTIVE_MODULE', 'website');
