@@ -89,3 +89,10 @@
 .modal-header .modal-title {
     margin-bottom: 5px;
 }
+
+/** Forms **/
+
+.form-group .textonly {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}

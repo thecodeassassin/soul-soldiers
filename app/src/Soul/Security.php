@@ -54,8 +54,6 @@ class Security extends Module
         $controller = $dispatcher->getControllerName();
         $action = $dispatcher->getActionName();
 
-
-
         //Obtain the ACL list
         $acl = $this->getACL();
 

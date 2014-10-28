@@ -387,10 +387,17 @@ body {
     display: none;
 }
 
+/* Submenu links */
 #primary-nav li > ul a {
     margin: 0;
-    background: #eee;
+    background: #B1B1B1;
     font-size: 13px;
+    color: #000;
+}
+
+#primary-nav li > ul a:hover {
+    background: #383838;
+    color: #cccccc;
 }
 
 #primary-nav li > ul i {
@@ -708,8 +715,8 @@ body {
     line-height: 40px;
     text-align: center;
     position: fixed;
-    bottom: 85px;
-    left: 5px;
+    bottom: 10px;
+    left: 10px;
     color: #555;
     display: none;
     background-color: #fff;
@@ -2691,4 +2698,18 @@ only screen and (min-device-pixel-ratio: 1.5) {
     .loader-10 { background-image: url('../../img/intranet/loading.gifs/loading10@2x.gif'); }
     .loader-11 { background-image: url('../../img/intranet/loading.gifs/loading11@2x.gif'); }
     .loader-12 { background-image: url('../../img/intranet/loading.gifs/loading12@2x.gif'); }
+}
+
+/** custom **/
+.page-header a {
+    color: #2E3947;
+    border-bottom: 1px solid #2E3947;
+}
+
+.page-header a:hover {
+    text-decoration: none;
+}
+
+.cke_source {
+    color: #000;
 }

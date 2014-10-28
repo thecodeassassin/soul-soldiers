@@ -47,13 +47,10 @@ $(function() {
         e.preventDefault();
 
         var tournamentId = $(this).attr('data-tournament-id');
-        console.log('/img/tournaments/'+tournamentId+'.png');
-
-
         $.magnificPopup.open({
             type:'image',
             mainClass: 'mfp-fade',
-            items: {src: '/img/tournaments/'+tournamentId+'.png'},
+            items: {src: '/static/image/'+tournamentId+'.png'},
             gallery: {
                 enabled: true
             }

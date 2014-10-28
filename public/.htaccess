@@ -3,12 +3,16 @@ AddDefaultCharset UTF-8
 <IfModule mod_rewrite.c>
 
     RewriteEngine On
+
+    RewriteCond %{REQUEST_URI} !/img.?
+    RewriteRule ^static/image/(.*)$ staticimage.php?file=$1 [L,PT]
+
+
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} !/\.doc.?
     RewriteCond %{REQUEST_URI} !/demo.?
     RewriteCond %{REQUEST_URI} !/media.?
     RewriteCond %{REQUEST_URI} !/\.js.?
-    RewriteCond %{REQUEST_URI} !/img.?
     RewriteCond %{REQUEST_URI} !/js.?
     RewriteCond %{REQUEST_URI} !/\.css.?
     RewriteCond %{REQUEST_URI} !/\.ttf.?
@@ -20,6 +24,7 @@ AddDefaultCharset UTF-8
     RewriteCond %{REQUEST_URI} !/js/?
 
     RewriteCond %{REQUEST_FILENAME} !-f
+
     RewriteRule ^(.*)$ index.php?_url=/$1 [QSA,L]
 </IfModule>
 

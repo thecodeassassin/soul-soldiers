@@ -30,3 +30,19 @@ function reserveSeat() {
     }
     return confirmed;
 }
+
+$(function() {
+
+    // check submenu's if they have any active menus
+
+    $('.hasSubMenu').siblings('.subMenu').find('li a').each(function() {
+
+       if ($(this).hasClass('active')) {
+
+           var subMenu = $(this).parent().parent();
+           subMenu.show();
+           subMenu.siblings('.hasSubMenu').addClass('open');
+       }
+    });
+
+});

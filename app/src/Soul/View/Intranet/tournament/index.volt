@@ -4,6 +4,8 @@
 <div class="row">
 {% for tournament in tournaments %}
 
+{% if tournament.hasError %} {% continue %} {% endif %}
+
 {% set entered = tournament.hasEntered(user.userId) %}
 {% set id = tournament.tournamentId %}
 {% set isChallonge = tournament.isChallonge %}
@@ -109,14 +111,10 @@
                         {% endfor %}
                     </div>
                     <div class="tab-pane" id="regels{{ id }}">
-                        {% if view.exists('tournament/rules/' ~ tournament.systemName) %}
-                            {{ partial('tournament/rules/' ~ tournament.systemName) }}
-                        {% endif %}
+                        {{ tournament.rules }}
                     </div>
                     <div class="tab-pane" id="prijzen{{ id }}">
-                        {% if view.exists('tournament/prizes/' ~ tournament.systemName) %}
-                            {{ partial('tournament/prizes/' ~ tournament.systemName) }}
-                        {% endif %}
+                        {{ tournament.prizes }}
                     </div>
                 </div>
             </div>

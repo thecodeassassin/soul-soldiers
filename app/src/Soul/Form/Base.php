@@ -6,8 +6,10 @@
 namespace Soul\Form;
 
 
+use Phalcon\Forms\Element\Date;
 use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Element\Password;
+use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\TextArea;
 use Phalcon\Forms\Form;
@@ -42,17 +44,19 @@ abstract class Base extends Form
     }
 
     /**
-     * @param string      $placeholder Placeholder
-     * @param string      $name        Name of the field
-     * @param bool        $required    Mandatory field or not
-     * @param string      $filter      Pass a filter
+     * @param string $placeholder Placeholder
+     * @param string $name        Name of the field
+     * @param bool   $required    Mandatory field or not
+     * @param string $filter      Pass a filter
+     *
+     * @param string $class       CSS class(es)
      *
      * @return Text
      */
-    protected function getTextField($placeholder, $name, $required = false, $filter = 'string')
+    protected function getTextField($placeholder, $name, $required = false, $filter = 'string', $class = 'form-control')
     {
 
-        $text = new Text($name, ['class' => 'form-control', 'placeholder' => $placeholder]);
+        $text = new Text($name, ['class' => $class, 'placeholder' => $placeholder]);
 
         if ($required) {
             $text->addValidator(
@@ -69,6 +73,40 @@ abstract class Base extends Form
 
         return $text;
     }
+
+
+
+    /**
+     * @param string $placeholder Placeholder
+     * @param string $name        Name of the field
+     * @param bool   $required    Mandatory field or not
+     * @param string $filter      Pass a filter
+     *
+     * @param string $class       CSS class(es)
+     *
+     * @return Text
+     */
+    protected function getDateField($placeholder, $name, $required = false, $filter = 'string', $class = 'form-control')
+    {
+
+        $text = new Date($name, ['class' => $class, 'placeholder' => $placeholder]);
+
+        if ($required) {
+            $text->addValidator(
+                new PresenceOf([
+                    'message' => sprintf('%s is verplicht', $placeholder)
+                ])
+            );
+            $text->setAttribute('required', '');
+        }
+
+        if (!empty($filter)) {
+            $text->addFilter($filter);
+        }
+
+        return $text;
+    }
+
 
     /**
      * @param string $placeholder Placeholder
@@ -99,6 +137,18 @@ abstract class Base extends Form
         }
 
         return $text;
+    }
+
+    /**
+     * @param        $name
+     * @param        $options
+     * @param string $class
+     *
+     * @return \Phalcon\Forms\Element\Select
+     */
+    protected function getSelect($name, $options, $class = 'form-control')
+    {
+        return new Select($name, $options, ['class' => $class]);
     }
 
     /**

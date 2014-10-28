@@ -200,7 +200,7 @@ class AccountBase extends Base
                             $this->flashMessage('Uw profiel informatie is gewijzigd', 'success');
                         }
 
-                        // create the new user
+                        // save the user
                         $user->save();
 
                     }

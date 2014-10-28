@@ -55,6 +55,10 @@ class Challonge
         if ($subDomain) {
             $this->setSubDomain($subDomain);
         }
+
+        if (empty($api_key)) {
+            throw new \Exception('Challonge API key may not be empty');
+        }
     }
 
     /*
@@ -176,6 +180,10 @@ class Challonge
      */
     public function getTournaments($params = array())
     {
+        if ($this->subDomain) {
+            $params['subdomain'] = $this->subDomain;
+        }
+
         return $this->makeCall('tournaments', $params, 'get');
     }
 

@@ -198,7 +198,20 @@ return [
             "controller" => "tournament",
             "action" => 'overview',
             "systemName" => 1
-        ]
+        ],
+
+        // Admin specific routes
+
+        '/admin/tournaments/manage/([a-zA-Z0-9_-]+)' => [
+            "controller" => "admin",
+            "action" => 'manageTournament',
+            "systemName" => 1
+        ],
+
+        '/admin/tournaments/add' => [
+            "controller" => "admin",
+            "action" => 'addTournament'
+        ],
     ]
 
 ];

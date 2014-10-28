@@ -1,6 +1,8 @@
 <?php
 namespace Soul\Model;
 
+use Phalcon\Mvc\Model\Message;
+use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Soul\Tournaments\Challonge;
 use Soul\Tournaments\Challonge\Exception as ChallongeException;
 use Soul\Tournaments\Challonge\Tournament as ChallongeTournament;
@@ -55,6 +57,16 @@ class Tournament extends Base
     /**
      * @var string
      */
+    public $rules;
+
+    /**
+     * @var string
+     */
+    public $prizes;
+
+    /**
+     * @var string
+     */
     public $typeString;
 
     /**
@@ -100,6 +112,55 @@ class Tournament extends Base
         $this->hasMany('tournamentId', '\Soul\Model\TournamentUser', 'tournamentId', ['alias' => 'players']);
     }
 
+    public function validation()
+    {
+        $existing = self::findFirst(["tournamentId='$this->tournamentId'"]);
+
+        if ($existing) {
+            if ($existing->name != $this->name) {
+                $this->validate(new Uniqueness(
+                        array(
+                            "field"   => "name",
+                            "message" => "Er bestaat al een toernooi met deze naam"
+                        )
+                    ));
+            }
+        }
+
+        if ($this->validationHasFailed() == true) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Sanitize the system name before saving the tournament
+     */
+    public function beforeCreate()
+    {
+        $this->systemName = preg_replace('/[^A-Za-z0-9\_]/', '', strtolower(str_replace(' ', '_', $this->name)));
+
+        $challongeTypes = [
+          self::TYPE_SINGLE_ELIMINATION => 'single elimination',
+          self::TYPE_DOUBLE_ELIMINATION => 'double elimination',
+        ];
+
+        // if the tournament is single or double elimination, register the tournament in challonge
+        if (in_array($this->type, [self::TYPE_SINGLE_ELIMINATION, self::TYPE_DOUBLE_ELIMINATION])) {
+            $challongeApi = $this->getChallongeAPI();
+            $challongeApi->createTournament([
+              'tournament[name]' => $this->name,
+              'tournament[tournament_type]' => $challongeTypes[$this->type],
+              'tournament[url]' => $this->systemName,
+              'tournament[subdomain]' => $challongeApi->getSubDomain(),
+              'tournament[open_signup]' => 'false',
+              'tournament[start_at]' => $this->startDate
+            ]);
+            $this->challongeId = $this->systemName;
+        }
+    }
+
     /**
      * @return \Phalcon\Mvc\Model\ResultsetInterface
      */
@@ -108,20 +169,33 @@ class Tournament extends Base
         return self::find('startDate < \''.date('Y-m-d H:i:s', strtotime('+1 week')) . '\'');
     }
 
-    public function afterFetch()
+    /**
+     * Returns a list of tournament types
+     *
+     * @return array list of types
+     */
+    public static function getTypes()
     {
-        $types = [
+        return [
             self::TYPE_TOP_SCORE => 'Top score',
             self::TYPE_SINGLE_ELIMINATION => 'Single elimination',
             self::TYPE_DOUBLE_ELIMINATION => 'Double elimination'
         ];
+    }
+
+    /**
+     *
+     */
+    public function afterFetch()
+    {
+        $types = self::getTypes();
 
         if ($this->challongeId) {
 
+            $this->isChallonge = true;
             try {
 
                 $this->challonge = new ChallongeTournament($this->challongeId);
-                $this->isChallonge = true;
 
             } catch(ChallongeException $e) {
                 $this->hasError = true;
@@ -198,7 +272,7 @@ class Tournament extends Base
                 }
 
                 // always remove the old image
-                $newImage = APPLICATION_PATH . '/../public/img/tournaments/'.$this->systemName.'.png';
+                $newImage = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
 
 
                 if (file_exists($newImage)) {
@@ -208,7 +282,7 @@ class Tournament extends Base
                 // generate an image for this tournament
                 if ($image =  $this->challonge->getOverviewImage()) {
                     $tmpFile = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
-                    file_put_contents($tmpFile, file_get_contents($image));
+                    file_put_contents($tmpFile, file_get_contents((string)$image));
 
 
                     $original = new \Phalcon\Image\Adapter\GD($tmpFile);
@@ -293,9 +367,19 @@ class Tournament extends Base
             'type' => 'type',
             'startDate' => 'startDate',
             'challongeId' => 'challongeId',
-            'systemName' => 'systemName'
+            'systemName' => 'systemName',
+            'rules' => 'rules',
+            'prizes' => 'prizes',
 
         );
+    }
+
+    /**
+     * @return Challonge
+     */
+    protected function getChallongeAPI()
+    {
+        return $this->getDI()->get('challonge');
     }
 
 }

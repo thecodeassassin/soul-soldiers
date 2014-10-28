@@ -1,9 +1,9 @@
 <?php
-/**  
+/**
  * @author Stephen Hoogendijk
  * @copyright Soul-Soldiers
- * @package Tournament 
- */  
+ * @package Tournament
+ */
 
 namespace Soul\Tournaments\Challonge;
 
@@ -55,12 +55,12 @@ class Tournament extends Module
 
         $this->challongeId = $challongeId;
 
-        try {
-            $this->api = $this->getApi();
 
-            $this->tournamentObject = $this->api->getTournament($challongeId);
+        $this->api = $this->getApi();
 
-        } catch (\Exception $e) {
+        $this->tournamentObject = $this->api->getTournament($challongeId);
+
+        if (!$this->tournamentObject) {
             throw new Exception(sprintf('Tournament with ID %s could not be loaded', $challongeId));
         }
 
@@ -183,9 +183,12 @@ class Tournament extends Module
         }
     }
 
+    /**
+     * @return null|\SimpleXMLElement[]
+     */
     public function getOverviewImage()
     {
-        return $this->tournamentObject->{'live-image-url'};
+        return ($this->tournamentObject ? $this->tournamentObject->{'live-image-url'} : null);
     }
 
     /**
@@ -274,4 +277,4 @@ class Tournament extends Module
     {
         return $this->di->get('challonge');
     }
-} 
+}

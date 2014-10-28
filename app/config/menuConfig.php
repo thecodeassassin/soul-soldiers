@@ -77,7 +77,10 @@ $menuConfig = [
             '<span class="icon-home"></span> Home' => BASE_URL . '/home',
             '<span class="icon-award"></span> Toernooien' => BASE_URL . '/tournaments',
             '<span class="icon-download"></span> Downloads' => BASE_URL . '/content/downloads',
-            '<span class="icon-gauge"></span> Admin' => BASE_URL . '/admin/index',
+            '<span class="icon-gauge"></span> Admin' => [
+                 'Dashboard' => BASE_URL . '/admin/index',
+                 'Toernooien' => BASE_URL . '/admin/tournaments'
+            ],
             '<span class="icon-logout"></span> Uitloggen' => BASE_URL . '/logout',
         ],
         // guest only menu items

@@ -14,9 +14,17 @@ defined('APPLICATION_ENV')
 defined('BASE_URL')
 || define('BASE_URL', sprintf('%s://%s', (array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] != null) ? 'https' : 'http', $_SERVER['HTTP_HOST']));
 
+$requiredExtensions = ['gd', 'curl', 'mcrypt', 'mysql', 'memcached'];
 
-if (!extension_loaded('gd')) {
-    die('Please make sure GD is installed');
+$missing = [];
+foreach ($requiredExtensions as $extension) {
+    if (!extension_loaded($extension)) {
+        $missing[] = $extension;
+    }
+}
+
+if (count($missing) > 0) {
+    die(sprintf('The following php extensions are not installed or enabled: %s', implode(', ',$missing)));
 }
 
 if (strpos(BASE_URL, '.lan') !== false || strpos(BASE_URL, 'intranet') !== false) {
