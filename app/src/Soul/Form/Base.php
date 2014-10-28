@@ -51,12 +51,15 @@ abstract class Base extends Form
      *
      * @param string $class       CSS class(es)
      *
+     * @param array  $params
+     *
      * @return Text
      */
-    protected function getTextField($placeholder, $name, $required = false, $filter = 'string', $class = 'form-control')
+    protected function getTextField($placeholder, $name, $required = false, $filter = 'string', $class = 'form-control', array $params = [])
     {
 
-        $text = new Text($name, ['class' => $class, 'placeholder' => $placeholder]);
+        $params = array_merge($params, ['class' => $class, 'placeholder' => $placeholder]);
+        $text = new Text($name, $params);
 
         if ($required) {
             $text->addValidator(
@@ -144,11 +147,14 @@ abstract class Base extends Form
      * @param        $options
      * @param string $class
      *
+     * @param array  $params
+     *
      * @return \Phalcon\Forms\Element\Select
      */
-    protected function getSelect($name, $options, $class = 'form-control')
+    protected function getSelect($name, $options, $class = 'form-control', array $params = [])
     {
-        return new Select($name, $options, ['class' => $class]);
+        $params = array_merge($params, ['class' => $class]);
+        return new Select($name, $options, $params);
     }
 
     /**

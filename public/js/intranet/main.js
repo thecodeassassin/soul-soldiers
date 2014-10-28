@@ -57,6 +57,9 @@ $(function() {
         });
 
     });
+
+    $("#startDate").mask("9999-99-99 99:99:99");
+    activateToolTips();
 });
 
 

@@ -50,6 +50,37 @@ class AdminController extends \Soul\Controller\Website\AdminController
     }
 
     /**
+     * @param $systemName
+     */
+    public function deleteTournamentAction($systemName)
+    {
+        try {
+
+            $tournament = Tournament::findFirstBySystemName($systemName);
+
+            if (!$tournament) {
+                $this->flashMessage(sprintf('Tournooi %s bestaat niet', $systemName), 'error', true);
+            } else {
+                // delete the tournament
+                $deleteStatus = $tournament->delete();
+
+                if ($deleteStatus) {
+                    $this->flashMessage(sprintf('Tournooi %s is verwijderd', $systemName), 'success', true);
+                } else {
+                    $this->flashMessages($tournament->getMessages(), 'error');
+                }
+
+            }
+
+            return $this->response->redirect('admin/tournaments');
+
+
+        } catch (\Exception $e) {
+            $this->flashMessage(sprintf('Tournooi verwijderen mislukt: %s', $e->getMessage()), 'error');
+        }
+    }
+
+    /**
      * @param Tournament $tournament
      */
     protected function tournamentForm(Tournament $tournament)
@@ -72,19 +103,20 @@ class AdminController extends \Soul\Controller\Website\AdminController
                 } else {
 
                     // save the tournament and go back to the previous screen
-                    $tournament->save();
+                    $saveState = $tournament->save();
 
-                    if ($hasIdentifier) {
-                        $this->flashMessage('Het toernooi is opgeslagen', 'success');
+                    if ($saveState) {
+                        if ($hasIdentifier) {
+                            $this->flashMessage('Het toernooi is opgeslagen', 'success');
+                        } else {
+                            $this->flashMessage('Het toernooi is opgeslagen', 'success', true);
+                            $this->response->redirect('admin/tournaments/manage/'.$tournament->systemName);
+                        }
                     } else {
-                        $this->flashMessage('Het toernooi is opgeslagen', 'success', true);
-                        $this->response->redirect('admin/tournaments/manage/'.$tournament->systemName);
+                        $this->flashMessages($tournament->getMessages(), 'error');
                     }
 
-
-
                 }
-
             }
 
         } else {

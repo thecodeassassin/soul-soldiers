@@ -201,10 +201,15 @@ return [
         ],
 
         // Admin specific routes
-
         '/admin/tournaments/manage/([a-zA-Z0-9_-]+)' => [
             "controller" => "admin",
             "action" => 'manageTournament',
+            "systemName" => 1
+        ],
+
+        '/admin/tournaments/delete/([a-zA-Z0-9_-]+)' => [
+            "controller" => "admin",
+            "action" => 'deleteTournament',
             "systemName" => 1
         ],
 

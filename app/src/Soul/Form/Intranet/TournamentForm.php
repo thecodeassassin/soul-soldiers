@@ -34,9 +34,9 @@ class TournamentForm extends Base
         $rules = $this->getTextArea('Regels HTML', 'rules', 10, true, null, 'form-control ckeditor');
         $prizes = $this->getTextArea('Prijzen HTML', 'prizes', 10, true, null, 'form-control ckeditor');
 
-        $type = $this->getSelect('type', Tournament::getTypes());
+        $type = $this->getSelect('type', Tournament::getTypes(), 'form-control', ['id' => 'typeSelect']);
 
-        $date = $this->getTextField('Datum', 'startDate', true);
+        $date = $this->getTextField('Datum', 'startDate', true, 'string', 'form-control', ['id' => 'startDate']);
         $date->addValidator(
           new Regex([
               'pattern' => '/\d{4}-[01]\d-[0-3]\d [0-2]\d:[0-5]\d:[0-5]\d/',
@@ -44,21 +44,9 @@ class TournamentForm extends Base
           ])
         );
 
-//        $challongeApi = $this->getChallongeAPI();
-//        $tournaments = $challongeApi->getTournaments();
-//        $challongeIds = ['' => '-- Geen challonge --'];
-//
-//        if ($tournaments) {
-//            foreach ($tournaments as $tournament) {
-//                $challongeIds[(string)$tournament->url] = (string)$tournament->name;
-//            }
-//        }
-//        $challongeId = $this->getSelect('challongeId', $challongeIds);
-
         $this->add($name)
              ->add($date)
              ->add($rules)
-//             ->add($challongeId)
              ->add($type)
              ->add($prizes)->add(new Submit('Opslaan', [
                 'class' => 'btn btn-primary btn-lg'

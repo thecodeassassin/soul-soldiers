@@ -103,6 +103,11 @@ class Tournament extends Base
      */
     public $challonge;
 
+    public $challongeTypes = [
+        self::TYPE_SINGLE_ELIMINATION => 'single elimination',
+        self::TYPE_DOUBLE_ELIMINATION => 'double elimination',
+    ];
+
     /**
      * Initialize method for model.
      */
@@ -141,24 +146,59 @@ class Tournament extends Base
     {
         $this->systemName = preg_replace('/[^A-Za-z0-9\_]/', '', strtolower(str_replace(' ', '_', $this->name)));
 
-        $challongeTypes = [
-          self::TYPE_SINGLE_ELIMINATION => 'single elimination',
-          self::TYPE_DOUBLE_ELIMINATION => 'double elimination',
-        ];
-
-        // if the tournament is single or double elimination, register the tournament in challonge
-        if (in_array($this->type, [self::TYPE_SINGLE_ELIMINATION, self::TYPE_DOUBLE_ELIMINATION])) {
-            $challongeApi = $this->getChallongeAPI();
-            $challongeApi->createTournament([
-              'tournament[name]' => $this->name,
-              'tournament[tournament_type]' => $challongeTypes[$this->type],
-              'tournament[url]' => $this->systemName,
-              'tournament[subdomain]' => $challongeApi->getSubDomain(),
-              'tournament[open_signup]' => 'false',
-              'tournament[start_at]' => $this->startDate
-            ]);
-            $this->challongeId = $this->systemName;
+        if ($this->isChallongeTournament()) {
+            return $this->createChallongeTournament();
         }
+    }
+
+    /**
+     * Before deleting a tournament
+     *
+     * @return bool
+     */
+    public function beforeDelete()
+    {
+        // when deleting a tournament, also delete the linked challonge
+        if ($this->isChallongeTournament()) {
+           return $this->deleteChallongeTournament();
+        }
+
+        return true;
+    }
+
+    public function beforeUpdate()
+    {
+
+        $databaseEntry = self::findFirstBySystemName($this->systemName);
+
+        // if the tournament changed to non challonge, delete the challonge tournament
+        if ($databaseEntry->isChallongeTournament() && !$this->isChallongeTournament()) {
+            if (!$this->deleteChallongeTournament()) {
+                return false;
+            }
+        } elseif (!$databaseEntry->isChallongeTournament() && $this->isChallongeTournament()) {
+            if (!$this->createChallongeTournament()) {
+                return false;
+            }
+        }
+
+        // when updating a tournament, also update the linked challonge
+        if ($this->isChallongeTournament()) {
+            $challongeApi = $this->getChallongeAPI();
+            $editAction = $challongeApi->updateTournament($this->challongeId, [
+                'tournament[name]' => $this->name,
+                'tournament[start_at]' => $this->startDate,
+                'tournament[tournament_type]' => $this->challongeTypes[$this->type],
+            ]);
+
+            if (!$editAction) {
+                $this->appendMessage(new Message('Dit toernooi kon niet worden bijgewerkt. Challonge kan niet worden bereikt.'));
+                return false;
+            }
+
+        }
+
+        return true;
     }
 
     /**
@@ -281,14 +321,23 @@ class Tournament extends Base
 
                 // generate an image for this tournament
                 if ($image =  $this->challonge->getOverviewImage()) {
+
                     $tmpFile = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
                     file_put_contents($tmpFile, file_get_contents((string)$image));
 
 
-                    $original = new \Phalcon\Image\Adapter\GD($tmpFile);
-                    $original->crop($original->getWidth(), $original->getHeight(), 0, 100);
-                    $original->save($newImage);
-                    chmod($newImage, 0777);
+                    $mimeType = @finfo_file(finfo_open(FILEINFO_MIME_TYPE), $tmpFile);
+                    if ($mimeType) {
+                        if (strpos($mimeType, 'image') !== false) {
+                            $original = new \Phalcon\Image\Adapter\GD($tmpFile);
+                            if ($original->getHeight() >= 105) {
+                                $original->crop($original->getWidth(), $original->getHeight(), 0, 105);
+                            }
+                            $original->save($newImage);
+                            chmod($newImage, 0777);
+                        }
+                    }
+
                 }
 
             }
@@ -317,7 +366,7 @@ class Tournament extends Base
             return $this->challonge->isCompleted();
         }
 
-
+        return false;
     }
 
     /**
@@ -372,6 +421,57 @@ class Tournament extends Base
             'prizes' => 'prizes',
 
         );
+    }
+
+    /**
+     * @return bool
+     */
+    protected function deleteChallongeTournament()
+    {
+        $challongeApi = $this->getChallongeAPI();
+        $deleteAction = $challongeApi->deleteTournament($this->challongeId);
+
+        if (!$deleteAction) {
+            $this->appendMessage(new Message('Dit toernooi kon niet worden verwijderd. Challonge kan niet worden bereikt.'));
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function createChallongeTournament()
+    {
+        // if the tournament is single or double elimination, register the tournament in challonge
+        $challongeApi = $this->getChallongeAPI();
+        $challongeTournament = $challongeApi->createTournament([
+                'tournament[name]' => $this->name,
+                'tournament[tournament_type]' => $this->challongeTypes[$this->type],
+                'tournament[url]' => $this->systemName,
+                'tournament[subdomain]' => $challongeApi->getSubDomain(),
+                'tournament[open_signup]' => 'false',
+                'tournament[start_at]' => $this->startDate
+            ]);
+
+        if (!$challongeTournament) {
+            $this->appendMessage(new Message('Dit toernooi kon niet gemaakt worden. Challonge kan niet worden bereikt.'));
+            return false;
+        }
+
+        $this->challongeId = $this->systemName;
+
+        return true;
+    }
+
+    /**
+     * Checks whether or not this tournament is linked on challonge
+     * @return bool
+     */
+    protected function isChallongeTournament()
+    {
+        return in_array($this->type, [self::TYPE_SINGLE_ELIMINATION, self::TYPE_DOUBLE_ELIMINATION]);
     }
 
     /**

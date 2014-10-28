@@ -1,6 +1,12 @@
 {% if tournament.systemName %}
     {% set mode = 'edit' %}
     {% set postRoute = 'admin/tournaments/manage/'~tournament.systemName %}
+
+    <div class="alert alert-info">
+        <h4><i class="icon-attention-circle"></i> Let op!</h4>
+         Als je het type toernooi veranderd van een challonge toernooi (single/double elimination) naar
+         een topscore toernooi wordt het challonge toernooi verwijderd.
+    </div>
 {% else %}
     {% set mode = 'add' %}
     {% set postRoute = 'admin/tournaments/add' %}
@@ -24,21 +30,12 @@
 
 <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Type toernooi*</label>
-    <div class="col-sm-10 noaddon {% if mode is 'edit' %}textonly{% endif %}">
-        {% if mode is 'edit' %}
-            {{ tournament.typeString }}
-        {% else %}
-            {{ form.render('type') }}
-        {% endif %}
+    <div class="col-sm-10 noaddon">
+
+        {{ form.render('type') }}
+
     </div>
 </div>
-
-{#<div class="form-group">#}
-    {#<label for="name" class="col-sm-2 control-label">Challonge ID</label>#}
-    {#<div class="col-sm-10 noaddon">#}
-        {#{{ form.render('challongeId') }}#}
-    {#</div>#}
-{#</div>#}
 
 <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Regels HTML</label>
@@ -55,8 +52,8 @@
 </div>
 
 <div class="form-group">
-    <div class="col-md-2 col-md-offset-10">
-        <br />
+    <div class="col-md-5 col-md-offset-8">
+        <a class="btn btn-danger btn-lg" href="{{ url('admin/tournaments/delete/' ~ tournament.systemName) }}" onclick="return alert('Zeker weten?')"><i class="icon-remove-circle">Verwijderen</i></a>
         {{ form.render('Opslaan') }}
     </div>
 </div>
