@@ -67,6 +67,20 @@ if (ACTIVE_MODULE == 'intranet') {
         return new \Soul\Tournaments\Challonge($config->challonge->apiKey, $config->challonge->subdomain);
     });
 
+    $di->setShared('binarybeast', function() use ($config) {
+        $bbConfig = new BBConfiguration();
+        $bbConfig->api_key = $config->binarybeast->key;
+        $bbConfig->cache_db_database = $config->database->dbname;
+        $bbConfig->cache_db_password = $config->database->password;
+        $bbConfig->cache_db_username = $config->database->username;
+        $bbConfig->cache_db_server = $config->database->host;
+        $bbConfig->cache_db_table = 'tblBBApiCache';
+        $bbConfig->cache_default_ttl = 5;
+
+        return new BinaryBeast($bbConfig);
+
+    });
+
 }
 
 $di->setShared('logger', function() use ($config) {

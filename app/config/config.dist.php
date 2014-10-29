@@ -66,6 +66,9 @@ return new \Phalcon\Config(
         'challonge' => [
             'apiKey' => '',
             'subdomain' => ''
+        ],
+        'binarybeast' => [
+            'key' => '030fc0777a022cff4e333a3204466a13.5450224414be89.63182112'
         ]
     ]
 );

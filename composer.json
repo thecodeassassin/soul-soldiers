@@ -39,19 +39,19 @@
             }
         },
         {
-            "url": "https://github.com/BinaryBeast/BinaryBeast_API_PHP.git",
+            "url": "https://github.com/thecodeassassin/BinaryBeast_API_PHP.git",
             "type": "package",
             "package": {
                 "name": "binarybeast/stable",
                 "version": "dev-master",
                 "source": {
-                    "url": "https://github.com/BinaryBeast/BinaryBeast_API_PHP.git",
+                    "url": "https://github.com/thecodeassassin/BinaryBeast_API_PHP.git",
                     "type": "git",
                     "reference": "master"
+                },
+                "autoload": {
+                    "classmap": ["lib/", "BinaryBeast.php"]
                 }
-            },
-            "autoload": {
-                "classmap": ["lib/", "BinaryBeast.php"]
             }
         }
 
