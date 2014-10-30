@@ -57,6 +57,7 @@ class Security extends Module
         //Obtain the ACL list
         $acl = $this->getACL();
 
+
         //Check if the Role have access to the controller (resource)
         $allowed = $acl->isAllowed($role, $controller, $action);
 

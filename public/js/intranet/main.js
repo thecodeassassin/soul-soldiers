@@ -6,8 +6,9 @@ $(function() {
 
         $('form.scoreAdd').submit(function(e){
             e.preventDefault();
+            ajaxLoad(true);
 
-            var thisScoreCount = $(this).siblings('.badge'),
+            var thisScoreCount = $(this).parent().siblings('.badge'),
                 scoreCountEl = $(this).find('.scoreCount');
 
             $.ajax({
@@ -18,31 +19,16 @@ $(function() {
                     thisScoreCount.html(newScore);
 
                     scoreCountEl.val(0);
+                },
+                complete: function() {
+                    ajaxLoad(false);
                 }
             });
 
         });
 
-        $('.removeUser').click(function(e){
-            e.preventDefault();
-
-            var accept = confirm('Weet je zeker dat deze gebruiker niet meer mee doet?'),
-                me = $(this);
-
-            if (accept) {
-                $.ajax({
-                    url: me.attr('data-url'),
-                    method: 'GET',
-                    success: function() {
-                        me.closest('.list-group-item').addClass('disabled');
-                        me.closest('form').remove();
-                    }
-                });
-            }
-
-        });
-
     }
+
     $('.matchLink').click(function(e) {
         e.preventDefault();
 
@@ -50,13 +36,29 @@ $(function() {
         $.magnificPopup.open({
             type:'image',
             mainClass: 'mfp-fade',
-            items: {src: '/static/image/'+tournamentId+'.png'},
+            items: {src: '/static/image/'+tournamentId+'.png?ts='+new Date().getTime()},
             gallery: {
                 enabled: true
             }
         });
 
     });
+
+    $('.action-btn').click(function() {
+        ajaxLoad(true);
+       $(this).attr('disabled', 'disabled');
+    });
+
+    $('#isTeamTournament').click(function() {
+        var teamSize = $('#teamSize');
+       if (!$(this).prop('checked')){
+           teamSize.val('');
+       } else {
+           if (teamSize.val() == '') {
+               teamSize.val(2);
+           }
+       }
+     });
 
     $("#startDate").mask("9999-99-99 99:99:99");
     activateToolTips();

@@ -9,6 +9,7 @@ namespace Soul\Controller\Intranet;
 use Phalcon\Mvc\View;
 use Soul\Form\Intranet\TournamentForm;
 use Soul\Model\Tournament;
+use Soul\Model\TournamentTeam;
 
 class AdminController extends \Soul\Controller\Website\AdminController
 {
@@ -81,6 +82,35 @@ class AdminController extends \Soul\Controller\Website\AdminController
     }
 
     /**
+     * @return \Phalcon\Http\ResponseInterface
+     */
+    public function editTeamNameAction($teamId)
+    {
+
+        $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+
+        if ($this->request->isPost()) {
+            $team = TournamentTeam::findFirstById($teamId);
+
+            if ($team) {
+                $teamName = $this->request->get('teamName');
+
+                $tournament = $team->tournament;
+
+                die(var_dump($tournament));
+
+                $this->flashMessages(sprintf('Team naam aangepast naar %s', $teamName));
+
+                return $this->response->redirect('tournament/view/'.$tournament->systemName);
+            }
+
+        }
+
+        $this->view->teamId = $teamId;
+
+    }
+
+    /**
      * @param Tournament $tournament
      */
     protected function tournamentForm(Tournament $tournament)
@@ -90,7 +120,13 @@ class AdminController extends \Soul\Controller\Website\AdminController
 
         if ($this->request->isPost()) {
 
+
             $tournamentForm->bind($this->request->getPost(), $tournament);
+
+            // if isTeamTournament is empty, set the value to 0
+            if (!$this->request->has('isTeamTournament')) {
+                $tournament->setTeamTournament(false);
+            }
 
 
             // if the form is invalid, show the messages to the user

@@ -178,10 +178,14 @@ class Menu
                 $subMenuHTML = static::parseHTML($properties['subMenu'], true);
             }
 
-            $link = sprintf("\n<a href='%s' class='%s'>%s</a>", $properties['link'],
-                implode(' ', $parsedProperties['linkClasses']),
-                $name
-            );
+            $link = '';
+            if (array_key_exists('link', $properties)) {
+                $link = sprintf("\n<a href='%s' class='%s'>%s</a>", $properties['link'],
+                    implode(' ', $parsedProperties['linkClasses']),
+                    $name
+                );
+            }
+
             $output .= sprintf("\n\n<li class='%s'>
                 %s
                 %s

@@ -8,6 +8,7 @@ namespace Soul\Form\Intranet;
 use Phalcon\Forms\Element\Date;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Submit;
+use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Regex;
 use Soul\Model\Tournament;
 use Soul\Form\Base;
@@ -35,6 +36,20 @@ class TournamentForm extends Base
         $prizes = $this->getTextArea('Prijzen HTML', 'prizes', 10, true, null, 'form-control ckeditor');
 
         $type = $this->getSelect('type', Tournament::getTypes(), 'form-control', ['id' => 'typeSelect']);
+        $isTeamTournament = $this->getCheckBox('isTeamTournament', 1);
+        $teamSize = $this->getSelect('teamSize', [
+            '' => '-- Geen Teams --',
+            2 => 2,
+            3 => 3,
+            4 => 4,
+            5 => 5,
+            6 => 6,
+            7 => 7,
+            8 => 8,
+            9 => 9,
+            10 => 10
+        ]);
+
 
         $date = $this->getTextField('Datum', 'startDate', true, 'string', 'form-control', ['id' => 'startDate']);
         $date->addValidator(
@@ -48,6 +63,8 @@ class TournamentForm extends Base
              ->add($date)
              ->add($rules)
              ->add($type)
+             ->add($isTeamTournament)
+             ->add($teamSize)
              ->add($prizes)->add(new Submit('Opslaan', [
                 'class' => 'btn btn-primary btn-lg'
              ]));

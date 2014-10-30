@@ -8,6 +8,9 @@ use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 
+// load the config into the DI
+$di->set('config', $config);
+
 /**
  * Read auto-loader
  */
@@ -48,6 +51,15 @@ include __DIR__ . "/services/crypt.php";
 // load the routes
 include __DIR__ . "/services/router.php";
 
+if (ACTIVE_MODULE == 'intranet') {
+
+    // enable challonge for the intranet site
+    $di->setShared('challonge' , function() use ($config) {
+        return new \Soul\Tournaments\Challonge($config->challonge->apiKey, $config->challonge->subdomain);
+    });
+
+}
+
 // load the menu config
 include __DIR__ . "/services/menu.php";
 
@@ -60,14 +72,7 @@ include __DIR__ . "/services/assets.php";
 // load auth services
 include __DIR__ . "/services/auth.php";
 
-if (ACTIVE_MODULE == 'intranet') {
 
-    // enable challonge for the intranet site
-    $di->setShared('challonge' , function() use ($config) {
-        return new \Soul\Tournaments\Challonge($config->challonge->apiKey, $config->challonge->subdomain);
-    });
-
-}
 
 $di->setShared('logger', function() use ($config) {
     return $config->error->logger;

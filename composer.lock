@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "1e47dba5da0c10a544bb6d12b474ec65",
+    "hash": "6189dd885a7e5672fb8c23a159a62233",
     "packages": [
         {
             "name": "mrclay/minify",
@@ -35,7 +36,7 @@
             ],
             "authors": [
                 {
-                    "name": "Stephen Clay",
+                    "name": "Steve Clay",
                     "email": "steve@mrclay.org",
                     "homepage": "http://www.mrclay.org/",
                     "role": "Developer"
@@ -54,7 +55,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-05-05 05:08:18"
+            "time": "2014-10-27 05:00:32"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -108,16 +109,13 @@
             "time": "2013-12-03 13:33:24"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "phalcon/incubator": 20
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.4",
         "ext-phalcon": ">=1.2.4",
@@ -127,7 +125,5 @@
         "ext-memcached": "*",
         "ext-memcache": "*"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }

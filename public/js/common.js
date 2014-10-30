@@ -18,6 +18,21 @@ function activateToolTips(){
     $("[data-toggle='tooltip']").tooltip();
 }
 
+
+/**
+ *
+ * @param msg
+ */
+function ajaxConfirm(msg){
+    var confirmed = confirm(msg);
+
+    if (confirmed) {
+        ajaxLoad(true);
+    }
+
+    return confirmed;
+}
+
 /**
  * Reserve a seat confirmation message
  * @returns {*}

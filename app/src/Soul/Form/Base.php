@@ -6,6 +6,7 @@
 namespace Soul\Form;
 
 
+use Phalcon\Forms\Element\Check;
 use Phalcon\Forms\Element\Date;
 use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Element\Password;
@@ -155,6 +156,22 @@ abstract class Base extends Form
     {
         $params = array_merge($params, ['class' => $class]);
         return new Select($name, $options, $params);
+    }
+
+    /**
+     * @param        $name
+     * @param        $value
+     * @param string $class
+     *
+     * @param array  $params
+     *
+     * @internal param $options
+     * @return \Phalcon\Forms\Element\Select
+     */
+    protected function getCheckBox($name, $value, $class = '', array $params = [])
+    {
+        $params = array_merge($params, compact('class', 'value'));
+        return new Check($name, $params);
     }
 
     /**

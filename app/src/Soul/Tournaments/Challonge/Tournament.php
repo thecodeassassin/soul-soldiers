@@ -58,7 +58,9 @@ class Tournament extends Module
 
         $this->api = $this->getApi();
 
-        $this->tournamentObject = $this->api->getTournament($challongeId);
+        if ($this->api) {
+            $this->tournamentObject = $this->api->getTournament($challongeId);
+        }
 
         if (!$this->tournamentObject) {
             throw new Exception(sprintf('Tournament with ID %s could not be loaded', $challongeId));
@@ -211,13 +213,16 @@ class Tournament extends Module
 
     /**
      * @param $name
+     *
+     * @return bool|\SimpleXMLElement
+     *
      * @throws Exception
      */
     public function addPlayer($name)
     {
         try {
 
-            $this->api->createParticipant(
+            return $this->api->createParticipant(
                 $this->challongeId,
                 [
                     'participant[name]' => $name
@@ -225,7 +230,27 @@ class Tournament extends Module
             );
 
         } catch (\Exception $e) {
-            throw new Exception(sprintf('No participants found for tournament %s', $this->challongeId));
+            throw new Exception(sprintf('Cannot add %s', $name));
+        }
+    }
+
+    /**
+     * @param $participantId
+     *
+     * @return bool|\SimpleXMLElement
+     * @throws Exception
+     */
+    public function removePlayer($participantId)
+    {
+        try {
+
+            return $this->api->deleteParticipant(
+                $this->challongeId,
+                $participantId
+            );
+
+        } catch (\Exception $e) {
+            throw new Exception(sprintf('Cannot delete participant with id %s', $participantId));
         }
     }
 

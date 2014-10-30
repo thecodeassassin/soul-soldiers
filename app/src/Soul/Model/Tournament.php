@@ -2,10 +2,12 @@
 namespace Soul\Model;
 
 use Phalcon\Mvc\Model\Message;
+use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Soul\Tournaments\Challonge;
 use Soul\Tournaments\Challonge\Exception as ChallongeException;
 use Soul\Tournaments\Challonge\Tournament as ChallongeTournament;
+use Soul\Util;
 
 /**
  * Class Tournament
@@ -65,9 +67,29 @@ class Tournament extends Base
     public $prizes;
 
     /**
+     * @var integer
+     */
+    public $isTeamTournament;
+
+    /**
+     * @var
+     */
+    public $state;
+
+    /**
+     * @var integer
+     */
+    public $teamSize;
+
+    /**
      * @var string
      */
     public $typeString;
+
+    /**
+     * @var string
+     */
+    public $stateString;
 
     /**
      * @var array
@@ -98,6 +120,10 @@ class Tournament extends Base
     const TYPE_SINGLE_ELIMINATION = 2;
     const TYPE_DOUBLE_ELIMINATION = 3;
 
+    const STATE_PENDING = 0;
+    const STATE_STARTED = 1;
+    const STATE_FINISHED = 2;
+
     /**
      * @var ChallongeTournament
      */
@@ -114,22 +140,36 @@ class Tournament extends Base
     public function initialize()
     {
         $this->setSource('tblTournament');
+        $this->hasMany('tournamentId', '\Soul\Model\TournamentTeam', 'tournamentId', ['alias' => 'teams']);
         $this->hasMany('tournamentId', '\Soul\Model\TournamentUser', 'tournamentId', ['alias' => 'players']);
+
     }
 
     public function validation()
     {
-        $existing = self::findFirst(["tournamentId='$this->tournamentId'"]);
+        $existing = self::findFirstBySystemName($this->systemName);
 
         if ($existing) {
             if ($existing->name != $this->name) {
                 $this->validate(new Uniqueness(
-                        array(
-                            "field"   => "name",
-                            "message" => "Er bestaat al een toernooi met deze naam"
-                        )
-                    ));
+                    array(
+                        "field"   => "name",
+                        "message" => "Er bestaat al een toernooi met deze naam"
+                    )
+                ));
             }
+        }
+
+        if ($this->type == self::TYPE_TOP_SCORE && $this->isTeamTournament()) {
+            $this->appendMessage(new Message('Teams worden alleen ondersteund in single of double elimination toernooien.'));
+            return false;
+        }
+
+        if ($this->isTeamTournament() && !is_numeric($this->teamSize)) {
+            $this->validate(new PresenceOf([
+                "field"   => "teamSize",
+                "message" => "Je dient een team grootte op te geven voor team toernooien"
+            ]));
         }
 
         if ($this->validationHasFailed() == true) {
@@ -144,11 +184,58 @@ class Tournament extends Base
      */
     public function beforeCreate()
     {
+
         $this->systemName = preg_replace('/[^A-Za-z0-9\_]/', '', strtolower(str_replace(' ', '_', $this->name)));
 
         if ($this->isChallongeTournament()) {
             return $this->createChallongeTournament();
         }
+    }
+
+    /**
+     * When creating
+     */
+    public function beforeValidationOnCreate()
+    {
+
+        if (!$this->isTeamTournament) {
+            $this->setTeamTournament(false);
+        }
+
+        $this->state = self::STATE_PENDING;
+
+    }
+
+    /**
+     *
+     */
+    public function beforeValidationOnUpdate()
+    {
+        $existing = self::findFirstBySystemName($this->systemName);
+
+        if (!$this->isTeamTournament && $existing->isTeamTournament()) {
+            $this->setTeamTournament(false);
+
+            $this->teamSize = null;
+
+            // remove any teams associated with this tournament
+            $tournamentTeams = TournamentTeam::findByTournamentId($this->tournamentId);
+
+            foreach ($tournamentTeams as $team) {
+                $players = $team->getPlayers();
+
+                // remove users from the team
+                foreach ($players as $player) {
+                    $player->teamId = null;
+                    $player->save();
+                }
+
+                // delete the tournament
+                $team->delete();
+            }
+
+        }
+
     }
 
     /**
@@ -161,6 +248,13 @@ class Tournament extends Base
         // when deleting a tournament, also delete the linked challonge
         if ($this->isChallongeTournament()) {
            return $this->deleteChallongeTournament();
+        }
+
+        // delete all players associated with this tournament
+        if (count($this->players) > 0) {
+            foreach ($this->players as $player) {
+                $player->delete();
+            }
         }
 
         return true;
@@ -176,6 +270,7 @@ class Tournament extends Base
             if (!$this->deleteChallongeTournament()) {
                 return false;
             }
+
         } elseif (!$databaseEntry->isChallongeTournament() && $this->isChallongeTournament()) {
             if (!$this->createChallongeTournament()) {
                 return false;
@@ -202,6 +297,15 @@ class Tournament extends Base
     }
 
     /**
+     * before save event
+     */
+    public function beforeSave()
+    {
+        // remove the tournament menu caching before saving
+        $this->getCache()->delete('tournament_menu');
+    }
+
+    /**
      * @return \Phalcon\Mvc\Model\ResultsetInterface
      */
     public static function getLatestTournaments()
@@ -223,35 +327,94 @@ class Tournament extends Base
         ];
     }
 
+    public static function getStates()
+    {
+        return [
+            self::STATE_PENDING => 'Registratie open',
+            self:: STATE_STARTED => 'Gestart, registratie gesloten',
+            self::STATE_FINISHED => 'Afgelopen'
+        ];
+    }
+
     /**
      *
      */
     public function afterFetch()
     {
         $types = self::getTypes();
+        $states = self::getStates();
+        $cache = $this->getCache();
+
+        $this->typeString = $types[$this->type];
+        $this->stateString = $states[$this->state];
+
+
+        $this->startDateString = date('d-m-y H:i', strtotime($this->startDate));
 
         if ($this->challongeId) {
-
             $this->isChallonge = true;
-            try {
+        }
 
-                $this->challonge = new ChallongeTournament($this->challongeId);
+        // todo fix this logic
+        if ($this->isChallonge) {
 
-            } catch(ChallongeException $e) {
-                $this->hasError = true;
-                $this->challonge = null;
+            $challongeTournament = $this->getChallongeTournament();
+            if ($challongeTournament) {
+
+                if (!$this->hasError) {
+
+
+                    $imageKey = sprintf('tournament_%s_image', $this->systemName);
+                    if ($cache->exists($imageKey)) {
+                        $image = $cache->get($imageKey);
+                    } else {
+
+                        // cache the overview image url for a day
+                        $image = (string)$challongeTournament->getOverviewImage();
+                        $cache->save($imageKey, $image, 86400);
+                    }
+
+                    // generate an image for this tournament
+                    if (Util::verifyUrl($image)) {
+
+                        // always remove the old image
+                        $newImage = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
+
+                        if (file_exists($newImage)) {
+                            unlink($newImage);
+                        }
+
+                        $tmpFile = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
+                        file_put_contents($tmpFile, file_get_contents((string)$image));
+
+                        $mimeType = @finfo_file(finfo_open(FILEINFO_MIME_TYPE), $tmpFile);
+                        if ($mimeType) {
+                            if (strpos($mimeType, 'image') !== false) {
+                                try {
+                                    $original = new \Phalcon\Image\Adapter\GD($tmpFile);
+                                    if ($original->getHeight() >= 105) {
+                                        $original->crop($original->getWidth(), $original->getHeight(), 0, 105);
+                                    }
+                                    $original->save($newImage);
+                                    chmod($newImage, 0777);
+                                } catch(\Exception $e) {
+                                    // do nothing
+                                }
+                            }
+                        }
+
+                    }
+                }
             }
 
         }
 
-        $this->typeString = $types[$this->type];
-        $this->startDateString = date('d-m-y H:i', strtotime($this->startDate));
+        $playerArrayKey = sprintf('tournament_%s_playersarray', $this->systemName);
+        if ($cache->exists($playerArrayKey)) {
+            $this->playersArray = $cache->get($playerArrayKey);
+        } else {
 
-
-        // todo fix this logic
-        if (!$this->isChallonge) {
             $this->playersArray = $this->players->toArray();
-
 
             array_walk($this->playersArray, function(&$player) {
                     $player['user'] = User::findFirstByUserId($player['userId'])->toArray();
@@ -271,75 +434,57 @@ class Tournament extends Base
 
                 });
 
-            if ($this->type == self::TYPE_TOP_SCORE) {
+            $cache->save($playerArrayKey,  $this->playersArray , 600);
+            $ranks = [];
 
-                usort($this->playersArray, function ($left, $right) {
+            // if the tournament is a non team challonge tournament, get the player ranks
+            if ($this->isChallonge && !$this->isTeamTournament()) {
+                $challongePlayers = $this->getChallongeTournament()->getPlayers();
+
+                if ($challongePlayers) {
+                    foreach ($challongePlayers->participant as $player) {
+
+                        $name = (string)$player->name;
+                        $rank = null;
+
+                        if (is_numeric($player->{'final-rank'})) {
+                            $rank = $player->{'final-rank'};
+                        }
+
+                        $ranks[$name] = $rank;
+                    }
+
+                }
+            }
+
+            if ($this->type == self::TYPE_TOP_SCORE || ($this->isChallonge && count($ranks) > 0 )) {
+
+                usort($this->playersArray, function ($left, $right) use ($ranks) {
+
+                    if ($this->type == self::TYPE_TOP_SCORE) {
 
                         if ($left['totalScore'] == $right['totalScore']) {
                             return 0;
                         }
 
                         return ($left['totalScore'] > $right['totalScore'] ? -1 : 1);
-                    });
+                    } else {
 
-            }
-        } else {
+                        $nickNameLeft = $left['user']['nickName'];
+                        $nickNameRight = $right['user']['nickName'];
 
-            if (!$this->hasError) {
-                $players = $this->challonge->getPlayers();
+                        if (array_key_exists($nickNameLeft, $ranks) && array_key_exists($nickNameRight, $ranks)) {
 
-                if ($players) {
-                    foreach ($players->participant as $player) {
-
-                        $name = (string)$player->name;
-
-                        $playerData = [
-                            'user' => ['nickName' => $name],
-                            'active' => $player->active
-                        ];
-
-                        if (is_numeric($player->{'final-rank'})) {
-                            $playerData['rank'] = $player->{'final-rank'};
-                        } else {
-                            $playerData['rank'] = null;
-                        }
-
-                        $this->playersArray[] = $playerData;
-                        $this->entries[] = $name;
-
-                    }
-
-                }
-
-                // always remove the old image
-                $newImage = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
-
-
-                if (file_exists($newImage)) {
-                    unlink($newImage);
-                }
-
-                // generate an image for this tournament
-                if ($image =  $this->challonge->getOverviewImage()) {
-
-                    $tmpFile = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
-                    file_put_contents($tmpFile, file_get_contents((string)$image));
-
-
-                    $mimeType = @finfo_file(finfo_open(FILEINFO_MIME_TYPE), $tmpFile);
-                    if ($mimeType) {
-                        if (strpos($mimeType, 'image') !== false) {
-                            $original = new \Phalcon\Image\Adapter\GD($tmpFile);
-                            if ($original->getHeight() >= 105) {
-                                $original->crop($original->getWidth(), $original->getHeight(), 0, 105);
+                            if ($ranks[$nickNameLeft] == $ranks[$nickNameRight]) {
+                                return 0;
                             }
-                            $original->save($newImage);
-                            chmod($newImage, 0777);
+
+                            return ($ranks[$nickNameLeft] > $ranks[$nickNameRight] ? -1 :1);
+
                         }
+
                     }
-
-                }
-
+                });
             }
 
         }
@@ -347,6 +492,7 @@ class Tournament extends Base
     }
 
     /**
+     * @deprecated
      * @return bool
      */
     public function isCompleted()
@@ -363,7 +509,7 @@ class Tournament extends Base
             return count($this->playersArray) > 1 && count($players) == 1;
 
         } elseif ($this->isChallonge) {
-            return $this->challonge->isCompleted();
+            return $this->getChallongeTournament->isCompleted();
         }
 
         return false;
@@ -375,21 +521,12 @@ class Tournament extends Base
      */
     public function hasEntered($userId)
     {
-        if (!$this->challonge && !empty($this->players)) {
+        if (!empty($this->players)) {
 
             foreach ($this->players as $player) {
                 if ($player->userId == $userId) {
                     return true;
                 }
-            }
-        }
-
-
-        if ($this->isChallonge) {
-            $user = User::findFirstByUserId($userId);
-
-            if ($user) {
-                return in_array($user->nickName, $this->entries);
             }
         }
 
@@ -419,8 +556,39 @@ class Tournament extends Base
             'systemName' => 'systemName',
             'rules' => 'rules',
             'prizes' => 'prizes',
-
+            'isTeamTournament' => 'isTeamTournament',
+            'teamSize' => 'teamSize',
+            'state' => 'state'
         );
+    }
+
+    /**
+     * @param $val
+     */
+    public function setTeamTournament($val)
+    {
+        $this->isTeamTournament = ($val ? 1 : 0);
+    }
+
+    public function isTeamTournament()
+    {
+        return (bool)$this->isTeamTournament;
+    }
+
+    /**
+     * @return null|ChallongeTournament
+     */
+    public function getChallongeTournament()
+    {
+        try {
+            return new ChallongeTournament($this->challongeId);
+
+        } catch(ChallongeException $e) {
+            $this->hasError = true;
+            $challonge = null;
+        }
+
+        return null;
     }
 
     /**
@@ -435,6 +603,8 @@ class Tournament extends Base
             $this->appendMessage(new Message('Dit toernooi kon niet worden verwijderd. Challonge kan niet worden bereikt.'));
             return false;
         }
+
+        $this->challongeId = null;
 
         return true;
     }
@@ -465,11 +635,13 @@ class Tournament extends Base
         return true;
     }
 
+
+
     /**
      * Checks whether or not this tournament is linked on challonge
      * @return bool
      */
-    protected function isChallongeTournament()
+    public function isChallongeTournament()
     {
         return in_array($this->type, [self::TYPE_SINGLE_ELIMINATION, self::TYPE_DOUBLE_ELIMINATION]);
     }

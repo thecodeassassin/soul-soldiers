@@ -2,6 +2,8 @@
 namespace Soul\Model;
 
 
+use Phalcon\Mvc\Model\Message;
+
 class TournamentUser extends Base
 {
 
@@ -15,7 +17,7 @@ class TournamentUser extends Base
      * @var integer
      */
     public $tournamentId;
-     
+
     /**
      *
      * @var integer
@@ -33,6 +35,14 @@ class TournamentUser extends Base
      */
     public $totalScore;
 
+    /**
+     * @var integer
+     */
+    public $teamId;
+    /**
+     * @var integer
+     */
+    public $participantId;
 
     /**
      * Initialize method for model.
@@ -51,6 +61,34 @@ class TournamentUser extends Base
     public function afterFetch()
     {
         $this->totalScore = $this->getTotalScore();
+    }
+
+    /**
+     *
+     */
+    public function beforeDelete()
+    {
+       $tournament = $this->getTournament();
+
+       // remove the user from challonge before deleting the user
+       if ($tournament->isChallongeTournament() && !$tournament->isTeamTournament()) {
+           $deleted = $tournament->getChallongeTournament()->removePlayer($this->participantId);
+
+           if (!$deleted) {
+               $this->appendMessage(new Message('De gebruiker kon niet worden verwijderd uit challonge.'));
+               return false;
+           }
+       }
+
+        return true;
+    }
+
+    /**
+     * @return Tournament
+     */
+    public function getTournament()
+    {
+        return $this->tournament;
     }
 
     /**
@@ -79,6 +117,27 @@ class TournamentUser extends Base
     }
 
     /**
+     * @param $tournamentId
+     * @param $userId
+     *
+     * @return TournamentUser
+     */
+    public static function findFirstByTournamentIdAndUserId($tournamentId, $userId)
+    {
+        return self::findFirst('tournamentId = \''.$tournamentId.'\' AND userId = \''.$userId.'\'');
+    }
+
+    /**
+     * @param $teamId
+     *
+     * @return \Phalcon\Mvc\Model\ResultsetInterface
+     */
+    public static function findByTeamId($teamId)
+    {
+        return self::find('teamId = \''.$teamId.'\'');
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()
@@ -87,7 +146,9 @@ class TournamentUser extends Base
             'tournamentUserId' => 'tournamentUserId',
             'tournamentId' => 'tournamentId',
             'userId' => 'userId',
-            'active' => 'active'
+            'active' => 'active',
+            'teamId' => 'teamId',
+            'participantId' => 'participantId'
         );
     }
 

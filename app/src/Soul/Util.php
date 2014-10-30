@@ -277,6 +277,39 @@ class Util {
     }
 
     /**
+     * Verifies an URL
+     *
+     * @param $url
+     *
+     * @return bool
+     */
+    public static function verifyUrl($url) {
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_NOBODY, true); // set to HEAD request
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // don't output the response
+        curl_exec($ch);
+        $valid = curl_getinfo($ch, CURLINFO_HTTP_CODE) == 200;
+        curl_close($ch);
+
+        return $valid;
+    }
+
+    /**
+     * @param $xml
+     *
+     * @return bool
+     */
+    public static function isValidXML($xml) {
+        $doc = @simplexml_load_string($xml);
+        if ($doc) {
+            return true; //this is valid
+        } else {
+            return false; //this is not valid
+        }
+    }
+
+    /**
      * @return Adapter
      */
     public static function getDefaultLogger()

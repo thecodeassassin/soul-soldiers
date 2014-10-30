@@ -5,7 +5,9 @@ use Phalcon\Mvc\View;
 use Soul\Controller\Base;
 use Soul\Model\Tournament;
 use Soul\Model\TournamentScore;
+use Soul\Model\TournamentTeam;
 use Soul\Model\TournamentUser;
+use Soul\Model\User;
 use Soul\Util;
 
 /**
@@ -22,9 +24,26 @@ class TournamentController extends Base
      */
     public function indexAction()
     {
-        $this->view->tournaments = Tournament::getLatestTournaments();
+//        $this->view->tournaments = Tournament::getLatestTournaments();
+    }
 
+    public function viewAction($systemName)
+    {
+        $tournament = Tournament::findFirstBySystemName($systemName) or null;
 
+        if ($tournament) {
+            if ($tournament->isTeamTournament()) {
+                $teamUserCount = count($tournament->teams) * $tournament->teamSize;
+                $userCount = count($tournament->players);
+
+                if ($teamUserCount != $userCount && $this->view->user->isAdmin()) {
+                    $this->flashMessage('Het aantal spelers is niet gelijk aan het aantal spelers, regeneer de teams voordat het toernooi start.', 'error');
+                }
+
+            }
+        }
+
+        $this->view->tournament = $tournament;
     }
 
     /**
@@ -34,34 +53,80 @@ class TournamentController extends Base
     public function signupAction($systemName)
     {
         $tournament = Tournament::findFirstBySystemName($systemName);
+        $participant = null;
 
         if ($tournament) {
 
             if ($tournament->hasEntered($this->view->user->getUserId())) {
                 $this->flashMessage(sprintf('Je bent al ingeschreven voor %s', $tournament->name), 'error', true);
 
-                return $this->response->redirect('tournaments');
+                return $this->response->redirect('tournament/view/'.$systemName);
             }
 
-            if ($tournament->isChallonge) {
-                $tournament->challonge->addPlayer($this->view->user->getNickName());
+            if ($tournament->isChallonge && !$tournament->isTeamTournament()) {
+                $challongeTournament = $tournament->getChallongeTournament();
 
-            } else {
+                if (!$challongeTournament) {
+                    $this->getChallongeError();
+                    return $this->response->redirect('tournament/view/'.$systemName);
+                }
 
-                // sign the user up for the given tournament
-                $tournamentUser = new TournamentUser();
-                $tournamentUser->userId = $this->authService->getAuthData()->userId;
-                $tournamentUser->tournamentId = $tournament->tournamentId;
-                $tournamentUser->active = 1;
-
-                $tournamentUser->save();
-
+                $participant = $challongeTournament->addPlayer($this->view->user->getNickName());
             }
+
+            // sign the user up for the given tournament
+            $tournamentUser = new TournamentUser();
+            $tournamentUser->userId = $this->authService->getAuthData()->userId;
+            $tournamentUser->tournamentId = $tournament->tournamentId;
+
+            if ($participant){
+                $tournamentUser->participantId = $participant->id;
+            }
+
+            $tournamentUser->active = 1;
+            $tournamentUser->save();
+
+            $this->deletePlayerCache($tournament);
 
             $this->flashMessage(sprintf('Successvol ingeschreven voor %s', $tournament->name), 'success', true);
         }
 
-        return $this->response->redirect('tournaments');
+        return $this->response->redirect('tournament/view/'.$systemName);
+    }
+
+    /**
+     * @param $systemName
+     * @return \Phalcon\Http\ResponseInterface
+     */
+    public function cancelAction($systemName)
+    {
+        $tournament = Tournament::findFirstBySystemName($systemName);
+        $userId = $this->view->user->getUserId();
+
+        if ($tournament) {
+
+            if (!$tournament->hasEntered($userId)) {
+                $this->flashMessage(sprintf('Je bent niet ingeschreven voor %s', $tournament->name), 'error', true);
+
+                return $this->response->redirect('tournament/view/'.$systemName);
+            }
+            $tournamentUser = TournamentUser::findFirstByTournamentIdAndUserId($tournament->tournamentId, $userId);
+
+            if ($tournamentUser) {
+                $deleted = $tournamentUser->delete();
+
+                if (!$deleted) {
+                    $this->flashMessages($tournamentUser->getMessages(), 'error', true);
+                }
+
+                $this->deletePlayerCache($tournament);
+            }
+
+
+            $this->flashMessage(sprintf('Successvol uitgeschreven voor %s', $tournament->name), 'success', true);
+        }
+
+        return $this->response->redirect('tournament/view/'.$systemName);
     }
 
     /**
@@ -88,6 +153,8 @@ class TournamentController extends Base
                         sprintf('%s punten toegevoegd aan %s', $scoreCount, $tournamentUser->user->nickName), 'success', true
                     );
                 }
+
+                $this->deletePlayerCache($tournamentUser->tournament);
             }
         }
 
@@ -97,8 +164,82 @@ class TournamentController extends Base
             $tournamentUser = TournamentUser::findFirstByTournamentUserId($userId);
             echo $tournamentUser->getTotalScore();
         } else {
-            $this->response->redirect('tournaments');
+            return $this->response->redirect('tournament/view/'.$tournamentUser->tournament->systemName);
         }
+    }
+
+    /**
+     * @param $systemName
+     */
+    public function generateTeamsAction($systemName)
+    {
+        $tournament = Tournament::findFirstBySystemName($systemName);
+        $teams = [];
+        $players = [];
+
+        try {
+
+            if (!$tournament->isTeamTournament()) {
+                throw new \Exception('Toernooi is geen team toernooi');
+            }
+
+            if ((count($tournament->players) % $tournament->teamSize) == 1 ) {
+                throw new \Exception(sprintf('Er kunnen geen teams gemaakt worden van %d deelnemers.', count($tournament->players)));
+            }
+
+            // delete all existing teams first
+            $existingTeams = TournamentTeam::findByTournamentId($tournament->tournamentId);
+            foreach ($existingTeams as $existingTeam) {
+                $existingTeam->delete();
+            }
+
+
+            foreach ($tournament->players as $player) {
+                $players[] = $player->userId;
+            }
+
+            // shuffle the array
+            shuffle($players);
+
+            while (count($players) > 0) {
+
+                $newPlayers = array_splice($players, 2);
+                $teams[] = $players;
+
+                $players = $newPlayers;
+            }
+
+            foreach ($teams as $team) {
+                $tournamentTeam = new TournamentTeam();
+                $teamNames = [];
+
+                foreach ($team as $userId) {
+                    $user = User::findFirstByUserId($userId);
+                    $teamNames[] = $user->nickName;
+                }
+
+                $tournamentTeam->name = implode(' & ', $teamNames);
+                $tournamentTeam->tournamentId = $tournament->tournamentId;
+                $tournamentTeam->save();
+
+                // add all the players to the team
+                foreach ($team as $teamPlayer) {
+                    $tournamentUser = TournamentUser::findFirstByTournamentIdAndUserId($tournament->tournamentId, $teamPlayer);
+                    $tournamentUser->teamId = $tournamentTeam->teamId;
+                    $tournamentUser->save();
+                }
+            }
+
+            $this->flashMessage(sprintf('Aantal teams gegenereerd: %d', count($teams)), 'success', true);
+
+        } catch (\Exception $e) {
+            $this->flashMessage(sprintf('Teams kunnen niet worden gegenereerd: %s', $e->getMessage()), 'error', true);
+
+        }
+
+        return $this->response->redirect('tournament/view/'.$systemName);
+
+
     }
 
     /**
@@ -109,15 +250,47 @@ class TournamentController extends Base
         $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
         $tournament = Tournament::findFirstBySystemName($systemName);
 
-        if ($tournament && !$tournament->challonge->hasStarted()) {
-            if ($tournament->challonge->start()) {
-                $this->flashMessage(sprintf('Toernooi %s is gestart.', $tournament->name), 'success', true);
+        if ($tournament) {
+
+           $tournament->state = Tournament::STATE_STARTED;
+           $tournament->save();
+
+            if ($tournament->isTeamTournament() && count($tournament->teams) == 0) {
+                $this->flashMessage('Er zijn nog geen teams aangemaakt!', 'error', true);
             } else {
-                $this->flashMessage(sprintf('Toernooi %s kan niet worden gestart.', $tournament->name), 'error', true);
+
+                if ($tournament->isChallonge) {
+                    $challongeTournament = $tournament->getChallongeTournament();
+
+                    if (!$challongeTournament) {
+                        $this->getChallongeError();
+                        return $this->response->redirect('tournament/view/'.$systemName);
+                    }
+
+                    if ($tournament->isTeamTournament()) {
+                        // create all the teams in challonge
+                        foreach ($tournament->teams as $team) {
+
+                            // add a player with the name of the team
+                            $challongeTournament->addPlayer($team->name);
+                        }
+                    }
+
+                    if (!$challongeTournament->hasStarted()) {
+                        if ($challongeTournament->start()) {
+                            $this->flashMessage(sprintf('Toernooi %s is gestart.', $tournament->name), 'success', true);
+                        } else {
+                            $this->flashMessage(sprintf('Toernooi %s kan niet worden gestart.', $tournament->name), 'error', true);
+                        }
+                    }
+
+                }
+
             }
 
         }
-        $this->response->redirect('tournaments');
+
+        return $this->response->redirect('tournament/view/'.$systemName);
     }
 
     /**
@@ -128,16 +301,29 @@ class TournamentController extends Base
         $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
         $tournament = Tournament::findFirstBySystemName($systemName);
 
+        if ($tournament) {
+            $tournament->state = Tournament::STATE_FINISHED;
+            $tournament->save();
 
-        if ($tournament && $tournament->challonge->isAwaitingReview()) {
-            if ($tournament->challonge->end()) {
-                $this->flashMessage(sprintf('Toernooi %s is beeindigd.', $tournament->name), 'success', true);
-            } else {
-                $this->flashMessage(sprintf('Toernooi %s kan niet worden beeindigd.', $tournament->name), 'error', true);
+            if ($tournament->isChallonge) {
+                $challongeTournament = $tournament->getChallongeTournament();
+
+                if (!$challongeTournament) {
+                    $this->getChallongeError();
+                    return $this->response->redirect('tournament/view/'.$systemName);
+                }
+
+                if ($challongeTournament->isAwaitingReview()) {
+                    if ($challongeTournament->end()) {
+                        $this->flashMessage(sprintf('Toernooi %s is beeindigd.', $tournament->name), 'success', true);
+                    } else {
+                        $this->flashMessage(sprintf('Toernooi %s kan niet worden beeindigd.', $tournament->name), 'error', true);
+                    }
+                }
             }
         }
 
-        $this->response->redirect('tournaments');
+        return $this->response->redirect('tournament/view/'.$systemName);
     }
 
 
@@ -147,31 +333,52 @@ class TournamentController extends Base
      */
     public function selectWinnerAction($systemName, $matchId)
     {
-        $tournament = Tournament::findFirstBySystemName($systemName);
-
-        if ($tournament) {
-            $match = $tournament->challonge->getMatchById($matchId);
-
-            die(var_dump($match));
-        }
+//        $tournament = Tournament::findFirstBySystemName($systemName);
+//
+//        if ($tournament) {
+//            $match = $tournament->getChallongeTournament()->getMatchById($matchId);
+//
+//            die(var_dump($match));
+//        }
     }
 
 
     /**
-     * @param $userId
+     * @param $systemName
+     * @param $tournamentUserId
+     *
+     * @return \Phalcon\Http\ResponseInterface
      */
-    public function removeUserAction($userId)
+    public function removeUserAction($systemName, $tournamentUserId)
     {
-
         $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
+        $tournament = Tournament::findFirstBySystemName($systemName);
 
-        $tournamentUser = TournamentUser::findFirstByTournamentUserId($userId);
+        $tournamentUser = TournamentUser::findFirstByTournamentUserId($tournamentUserId);
 
+        // if the tournament user is present, either remove the user or disable him
         if ($tournamentUser) {
-            $tournamentUser->active = 0;
-            $tournamentUser->save();
+
+            if ($tournament->state == Tournament::STATE_STARTED && $tournament->type == Tournament::TYPE_TOP_SCORE) {
+                $tournamentUser->active = 0;
+                $tournamentUser->save();
+            } else {
+                $tournamentUser->delete();
+            }
+
+            $this->deletePlayerCache($tournament);
+
+            return $this->response->redirect('tournament/view/'.$tournament->systemName);
         }
 
+    }
+
+    /**
+     * @param string $tournamentName
+     */
+    protected function getChallongeError()
+    {
+        $this->flashMessage(sprintf('Challonge is onbereikbaar, probeer het later nogmaals.'), 'error', true);
     }
 
     /**
@@ -180,26 +387,20 @@ class TournamentController extends Base
     public function overviewAction($systemName)
     {
 
-//        $tournament = Tournament::findFirstBySystemName($systemName);
-//
-//        if ($tournament) {
-//
-//            if ($image = (string)$tournament->challonge->getOverviewImage()) {
-//                $this->response->resetHeaders();
-//                $this->response->setHeader('Content-Type', 'image/png');
-//
-//                $tmpFile = $this->config->application->cacheDir . $systemName . '.png';
-//                file_put_contents($tmpFile, file_get_contents($image));
-//
-//
-//                $original = new \Phalcon\Image\Adapter\GD($tmpFile);
-//                $original->crop($original->getWidth(), $original->getHeight() - 150);
-//                $original->save();
-//
-//                readfile($tmpFile);
-//            }
-//        }
 
+    }
+
+    /**
+     * @param Tournament $tournament
+     */
+    protected function deletePlayerCache(Tournament $tournament)
+    {
+        $playerArrayKey = sprintf('tournament_%s_playersarray', $tournament->systemName);
+        $cache =  $this->getCache();
+
+        if ($cache->exists($playerArrayKey)) {
+            $cache->delete($playerArrayKey);
+        }
     }
 
 }

@@ -89,7 +89,7 @@ body {
 }
 
 #page-sidebar {
-    width: 201px;
+    width: 251px;
     padding: 0;
     position: absolute;
     border-right: 1px solid #ccc;
@@ -100,7 +100,7 @@ body {
 }
 
 #page-content {
-    margin: 0 0 0 200px;
+    margin: 0 0 0 250px;
     padding: 20px;
     background-color: #426d84;
     border-left: 1px solid #ccc;
@@ -2712,4 +2712,28 @@ only screen and (min-device-pixel-ratio: 1.5) {
 
 .cke_source {
     color: #000;
+}
+
+.scoreControls {
+    position: absolute;
+    right: -1px;
+    width: 196px;
+    top: 6px;
+}
+
+.scoreCount {
+    float: left;
+    height: 30px
+}
+
+.team a {
+    background-color: transparent;
+}
+
+.team a:hover {
+    background-color: transparent;
+}
+
+.team a.list-group-item .list-group-item-heading {
+    color: #cccccc
 }

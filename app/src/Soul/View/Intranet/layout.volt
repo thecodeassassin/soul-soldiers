@@ -41,6 +41,9 @@
         <script type="text/javascript">
             var __loading_img = '{{ url('img/ajax-loader.gif') }}';
             var CKEDITOR_BASEPATH = '/js/intranet/ckeditor/'
+
+            var loadingImagePreload=new Image();
+            loadingImagePreload.src = __loading_img;
         </script>
 
         {{ assets.outputJs('scripts') }}

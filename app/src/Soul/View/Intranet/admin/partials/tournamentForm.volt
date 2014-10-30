@@ -13,6 +13,11 @@
 {% endif %}
 
 {{ form(postRoute, "method": "post", "name":"tournament", "class":"validate form-horizontal", "role":"form") }}
+
+<h4>Algemene instellingen</h4>
+<hr />
+
+
 <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Naam toernooi</label>
     <div class="col-sm-10 noaddon">
@@ -21,7 +26,7 @@
 </div>
 
 <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Start datum*</label>
+    <label for="startDate" class="col-sm-2 control-label">Start datum*</label>
     <div class="col-sm-10 noaddon">
         {{ form.render('startDate') }}
     </div>
@@ -29,13 +34,31 @@
 
 
 <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Type toernooi*</label>
+    <label for="type" class="col-sm-2 control-label">Type toernooi*</label>
     <div class="col-sm-10 noaddon">
-
         {{ form.render('type') }}
-
     </div>
 </div>
+
+<h4>Team instellingen</h4>
+<hr />
+
+<div class="form-group">
+    <label for="isTeamTournament" class="col-sm-2 control-label">Team toernooi</label>
+    <div class="col-sm-10 noaddon">
+        {{ form.render('isTeamTournament') }}
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="" class="col-sm-2 control-label">Team grootte</label>
+    <div class="col-sm-10 noaddon">
+        {{ form.render('teamSize') }}
+    </div>
+</div>
+
+<h4>Omschrijving</h4>
+<hr />
 
 <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Regels HTML</label>
@@ -52,8 +75,10 @@
 </div>
 
 <div class="form-group">
-    <div class="col-md-5 col-md-offset-8">
-        <a class="btn btn-danger btn-lg" href="{{ url('admin/tournaments/delete/' ~ tournament.systemName) }}" onclick="return alert('Zeker weten?')"><i class="icon-remove-circle">Verwijderen</i></a>
+    <div class="{% if mode is 'edit' %} col-md-5 col-md-offset-8 {% else %} col-md-2 col-md-offset-10 {% endif %}">
+        {% if mode is 'edit' %}
+        <a class="btn btn-danger btn-lg" href="{{ url('admin/tournaments/delete/' ~ tournament.systemName) }}" onclick="return confirm('Zeker weten?')"><i class="icon-remove-circle">Verwijderen</i></a>
+        {% endif %}
         {{ form.render('Opslaan') }}
     </div>
 </div>

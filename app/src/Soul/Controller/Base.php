@@ -2,6 +2,8 @@
 
 namespace Soul\Controller;
 
+use Phalcon\Cache\Backend;
+use Phalcon\Cache\BackendInterface;
 use Phalcon\Config;
 use Phalcon\Crypt;
 use Phalcon\DI;
@@ -363,4 +365,11 @@ class Base extends Controller
         return $this->di->get('logger');
     }
 
+    /**
+     * @return BackendInterface
+     */
+    protected function getCache()
+    {
+        return $this->getDI()->get('cache');
+    }
 }

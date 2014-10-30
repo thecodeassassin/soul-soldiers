@@ -24,7 +24,7 @@
             <a href="{{ url('home') }}" class="navbar-brand">Soul-Soldiers Intranet</a>
 
             <!-- Loading Indicator, Used for demostrating how loading of widgets could happen, check main.js - uiDemo() -->
-            <div id="loading" class="pull-left"><img src="img/ajax-loader.gif" alt="loading" /></div>
+            {#<div id="loading" class="pull-left"><img src="img/ajax-loader.gif" alt="loading" /></div>#}
 
             <!-- Header Widgets -->
             <!-- You can create the widgets you want by replicating the following. Each one exists in a <li> element -->

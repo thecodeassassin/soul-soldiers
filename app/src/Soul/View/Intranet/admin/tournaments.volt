@@ -16,6 +16,7 @@
                         <th>Naam</th>
                         <th>Type</th>
                         <th>Startdatum</th>
+                        <th>Aantal deelnemers</th>
                         <th>Status</th>
                         <th>Actie</th>
                     </tr>
@@ -26,13 +27,14 @@
                         <td>{{ tournament.name }}</td>
                         <td>{{ tournament.typeString }}</td>
                         <td>{{ tournament.startDate|date('d-m-Y H:i:s') }}</td>
+                        <td>{{ tournament.players|length }}</td>
                         <td>{% if tournament.hasError %}<span class="text-danger"><i class="icon-attention-circle"></i> </span>{% else %}<span class="text-success"><i class="icon-check"></i> </span>{% endif %}</td>
                         <td>
                             <a class="btn btn-default" href="{{ url('admin/tournaments/manage/' ~ tournament.systemName) }}"><i class="icon-edit">Aanpassen</i></a>
-                            <a class="btn btn-danger" href="{{ url('admin/tournaments/delete/' ~ tournament.systemName) }}" onclick="return alert('Zeker weten?')"><i class="icon-remove-circle">Verwijderen</i></a>
+                            <a class="btn btn-danger" href="{{ url('admin/tournaments/delete/' ~ tournament.systemName) }}" onclick="return confirm('Zeker weten?')"><i class="icon-remove-circle">Verwijderen</i></a>
 
                             {% if tournament.isChallonge %}
-                                <a class="btn btn-info matchLink" data-toggle="tooltip" title="Bekijk matches" href="#matches{{ id }}" data-tournament-id="{{ tournament.systemName }}"><i class="icon-eye"></i> </a>
+                                <a class="btn btn-info matchLink" data-toggle="tooltip" title="Bekijk matches" href="#matches{{ tournament.tournamentId }}" data-tournament-id="{{ tournament.systemName }}"><i class="icon-eye"></i> </a>
                             {% endif %}
                         </td>
                     </tr>

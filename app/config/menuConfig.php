@@ -18,6 +18,27 @@ use Soul\Menu\Builder;
  * ]
  */
 
+/**
+ * Show the tournaments in the menu
+ */
+
+$cache = Phalcon\DI::getDefault()->get('cache');
+$url = Phalcon\DI::getDefault()->get('url');
+$tournamentNames = $cache->get('tournament_menu');
+
+if (!$tournamentNames) {
+    $tournaments = \Soul\Model\Tournament::find();
+    $tournamentNames = [];
+    if ($tournaments) {
+        foreach ($tournaments as $tournament) {
+            $tournamentNames[$tournament->name] = $url->get('tournament/view/'.$tournament->systemName);
+        }
+    }
+
+    // cache the menu for a day
+    $cache->save('tournament_menu', $tournamentNames, 86400);
+
+}
 
 // menu available for everybody
 $menuConfig = [
@@ -75,9 +96,9 @@ $menuConfig = [
 
         'menu'=> [
             '<span class="icon-home"></span> Home' => BASE_URL . '/home',
-            '<span class="icon-award"></span> Toernooien' => BASE_URL . '/tournaments',
+            '<span class="icon-award"></span> Toernooien' => $tournamentNames,
             '<span class="icon-download"></span> Downloads' => BASE_URL . '/content/downloads',
-            '<span class="icon-gauge"></span> Admin' => [
+            'Admin' => [
                  'Dashboard' => BASE_URL . '/admin/index',
                  'Toernooien' => BASE_URL . '/admin/tournaments'
             ],
@@ -91,9 +112,10 @@ $menuConfig = [
         'authenticated' => [
             'Tournooien'
         ],
+
         // Admin only menu items
         'admin' => [
-            '<span class="icon-gauge"></span> Admin'
+            'Admin'
         ]
     ],
 

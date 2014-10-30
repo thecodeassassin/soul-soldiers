@@ -58,6 +58,7 @@ if (!file_exists($logFile)) {
     touch($logFile);
 }
 
+
 /*
  * Read the configuration
  */
@@ -79,9 +80,6 @@ include __DIR__ . '/../app/config/services/loader.php';
 $di = new FactoryDefault();
 
 include __DIR__ . "/../app/config/services.php";
-
-// load the config into the DI
-$di->set('config', $config);
 
 if (APPLICATION_ENV == \Soul\Kernel::ENV_STAGING) {
     $stagingAccess = $config->stagingAccess->toArray();
