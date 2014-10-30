@@ -29,19 +29,46 @@
             <h4><span class="icon-help"></span> Help</h4>
 
             <div class="mt30">
-                <h5>Toernooien</h5>
+                <h3>Toernooien</h3>
                 <p>
                     Om deel te nemen aan een toernooi dien je enkel naar de pagina <a href="{{ url('tournaments') }}">Toernooien</a> te gaan
                     en op 'Inschrijven' te klikken. De scores worden door de crew bijgewerkt. <br /> <br />
 
-                    <i class="icon-attention-circle"></i>&nbsp; Let op! Voor Starcraft II is het verplicht om door te geven wie er heeft gewonnen en het maken van
-                    een replay is tevens verplicht.
+                    {#<i class="icon-attention-circle"></i>&nbsp; Let op! Voor Starcraft II is het verplicht om door te geven wie er heeft gewonnen en het maken van#}
+                    {#een replay is tevens verplicht.#}
 
                 </p>
-                <h5>BBQ</h5>
+                {% if tournaments|length > 0 %}
+                <h4>Lopende toernooien</h4>
                 <p>
-                    Er is een BBQ op zaterdag. We hebben voor elke deelnemer een hamburger, een worst en 2 sate stokjes.
+                    Hieronder vindt je een lijst van toernooien waar jij voor bent ingeschreven en die momenteel actief zijn.
                 </p>
+
+                <div class="list-group">
+
+                {% for systemName,tournamentName in tournaments %}
+                    <a class="list-group-item" href="{{ url('tournament/view/'~systemName) }}">{{ tournamentName }}</a>
+                {% endfor %}
+                </div>
+
+                {% endif %}
+
+                {% if payedForBuffet %}
+                <hr />
+                <h3>Buffet</h3>
+                <p>
+                    Fantastisch dat je mee eet met ons buffet op Zaterdag avond. We starten met het serveren van eten om 19:00. <br />
+                    Zorg dus dat je op tijd bij de bar staat om gezellig met ons te eten.
+
+                </p>
+                <h4>Menu</h4>
+                <ul class="menuList">
+                    <li>Huisgemaakte Nasi</li>
+                    <li>Huisgemaakte thaise loempia's</li>
+                    <li>Kipsate</li>
+                    <li>Salade</li>
+                </ul>
+                {% endif %}
 
             </div>
         </div>

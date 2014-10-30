@@ -86,7 +86,7 @@ class TournamentController extends Base
             $tournamentUser->active = 1;
             $tournamentUser->save();
 
-            $this->deletePlayerCache($tournament);
+            Tournament::clearCache($tournament);
 
             $this->flashMessage(sprintf('Successvol ingeschreven voor %s', $tournament->name), 'success', true);
         }
@@ -119,7 +119,7 @@ class TournamentController extends Base
                     $this->flashMessages($tournamentUser->getMessages(), 'error', true);
                 }
 
-                $this->deletePlayerCache($tournament);
+                Tournament::clearCache($tournament);
             }
 
 
@@ -155,7 +155,7 @@ class TournamentController extends Base
                 }
 
                 // delete the player cache
-                $this->deletePlayerCache($tournamentUser->tournament);
+                Tournament::clearCache($tournamentUser->tournament);
             }
         }
 
@@ -375,7 +375,7 @@ class TournamentController extends Base
                 $tournamentUser->delete();
             }
 
-            $this->deletePlayerCache($tournament);
+            Tournament::clearCache($tournament);
 
             return $this->response->redirect('tournament/view/'.$tournament->systemName);
         }
@@ -397,19 +397,6 @@ class TournamentController extends Base
     {
 
 
-    }
-
-    /**
-     * @param Tournament $tournament
-     */
-    protected function deletePlayerCache(Tournament $tournament)
-    {
-        $playerArrayKey = sprintf('tournament_%s_playersarray', $tournament->systemName);
-        $cache =  $this->getCache();
-
-        if ($cache->exists($playerArrayKey)) {
-            $cache->delete($playerArrayKey);
-        }
     }
 
 }

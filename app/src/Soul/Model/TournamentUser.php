@@ -45,6 +45,11 @@ class TournamentUser extends Base
     public $participantId;
 
     /**
+     * @var bool Skips deletion checks, use with care
+     */
+    public $deleteForce = false;
+
+    /**
      * Initialize method for model.
      */
     public function initialize()
@@ -58,6 +63,12 @@ class TournamentUser extends Base
 
     }
 
+    public function beforeCreate()
+    {
+        // clear the cache before creating
+        $this->getCache()->delete($this->tournament->playerCacheKey);
+    }
+
     public function afterFetch()
     {
         $this->totalScore = $this->getTotalScore();
@@ -68,6 +79,15 @@ class TournamentUser extends Base
      */
     public function beforeDelete()
     {
+
+        // clear the cache before deleting
+        $this->getCache()->delete($this->tournament->playerCacheKey);
+
+        // deleteForce skips all delete checks
+       if ($this->deleteForce) {
+           return true;
+       }
+
        $tournament = $this->getTournament();
 
        // remove the user from challonge before deleting the user
@@ -125,6 +145,17 @@ class TournamentUser extends Base
     public static function findFirstByTournamentIdAndUserId($tournamentId, $userId)
     {
         return self::findFirst('tournamentId = \''.$tournamentId.'\' AND userId = \''.$userId.'\'');
+    }
+
+
+    /**
+     * @param $userId
+     *
+     * @return \Phalcon\Mvc\Model\ResultsetInterface
+     */
+    public static function findByUserId($userId)
+    {
+        return self::find('userId = \''.$userId.'\'');
     }
 
     /**

@@ -144,6 +144,11 @@ class Tournament extends Base
     ];
 
     /**
+     * @var
+     */
+    public $playerCacheKey;
+
+    /**
      * Initialize method for model.
      */
     public function initialize()
@@ -151,6 +156,8 @@ class Tournament extends Base
         $this->setSource('tblTournament');
         $this->hasMany('tournamentId', '\Soul\Model\TournamentTeam', 'tournamentId', ['alias' => 'teams']);
         $this->hasMany('tournamentId', '\Soul\Model\TournamentUser', 'tournamentId', ['alias' => 'players']);
+
+        $this->playerCacheKey = sprintf('tournament_%s_playersarray', $this->systemName);
 
     }
 
@@ -256,23 +263,11 @@ class Tournament extends Base
     {
 
         // clear the menu cache
-        $this->getCache()->delete('tournament_menu');
-        $this->getCache()->delete(sprintf('tournament_%s_playersarray', $this->systemName));
+        self::clearCache($this);
 
 
         // delete all players associated with this tournament
-        if (count($this->players) > 0) {
-            foreach ($this->players as $player) {
-                $player->delete();
-            }
-        }
-
-        // delete all the teams associated with this tournament
-        if ($this->isTeamTournament()) {
-            foreach ($this->teams as $team) {
-                $team->delete();
-            }
-        }
+        $this->deletePlayers();
 
         // when deleting a tournament, also delete the linked challonge
         if ($this->isChallongeTournament()) {
@@ -288,13 +283,23 @@ class Tournament extends Base
         if (!$this->onlyStateUpdate) {
             $databaseEntry = self::findFirstBySystemName($this->systemName);
 
+            // always delete player cache when updating a tournament
+            self::clearCache($this);
+
             // if the tournament changed to non challonge, delete the challonge tournament
             if ($databaseEntry->isChallongeTournament() && !$this->isChallongeTournament()) {
+
+                $this->deletePlayers();
+
                 if (!$this->deleteChallongeTournament()) {
                     return false;
                 }
 
             } elseif (!$databaseEntry->isChallongeTournament() && $this->isChallongeTournament()) {
+
+                $this->deletePlayers();
+
+
                 if (!$this->createChallongeTournament()) {
                     return false;
                 }
@@ -327,7 +332,7 @@ class Tournament extends Base
     public function beforeSave()
     {
         // remove the tournament menu caching before saving
-        $this->getCache()->delete('tournament_menu');
+        self::clearCache($this);
     }
 
     /**
@@ -434,10 +439,8 @@ class Tournament extends Base
 
         }
 
-        $playerArrayKey = sprintf('tournament_%s_playersarray', $this->systemName);
-
-        if ($cache->exists($playerArrayKey)) {
-            $this->playersArray = $cache->get($playerArrayKey);
+        if ($cache->exists($this->playerCacheKey)) {
+            $this->playersArray = $cache->get($this->playerCacheKey);
         } else {
 
             $ranks = [];
@@ -486,7 +489,8 @@ class Tournament extends Base
 
                 });
 
-            $cache->save($playerArrayKey,  $this->playersArray , 600);
+            // cache the playerlist
+            $cache->save($this->playerCacheKey,  $this->playersArray , 600);
 
             if ($this->type == self::TYPE_TOP_SCORE || ($this->isChallonge && count($ranks) > 0 )) {
 
@@ -574,6 +578,28 @@ class Tournament extends Base
     }
 
     /**
+     * @param Tournament $tournament
+     *
+     * @return bool
+     */
+    public static function clearCache(Tournament $tournament)
+    {
+        $cache = $tournament->getCache();
+        $return = false;
+
+        if ($cache->exists($tournament->playerCacheKey)) {
+            $return = $cache->delete($tournament->playerCacheKey);
+        }
+
+        if ($cache->exists('tournament_menu')) {
+            $return = $cache->delete('tournament_menu');
+        }
+
+        return $return;
+
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()
@@ -620,6 +646,32 @@ class Tournament extends Base
         }
 
         return null;
+    }
+
+    /**
+     * Deletes all players associated with this tournament
+     */
+    protected function deletePlayers()
+    {
+
+        // delete all the teams associated with this tournament
+        if ($this->isTeamTournament()) {
+            foreach ($this->teams as $team) {
+                $team->delete();
+            }
+        }
+
+        // then delete all the players themselves
+        if (count($this->players) > 0) {
+
+            foreach ($this->players as $player) {
+
+                // force delete this player, since we are cleaning up the tournament
+                $player->deleteForce = true;
+                $player->delete();
+            }
+        }
+
     }
 
     /**

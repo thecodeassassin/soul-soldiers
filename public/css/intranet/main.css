@@ -2725,3 +2725,17 @@ only screen and (min-device-pixel-ratio: 1.5) {
     float: left;
     height: 30px
 }
+
+ul.menuList li:before
+{
+    content: '✔';
+    margin-left: -1em; margin-right: .100em;
+}
+
+ul.menuList
+{
+    padding-left:20px;
+    text-indent:2px;
+    list-style: none;
+    list-style-position:outside;
+}

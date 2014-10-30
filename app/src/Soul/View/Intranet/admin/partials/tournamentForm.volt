@@ -5,7 +5,7 @@
     <div class="alert alert-info">
         <h4><i class="icon-attention-circle"></i> Let op!</h4>
          Als je het type toernooi veranderd van een challonge toernooi (single/double elimination) naar
-         een topscore toernooi wordt het challonge toernooi verwijderd.
+         een topscore toernooi wordt het challonge toernooi verwijderd. Ook alle deelnemers en teams worden verwijderd!
     </div>
 {% else %}
     {% set mode = 'add' %}

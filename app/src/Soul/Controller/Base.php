@@ -372,4 +372,12 @@ class Base extends Controller
     {
         return $this->getDI()->get('cache');
     }
+
+    /**
+     * @return \Soul\Auth\Data
+     */
+    protected function getUser()
+    {
+        return $this->authService->getAuthData();
+    }
 }
