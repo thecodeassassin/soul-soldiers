@@ -6,6 +6,7 @@
 namespace Soul\Form\Intranet;
 
 use Phalcon\Forms\Element\Date;
+use Phalcon\Forms\Element\File;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Submit;
 use Phalcon\Validation\Validator\PresenceOf;
@@ -50,6 +51,8 @@ class TournamentForm extends Base
             10 => 10
         ]);
 
+        $image = $this->getFileField('imageUpload');
+
 
         $date = $this->getTextField('Datum', 'startDate', true, 'string', 'form-control', ['id' => 'startDate']);
         $date->addValidator(
@@ -63,6 +66,7 @@ class TournamentForm extends Base
              ->add($date)
              ->add($rules)
              ->add($type)
+             ->add($image)
              ->add($isTeamTournament)
              ->add($teamSize)
              ->add($prizes)->add(new Submit('Opslaan', [

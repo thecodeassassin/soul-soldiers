@@ -12,7 +12,7 @@
     {% set postRoute = 'admin/tournaments/add' %}
 {% endif %}
 
-{{ form(postRoute, "method": "post", "name":"tournament", "class":"validate form-horizontal", "role":"form") }}
+{{ form(postRoute, "method": "post", "name":"tournament", "class":"validate form-horizontal", "role":"form", 'enctype':"multipart/form-data", 'onsubmit':'ajaxLoadCallback()') }}
 
 <h4>Algemene instellingen</h4>
 <hr />
@@ -59,6 +59,13 @@
 
 <h4>Omschrijving</h4>
 <hr />
+
+{#<div class="form-group">#}
+    {#<label for="name" class="col-sm-2 control-label">Achtergrond afbeelding</label>#}
+    {#<div class="col-sm-10 noaddon">#}
+        {#{{ form.render('imageUpload') }}#}
+    {#</div>#}
+{#</div>#}
 
 <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Regels HTML</label>

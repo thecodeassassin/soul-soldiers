@@ -8,6 +8,7 @@ namespace Soul\Form;
 
 use Phalcon\Forms\Element\Check;
 use Phalcon\Forms\Element\Date;
+use Phalcon\Forms\Element\File;
 use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Element\Password;
 use Phalcon\Forms\Element\Select;
@@ -78,6 +79,36 @@ abstract class Base extends Form
         return $text;
     }
 
+    /**
+     * @param string $name     Name of the field
+     * @param bool   $required Mandatory field or not
+     * @param string $class    CSS class(es)
+     *
+     * @param array  $params
+     *
+     * @return Text
+     */
+    protected function getFileField($name, $required = false, $class = 'form-control', array $params = [])
+    {
+
+        $params = array_merge($params, compact('class'));
+        $fileField = new File($name, $params);
+
+        if ($required) {
+            $fileField->addValidator(
+                new PresenceOf([
+                    'message' => sprintf('%s is verplicht', $name)
+                ])
+            );
+            $fileField->setAttribute('required', '');
+        }
+
+        if (!empty($filter)) {
+            $fileField->addFilter($filter);
+        }
+
+        return $fileField;
+    }
 
 
     /**

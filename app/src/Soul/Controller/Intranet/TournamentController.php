@@ -306,14 +306,6 @@ class TournamentController extends Base
 
         if ($tournament) {
 
-            $tournament->state = Tournament::STATE_FINISHED;
-            $tournament->onlyStateUpdate = true;
-            $saved = $tournament->save();
-
-            if (!$saved) {
-                $this->flashMessages($tournament->getMessages(), 'error', true);
-            }
-
             if ($tournament->isChallonge) {
                 $challongeTournament = $tournament->getChallongeTournament();
 
@@ -328,7 +320,18 @@ class TournamentController extends Base
                     } else {
                         $this->flashMessage(sprintf('Toernooi %s kan niet worden beeindigd.', $tournament->name), 'error', true);
                     }
+                } else {
+                    $this->flashMessage(sprintf('Toernooi %s kan niet worden beeindigd, niet alle scores zijn ingevuld.', $tournament->name), 'error', true);
+                    return $this->response->redirect('tournament/view/'.$systemName);
                 }
+            }
+
+            $tournament->state = Tournament::STATE_FINISHED;
+            $tournament->onlyStateUpdate = true;
+            $saved = $tournament->save();
+
+            if (!$saved) {
+                $this->flashMessages($tournament->getMessages(), 'error', true);
             }
         }
 

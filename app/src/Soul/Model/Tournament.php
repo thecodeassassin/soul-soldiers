@@ -93,6 +93,11 @@ class Tournament extends Base
     public $stateString;
 
     /**
+     * @var string image base64
+     */
+    public $image;
+
+    /**
      * @var array
      */
     public $playersArray = [];
@@ -446,7 +451,7 @@ class Tournament extends Base
             $ranks = [];
 
             // if the tournament is a non team challonge tournament, get the player ranks
-            if ($this->isChallonge && !$this->isTeamTournament()) {
+            if ($this->isChallonge && !$this->isTeamTournament() && $this->state == self::STATE_FINISHED) {
                 $challongePlayers = $this->getChallongeTournament()->getPlayers();
 
                 if ($challongePlayers) {
@@ -467,30 +472,30 @@ class Tournament extends Base
 
             $this->playersArray = $this->players->toArray();
 
+
             array_walk($this->playersArray, function(&$player) use ($ranks) {
-                    $player['user'] = User::findFirstByUserId($player['userId'])->toArray();
+                $player['user'] = User::findFirstByUserId($player['userId'])->toArray();
 
-                    $scoreResult = $this->players->filter(function($obj) use ($player){
-                        if ($obj->userId == $player['userId']) {
-                            return $obj;
-                        }
-                        return null;
-                    });
-
-                    if (count($scoreResult) == 1) {
-                        $player['totalScore'] = $scoreResult[0]->totalScore;
-                    } else {
-                        $player['totalScore'] = 0;
+                $scoreResult = $this->players->filter(function($obj) use ($player){
+                    if ($obj->userId == $player['userId']) {
+                        return $obj;
                     }
-
-                    if (array_key_exists($player['user']['nickName'], $ranks)) {
-                        $player['rank'] = $ranks[$player['user']['nickName']];
-                    }
-
+                    return null;
                 });
 
-            // cache the playerlist
-            $cache->save($this->playerCacheKey,  $this->playersArray , 600);
+                if (count($scoreResult) == 1) {
+                    $player['totalScore'] = $scoreResult[0]->totalScore;
+                } else {
+                    $player['totalScore'] = 0;
+                }
+
+                if (array_key_exists($player['user']['nickName'], $ranks)) {
+                    $player['rank'] = $ranks[$player['user']['nickName']];
+                }
+
+            });
+
+
 
             if ($this->type == self::TYPE_TOP_SCORE || ($this->isChallonge && count($ranks) > 0 )) {
 
@@ -507,6 +512,9 @@ class Tournament extends Base
                     }
                 });
             }
+
+            // cache the playerlist
+            $cache->save($this->playerCacheKey,  $this->playersArray , 600);
 
             if ($this->type == self::TYPE_TOP_SCORE) {
                 $this->playersArray = array_reverse($this->playersArray);
@@ -615,7 +623,8 @@ class Tournament extends Base
             'prizes' => 'prizes',
             'isTeamTournament' => 'isTeamTournament',
             'teamSize' => 'teamSize',
-            'state' => 'state'
+            'state' => 'state',
+            'image' => 'image'
         );
     }
 

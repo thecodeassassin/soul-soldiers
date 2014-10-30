@@ -6,6 +6,7 @@
 namespace Soul\Controller\Intranet;
 
 
+use Phalcon\Mvc\Model\Message;
 use Phalcon\Mvc\View;
 use Soul\Form\Intranet\TournamentForm;
 use Soul\Model\Tournament;
@@ -123,6 +124,7 @@ class AdminController extends \Soul\Controller\Website\AdminController
     protected function tournamentForm(Tournament $tournament)
     {
         $tournamentForm = new TournamentForm();
+        $error = false;
 
         if ($this->request->isPost()) {
 
@@ -144,10 +146,29 @@ class AdminController extends \Soul\Controller\Website\AdminController
                     $this->flashMessages($tournament->getMessages(), 'error');
                 } else {
 
-                    // save the tournament and go back to the previous screen
-                    $saveState = $tournament->save();
+                    if ($tournament)
 
-                    if ($saveState) {
+                    if ($this->request->hasFiles()) {
+                        $files = $this->request->getUploadedFiles();
+
+                        foreach ($files as $file) {
+
+                            if (in_array($file->getRealType(), ['image/jpeg', 'image/png', 'image/gif', 'image/bmp'])) {
+                                $tournament->image = file_get_contents($file->getTempName());
+                            } else {
+                                $this->flashMessage('De afbeelding is in een ongeldig formaat, probeer png of jpeg', 'error');
+                                $error = true;
+                            }
+                        }
+                    }
+
+                    $saveState = false;
+                    if (!$error) {
+                        // save the tournament and go back to the previous screen
+                        $saveState = $tournament->save();
+                    }
+
+                    if ($saveState && !$error) {
 
                         $this->flashMessage('Het toernooi is opgeslagen', 'success', true);
 
