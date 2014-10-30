@@ -51,7 +51,7 @@
             {% endif %}
 
             {% if isTeamTournament and pending and isAdmin %}
-                <a class="btn btn-lg btn-primary" onclick="return ajaxConfirm('Zodra er teams gegenereerd zijn kan er niemand meer meedoen, weet je het zeker dat je teams wilt genereren?');"
+                <a class="btn btn-lg btn-primary" onclick="return ajaxConfirm('Weet je het zeker? Alle huidige teams worden verwijderd.');"
                    href="{{ url('tournament/generateteams/' ~ tournament.systemName ) }}">Genereer teams</a>
             {% endif %}
 
@@ -166,13 +166,9 @@
 
                     <div class="list-group-item">
                         <h4 class="list-group-item-heading">
-                            {% if isAdmin %}
-
-                            <span class="currentTeamName">{{ team.name }}</span>
-                            <a class="btn btn-primary" href="{{ url('admin/editTeamName/' ~ team.teamId) }}" id="editTeamName" rel="remote-modal"><i class="icon-pencil"></i></a>
-
-                            {% else %}
                             {{ team.name }}
+                            {% if isAdmin and pending %}
+                                <a class="btn btn-primary" href="{{ url('admin/editTeamName/' ~ team.teamId) }}" id="editTeamName" rel="remote-modal"><i class="icon-pencil"></i></a>
                             {% endif %}
                         </h4>
                         <div class="list-group-item-text">

@@ -2725,15 +2725,3 @@ only screen and (min-device-pixel-ratio: 1.5) {
     float: left;
     height: 30px
 }
-
-.team a {
-    background-color: transparent;
-}
-
-.team a:hover {
-    background-color: transparent;
-}
-
-.team a.list-group-item .list-group-item-heading {
-    color: #cccccc
-}

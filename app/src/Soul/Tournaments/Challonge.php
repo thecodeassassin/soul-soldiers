@@ -9,6 +9,7 @@ namespace Soul\Tournaments;
 
 
 use SimpleXMLElement;
+use Soul\Util;
 
 /**
  * Class Challonge
@@ -132,6 +133,7 @@ class Challonge
             // CURL Failed
             $this->errors[] = curl_error($curl_handle);
         } else {
+
             switch ($this->status_code) {
 
                 case 401: // Bad API Key
@@ -146,6 +148,7 @@ class Challonge
                         foreach ($return->error as $error) {
                             $this->errors[] = $error;
                         }
+
                         $return = false;
                     }
                     break;
@@ -156,7 +159,9 @@ class Challonge
                     break;
 
                 case 200:
+
                     $return = $this->result = new SimpleXMLElement($curl_result);
+
                     // Check if the result set is nil/empty
                     if (sizeof($return) == 0) {
                         $this->errors[] = "Result set empty";
@@ -268,7 +273,7 @@ class Challonge
     {
         $tournament_id = $this->getRealTournamentId($tournament_id);
 
-        return $this->makeCall("tournaments/finalize/$tournament_id", $params, "post");
+        return $this->makeCall("tournaments/$tournament_id/finalize", $params, "post");
     }
 
     /**

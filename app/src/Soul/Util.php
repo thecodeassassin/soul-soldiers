@@ -303,9 +303,9 @@ class Util {
     public static function isValidXML($xml) {
         $doc = @simplexml_load_string($xml);
         if ($doc) {
-            return true; //this is valid
+            return true;
         } else {
-            return false; //this is not valid
+            return false;
         }
     }
 

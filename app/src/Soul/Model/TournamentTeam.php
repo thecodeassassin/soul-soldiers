@@ -34,7 +34,8 @@ class TournamentTeam extends Base
     public function initialize()
     {
 		$this->setSource('tblTournamentTeam');
-        $this->belongsTo('tournamentId', '\Soul\Model\Tournament', 'tournamentId', ['alias' => 'tournament']);
+
+        $this->hasOne('tournamentId', '\Soul\Model\Tournament', 'tournamentId', ['alias' => 'tournament']);
     }
 
     /**
@@ -60,6 +61,16 @@ class TournamentTeam extends Base
     }
 
     /**
+     * Returns a read-only copy of tournament
+     *
+     * @return Tournament
+     */
+    public function getTournament()
+    {
+        return Tournament::findFirstById($this->tournamentId);
+    }
+
+    /**
      * @param $tournamentId
      *
      * @return \Phalcon\Mvc\Model\ResultsetInterface
@@ -76,7 +87,7 @@ class TournamentTeam extends Base
      */
     public static function findFirstById($teamId)
     {
-        return self::find('teamId = \''.$teamId.'\'');
+        return self::findFirst('teamId = \''.$teamId.'\'');
     }
 
     /**

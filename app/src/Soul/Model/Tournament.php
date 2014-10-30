@@ -1,6 +1,7 @@
 <?php
 namespace Soul\Model;
 
+use Phalcon\Forms\Element\Date;
 use Phalcon\Mvc\Model\Message;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
@@ -115,6 +116,14 @@ class Tournament extends Base
      * @var bool
      */
     public $hasError = false;
+
+
+    /**
+     * True when only updating state
+     *
+     * @var bool
+     */
+    public $onlyStateUpdate = false;
 
     const TYPE_TOP_SCORE = 1;
     const TYPE_SINGLE_ELIMINATION = 2;
@@ -245,6 +254,10 @@ class Tournament extends Base
      */
     public function beforeDelete()
     {
+
+        // clear the menu cache
+        $this->getCache()->delete('tournament_menu');
+
         // when deleting a tournament, also delete the linked challonge
         if ($this->isChallongeTournament()) {
            return $this->deleteChallongeTournament();
@@ -263,34 +276,37 @@ class Tournament extends Base
     public function beforeUpdate()
     {
 
-        $databaseEntry = self::findFirstBySystemName($this->systemName);
+        if (!$this->onlyStateUpdate) {
+            $databaseEntry = self::findFirstBySystemName($this->systemName);
 
-        // if the tournament changed to non challonge, delete the challonge tournament
-        if ($databaseEntry->isChallongeTournament() && !$this->isChallongeTournament()) {
-            if (!$this->deleteChallongeTournament()) {
-                return false;
+            // if the tournament changed to non challonge, delete the challonge tournament
+            if ($databaseEntry->isChallongeTournament() && !$this->isChallongeTournament()) {
+                if (!$this->deleteChallongeTournament()) {
+                    return false;
+                }
+
+            } elseif (!$databaseEntry->isChallongeTournament() && $this->isChallongeTournament()) {
+                if (!$this->createChallongeTournament()) {
+                    return false;
+                }
             }
 
-        } elseif (!$databaseEntry->isChallongeTournament() && $this->isChallongeTournament()) {
-            if (!$this->createChallongeTournament()) {
-                return false;
+            // when updating a tournament, also update the linked challonge
+            if ($this->isChallongeTournament()) {
+                $challongeApi = $this->getChallongeAPI();
+
+                $editAction = $challongeApi->updateTournament($this->challongeId, [
+                        'tournament[name]' => $this->name,
+                        'tournament[start_at]' => $this->getProperStartDate(),
+                        'tournament[tournament_type]' => $this->challongeTypes[$this->type],
+                    ]);
+
+                if (!$editAction) {
+                    $this->appendMessage(new Message('Dit toernooi kon niet worden bijgewerkt. Challonge kan niet worden bereikt.'));
+                    return false;
+                }
+
             }
-        }
-
-        // when updating a tournament, also update the linked challonge
-        if ($this->isChallongeTournament()) {
-            $challongeApi = $this->getChallongeAPI();
-            $editAction = $challongeApi->updateTournament($this->challongeId, [
-                'tournament[name]' => $this->name,
-                'tournament[start_at]' => $this->startDate,
-                'tournament[tournament_type]' => $this->challongeTypes[$this->type],
-            ]);
-
-            if (!$editAction) {
-                $this->appendMessage(new Message('Dit toernooi kon niet worden bijgewerkt. Challonge kan niet worden bereikt.'));
-                return false;
-            }
-
         }
 
         return true;
@@ -410,31 +426,11 @@ class Tournament extends Base
         }
 
         $playerArrayKey = sprintf('tournament_%s_playersarray', $this->systemName);
+
         if ($cache->exists($playerArrayKey)) {
             $this->playersArray = $cache->get($playerArrayKey);
         } else {
 
-            $this->playersArray = $this->players->toArray();
-
-            array_walk($this->playersArray, function(&$player) {
-                    $player['user'] = User::findFirstByUserId($player['userId'])->toArray();
-
-                    $scoreResult = $this->players->filter(function($obj) use ($player){
-                            if ($obj->userId == $player['userId']) {
-                                return $obj;
-                            }
-                            return null;
-                        });
-
-                    if (count($scoreResult) == 1) {
-                        $player['totalScore'] = $scoreResult[0]->totalScore;
-                    } else {
-                        $player['totalScore'] = 0;
-                    }
-
-                });
-
-            $cache->save($playerArrayKey,  $this->playersArray , 600);
             $ranks = [];
 
             // if the tournament is a non team challonge tournament, get the player ranks
@@ -447,8 +443,8 @@ class Tournament extends Base
                         $name = (string)$player->name;
                         $rank = null;
 
-                        if (is_numeric($player->{'final-rank'})) {
-                            $rank = $player->{'final-rank'};
+                        if (is_numeric((string) $player->{'final-rank'})) {
+                            $rank = (int) $player->{'final-rank'};
                         }
 
                         $ranks[$name] = $rank;
@@ -457,37 +453,55 @@ class Tournament extends Base
                 }
             }
 
+            $this->playersArray = $this->players->toArray();
+
+            array_walk($this->playersArray, function(&$player) use ($ranks) {
+                    $player['user'] = User::findFirstByUserId($player['userId'])->toArray();
+
+                    $scoreResult = $this->players->filter(function($obj) use ($player){
+                        if ($obj->userId == $player['userId']) {
+                            return $obj;
+                        }
+                        return null;
+                    });
+
+                    if (count($scoreResult) == 1) {
+                        $player['totalScore'] = $scoreResult[0]->totalScore;
+                    } else {
+                        $player['totalScore'] = 0;
+                    }
+
+                    if (array_key_exists($player['user']['nickName'], $ranks)) {
+                        $player['rank'] = $ranks[$player['user']['nickName']];
+                    }
+
+                });
+
+            $cache->save($playerArrayKey,  $this->playersArray , 600);
+
             if ($this->type == self::TYPE_TOP_SCORE || ($this->isChallonge && count($ranks) > 0 )) {
 
                 usort($this->playersArray, function ($left, $right) use ($ranks) {
 
                     if ($this->type == self::TYPE_TOP_SCORE) {
 
-                        if ($left['totalScore'] == $right['totalScore']) {
-                            return 0;
-                        }
+                        return ($left['totalScore'] - $right['totalScore']);
 
-                        return ($left['totalScore'] > $right['totalScore'] ? -1 : 1);
                     } else {
 
-                        $nickNameLeft = $left['user']['nickName'];
-                        $nickNameRight = $right['user']['nickName'];
-
-                        if (array_key_exists($nickNameLeft, $ranks) && array_key_exists($nickNameRight, $ranks)) {
-
-                            if ($ranks[$nickNameLeft] == $ranks[$nickNameRight]) {
-                                return 0;
-                            }
-
-                            return ($ranks[$nickNameLeft] > $ranks[$nickNameRight] ? -1 :1);
-
-                        }
+                        return ($left['rank'] - $right['rank']);
 
                     }
                 });
             }
 
+            if ($this->type == self::TYPE_TOP_SCORE) {
+                $this->playersArray = array_reverse($this->playersArray);
+            }
+
+
         }
+
 
     }
 
@@ -540,6 +554,14 @@ class Tournament extends Base
     public static function findFirstBySystemName($systemName)
     {
         return self::findFirst('systemName = \''.$systemName.'\'');
+    }
+    /**
+     * @param $tournamentId
+     * @return Tournament
+     */
+    public static function findFirstById($tournamentId)
+    {
+        return self::findFirst('tournamentId = \''.$tournamentId.'\'');
     }
 
     /**
@@ -614,6 +636,7 @@ class Tournament extends Base
      */
     protected function createChallongeTournament()
     {
+
         // if the tournament is single or double elimination, register the tournament in challonge
         $challongeApi = $this->getChallongeAPI();
         $challongeTournament = $challongeApi->createTournament([
@@ -622,7 +645,8 @@ class Tournament extends Base
                 'tournament[url]' => $this->systemName,
                 'tournament[subdomain]' => $challongeApi->getSubDomain(),
                 'tournament[open_signup]' => 'false',
-                'tournament[start_at]' => $this->startDate
+                'tournament[start_at]' => $this->getProperStartDate(),
+                'tournament[private]' => 'true'
             ]);
 
         if (!$challongeTournament) {
@@ -635,7 +659,16 @@ class Tournament extends Base
         return true;
     }
 
+    /**
+     * @return string
+     */
+    protected function getProperStartDate()
+    {
+        $startDate = new \DateTime($this->startDate);
+        $startDate->setTimezone(new \DateTimeZone('Europe/Amsterdam'));
 
+        return (string)$startDate->format('Y-m-d H:i:s O');
+    }
 
     /**
      * Checks whether or not this tournament is linked on challonge

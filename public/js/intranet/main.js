@@ -1,33 +1,34 @@
 $(function() {
 
-    var scoreCount = $('.scoreCount');
+//    var scoreCount = $('.scoreCount');
+//
+//    if (scoreCount[0]) {
+//
+//        $('form.scoreAdd').submit(function(e){
+//            e.preventDefault();
+//            ajaxLoad(true);
+////
+////            var thisScoreCount = $(this).parent().siblings('.badge'),
+////                scoreCountEl = $(this).find('.scoreCount');
+//
+//            $.ajax({
+//                url: $(this).attr('action'),
+//                method: 'POST',
+//                data: $(this).serialize(),
+//                success: function(newScore) {
+////                    thisScoreCount.html(newScore);
+////
+////                    scoreCountEl.val(0);
+//                    location.reload();
+//                },
+//                complete: function() {
+//                    ajaxLoad(false);
+//                }
+//            });
+//
+//        });
 
-    if (scoreCount[0]) {
-
-        $('form.scoreAdd').submit(function(e){
-            e.preventDefault();
-            ajaxLoad(true);
-
-            var thisScoreCount = $(this).parent().siblings('.badge'),
-                scoreCountEl = $(this).find('.scoreCount');
-
-            $.ajax({
-                url: $(this).attr('action'),
-                method: 'POST',
-                data: $(this).serialize(),
-                success: function(newScore) {
-                    thisScoreCount.html(newScore);
-
-                    scoreCountEl.val(0);
-                },
-                complete: function() {
-                    ajaxLoad(false);
-                }
-            });
-
-        });
-
-    }
+//    }
 
     $('.matchLink').click(function(e) {
         e.preventDefault();

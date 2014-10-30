@@ -258,21 +258,21 @@ class Tournament extends Module
     {
         try {
 
-            return$this->api->startTournament($this->challongeId);
+            return $this->api->startTournament($this->challongeId);
 
         } catch (\Exception $e) {
             throw new Exception(sprintf('Cannot start %s', $this->challongeId));
         }
     }
 
-    public function end()
+    public function endTournament()
     {
         try {
 
             return $this->api->endTournament($this->challongeId);
 
         } catch (\Exception $e) {
-            throw new Exception(sprintf('Cannot end %s', $this->challongeId));
+            throw new Exception(sprintf('Cannot end tournament %s: %s', $this->challongeId, $e->getMessage()));
         }
     }
 

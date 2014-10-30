@@ -154,18 +154,13 @@ class TournamentController extends Base
                     );
                 }
 
+                // delete the player cache
                 $this->deletePlayerCache($tournamentUser->tournament);
             }
         }
 
-        if ($this->request->isAjax()) {
+        return $this->response->redirect('tournament/view/'.$tournamentUser->tournament->systemName);
 
-            // refresh score and return new score
-            $tournamentUser = TournamentUser::findFirstByTournamentUserId($userId);
-            echo $tournamentUser->getTotalScore();
-        } else {
-            return $this->response->redirect('tournament/view/'.$tournamentUser->tournament->systemName);
-        }
     }
 
     /**
@@ -252,12 +247,14 @@ class TournamentController extends Base
 
         if ($tournament) {
 
-           $tournament->state = Tournament::STATE_STARTED;
-           $tournament->save();
 
-            if ($tournament->isTeamTournament() && count($tournament->teams) == 0) {
-                $this->flashMessage('Er zijn nog geen teams aangemaakt!', 'error', true);
+            if ($tournament->isTeamTournament() && count($tournament->teams) == 0 || count($tournament->players) < 2) {
+                $this->flashMessage('Er zijn nog geen teams aangemaakt, of er zijn onvoldoende spelers!', 'error', true);
             } else {
+
+                $tournament->state = Tournament::STATE_STARTED;
+                $tournament->onlyStateUpdate = true;
+                $tournament->save();
 
                 if ($tournament->isChallonge) {
                     $challongeTournament = $tournament->getChallongeTournament();
@@ -302,8 +299,14 @@ class TournamentController extends Base
         $tournament = Tournament::findFirstBySystemName($systemName);
 
         if ($tournament) {
+
             $tournament->state = Tournament::STATE_FINISHED;
-            $tournament->save();
+            $tournament->onlyStateUpdate = true;
+            $saved = $tournament->save();
+
+            if (!$saved) {
+                $this->flashMessages($tournament->getMessages(), 'error', true);
+            }
 
             if ($tournament->isChallonge) {
                 $challongeTournament = $tournament->getChallongeTournament();
@@ -314,7 +317,7 @@ class TournamentController extends Base
                 }
 
                 if ($challongeTournament->isAwaitingReview()) {
-                    if ($challongeTournament->end()) {
+                    if ($challongeTournament->endTournament()) {
                         $this->flashMessage(sprintf('Toernooi %s is beeindigd.', $tournament->name), 'success', true);
                     } else {
                         $this->flashMessage(sprintf('Toernooi %s kan niet worden beeindigd.', $tournament->name), 'error', true);

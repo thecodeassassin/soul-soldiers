@@ -66,7 +66,7 @@ class AdminController extends \Soul\Controller\Website\AdminController
                 $deleteStatus = $tournament->delete();
 
                 if ($deleteStatus) {
-                    $this->flashMessage(sprintf('Tournooi %s is verwijderd', $systemName), 'success', true);
+                    $this->flashMessage(sprintf('Tournooi %s is verwijderd', $tournament->name), 'success', true);
                 } else {
                     $this->flashMessages($tournament->getMessages(), 'error');
                 }
@@ -82,6 +82,8 @@ class AdminController extends \Soul\Controller\Website\AdminController
     }
 
     /**
+     * @param $teamId
+     *
      * @return \Phalcon\Http\ResponseInterface
      */
     public function editTeamNameAction($teamId)
@@ -94,12 +96,16 @@ class AdminController extends \Soul\Controller\Website\AdminController
 
             if ($team) {
                 $teamName = $this->request->get('teamName');
+                $tournament = $team->getTournament();
 
-                $tournament = $team->tournament;
+                $team->name = $teamName;
+                $saved = $team->save();
 
-                die(var_dump($tournament));
-
-                $this->flashMessages(sprintf('Team naam aangepast naar %s', $teamName));
+                if (!$saved) {
+                    $this->flashMessages($team->getMessages(), 'error', true);
+                } else {
+                    $this->flashMessage(sprintf('Team naam aangepast naar %s', $teamName), 'success', true);
+                }
 
                 return $this->response->redirect('tournament/view/'.$tournament->systemName);
             }
@@ -116,7 +122,6 @@ class AdminController extends \Soul\Controller\Website\AdminController
     protected function tournamentForm(Tournament $tournament)
     {
         $tournamentForm = new TournamentForm();
-        $hasIdentifier = $tournament->tournamentId;
 
         if ($this->request->isPost()) {
 
@@ -142,12 +147,10 @@ class AdminController extends \Soul\Controller\Website\AdminController
                     $saveState = $tournament->save();
 
                     if ($saveState) {
-                        if ($hasIdentifier) {
-                            $this->flashMessage('Het toernooi is opgeslagen', 'success');
-                        } else {
-                            $this->flashMessage('Het toernooi is opgeslagen', 'success', true);
-                            $this->response->redirect('admin/tournaments/manage/'.$tournament->systemName);
-                        }
+
+                        $this->flashMessage('Het toernooi is opgeslagen', 'success', true);
+
+                        return $this->response->redirect('admin/tournaments');
                     } else {
                         $this->flashMessages($tournament->getMessages(), 'error');
                     }
