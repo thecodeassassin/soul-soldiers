@@ -178,8 +178,14 @@ class TournamentController extends Base
                 throw new \Exception('Toernooi is geen team toernooi');
             }
 
-            if ((count($tournament->players) % $tournament->teamSize) == 1 ) {
-                throw new \Exception(sprintf('Er kunnen geen teams gemaakt worden van %d deelnemers.', count($tournament->players)));
+            $playerCount = count($tournament->players);
+
+            if (($playerCount % $tournament->teamSize) == 1 ) {
+                throw new \Exception(sprintf('Er kunnen geen teams gemaakt worden van %d deelnemers.', $playerCount));
+            }
+
+            if ($playerCount / $tournament->teamSize  == 1) {
+                throw new \Exception(sprintf('Er dienen minimaal %d mensen mee te doen.', (2 * $tournament->teamSize)));
             }
 
             // delete all existing teams first
@@ -248,7 +254,7 @@ class TournamentController extends Base
         if ($tournament) {
 
 
-            if ($tournament->isTeamTournament() && count($tournament->teams) == 0 || count($tournament->players) < 2) {
+            if ($tournament->isTeamTournament() && count($tournament->teams) < 2 || count($tournament->players) < 2) {
                 $this->flashMessage('Er zijn nog geen teams aangemaakt, of er zijn onvoldoende spelers!', 'error', true);
             } else {
 

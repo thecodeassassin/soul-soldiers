@@ -90,9 +90,9 @@ class AdminController extends \Soul\Controller\Website\AdminController
     {
 
         $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+        $team = TournamentTeam::findFirstById($teamId);
 
         if ($this->request->isPost()) {
-            $team = TournamentTeam::findFirstById($teamId);
 
             if ($team) {
                 $teamName = $this->request->get('teamName');
@@ -112,6 +112,7 @@ class AdminController extends \Soul\Controller\Website\AdminController
 
         }
 
+        $this->view->team = $team;
         $this->view->teamId = $teamId;
 
     }

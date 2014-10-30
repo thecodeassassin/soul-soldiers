@@ -168,7 +168,11 @@
                         <h4 class="list-group-item-heading">
                             {{ team.name }}
                             {% if isAdmin and pending %}
-                                <a class="btn btn-primary" href="{{ url('admin/editTeamName/' ~ team.teamId) }}" id="editTeamName" rel="remote-modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-primary" href="{{ url('admin/editTeamName/' ~ team.teamId) }}"
+                                   id="editTeamName"
+                                   rel="remote-modal"
+                                   data-before-submit-callback="ajaxLoadCallback">
+                                    <i class="icon-pencil"></i></a>
                             {% endif %}
                         </h4>
                         <div class="list-group-item-text">

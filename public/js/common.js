@@ -34,6 +34,16 @@ function ajaxConfirm(msg){
 }
 
 /**
+ * ajaxLoader callback for remote modals
+ * @returns {boolean}
+ */
+function ajaxLoadCallback()
+{
+    ajaxLoad(true);
+    return true;
+}
+
+/**
  * Reserve a seat confirmation message
  * @returns {*}
  */

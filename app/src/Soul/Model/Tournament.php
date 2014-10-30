@@ -257,17 +257,26 @@ class Tournament extends Base
 
         // clear the menu cache
         $this->getCache()->delete('tournament_menu');
+        $this->getCache()->delete(sprintf('tournament_%s_playersarray', $this->systemName));
 
-        // when deleting a tournament, also delete the linked challonge
-        if ($this->isChallongeTournament()) {
-           return $this->deleteChallongeTournament();
-        }
 
         // delete all players associated with this tournament
         if (count($this->players) > 0) {
             foreach ($this->players as $player) {
                 $player->delete();
             }
+        }
+
+        // delete all the teams associated with this tournament
+        if ($this->isTeamTournament()) {
+            foreach ($this->teams as $team) {
+                $team->delete();
+            }
+        }
+
+        // when deleting a tournament, also delete the linked challonge
+        if ($this->isChallongeTournament()) {
+            return $this->deleteChallongeTournament();
         }
 
         return true;
