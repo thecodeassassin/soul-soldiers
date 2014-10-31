@@ -29,7 +29,7 @@
             <div class="panel-body news-body">
 
                 {% if admin and editMode %}
-                    <textarea class="form-control" name="content" class="news-content" data-news-id="{{ item.newsId }}">{{ item.body }}</textarea>
+                    <textarea class="form-control" name="content" rows="5" class="news-content" data-news-id="{{ item.newsId }}">{{ item.body }}</textarea>
                     <input type="hidden" name="newsId" value="{{ item.newsId }}" />
                     <button type="submit" class="btn btn-primary"><i class="icon-edit"></i></button>
                     <a href="{{ url('/news/delete/' ~ item.newsId) }}">

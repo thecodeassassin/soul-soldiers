@@ -15,8 +15,7 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <br/>
-                    <h3>Red Alert 2</h3><br /> 
+                    <h3>Red Alert 2</h3>
                     <p>Download links :<br />
                        Download link 1 : <a href="http://filemaster.intranet.lan/games/RA2.exe"> Installer</a> <br /> <br /> <br /> <br />
                     <a href="downloads/ra2" target="_blank"> Installatie uitleg + screenshots</a></p>

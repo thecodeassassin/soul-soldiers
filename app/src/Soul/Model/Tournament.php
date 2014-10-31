@@ -410,7 +410,6 @@ class Tournament extends Base
                         $cache->save($imageKey, $image, 86400);
                     }
                 }
-
             }
 
             // generate an image for this tournament

@@ -7,3 +7,6 @@ LOCAL_DB_IP=localhost
 LOCAL_DB=xxx
 LOCAL_DB_USER=xxx
 LOCAL_DB_PASS=xxx
+
+declare -a IGNORE_LIST
+IGNORE_LIST=(tblTournament tblTournamentScore tblTournamentUser tblTournamentTeam tblNews)

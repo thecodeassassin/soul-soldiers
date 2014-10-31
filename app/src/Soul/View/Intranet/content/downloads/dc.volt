@@ -34,18 +34,17 @@
          <H1>Screenshots</H1>
          <p>Klik op de plaatjes om ze in het groot te bekijken</p>
          <div class="row">
-                         <div class="col-md-4">
-                         <h3>Afbeelding 1</h3>
-                         </div>
+             <div class="col-md-2">
+                <h3>Afbeelding 1</h3>
+             </div>
 
-                         <div class="col-md-3">
-                         <h3>Afbeelding 2</h3>
-                         </div>
+             <div class="col-md-2">
+                <h3>Afbeelding 2</h3>
+             </div>
 
-                         <div class="col-md-3">
-                         <h3>Afbeelding 3</h3>
-                         </div>
-
+             <div class="col-md-2">
+                <h3>Afbeelding 3</h3>
+             </div>
          </div>
 
             <a href="{{ url(image_1) }}" class="image-link">

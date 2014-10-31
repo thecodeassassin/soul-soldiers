@@ -8,14 +8,7 @@
     <tbody>
     <tr>
         <td>&euro; 20 Steam gift card</td>
-        <td>1x &euro; 20 Steam gift card</td>
-    </tr>
-    <tr>
-        <td>&euro; 20 Bol.com cadeaubon</td>
-        <td>Leaseweb Virtual Server M</td>
-    </tr>
-    <tr>
-        <td>Leaseweb Virtual Server L</td>
+        <td>Awesomenauts Skin pack</td>
     </tr>
     </tbody>
 </table>

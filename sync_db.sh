@@ -13,9 +13,12 @@ LOCAL_DB_ARGS="-h$LOCAL_DB_IP -u $LOCAL_DB_USER -p$LOCAL_DB_PASS $LOCAL_DB"
 IGNORE_PARAMS=""
 IGNORE_STR=""
 
-declare -a IGNORE_LIST
-IGNORE_LIST=(tblTournament tblTournamentScore tblTournamentUser)
 #IGNORE_LIST=(tblUser)
+
+if [ -z $IGNORE_LIST ] ; then
+    echo 'Ignore list not set, please check params.sh'
+    exit
+fi
 
 echo "=> Attempting connection to $REMOTE_DB_IP..."
 
