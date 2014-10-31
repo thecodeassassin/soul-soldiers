@@ -7,6 +7,7 @@ namespace Soul;
 use Phalcon\Cache\Backend\Memcache;
 use Phalcon\Config;
 use Phalcon\Crypt;
+use Phalcon\Logger\Adapter;
 use Phalcon\Mvc\User\Plugin;
 use Phalcon\DI as DI;
 use Soul\Auth\AuthService;
@@ -34,6 +35,11 @@ abstract class Module extends Plugin
      * @var DI
      */
     protected $di;
+
+    /**
+     * @var Adapter
+     */
+    protected $logger;
 
 
     /**
@@ -133,6 +139,14 @@ abstract class Module extends Plugin
     protected function getCrypt()
     {
         return $this->di->get('crypt');
+    }
+
+    /**
+     * @return Adapter
+     */
+    protected function getLogger()
+    {
+        return $this->di->get('logger');
     }
 
     /**

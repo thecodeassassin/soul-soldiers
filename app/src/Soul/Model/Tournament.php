@@ -315,12 +315,13 @@ class Tournament extends Base
                 $challongeApi = $this->getChallongeAPI();
 
                 $editAction = $challongeApi->updateTournament($this->challongeId, [
-                        'tournament[name]' => $this->name,
-                        'tournament[start_at]' => $this->getProperStartDate(),
-                        'tournament[tournament_type]' => $this->challongeTypes[$this->type],
-                    ]);
+                    'tournament[name]' => $this->name,
+                    'tournament[start_at]' => $this->getProperStartDate(),
+                    'tournament[tournament_type]' => $this->challongeTypes[$this->type],
+                ]);
 
                 if (!$editAction) {
+                    $this->appendChallongeErrors($challongeApi);
                     $this->appendMessage(new Message('Dit toernooi kon niet worden bijgewerkt. Challonge kan niet worden bereikt.'));
                     return false;
                 }
@@ -692,6 +693,7 @@ class Tournament extends Base
         $deleteAction = $challongeApi->deleteTournament($this->challongeId);
 
         if (!$deleteAction) {
+            $this->appendChallongeErrors($challongeApi);
             $this->appendMessage(new Message('Dit toernooi kon niet worden verwijderd. Challonge kan niet worden bereikt.'));
             return false;
         }
@@ -720,6 +722,7 @@ class Tournament extends Base
             ]);
 
         if (!$challongeTournament) {
+            $this->appendChallongeErrors($challongeApi);
             $this->appendMessage(new Message('Dit toernooi kon niet gemaakt worden. Challonge kan niet worden bereikt.'));
             return false;
         }
@@ -755,6 +758,16 @@ class Tournament extends Base
     protected function getChallongeAPI()
     {
         return $this->getDI()->get('challonge');
+    }
+
+    /**
+     * @param Challonge $challonge
+     */
+    protected function appendChallongeErrors(Challonge $challonge)
+    {
+        foreach ($challonge->errors as $error) {
+            $this->appendMessage(new Message($error));
+        }
     }
 
 }
