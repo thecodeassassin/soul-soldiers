@@ -377,7 +377,7 @@ class Tournament extends Base
     {
 
         $this->playerCacheKey = sprintf('tournament_%s_playersarray', $this->systemName);
-        
+
         $types = self::getTypes();
         $states = self::getStates();
         $cache = $this->getCache();
@@ -394,56 +394,54 @@ class Tournament extends Base
 
         // todo fix this logic
         if ($this->isChallonge) {
+            $image = null;
 
-            $challongeTournament = $this->getChallongeTournament();
-            if ($challongeTournament) {
+            $imageKey = sprintf('tournament_%s_image', $this->systemName);
+            if ($cache->exists($imageKey)) {
+                $image = $cache->get($imageKey);
+            } else {
 
-                if (!$this->hasError) {
+                $challongeTournament = $this->getChallongeTournament();
+                if ($challongeTournament) {
 
-
-                    $imageKey = sprintf('tournament_%s_image', $this->systemName);
-                    if ($cache->exists($imageKey)) {
-                        $image = $cache->get($imageKey);
-                    } else {
-
+                    if (!$this->hasError) {
                         // cache the overview image url for a day
                         $image = (string)$challongeTournament->getOverviewImage();
                         $cache->save($imageKey, $image, 86400);
                     }
+                }
 
-                    // generate an image for this tournament
-                    if (Util::verifyUrl($image)) {
+            }
 
-                        // always remove the old image
-                        $newImage = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
+            // generate an image for this tournament
+            if (Util::verifyUrl($image)) {
 
-                        if (file_exists($newImage)) {
-                            unlink($newImage);
-                        }
+                // always remove the old image
+                $newImage = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
 
-                        $tmpFile = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
-                        file_put_contents($tmpFile, file_get_contents((string)$image));
+                if (file_exists($newImage)) {
+                    unlink($newImage);
+                }
 
-                        $mimeType = @finfo_file(finfo_open(FILEINFO_MIME_TYPE), $tmpFile);
-                        if ($mimeType) {
-                            if (strpos($mimeType, 'image') !== false) {
-                                try {
-                                    $original = new \Phalcon\Image\Adapter\GD($tmpFile);
-                                    if ($original->getHeight() >= 105) {
-                                        $original->crop($original->getWidth(), $original->getHeight(), 0, 105);
-                                    }
-                                    $original->save($newImage);
-                                    chmod($newImage, 0777);
-                                } catch(\Exception $e) {
-                                    // do nothing
-                                }
+                $tmpFile = $this->getConfig()->application->cacheDir . $this->systemName . '.png';
+                file_put_contents($tmpFile, file_get_contents((string)$image));
+
+                $mimeType = @finfo_file(finfo_open(FILEINFO_MIME_TYPE), $tmpFile);
+                if ($mimeType) {
+                    if (strpos($mimeType, 'image') !== false) {
+                        try {
+                            $original = new \Phalcon\Image\Adapter\GD($tmpFile);
+                            if ($original->getHeight() >= 105) {
+                                $original->crop($original->getWidth(), $original->getHeight(), 0, 105);
                             }
+                            $original->save($newImage);
+                            chmod($newImage, 0777);
+                        } catch(\Exception $e) {
+                            // do nothing
                         }
-
                     }
                 }
             }
-
         }
 
         if ($cache->exists($this->playerCacheKey)) {
