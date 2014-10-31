@@ -162,8 +162,6 @@ class Tournament extends Base
         $this->hasMany('tournamentId', '\Soul\Model\TournamentTeam', 'tournamentId', ['alias' => 'teams']);
         $this->hasMany('tournamentId', '\Soul\Model\TournamentUser', 'tournamentId', ['alias' => 'players']);
 
-        $this->playerCacheKey = sprintf('tournament_%s_playersarray', $this->systemName);
-
     }
 
     public function validation()
@@ -377,6 +375,9 @@ class Tournament extends Base
      */
     public function afterFetch()
     {
+
+        $this->playerCacheKey = sprintf('tournament_%s_playersarray', $this->systemName);
+        
         $types = self::getTypes();
         $states = self::getStates();
         $cache = $this->getCache();
