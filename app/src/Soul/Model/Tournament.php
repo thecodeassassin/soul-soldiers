@@ -766,7 +766,10 @@ class Tournament extends Base
     protected function appendChallongeErrors(Challonge $challonge)
     {
         foreach ($challonge->errors as $error) {
-            $this->appendMessage(new Message($error));
+            $error = (string) $error;
+            if (!empty($error)) {
+                $this->appendMessage(new Message($error));
+            }
         }
     }
 
