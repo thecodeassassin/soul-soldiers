@@ -22,22 +22,26 @@ use Soul\Menu\Builder;
  * Show the tournaments in the menu
  */
 
-$cache = Phalcon\DI::getDefault()->get('cache');
-$url = Phalcon\DI::getDefault()->get('url');
-$tournamentNames = $cache->get('tournament_menu');
+$tournamentNames = [];
+// todo make dynamic menu inserts possible
+if (ACTIVE_MODULE == 'intranet') {
+    $cache = Phalcon\DI::getDefault()->get('cache');
+    $url = Phalcon\DI::getDefault()->get('url');
+    $tournamentNames = $cache->get('tournament_menu');
 
-if (!$tournamentNames) {
-    $tournaments = \Soul\Model\Tournament::find();
-    $tournamentNames = [];
-    if ($tournaments) {
-        foreach ($tournaments as $tournament) {
-            $tournamentNames[$tournament->name] = $url->get('tournament/view/'.$tournament->systemName);
+    if (!$tournamentNames) {
+        $tournaments = \Soul\Model\Tournament::find();
+        $tournamentNames = [];
+        if ($tournaments) {
+            foreach ($tournaments as $tournament) {
+                $tournamentNames[$tournament->name] = $url->get('tournament/view/'.$tournament->systemName);
+            }
         }
+
+        // cache the menu for a day
+        $cache->save('tournament_menu', $tournamentNames, 86400);
+
     }
-
-    // cache the menu for a day
-    $cache->save('tournament_menu', $tournamentNames, 86400);
-
 }
 
 // menu available for everybody
@@ -50,18 +54,19 @@ $menuConfig = [
             'Home' => BASE_URL . '/home',
             'Archief' => [
                 'Soul-Soldiers: The Reunion 2013' => BASE_URL.'/event/the-reunion',
-                'Soul-Soldiers 2014' => BASE_URL.'/event/soul-2014'
+                'Soul-Soldiers 2014' => BASE_URL.'/event/soul-2014',
+                'Soul-Soldiers 2014: Autumn Edition' => BASE_URL.'/event/soul2014-autumn'
             ],
             'Informatie' => [
                 'Algemene voorwaarden' => BASE_URL.'/content/rules',
                 'LAN-Party checklist' => BASE_URL.'/content/checklist',
                 'Wat is een LAN-party?' => BASE_URL.'/content/lan-description'
             ],
-            'Aankomend evenement' => [
-                'link' => BASE_URL.'/event/current',
-                'Soul-Soldiers 2014: Autumn edition' => BASE_URL.'/event/current'
+//            'Aankomend evenement' => [
+//                'link' => BASE_URL.'/event/current',
+//                'Soul-Soldiers 2014: Autumn edition' => BASE_URL.'/event/current'
 //                'Competities' => BASE_URL.'/content/compos'
-            ],
+//            ],
             'Forum' => BASE_URL.'/forum',
             'Mijn account' => BASE_URL.'/account/manage',
             'Admin' => BASE_URL.'/admin',

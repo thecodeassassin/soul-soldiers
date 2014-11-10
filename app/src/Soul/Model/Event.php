@@ -2,6 +2,7 @@
 namespace Soul\Model;
 
 use Phalcon\DI;
+use Phalcon\Image\Adapter\GD;
 use Phalcon\Mvc\Model\Query;
 use Soul\Controller\Website\EventController;
 use Soul\Util;
@@ -133,6 +134,7 @@ class Event extends Base
 
         $imgDir = $this->getConfig()->application->mediaDir;
         $imgUrl = $this->getConfig()->application->mediaUrl;
+        $cacheDir = $this->getConfig()->application->cacheDir;
 
         if (is_readable($imgDir)) {
 
@@ -143,10 +145,23 @@ class Event extends Base
                 foreach ($fileList as $file) {
 
                     $filePath = $eventPictureDir . '/' . $file;
-                    $fileUrl = sprintf('%s/%s/%s', $imgUrl, $this->systemName, $file);
+                    $thumbName =  '/thumb_' . $file;
+                    $thumbFile = $cacheDir . $thumbName;
 
-                    if (Util::isImage($filePath)) {
-                        $files['images'][] = $fileUrl;
+                    $fileUrl = sprintf('%s/%s/%s', $imgUrl, $this->systemName, $file);
+                    $thumbUrl = '/static/image/' . $thumbName;
+
+                    // generate a thumnail
+                    $thumbnail = new GD($filePath);
+                    $thumbnail->resize(360, 360);
+                    $thumbnail->save($thumbFile);
+
+
+                    if (Util::isImage($filePath) && Util::isImage($thumbFile)) {
+                        $files['images'][] = [
+                            'url' => $fileUrl,
+                            'thumb' => $thumbUrl
+                        ];
                     } else {
                         $files['other'][] = $fileUrl;
                     }

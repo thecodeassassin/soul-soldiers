@@ -16,8 +16,8 @@
             {% for img in media['images'] %}
                 <article>
                     <figure class="minimalBox">
-                        <a href="{{ url(img) }}" class="image-link">
-                            {{ image(img, "class" : "img-responsive") }}
+                        <a href="{{ url(img['url']) }}" class="image-link">
+                            {{ image(img['thumb'], "class" : "img-responsive") }}
                         </a>
                     </figure>
                 </article>
