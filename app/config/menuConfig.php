@@ -58,6 +58,7 @@ $menuConfig = [
                 'Soul-Soldiers 2014: Autumn Edition' => BASE_URL.'/event/soul2014-autumn'
             ],
             'Informatie' => [
+                'Nieuws' => BASE_URL.'/news',
                 'Algemene voorwaarden' => BASE_URL.'/content/rules',
                 'LAN-Party checklist' => BASE_URL.'/content/checklist',
                 'Wat is een LAN-party?' => BASE_URL.'/content/lan-description'

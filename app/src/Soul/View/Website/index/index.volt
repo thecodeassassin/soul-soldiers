@@ -14,21 +14,22 @@
             {#</a>#}
         </div>
     </div>
-
     <div class="row">
-        <div class="col-md-8 news-container">
-            <div class="gutter color0">
-                <h2>Nieuws</h2>
+        <div class="jumbotron color0">
+            <h1>Soul-Soldiers 2015 is een feit!</h1>
 
-                {{ partial("../partials/news") }}
-            </div>
-        </div>
-        <div class="col-md-4 gutter tweet-container color0">
-            <div id="tweets">
-                <a class="twitter-timeline" href="https://twitter.com/SoulSoldiers2"  data-widget-id="342015704410759168">Tweets about "soulsoldiers2"</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            </div>
-        </div>
+            <p>
+               Het Eiland, Bijnsdorp. 22, 23 en 24 Mei 2015, Book it! Soul-Soldiers <br />
+                geeft de leukste LAN-Party's in de regio! We organiseren ook dit jaar weer een <br />
+                nieuw gezellig LAN Evenement. Unreal Tournament 2004: Instagib zal natuurlijk weer <br />
+                een kijharde comeback maken als Toernooi en natuurlijk spelen zoals elk jaar de games die <strong>jullie</strong> leuk vinden. <br />
+                <br />
+                Tournament gaming met prijzen en een fantastische sfeer, waar wacht je nog op? <br /><br />
+                Ga naar de <a href="{{ url('event/current') }}">evenements </a> pagina en schrijf je vandaag nog in!
+            </p>
 
+        </div>
     </div>
+
+
 </div>

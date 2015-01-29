@@ -22,4 +22,12 @@ class IndexController extends Base
 
     }
 
+    /**
+     * News action
+     */
+    public function newsAction()
+    {
+
+    }
+
 }

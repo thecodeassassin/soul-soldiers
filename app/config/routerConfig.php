@@ -29,6 +29,11 @@ return [
             "name" => 1
         ],
 
+        '/news' => [
+            "controller" => "index",
+            "action"     => "news"
+        ],
+
         '/news/add' => [
             "controller" => "index",
             "action"     => "addNews"

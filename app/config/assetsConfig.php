@@ -27,7 +27,9 @@ return new \Phalcon\Config(
                   'css/ajax-loader.css',
                   'css/custom.css',
                   'css/buttons.css',
-                  'css/common.css'
+                  'css/common.css',
+                  'css/slick.css',
+                  'css/slick-theme.css'
                 ]
             ],
 
@@ -54,10 +56,12 @@ return new \Phalcon\Config(
                     "js/bootstrap-remote-data.min.js",
                     "js/modernizr-2.6.1.min.js",
                     "js/jquery.stellar.min.js",
+                    "js/jquery.stellar.min.js",
 
 
                     "js/soul.js",
-                    "js/forum.js"
+                    "js/forum.js",
+                    "js/slick.min.js"
               ]
           ]
         ],
