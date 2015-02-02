@@ -4,6 +4,24 @@ $(function() {
 
     activateToolTips();
 
+    $('.index-caroussel').slick({
+        'autoplay': true,
+        'arrows': false,
+        'dots': true,
+        'mobileFirst': true,
+        'pauseOnHover': false
+    });
+
+    $('.index-news').slick({
+        'autoplay': true,
+        'arrows': false,
+        'mobileFirst': true,
+        'pauseOnHover': false,
+        'vertical': true
+        //'autoplaySpeed': 2000,
+        //'speed': 1000
+    });
+
     var emailEdit = $('.edit-email');
     emailEdit.click(function() {
         var emailField = $('.email-field'),

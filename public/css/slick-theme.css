@@ -12,8 +12,8 @@
     font-weight: normal;
     font-style: normal;
 
-    src: url('./fonts/slick.eot');
-    src: url('./fonts/slick.eot?#iefix') format('embedded-opentype'), url('./fonts/slick.woff') format('woff'), url('./fonts/slick.ttf') format('truetype'), url('./fonts/slick.svg#slick') format('svg');
+    src: url('/css/fonts/slick.eot');
+    src: url('/css/fonts/slick.eot?#iefix') format('embedded-opentype'), url('/css/fonts/slick.woff') format('woff'), url('/css/fonts/slick.ttf') format('truetype'), url('/css/fonts/slick.svg#slick') format('svg');
 }
 /* Arrows */
 .slick-prev,
@@ -143,6 +143,7 @@
     padding: 0;
 
     cursor: pointer;
+    text-shadow: 1px 1px 0 #cccccc
 }
 .slick-dots li button
 {

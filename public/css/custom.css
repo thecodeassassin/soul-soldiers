@@ -369,6 +369,26 @@ Index / news / tweets
     padding-top: 10px;
 }
 
+.right-container {
+    padding-right: 0;
+}
+
+/* Carousel */
+.index-caroussel.slick-slider {
+    margin-bottom: 0;
+}
+
+.index-caroussel .slick-list .slick-track {
+    background: #c0c0c0;
+}
+
+.index-caroussel ul.slick-dots {
+    bottom: 0;
+}
+
+.carousel-parent {
+    padding: 0;
+}
 /** Events **/
 .lan-info {
     background-image: url('../img/lan_bg_1.png');
