@@ -66,6 +66,12 @@ return new \Phalcon\Config(
         'challonge' => [
             'apiKey' => '',
             'subdomain' => ''
+        ],
+        'twitter' => [
+            'key' => '',
+            'secret' => '',
+            'token' => '',
+            'tokenSecret' => ''
         ]
     ]
 );

@@ -9,7 +9,8 @@ $(function() {
         'arrows': false,
         'dots': true,
         'mobileFirst': true,
-        'pauseOnHover': false
+        'pauseOnHover': false,
+        'autoplaySpeed': 4000
     });
 
     $('.index-news').slick({
@@ -17,9 +18,10 @@ $(function() {
         'arrows': false,
         'mobileFirst': true,
         'pauseOnHover': false,
-        'vertical': true
-        //'autoplaySpeed': 2000,
-        //'speed': 1000
+        'vertical': true,
+        'autoplaySpeed': 3500,
+        'slidesToShow': 2,
+        'speed': 1000
     });
 
     var emailEdit = $('.edit-email');

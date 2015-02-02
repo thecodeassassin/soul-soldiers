@@ -2,6 +2,7 @@
 namespace Soul\Controller\Website;
 
 use Soul\Controller\Base;
+use Twitter;
 
 /**
  * Class IndexController
@@ -19,6 +20,34 @@ class IndexController extends Base
      */
     public function indexAction()
     {
+        $cache = $this->getCache();
+
+
+        if ($cache->exists('twitter_feed')) {
+            $filteredPosts = $cache->get('twitter_feed');
+        } else {
+
+            $twitter = new Twitter($this->config->twitter->consumerKey,
+                $this->config->twitter->consumerSecret,
+                $this->config->twitter->token,
+                $this->config->twitter->tokenSecret
+            );
+            $filteredPosts = [];
+            $twitterPosts = $twitter->load();
+
+            foreach ($twitterPosts as $post) {
+                $filteredPosts[] = [
+                    'text' => Twitter::clickable($post),
+                    'date' => date('Y-m-d H:i', strtotime($post->created_at))
+                ];
+            }
+
+            // save the twitter feed for 30 minutes
+            $cache->save('twitter_feed', $twitterPosts, 1800);
+        }
+
+
+        $this->view->twitterPosts = $filteredPosts;
 
     }
 

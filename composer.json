@@ -18,7 +18,8 @@
         "ext-pdo_mysql" : "*",
         "ext-memcached" : "*",
         "ext-memcache" : "*",
-        "swiftmailer/swiftmailer" : "5.0.*"
+        "swiftmailer/swiftmailer" : "5.0.*",
+        "dg/twitter-php": "dev-master"
     },
     "repositories": [
         {

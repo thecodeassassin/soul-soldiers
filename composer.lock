@@ -4,8 +4,46 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6189dd885a7e5672fb8c23a159a62233",
+    "hash": "191bf21500fa51d74b3896466f2548f9",
     "packages": [
+        {
+            "name": "dg/twitter-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dg/twitter-php.git",
+                "reference": "27f2e95573756bf85e8972c468c79841841ef81c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dg/twitter-php/zipball/27f2e95573756bf85e8972c468c79841841ef81c",
+                "reference": "27f2e95573756bf85e8972c468c79841841ef81c",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "http://davidgrudl.com"
+                }
+            ],
+            "description": "Small and easy Twitter library for PHP",
+            "homepage": "https://github.com/dg/twitter-php",
+            "keywords": [
+                "oauth",
+                "twitter"
+            ],
+            "time": "2015-01-18 11:33:28"
+        },
         {
             "name": "mrclay/minify",
             "version": "2.2.0",
@@ -36,7 +74,7 @@
             ],
             "authors": [
                 {
-                    "name": "Steve Clay",
+                    "name": "Stephen Clay",
                     "email": "steve@mrclay.org",
                     "homepage": "http://www.mrclay.org/",
                     "role": "Developer"
@@ -55,7 +93,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-10-27 05:00:32"
+            "time": "2014-07-10 09:20:33"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -113,9 +151,11 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "phalcon/incubator": 20
+        "phalcon/incubator": 20,
+        "dg/twitter-php": 20
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.4",
         "ext-phalcon": ">=1.2.4",
