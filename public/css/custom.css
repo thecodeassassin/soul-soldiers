@@ -373,13 +373,21 @@ Index / news / tweets
     padding-right: 0;
 }
 
+.index-tweet-container {
+    min-height: 347px;
+}
+
+
 /* Carousel */
+.index-caroussel {
+    min-height: 420px;
+}
 .index-caroussel.slick-slider {
     margin-bottom: 0;
 }
 
 .index-caroussel .slick-list .slick-track {
-    background: #c0c0c0;
+    /*background: #c0c0c0;*/
 }
 
 .index-caroussel ul.slick-dots {

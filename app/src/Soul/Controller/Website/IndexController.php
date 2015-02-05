@@ -36,10 +36,12 @@ class IndexController extends Base
             $twitterPosts = $twitter->load();
 
             foreach ($twitterPosts as $post) {
-                $filteredPosts[] = [
-                    'text' => Twitter::clickable($post),
-                    'date' => date('Y-m-d H:i', strtotime($post->created_at))
-                ];
+
+                $tmpPost = new \stdClass();
+                $tmpPost->text = Twitter::clickable($post);
+                $tmpPost->date = date('Y-m-d H:i', strtotime($post->created_at));
+
+                $filteredPosts[] = $tmpPost;
             }
 
             // save the twitter feed for 30 minutes

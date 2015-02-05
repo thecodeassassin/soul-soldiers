@@ -13,7 +13,7 @@ $(function() {
         'autoplaySpeed': 4000
     });
 
-    $('.index-news').slick({
+    $('.index-tweet-container').slick({
         'autoplay': true,
         'arrows': false,
         'mobileFirst': true,

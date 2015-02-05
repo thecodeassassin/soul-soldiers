@@ -18,47 +18,46 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 carousel-parent">
-            <div class="gutter">
-                <div class="index-caroussel">
-                    <div class="p40">
-                        <h3>dfs</h3>
-                        <p>
-                            42dfjsdfjsdfbdsfsmdfnsdf <br />
-                            fgdgfdgkndfjgnb
-                        </p>
-                    </div>
-                    <div class="p40">
-                        <h3>dfsd234524</h3>
-                        <p>
-                            dfjsdfjsdfbdsfsmdfnsdf <br />
-                            fgdgfdgkndfjgnb
-                        </p>
-                    </div>
-                    <div class="p40">
-                        <h3>sdfsdf34</h3>
-                        <p>
-                            dfjsdfjsdfbdsfsmdfnsdf <br />
-                            fgdgfdgkndfjgnb
-                        </p>
-                    </div>
+        <div class="col-md-8 carousel-parent color0">
+            <div class="index-caroussel">
+                <div class="p40">
+                    <h3>dfs</h3>
+                    <p>
+                        42dfjsdfjsdfbdsfsmdfnsdf <br />
+                        fgdgfdgkndfjgnb
+                    </p>
+                </div>
+                <div class="p40">
+                    <h3>dfsd234524</h3>
+                    <p>
+                        dfjsdfjsdfbdsfsmdfnsdf <br />
+                        fgdgfdgkndfjgnb
+                    </p>
+                </div>
+                <div class="p40">
+                    <h3>sdfsdf34</h3>
+                    <p>
+                        dfjsdfjsdfbdsfsmdfnsdf <br />
+                        fgdgfdgkndfjgnb
+                    </p>
                 </div>
             </div>
+
         </div>
         <div class="col-md-4 right-container">
             <div class="gutter">
                 <h2>Tweets</h2>
                 <div class="index-news-wrapper">
-                    <div class="index-news">
+                    <div class="index-tweet-container">
                         {% for item in twitterPosts %}
                             <div>
                                 <div class="news panel">
                                     <div class="panel-heading">
-                                        <span class="news-title">{{ item['date'] }}</span>
+                                        <span class="news-title">{{ item.date }}</span>
                                         {#<div class="pull-right news-date">{{ item.published }}</div>#}
                                     </div>
                                     <div class="panel-body news-body">
-                                        {{ item['text'] }}
+                                        {{ item.text }}
                                     </div>
                                 </div>
                             </div>

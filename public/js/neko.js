@@ -53,11 +53,6 @@ $(document).ready(function() {
     /** INIT FUNCTIONS **/
     initializeMainMenu();
 
-
-
-
-
-
     /*
      |--------------------------------------------------------------------------
      |  form placeholder for IE
@@ -136,213 +131,7 @@ $(document).ready(function() {
     if( $("a.image-iframe").length){
         $('a.image-iframe').magnificPopup({type:'iframe',mainClass: 'mfp-fade'});
     }
-
-
-    /*
-     |--------------------------------------------------------------------------
-     | TOOLTIP
-     |--------------------------------------------------------------------------
-     */
-
-    $('.tips').tooltip({placement:'auto'});
-
-
-
-    /*
-     |--------------------------------------------------------------------------
-     | COLLAPSE
-     |--------------------------------------------------------------------------
-     */
-
-    $('.accordion').on('show hide', function(e){
-        $('.accordion-toggle').removeClass('active');
-        $(e.target).siblings('.accordion-heading').find('.accordion-toggle').addClass('active');
-        $(e.target).siblings('.accordion-heading').find('.accordion-toggle i').toggleClass('icon-plus icon-minus', 200);
-
-    });
-
-
-
-    /*
-     |--------------------------------------------------------------------------
-     | ALERT
-     |--------------------------------------------------------------------------
-     */
-    $('.alert').delegate('button', 'click', function() {
-        $(this).parent().fadeOut('fast');
-    });
-
-
-    /*
-     |--------------------------------------------------------------------------
-     | CLIENT
-     |--------------------------------------------------------------------------
-     */
-
-    if($('.colorHover').length){
-        var array =[];
-        $('.colorHover').hover(
-
-            function () {
-
-                array[0] = $(this).attr('src');
-                $(this).attr('src', $(this).attr('src').replace('-off', ''));
-
-            },
-
-            function () {
-
-                $(this).attr('src', array[0]);
-
-            });
-    }
-
-
-
-    /*
-     |--------------------------------------------------------------------------
-     | Rollover boxIcon
-     |--------------------------------------------------------------------------
-     */
-    if($('.boxIcon').length){
-
-        $('.boxIcon').hover(function() {
-            var $this = $(this);
-
-            $this.css('opacity', '1');
-            //$this.find('.boxContent>p').stop(true, false).css('opacity', 0);
-            $this.addClass('hover');
-            $('.boxContent>p').css('bottom', '-50px');
-            $this.find('.boxContent>p').stop(true, false).css('display', 'block');
-
-            $this.find('.iconWrapper i').addClass('triggeredHover');
-
-            $this.find('.boxContent>p').stop(true, false).animate({
-                    'margin-top': '0px'},
-                300, function() {
-                    // stuff to do after animation is complete
-                });
-
-
-        }, function() {
-            var $this = $(this);
-            $this.removeClass('hover');
-
-            $this.find('.boxContent>p').stop(true, false).css('display', 'none');
-            $this.find('.boxContent>p').css('margin-top', '250px');
-            $this.find('.iconWrapper i').removeClass('triggeredHover');
-
-
-        });
-    }
-
-
-
-
-
-
-    $('#quoteTrigger').click(function (e) {
-
-        //$("#quoteWrapper").scrollTop(0);
-
-        if(!$('#quoteFormWrapper').is(':visible')){
-            $('html, body').animate({scrollTop: $("#quoteWrapper").offset().top}, 300);
-        }
-
-        var $this = $(this);
-
-
-        $('#quoteFormWrapper').slideToggle('fast', function() {
-
-            $this.text($('#quoteFormWrapper').is(':visible') ? "Close form" : "I have a project");
-
-        });
-
-
-        e.preventDefault();
-    });
-
-
-
-    /*
-     |--------------------------------------------------------------------------
-     | APPEAR
-     |--------------------------------------------------------------------------
-     */
-    if($('.activateAppearAnimation').length){
-
-        nekoAnimAppear();
-        $('.reloadAnim').click(function (e) {
-            $(this).parent().parent().find('img').removeClass().addClass('img-responsive');
-            nekoAnimAppear();
-            e.preventDefault();
-        });
-    }
-
-
-
-//END DOCUMENT READY
 });
-
-
-
-/*
- |--------------------------------------------------------------------------
- | EVENTS TRIGGER AFTER ALL IMAGES ARE LOADED
- |--------------------------------------------------------------------------
- */
-$(window).load(function() {
-
-    "use strict";
-
-    /*
-     |--------------------------------------------------------------------------
-     | PRELOADER
-     |--------------------------------------------------------------------------
-     */
-    if($('#status').length){
-        $('#status').fadeOut(); // will first fade out the loading animation
-        $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-        $('body').delay(350).css({'overflow':'visible'});
-    }
-
-    /**PROCESS ICONS**/
-    $('.iconBoxV3 a').hover(function() {
-
-        if(Modernizr.csstransitions) {
-
-            $(this).stop(false, true).toggleClass( 'hover', 150);
-            $('i', this).css('-webkit-transform', 'rotateZ(360deg)');
-            $('i', this).css('-moz-transform', 'rotateZ(360deg)');
-            $('i', this).css('-o-transform', 'rotateZ(360deg)');
-            $('i', this).css('transform', 'rotateZ(360deg)');
-
-        }else{
-
-            $(this).stop(false, true).toggleClass( 'hover', 150);
-
-        }
-
-    }, function() {
-
-        if(Modernizr.csstransitions) {
-            $(this).stop(false, true).toggleClass( 'hover', 150);
-            $('i', this).css('-webkit-transform', 'rotateZ(0deg)');
-            $('i', this).css('-moz-transform', 'rotateZ(0deg)');
-            $('i', this).css('-o-transform', 'rotateZ(0deg)');
-            $('i', this).css('transform', 'rotateZ(0deg)');
-
-        }else{
-
-            $(this).stop(false, true).toggleClass( 'hover', 150);
-        }
-
-    });
-
-
-//END WINDOW LOAD
-});
-
 /*
  |--------------------------------------------------------------------------
  | FUNCTIONS
@@ -585,11 +374,11 @@ function gaSSDSLoad (acct) {
 
 /* TO TOP BUTTON */
 
-function toTop(mobile){
+function toTop(mobile) {
 
-    if(mobile == false){
+    if (mobile == false) {
 
-        if(!$('#nekoToTop').length)
+        if (!$('#nekoToTop').length)
             $('body').append('<a href="#" id="nekoToTop"><i class="icon-up-open"></i></a>');
 
         $(window).scroll(function () {
@@ -606,13 +395,11 @@ function toTop(mobile){
             return false;
 
         });
-    }else{
+    } else {
 
-        if($('#nekoToTop').length)
+        if ($('#nekoToTop').length)
             $('#nekoToTop').remove();
 
     }
-
 }
-
 
