@@ -9,8 +9,9 @@ $(function() {
         'arrows': false,
         'dots': true,
         'mobileFirst': true,
-        'pauseOnHover': false,
-        'autoplaySpeed': 4000
+        'pauseOnHover': true,
+        'speed': 1500,
+        'autoplaySpeed': 4500
     });
 
     $('.index-tweet-container').slick({

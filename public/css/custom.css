@@ -380,7 +380,7 @@ Index / news / tweets
 
 /* Carousel */
 .index-caroussel {
-    min-height: 420px;
+    min-height: 441px;
 }
 .index-caroussel.slick-slider {
     margin-bottom: 0;
@@ -397,6 +397,29 @@ Index / news / tweets
 .carousel-parent {
     padding: 0;
 }
+
+.index-caroussel .slick-slide {
+    min-height: 441px;
+}
+
+.index-caroussel h3 {
+    font-size: 30px;
+}
+
+.index-caroussel .text {
+    background: url('../img/transparant_tile_50.png');
+    padding: 20px;
+    font-size: 18px;
+}
+
+.slide1 {
+    background-image: url('../img/home_slider/slider1.jpg');
+}
+
+.slide2 {
+    background-image: url('../img/home_slider/slider2.jpg');
+}
+
 /** Events **/
 .lan-info {
     background-image: url('../img/lan_bg_1.png');

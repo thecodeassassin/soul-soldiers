@@ -22,7 +22,6 @@ class IndexController extends Base
     {
         $cache = $this->getCache();
 
-
         if ($cache->exists('twitter_feed')) {
             $filteredPosts = $cache->get('twitter_feed');
         } else {
@@ -39,13 +38,13 @@ class IndexController extends Base
 
                 $tmpPost = new \stdClass();
                 $tmpPost->text = Twitter::clickable($post);
-                $tmpPost->date = date('Y-m-d H:i', strtotime($post->created_at));
+                $tmpPost->date = date('d-m-Y H:i', strtotime($post->created_at));
 
                 $filteredPosts[] = $tmpPost;
             }
 
             // save the twitter feed for 30 minutes
-            $cache->save('twitter_feed', $twitterPosts, 1800);
+            $cache->save('twitter_feed', $filteredPosts, 1800);
         }
 
 
