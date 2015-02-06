@@ -103,8 +103,6 @@ class EventController extends \Soul\Controller\Base
             $amountPayed = $event->getAmountPayed();
         }
 
-        $this->view->pick('event/'.$event->systemName);
-
         $this->view->registered = $registered;
         $this->view->archived = ($systemName != 'current');
         $this->view->payed = $payed;
