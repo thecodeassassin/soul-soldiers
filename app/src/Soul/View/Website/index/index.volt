@@ -18,15 +18,13 @@
             <div class="index-caroussel">
                 <div class="p40 slide1">
                     <div class="text">
-                        <h3>Soul-Soldiers 2015 is een feit!</h3>
+                        <h3>Soul-Soldiers 2015: 22, 23 en 24 Mei 2015</h3>
 
                         <p>
-                            Het Eiland, Bijnsdorp. 22, 23 en 24 Mei 2015, Book it! Soul-Soldiers geeft de leukste
-                            LAN-Party's in de regio! <br/>
-                            We organiseren ook dit jaar weer een nieuwe gezellige LAN-Party. <br/>Unreal Tournament
-                            2004: Instagib
-                            zal natuurlijk weer een kijharde comeback maken als toernooi en natuurlijk spelen zoals elk
-                            jaar de games die <strong>jullie</strong> leuk vinden. <br/>
+                            We organiseren ook dit jaar weer een nieuwe gezellige LAN-Party. <br />
+                            Soul-Soldiers 2015 zal plaatsvinden in buurtcentrum het Eiland in Bijnsdorp. <br/>
+                            Unreal Tournament 2004: Instagib zal natuurlijk weer een comeback maken als <br /> toernooi
+                            en natuurlijk spelen zoals elk jaar de games die <strong>jullie</strong> leuk vinden. <br/>
                             <br/>
                             Tournament gaming met prijzen en een fantastische sfeer, waar wacht je nog op? <br/><br/>
                             Ga naar de <a href="{{ url('event/current') }}">evenements </a> pagina en schrijf je vandaag
