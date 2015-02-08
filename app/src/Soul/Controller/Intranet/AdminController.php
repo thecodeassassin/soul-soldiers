@@ -118,6 +118,22 @@ class AdminController extends \Soul\Controller\Website\AdminController
 
     }
 
+
+    /**
+     * @param $systemName
+     * @param $count
+     */
+    public function generatePlayersAction($systemName, $count)
+    {
+
+        $tournament = Tournament::findFirstBySystemName($systemName);
+        if ($tournament) {
+            $tournament->generatePlayers($count);
+        }
+
+        return $this->response->redirect('tournament/view/'.$systemName);
+    }
+
     /**
      * @param Tournament $tournament
      */
@@ -190,4 +206,5 @@ class AdminController extends \Soul\Controller\Website\AdminController
         $this->view->form = $tournamentForm;
         $this->view->tournament = $tournament;
     }
+
 }

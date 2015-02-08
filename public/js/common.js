@@ -1,6 +1,3 @@
-
-
-
 function ajaxLoad(mode){
 
     if(mode) {

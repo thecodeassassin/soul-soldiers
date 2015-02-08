@@ -56,6 +56,11 @@
             {% endif %}
 
             {% if isAdmin %}
+                <a data-tournament-id="{{ tournament.systemName }}" class="generate-players btn btn-lg btn-default"><i class="icon-attention">
+
+                        </i> Genereer spelers
+
+                </a>
                 <a href="{{ url('admin/tournaments/manage/' ~ tournament.systemName) }}" class="btn btn-lg btn-default"><i class="icon-pencil-squared"></i> Aanpassen</a>
             {% endif %}
 
@@ -111,7 +116,7 @@
 
             <!-- Nav tabs -->
             <div class="tournament-info">
-                <h3>Deelnemers</h3>
+                <h3>Deelnemers ({{ tournament.playersArray|length }})</h3>
 
                 <ul class="list-group">
                     {% for place,player in tournament.playersArray %}

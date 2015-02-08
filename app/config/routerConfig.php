@@ -218,6 +218,14 @@ return [
             "systemName" => 1
         ],
 
+        '/admin/tournaments/generate-players/([a-zA-Z0-9_-]+)/([0-9]+)' => [
+            "controller" => "admin",
+            "action" => 'generatePlayers',
+            "systemName" => 1,
+            "count" => 2
+
+        ],
+
         '/admin/tournaments/add' => [
             "controller" => "admin",
             "action" => 'addTournament'

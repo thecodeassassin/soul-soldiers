@@ -30,6 +30,15 @@ $(function() {
 
 //    }
 
+    $('.generate-players').click(function(){
+       var count = prompt('Hoeveel spelers moeten er gegeneerd worden?', 4),
+           tournamentId = $(this).attr('data-tournament-id');
+       if (count > 0) {
+           document.location.href =  '/admin/tournaments/generate-players/' + tournamentId + '/' + count;
+       }
+
+    });
+
     $('.matchLink').click(function(e) {
         e.preventDefault();
 

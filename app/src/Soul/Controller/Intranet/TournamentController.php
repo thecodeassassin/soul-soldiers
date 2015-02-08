@@ -37,7 +37,7 @@ class TournamentController extends Base
                 $userCount = count($tournament->players);
 
                 if ($teamUserCount != $userCount && $this->view->user->isAdmin()) {
-                    $this->flashMessage('Het aantal spelers is niet gelijk aan het aantal spelers, regeneer de teams voordat het toernooi start.', 'error');
+                    $this->flashMessage('Het aantal spelers in teams is niet gelijk aan het aantal inschrijvingen, regeneer de teams voordat het toernooi start.', 'error');
                 }
 
             }
@@ -53,8 +53,6 @@ class TournamentController extends Base
     public function signupAction($systemName)
     {
         $tournament = Tournament::findFirstBySystemName($systemName);
-        $participant = null;
-
         if ($tournament) {
 
             if ($tournament->hasEntered($this->view->user->getUserId())) {
@@ -63,30 +61,8 @@ class TournamentController extends Base
                 return $this->response->redirect('tournament/view/'.$systemName);
             }
 
-            if ($tournament->isChallonge && !$tournament->isTeamTournament()) {
-                $challongeTournament = $tournament->getChallongeTournament();
-
-                if (!$challongeTournament) {
-                    $this->getChallongeError();
-                    return $this->response->redirect('tournament/view/'.$systemName);
-                }
-
-                $participant = $challongeTournament->addPlayer($this->view->user->getNickName());
-            }
-
             // sign the user up for the given tournament
-            $tournamentUser = new TournamentUser();
-            $tournamentUser->userId = $this->authService->getAuthData()->userId;
-            $tournamentUser->tournamentId = $tournament->tournamentId;
-
-            if ($participant){
-                $tournamentUser->participantId = $participant->id;
-            }
-
-            $tournamentUser->active = 1;
-            $tournamentUser->save();
-
-            Tournament::clearCache($tournament);
+            $tournament->registerPlayer($this->authService->getAuthData()->userId);
 
             $this->flashMessage(sprintf('Successvol ingeschreven voor %s', $tournament->name), 'success', true);
         }
@@ -180,7 +156,7 @@ class TournamentController extends Base
 
             $playerCount = count($tournament->players);
 
-            if (($playerCount % $tournament->teamSize) == 1 ) {
+            if (($playerCount % $tournament->teamSize) != 0 ) {
                 throw new \Exception(sprintf('Er kunnen geen teams gemaakt worden van %d deelnemers.', $playerCount));
             }
 
@@ -204,7 +180,7 @@ class TournamentController extends Base
 
             while (count($players) > 0) {
 
-                $newPlayers = array_splice($players, 2);
+                $newPlayers = array_splice($players, $tournament->teamSize);
                 $teams[] = $players;
 
                 $players = $newPlayers;
@@ -254,7 +230,7 @@ class TournamentController extends Base
         if ($tournament) {
 
 
-            if ($tournament->isTeamTournament() && count($tournament->teams) < 2 || count($tournament->players) < 2) {
+            if ($tournament->isTeamTournament() && count($tournament->teams) < $tournament->teamSize || count($tournament->players) < 2) {
                 $this->flashMessage('Er zijn nog geen teams aangemaakt, of er zijn onvoldoende spelers!', 'error', true);
             } else {
 
@@ -262,32 +238,6 @@ class TournamentController extends Base
                 $tournament->onlyStateUpdate = true;
                 $tournament->save();
 
-                if ($tournament->isChallonge) {
-                    $challongeTournament = $tournament->getChallongeTournament();
-
-                    if (!$challongeTournament) {
-                        $this->getChallongeError();
-                        return $this->response->redirect('tournament/view/'.$systemName);
-                    }
-
-                    if ($tournament->isTeamTournament()) {
-                        // create all the teams in challonge
-                        foreach ($tournament->teams as $team) {
-
-                            // add a player with the name of the team
-                            $challongeTournament->addPlayer($team->name);
-                        }
-                    }
-
-                    if (!$challongeTournament->hasStarted()) {
-                        if ($challongeTournament->start()) {
-                            $this->flashMessage(sprintf('Toernooi %s is gestart.', $tournament->name), 'success', true);
-                        } else {
-                            $this->flashMessage(sprintf('Toernooi %s kan niet worden gestart.', $tournament->name), 'error', true);
-                        }
-                    }
-
-                }
 
             }
 
@@ -306,25 +256,6 @@ class TournamentController extends Base
 
         if ($tournament) {
 
-            if ($tournament->isChallonge) {
-                $challongeTournament = $tournament->getChallongeTournament();
-
-                if (!$challongeTournament) {
-                    $this->getChallongeError();
-                    return $this->response->redirect('tournament/view/'.$systemName);
-                }
-
-                if ($challongeTournament->isAwaitingReview()) {
-                    if ($challongeTournament->endTournament()) {
-                        $this->flashMessage(sprintf('Toernooi %s is beeindigd.', $tournament->name), 'success', true);
-                    } else {
-                        $this->flashMessage(sprintf('Toernooi %s kan niet worden beeindigd.', $tournament->name), 'error', true);
-                    }
-                } else {
-                    $this->flashMessage(sprintf('Toernooi %s kan niet worden beeindigd, niet alle scores zijn ingevuld.', $tournament->name), 'error', true);
-                    return $this->response->redirect('tournament/view/'.$systemName);
-                }
-            }
 
             $tournament->state = Tournament::STATE_FINISHED;
             $tournament->onlyStateUpdate = true;

@@ -83,23 +83,6 @@ class TournamentUser extends Base
         // clear the cache before deleting
         $this->getCache()->delete($this->tournament->playerCacheKey);
 
-        // deleteForce skips all delete checks
-       if ($this->deleteForce) {
-           return true;
-       }
-
-       $tournament = $this->getTournament();
-
-       // remove the user from challonge before deleting the user
-       if ($tournament->isChallongeTournament() && !$tournament->isTeamTournament()) {
-           $deleted = $tournament->getChallongeTournament()->removePlayer($this->participantId);
-
-           if (!$deleted) {
-               $this->appendMessage(new Message('De gebruiker kon niet worden verwijderd uit challonge.'));
-               return false;
-           }
-       }
-
         return true;
     }
 

@@ -25,7 +25,11 @@
                 <tbody>
                     {% for tournament in tournaments %}
                     <tr>
-                        <td>{{ tournament.name }}</td>
+                        <td>
+                            <a href="{{ url('tournament/view/'~ tournament.systemName ) }}">
+                                {{ tournament.name }}
+                            </a>
+                        </td>
                         <td>{{ tournament.typeString }}</td>
                         <td>{{ tournament.startDate|date('d-m-Y H:i:s') }}</td>
                         <td>{{ tournament.players|length }}</td>
