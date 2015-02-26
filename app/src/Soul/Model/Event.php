@@ -144,27 +144,30 @@ class Event extends Base
 
                 foreach ($fileList as $file) {
 
-                    $filePath = $eventPictureDir . '/' . $file;
-                    $thumbName =  '/thumb_' . $file;
-                    $thumbFile = $cacheDir . $thumbName;
+                    if (is_string($file)) {
+                        $filePath = $eventPictureDir . '/' . $file;
+                        $thumbName =  '/thumb_' . $file;
+                        $thumbFile = $cacheDir . $thumbName;
 
-                    $fileUrl = sprintf('%s/%s/%s', $imgUrl, $this->systemName, $file);
-                    $thumbUrl = '/static/image/' . $thumbName;
+                        $fileUrl = sprintf('%s/%s/%s', $imgUrl, $this->systemName, $file);
+                        $thumbUrl = '/static/image/' . $thumbName;
 
-                    // generate a thumnail
-                    $thumbnail = new GD($filePath);
-                    $thumbnail->resize(360, 360);
-                    $thumbnail->save($thumbFile);
+                        // generate a thumnail
+                        $thumbnail = new GD($filePath);
+                        $thumbnail->resize(360, 360);
+                        $thumbnail->save($thumbFile);
 
 
-                    if (Util::isImage($filePath) && Util::isImage($thumbFile)) {
-                        $files['images'][] = [
-                            'url' => $fileUrl,
-                            'thumb' => $thumbUrl
-                        ];
-                    } else {
-                        $files['other'][] = $fileUrl;
+                        if (Util::isImage($filePath) && Util::isImage($thumbFile)) {
+                            $files['images'][] = [
+                                'url' => $fileUrl,
+                                'thumb' => $thumbUrl
+                            ];
+                        } else {
+                            $files['other'][] = $fileUrl;
+                        }
                     }
+
                 }
 
                 $cache->save($cacheKey, $files);
