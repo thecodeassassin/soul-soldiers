@@ -35,6 +35,7 @@ return new \Phalcon\Config(
                 'static',
                 'content',
                 'contact',
+                'archive'
 //                'forum'
             ],
             /**
