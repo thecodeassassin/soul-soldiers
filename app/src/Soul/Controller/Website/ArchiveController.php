@@ -41,6 +41,7 @@ class ArchiveController extends \Soul\Controller\Base
             return $this->response->redirect('/event/current');
         }
 
+        $this->view->media = $event->getMedia();
         $this->view->pick('archive/'.$systemName);
     }
 
