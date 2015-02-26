@@ -56,7 +56,9 @@
                 <p style="margin-left: 15px">	1. De organisatie kan niet aansprakelijk worden gesteld voor ziekte en/of personenletsel dat ontstaat door het nuttigen van etenswaren in de zaal. De aansprakelijkheid ligt volledig bij de partij die de etenswaren levert. <br />
                     2. De organisatie kan niet aansprakelijk worden gesteld voor letsel aan de ogen bij het te lang achtereen gebruik maken van de computer. De deelnemer is er zelf verantwoordelijk om regelmatig pauzes te nemen. <br /></p>
                 <p style="margin-left: 30px">	- Aanbevolen is om per 2 uur minimaal 10 minuten pauze te nemen. </p>
-                <p style="margin-left: 15px">	3. De deelnemer dient zelf te zorgen voor slaapspullen (bv. luchtbed, slaapmatje, stretcher, dekens, slaapzak en/of kussen). De organisatie kan niet aansprakelijk worden gesteld voor enig letsel ontstaan tijdens het slapen. </p></p><br />
+                <p style="margin-left: 15px">	3. De deelnemer dient zelf te zorgen voor slaapspullen (bv. luchtbed, slaapmatje, stretcher, dekens, slaapzak en/of kussen). De organisatie kan niet aansprakelijk worden gesteld voor enig letsel ontstaan tijdens het slapen. </p>
+                <p style="margin-left: 15px">   4. Het is niet toegestaan om nerf guns mee te nemen naar het evenement, dit geld ook voor andere apparaten die gebruikt kunnen worden om
+                andere mensen tot last te zijn.</p><br />
 
                 <h4>Beveiliging</h4>
                 <p> De organisatie beschikt nooit over uw wachtwoord, het wachtwoord wordt versleuteld opgeslagen en naar ons netwerk verstuurd. De organisatie beschikt dus nooit en te nimmer over uw wachtwoord. <br />
