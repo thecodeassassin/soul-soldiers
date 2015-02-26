@@ -347,6 +347,14 @@ class Event extends Base
     }
 
     /**
+     * @return bool
+     */
+    public function hasPassed()
+    {
+        return (bool) (strtotime($this->endDate) < time());
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()

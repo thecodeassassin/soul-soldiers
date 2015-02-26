@@ -59,17 +59,14 @@ class EventController extends \Soul\Controller\Base
         if ($systemName == 'current') {
             $event = Event::getCurrent();
 
-            if ($event && strtotime($event->endDate) < time()) {
+            if ($event && $event->hasPassed()) {
                 return $this->response->redirect('event/'.$event->systemName);
             }
         } else {
 
-            if (!$event = Event::findBySystemName($systemName)) {
-                $this->flashMessage('Dit evenement bestaat niet', 'error', true);
-                $this->setLastPage();
-
-//                return $this->redirectToLastPage();
-                return $this->response->redirect('/event/current');
+            $event = Event::findBySystemName($systemName);
+            if (!$event || $event->hasPassed()) {
+                return $this->response->redirect('event/current');
             }
 
         }
