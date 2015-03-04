@@ -374,7 +374,10 @@ Index / news / tweets
 }
 
 .index-tweet-container {
-    min-height: 347px;
+    min-height: 376px;
+    height: 376px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 

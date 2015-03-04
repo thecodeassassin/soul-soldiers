@@ -14,17 +14,6 @@ $(function() {
         'autoplaySpeed': 4500
     });
 
-    $('.index-tweet-container').slick({
-        'autoplay': true,
-        'arrows': false,
-        'mobileFirst': true,
-        'pauseOnHover': false,
-        'vertical': true,
-        'autoplaySpeed': 3500,
-        'slidesToShow': 2,
-        'speed': 1000
-    });
-
     var emailEdit = $('.edit-email');
     emailEdit.click(function() {
         var emailField = $('.email-field'),
