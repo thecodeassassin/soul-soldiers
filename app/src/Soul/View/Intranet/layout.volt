@@ -32,15 +32,13 @@
 </head>
 {% endblock %}
     <body class="{% if router.getActionName() in ['login','forgotPassword']  %}login{% endif %}">
-    {% block body %}
-
-    {% endblock %}
+    {% block body %}{% endblock %}
 
     {% block footer %}
 
         <script type="text/javascript">
             var __loading_img = '{{ url('img/ajax-loader.gif') }}';
-            var CKEDITOR_BASEPATH = '/js/intranet/ckeditor/'
+            var CKEDITOR_BASEPATH = '/js/intranet/ckeditor/';
 
             var loadingImagePreload=new Image();
             loadingImagePreload.src = __loading_img;

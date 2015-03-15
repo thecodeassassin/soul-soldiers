@@ -160,7 +160,7 @@ class Tournament extends Base
     {
         $this->setSource('tblTournament');
         $this->hasMany('tournamentId', '\Soul\Model\TournamentTeam', 'tournamentId', ['alias' => 'teams']);
-        $this->hasMany('tournamentId', '\Soul\Model\TournamentUser', 'tournamentId', ['alias' => 'players']);
+        $this->hasMany('tournamentId', '\Soul\Model\TournamentUser', 'tournamentId', ['alias' => 'players', 'order' => 'rank']);
 
     }
 
@@ -336,7 +336,6 @@ class Tournament extends Base
 
         $types = self::getTypes();
         $states = self::getStates();
-        $cache = $this->getCache();
 
         $this->typeString = $types[$this->type];
         $this->stateString = $states[$this->state];
@@ -344,65 +343,7 @@ class Tournament extends Base
 
         $this->startDateString = date('d-m-y H:i', strtotime($this->startDate));
 
-        if ($cache->exists($this->playerCacheKey)) {
-            $this->playersArray = $cache->get($this->playerCacheKey);
-        } else {
-
-            $ranks = [];
-
-            $this->playersArray = $this->players->toArray();
-
-
-            array_walk($this->playersArray, function(&$player) use ($ranks) {
-                $player['user'] = User::findFirstByUserId($player['userId'])->toArray();
-
-                $scoreResult = $this->players->filter(function($obj) use ($player){
-                    if ($obj->userId == $player['userId']) {
-                        return $obj;
-                    }
-                    return null;
-                });
-
-                if (count($scoreResult) == 1) {
-                    $player['totalScore'] = $scoreResult[0]->totalScore;
-                } else {
-                    $player['totalScore'] = 0;
-                }
-
-                if (array_key_exists($player['user']['nickName'], $ranks)) {
-                    $player['rank'] = $ranks[$player['user']['nickName']];
-                }
-
-            });
-
-
-
-            if ($this->type == self::TYPE_TOP_SCORE || ($this->isChallonge && count($ranks) > 0 )) {
-
-                usort($this->playersArray, function ($left, $right) use ($ranks) {
-
-                    if ($this->type == self::TYPE_TOP_SCORE) {
-
-                        return ($left['totalScore'] - $right['totalScore']);
-
-                    } else {
-
-                        return ($left['rank'] - $right['rank']);
-
-                    }
-                });
-            }
-
-            // cache the playerlist
-            $cache->save($this->playerCacheKey, $this->playersArray, 600);
-
-            if ($this->type == self::TYPE_TOP_SCORE) {
-                $this->playersArray = array_reverse($this->playersArray);
-            }
-
-
-        }
-
+//        die(var_dump($this->players[0]->user));
 
     }
 

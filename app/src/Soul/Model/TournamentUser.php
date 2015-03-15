@@ -31,11 +31,6 @@ class TournamentUser extends Base
     public $active;
 
     /**
-     * @var int
-     */
-    public $totalScore;
-
-    /**
      * @var integer
      */
     public $teamId;
@@ -43,6 +38,11 @@ class TournamentUser extends Base
      * @var integer
      */
     public $participantId;
+
+    /**
+     * @var integer
+     */
+    public $rank;
 
     /**
      * @var bool Skips deletion checks, use with care
@@ -65,13 +65,12 @@ class TournamentUser extends Base
 
     public function beforeCreate()
     {
-        // clear the cache before creating
-        $this->getCache()->delete($this->tournament->playerCacheKey);
+
     }
 
     public function afterFetch()
     {
-        $this->totalScore = $this->getTotalScore();
+
     }
 
     /**
@@ -79,10 +78,6 @@ class TournamentUser extends Base
      */
     public function beforeDelete()
     {
-
-        // clear the cache before deleting
-        $this->getCache()->delete($this->tournament->playerCacheKey);
-
         return true;
     }
 
@@ -92,22 +87,6 @@ class TournamentUser extends Base
     public function getTournament()
     {
         return $this->tournament;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTotalScore()
-    {
-        $totalScore = 0;
-
-        if ($this->scores) {
-            foreach ($this->scores as $score) {
-                $totalScore += (int)$score->score;
-            }
-        }
-
-        return $totalScore;
     }
 
     /**
@@ -162,7 +141,8 @@ class TournamentUser extends Base
             'userId' => 'userId',
             'active' => 'active',
             'teamId' => 'teamId',
-            'participantId' => 'participantId'
+            'participantId' => 'participantId',
+            'rank' => 'rank'
         );
     }
 

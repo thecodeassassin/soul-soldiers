@@ -160,3 +160,4 @@
     <a href="javascript:void(0)" id="to-top"><span class="icon-up"></span></a>
 
 {% endblock %}
+{% block javascript %}{% endblock %}

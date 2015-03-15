@@ -1,4 +1,3 @@
-
 {% if tournament %}
     {% set pageTitle = '<i class="icon-award"></i> Toernooien / ' ~ tournament.name %}
 {% endif %}
@@ -116,21 +115,22 @@
 
             <!-- Nav tabs -->
             <div class="tournament-info">
-                <h3>Deelnemers ({{ tournament.playersArray|length }})</h3>
+                <h3>Deelnemers ({{ tournament.players|length }})</h3>
 
                 <ul class="list-group">
-                    {% for place,player in tournament.playersArray %}
+                    {% for place,player in tournament.players %}
 
-                    {% set removed = player['active'] is '0' %}
+                    {% set removed = player.active is '0' %}
 
                     <li class="list-group-item {% if removed %} disabled{% endif %}">
 
                         {% if scoreType %}{{ place + 1 }}.&nbsp;{% endif %}
                         {% if isChallonge and not isTeamTournament and player['rank'] is defined %}{{ player['rank'] }}.&nbsp;{% endif %}
-                        {{ player['user']['nickName'] }}
+
+                        {{ player.user.nickName }}
 
                         {% if scoreType %}
-                            <span class="badge">{{ player['totalScore'] }}</span>
+                            {#<span class="badge">{{ player['totalScore'] }}</span>#}
                         {% endif %}
 
 
@@ -138,7 +138,7 @@
                         <div class="scoreControls">
 
                         {% if scoreType and not removed and started %}
-                                {{ form('tournament/score/add/' ~ player['tournamentUserId'], "method": "post", "name":"addScore", "class":"validate scoreAdd", "role":"form") }}
+                                {{ form('tournament/score/add/' ~ player.tournamentUserId, "method": "post", "name":"addScore", "class":"validate scoreAdd", "role":"form") }}
 
                                 <input type="number"  max="999" value="0" name="scoreCount" class="form-control scoreCount">
                                 <button type="submit" class="pull-left btn btn-sm btn-success"><i class="icon-plus"></i></button>
@@ -146,7 +146,7 @@
                             {% endif %}
 
                         {% if pending or (scoreType and not complete and player['active']) %}
-                        <a href="{{ url('tournament/removeUser/'~ tournament.systemName ~ '/' ~ player['tournamentUserId']) }}" onclick="return confirm('Weet je zeker dat deze gebruiker niet meer mee doet?');"
+                        <a href="{{ url('tournament/removeUser/'~ tournament.systemName ~ '/' ~ player.tournamentUserId) }}" onclick="return ajaxConfirm('Weet je zeker dat deze gebruiker niet meer mee doet?');"
                            class="pull-left btn btn-sm {% if started and scoreType %}btn-default{% else %}btn-danger{% endif %} removeUser"><i class="icon-trash"></i></a>
                         {% endif %}
                         </div>
@@ -203,3 +203,12 @@
         Dit toernooi kan nu niet geladen worden, probeer het later nogmaals.
     </div>
 {% endif %}
+
+
+{% block javascript %}
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+
+    <script type="text/javascript">
+        $('.tournament-info').find('ul.list-group').sortable();
+    </script>
+{% endblock %}
