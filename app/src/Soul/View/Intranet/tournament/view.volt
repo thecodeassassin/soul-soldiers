@@ -12,6 +12,7 @@
     {% set isTeamTournament = tournament.isTeamTournament() %}
     {% set teams = tournament.teams %}
     {% set scoreType = tournament.type == 1 %}
+    {% set tournamentPlayers = tournament.getTournamentPlayers() %}
 
     {% set complete = tournament.state == constant('\Soul\Model\Tournament::STATE_FINISHED') %}
     {% set pending = tournament.state == constant('\Soul\Model\Tournament::STATE_PENDING') %}
@@ -117,15 +118,18 @@
             <div class="tournament-info">
                 <h3>Deelnemers ({{ tournament.players|length }})</h3>
 
-                <ul class="list-group">
-                    {% for place,player in tournament.players %}
+                <ul class="list-group" data-tournament-id="{{ tournament.tournamentId }}">
+                    {% for place,player in tournamentPlayers %}
 
                     {% set removed = player.active is '0' %}
 
-                    <li class="list-group-item {% if removed %} disabled{% endif %}">
+                    <li class="list-group-item {% if removed %} disabled{% endif %}" data-player-id="userId_{{ player.userId }}">
+
+                        {% if isAdmin %}
+                        <span class="glyphicon glyphicon-sort"></span>
+                        {% endif %}
 
                         {% if scoreType %}{{ place + 1 }}.&nbsp;{% endif %}
-                        {% if isChallonge and not isTeamTournament and player['rank'] is defined %}{{ player['rank'] }}.&nbsp;{% endif %}
 
                         {{ player.user.nickName }}
 
@@ -203,12 +207,3 @@
         Dit toernooi kan nu niet geladen worden, probeer het later nogmaals.
     </div>
 {% endif %}
-
-
-{% block javascript %}
-    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-
-    <script type="text/javascript">
-        $('.tournament-info').find('ul.list-group').sortable();
-    </script>
-{% endblock %}

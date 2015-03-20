@@ -43,6 +43,10 @@ class TournamentController extends Base
             }
         }
 
+        if ($this->getUser()->isAdmin()) {
+            $this->assets->collection('scripts')->addJs('js/intranet/tournament.js');
+        }
+
         $this->view->tournament = $tournament;
     }
 
@@ -314,6 +318,17 @@ class TournamentController extends Base
             return $this->response->redirect('tournament/view/'.$tournament->systemName);
         }
 
+    }
+
+    /**
+     * @param $tournamentId
+     */
+    public function updateRankAction($tournamentId)
+    {
+        $tournament = Tournament::findFirstById($tournamentId);
+        $users = $this->request->getPost('userId');
+
+        $tournament->updateRanks($users);
     }
 
     /**

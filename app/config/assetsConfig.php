@@ -40,7 +40,7 @@ return new \Phalcon\Config(
                     "js-plugin/jquery/jquery-1.10.2.min.js",
                     "js/blockui.js",
                     "js/common.js",
-                    "js-plugin/jquery-ui/jquery-ui-1.8.23.custom.min.js",
+                    "js/jquery-ui.min.js",
                     "https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js",
                     "js-plugin/easing/jquery.easing.1.3.js",
 
@@ -75,8 +75,8 @@ return new \Phalcon\Config(
             'main' => [
                 'css' => [
                     'https://fonts.googleapis.com/css?family=Roboto:400,300,500,700',
-//                    'https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css',
-                    'css/intranet/bootstrap.css',
+                    'https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css',
+//                    'css/intranet/bootstrap.css',
                     'font-icons/custom-icons/css/custom-icons-ie7.css',
                     'font-icons/custom-icons/css/custom-icons.css',
                     'js-plugin/magnific-popup/magnific-popup.css',
@@ -95,7 +95,7 @@ return new \Phalcon\Config(
                     "js/common.js",
                     "js/intranet/ckeditor/ckeditor.js",
                     "js/intranet/plugins.js",
-                    "js/intranet/challonge.js",
+//                    "js/intranet/challonge.js",
                     "js/maskedinput.js",
                     'js/modernizr-2.6.1.min.js',
                     "js/magnificent.popup.min.js",
@@ -104,7 +104,7 @@ return new \Phalcon\Config(
                     "js/jquery.validate.nl.js",
                     "js/bootbox.min.js",
                     "js/remote-modal.js",
-                    "js-plugin/jquery-ui/jquery-ui-1.8.23.custom.min.js",
+                    "js/jquery-ui.min.js",
                     "js/intranet/main.js",
                     "https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
                 ]

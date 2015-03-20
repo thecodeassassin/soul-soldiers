@@ -3,6 +3,7 @@ namespace Soul\Model;
 
 use Phalcon\Forms\Element\Date;
 use Phalcon\Mvc\Model\Message;
+use Phalcon\Mvc\Model\Resultset\Simple;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 use Soul\Tournaments\Challonge;
@@ -162,6 +163,14 @@ class Tournament extends Base
         $this->hasMany('tournamentId', '\Soul\Model\TournamentTeam', 'tournamentId', ['alias' => 'teams']);
         $this->hasMany('tournamentId', '\Soul\Model\TournamentUser', 'tournamentId', ['alias' => 'players', 'order' => 'rank']);
 
+    }
+
+    /**
+     * @return Simple
+     */
+    public function getTournamentPlayers()
+    {
+        return $this->getPlayers(['order' => 'rank ASC']);
     }
 
     public function validation()
@@ -425,6 +434,32 @@ class Tournament extends Base
 
         self::clearCache($this);
 
+    }
+
+    /**
+     * @param array $users
+     */
+    public function updateRanks(array $users)
+    {
+        $players = $this->players;
+        $playersArray = [];
+
+        foreach ($players as $player) {
+            $playersArray[$player->userId] = $player;
+        }
+
+        $rank = 1;
+        foreach ($users as $userId) {
+            /** @var User $user */
+            $user = $playersArray[$userId];
+
+
+            // save the new rank
+            $user->rank = $rank;
+            $user->save();
+
+            $rank++;
+        }
     }
 
     /**

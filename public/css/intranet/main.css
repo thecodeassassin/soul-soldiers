@@ -2739,3 +2739,7 @@ ul.menuList
     list-style: none;
     list-style-position:outside;
 }
+
+.ui-sortable-handle {
+    cursor: pointer;
+}
