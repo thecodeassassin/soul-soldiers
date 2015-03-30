@@ -44,9 +44,14 @@ class TournamentController extends Base
         }
 
         if ($this->getUser()->isAdmin()) {
-            $this->assets->collection('scripts')->addJs('js/intranet/tournament.js');
+            if ($tournament->type == Tournament::TYPE_TOP_SCORE) {
+                $this->assets->collection('scripts')->addJs('js/intranet/topscore.js');
+            } else {
+                $this->assets->collection('scripts')->addJs('js/intranet/bracket.js');
+                $this->assets->collection('main')->addCss('css/intranet/bracket.css');
+                $this->assets->collection('scripts')->addJs('js/intranet/elimination.js');
+            }
         }
-
         $this->view->tournament = $tournament;
     }
 
@@ -169,11 +174,7 @@ class TournamentController extends Base
             }
 
             // delete all existing teams first
-            $existingTeams = TournamentTeam::findByTournamentId($tournament->tournamentId);
-            foreach ($existingTeams as $existingTeam) {
-                $existingTeam->delete();
-            }
-
+            TournamentTeam::deleteAllByTournamentId($tournament->tournamentId);
 
             foreach ($tournament->players as $player) {
                 $players[] = $player->userId;
@@ -190,16 +191,17 @@ class TournamentController extends Base
                 $players = $newPlayers;
             }
 
+            $num = 1;
             foreach ($teams as $team) {
                 $tournamentTeam = new TournamentTeam();
-                $teamNames = [];
+//                $teamNames = [];
+//
+//                foreach ($team as $userId) {
+//                    $user = User::findFirstByUserId($userId);
+//                    $teamNames[] = $user->nickName;
+//                }
 
-                foreach ($team as $userId) {
-                    $user = User::findFirstByUserId($userId);
-                    $teamNames[] = $user->nickName;
-                }
-
-                $tournamentTeam->name = implode(' & ', $teamNames);
+                $tournamentTeam->name = 'Team '.$num;
                 $tournamentTeam->tournamentId = $tournament->tournamentId;
                 $tournamentTeam->save();
 
@@ -209,6 +211,8 @@ class TournamentController extends Base
                     $tournamentUser->teamId = $tournamentTeam->teamId;
                     $tournamentUser->save();
                 }
+
+                $num += 1;
             }
 
             $this->flashMessage(sprintf('Aantal teams gegenereerd: %d', count($teams)), 'success', true);
@@ -329,6 +333,11 @@ class TournamentController extends Base
         $users = $this->request->getPost('userId');
 
         $tournament->updateRanks($users);
+    }
+
+    public function getTournamentData($tournamentId)
+    {
+
     }
 
     /**

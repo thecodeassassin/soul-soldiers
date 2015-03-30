@@ -162,6 +162,7 @@ class Tournament extends Base
         $this->setSource('tblTournament');
         $this->hasMany('tournamentId', '\Soul\Model\TournamentTeam', 'tournamentId', ['alias' => 'teams']);
         $this->hasMany('tournamentId', '\Soul\Model\TournamentUser', 'tournamentId', ['alias' => 'players', 'order' => 'rank']);
+        $this->hasMany('tournamentId', '\Soul\Model\TournamentScore', 'tournamentId', ['alias' => 'scores']);
 
     }
 
@@ -460,6 +461,29 @@ class Tournament extends Base
 
             $rank++;
         }
+    }
+
+    public function getBracketData()
+    {
+        $teams = $this->teams;
+        $tournamentTeams = [];
+
+        foreach ($teams as $team) {
+
+            /** @var TournamentTeam $team */
+            $tournamentTeams[] = $team->name;
+
+        }
+
+        $matches = array_chunk($tournamentTeams, 2);
+
+//        die(var_dump($matches));
+    }
+
+    public function getTournamentTeams()
+    {
+        /** @var Simple $teams */
+        $teams = $this->getTeams(['order' => 'seed ASC']);
     }
 
     /**

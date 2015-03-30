@@ -14,3 +14,7 @@ $(function(){
         }
     });
 });
+
+var onTournamentSave = function(data) {
+
+};

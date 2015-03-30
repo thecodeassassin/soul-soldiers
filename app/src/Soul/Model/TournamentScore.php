@@ -13,14 +13,14 @@ class TournamentScore extends Base
      *
      * @var integer
      */
-    public $tournamentUserId;
-     
+    public $tournamentId;
+
     /**
      *
      * @var integer
      */
     public $score;
-     
+
     /**
      * Initialize method for model.
      */
@@ -41,7 +41,7 @@ class TournamentScore extends Base
     public function columnMap()
     {
         return array(
-            'tournamentUserId' => 'tournamentUserId', 
+            'tournamentId' => 'tournamentId',
             'score' => 'score'
         );
     }

@@ -29,6 +29,11 @@ class TournamentTeam extends Base
     public $tournamentId;
 
     /**
+     * @var integer
+     */
+    public $seed;
+
+    /**
      * Initialize method for model.
      */
     public function initialize()
@@ -91,6 +96,21 @@ class TournamentTeam extends Base
     }
 
     /**
+     * @param $tournamentId
+     *
+     * @return bool
+     */
+    public static function deleteAllByTournamentId($tournamentId)
+    {
+        $existingTeams = self::findByTournamentId($tournamentId);
+        foreach ($existingTeams as $existingTeam) {
+            $existingTeam->delete();
+        }
+
+        return true;
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()
@@ -98,7 +118,8 @@ class TournamentTeam extends Base
         return array(
             'teamId' => 'teamId',
             'name' => 'name',
-            'tournamentId' => 'tournamentId'
+            'tournamentId' => 'tournamentId',
+            'seed' => 'seed'
         );
     }
 

@@ -69,6 +69,16 @@
 </div>
 {% endif %}
 
+{% if isTeamTournament and teams|length >= 2 %}
+<div class="row">
+    <div class="col-md-12 bracketcontainer">
+        <div class="well">
+            <div id="bracket" data-bracket="{{ tournament.getBracketData() }}"></div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <div class="row">
     <div class="col-md-4 tournament-container">
         <div class="gutter well">
@@ -125,7 +135,7 @@
 
                     <li class="list-group-item {% if removed %} disabled{% endif %}" data-player-id="userId_{{ player.userId }}">
 
-                        {% if isAdmin %}
+                        {% if isAdmin and scoreType %}
                         <span class="glyphicon glyphicon-sort"></span>
                         {% endif %}
 
@@ -140,14 +150,6 @@
 
                         {% if isAdmin %}
                         <div class="scoreControls">
-
-                        {% if scoreType and not removed and started %}
-                                {{ form('tournament/score/add/' ~ player.tournamentUserId, "method": "post", "name":"addScore", "class":"validate scoreAdd", "role":"form") }}
-
-                                <input type="number"  max="999" value="0" name="scoreCount" class="form-control scoreCount">
-                                <button type="submit" class="pull-left btn btn-sm btn-success"><i class="icon-plus"></i></button>
-                                {{ endform() }}
-                            {% endif %}
 
                         {% if pending or (scoreType and not complete and player['active']) %}
                         <a href="{{ url('tournament/removeUser/'~ tournament.systemName ~ '/' ~ player.tournamentUserId) }}" onclick="return ajaxConfirm('Weet je zeker dat deze gebruiker niet meer mee doet?');"

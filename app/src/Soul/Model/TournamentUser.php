@@ -59,7 +59,6 @@ class TournamentUser extends Base
         $this->belongsTo('tournamentId', '\Soul\Model\Tournament', 'tournamentId', ['alias' => 'tournament']);
 
         $this->hasOne('userId', '\Soul\Model\User', 'userId', ['alias' => 'user']);
-        $this->hasMany('tournamentUserId', '\Soul\Model\TournamentScore', 'tournamentUserId', ['alias' => 'scores']);
 
     }
 
