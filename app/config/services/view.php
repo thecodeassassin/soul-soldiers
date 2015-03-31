@@ -7,46 +7,64 @@ use Phalcon\Mvc\View,
 /**
  * Setting up the view component
  */
-$di->setShared('view', function() use ($config, $di) {
+$di->setShared(
+    'view',
+    function () use ($config, $di) {
 
         $view = new View();
 
-        if (!is_readable($config->application->libraryDir.'Soul/View/'.ucfirst(ACTIVE_MODULE))) {
+        if (!is_readable($config->application->libraryDir . 'Soul/View/' . ucfirst(ACTIVE_MODULE))) {
             throw new \Exception('View directory not readable');
         }
 
-        $view->setViewsDir($config->application->libraryDir.'Soul/View/'.ucfirst(ACTIVE_MODULE));
-        $view->registerEngines([
-            '.volt' => function ($view, $di) use ($config) {
+        $view->setViewsDir($config->application->libraryDir . 'Soul/View/' . ucfirst(ACTIVE_MODULE));
+        $view->registerEngines(
+            [
+                '.volt' => function ($view, $di) use ($config) {
 
                     $volt = new VoltEngine($view, $di);
 
-                    $volt->setOptions([
+                    $volt->setOptions(
+                        [
                             'compiledPath' => $config->application->cacheDir,
                             'compiledSeparator' => '_',
                             'compileAlways' => true
-                        ]);
+                        ]
+                    );
 
                     $compiler = $volt->getCompiler();
 
-                    $compiler->addFunction('t',
+                    $compiler->addFunction(
+                        't',
                         function ($key) {
                             return Translate::translate($key);
                         }
                     );
 
-                    $compiler->addFunction('rand',
+                    $compiler->addFunction(
+                        'rand',
                         function ($resolvedArgs) {
-                            return 'mt_rand('.$resolvedArgs.')';
+                            return 'mt_rand(' . $resolvedArgs . ')';
                         }
                     );
 
-                    $compiler->addFilter('date', function($resolvedArgs, $exprArgs) use($compiler)
-                    {
-                        $firstArgument = $compiler->expression($exprArgs[0]['expr']);
-                        $secondArgument = $compiler->expression($exprArgs[1]['expr']);
-                        return  'date(' . $secondArgument . ', strtotime('.$firstArgument.'))';
-                    });
+                    $compiler->addFilter(
+                        'date',
+                        function ($resolvedArgs, $exprArgs) use ($compiler) {
+                            $firstArgument = $compiler->expression($exprArgs[0]['expr']);
+                            $secondArgument = $compiler->expression($exprArgs[1]['expr']);
+
+                            return 'date(' . $secondArgument . ', strtotime(' . $firstArgument . '))';
+                        }
+                    );
+
+                    $compiler->addFilter(
+                        'base64',
+                        function ($resolvedArgs, $exprArgs) use ($compiler) {
+                            return 'base64_encode(' . $resolvedArgs . ')';
+                        }
+                    );
+
 
                     $compiler->addFunction(
                         'email_embed',
@@ -60,30 +78,37 @@ $di->setShared('view', function() use ($config, $di) {
                                 return '""';
                             }
 
-                            return '"[embed]'.$fullPath.'[/embed]"';
+                            return '"[embed]' . $fullPath . '[/embed]"';
                         }
                     );
 
-                    $compiler->addFunction('gravatar_url', function($args, $params) use ($compiler, $di)  {
+                    $compiler->addFunction(
+                        'gravatar_url',
+                        function ($args, $params) use ($compiler, $di) {
 
-                        $email = str_replace("'", "", $compiler->expression($params[0]['expr']));
+                            $email = str_replace("'", "", $compiler->expression($params[0]['expr']));
 
 
-                        $size = 80;
+                            $size = 80;
 
-                        if (isset($params[1])) {
-                            $size = $compiler->expression($params[1]['expr']);
+                            if (isset($params[1])) {
+                                $size = $compiler->expression($params[1]['expr']);
+                            }
+
+                            $url = "http://www.gravatar.com/avatar/%s?s=$size&d=mm&r=r";
+
+                            return "sprintf('$url', md5(strtolower(trim($email))))";
                         }
+                    );
 
-                        $url = "http://www.gravatar.com/avatar/%s?s=$size&d=mm&r=r";
-
-                        return "sprintf('$url', md5(strtolower(trim($email))))";
-                    });
 
                     return $volt;
                 },
-                '.phtml' => 'Phalcon\Mvc\View\Engine\Php' // Generate Template files uses PHP itself as the template engine
-            ]);
+                '.phtml' => 'Phalcon\Mvc\View\Engine\Php'
+                // Generate Template files uses PHP itself as the template engine
+            ]
+        );
 
         return $view;
-});
+    }
+);

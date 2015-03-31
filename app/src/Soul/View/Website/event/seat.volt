@@ -1,5 +1,5 @@
-{% set seatImagePosX = event.seatImagePosX %}
-{% set seatImagePosY = event.seatImagePosY %}
+{% set seatImagePosX = seatMap.posX %}
+{% set seatImagePosY = seatMap.posY %}
 {% set crewSize = event.crewSize %}
 {% set tableSize = 2 %}
 {% set numSeats = event.maxEntries - crewSize %}
@@ -23,20 +23,21 @@
     <div class="col-md-12">
 
         <div class="seating-table">
-            <div class="seatmap-wrapper" style="background-image: url({{ url('img/seatmaps/' ~ event.systemName ~ '.jpg') }})">
+            <div class="seatmap-wrapper" style="background-image: url(data:image/png;base64,{{ seatMap.image|base64 }})">
 
-                {% set blockSize = event.tableBlockSize %}
-                {% set rowSize = event.tableRowSize %}
+                {% set xCount = seatMap.xCount %}
+                {% set yCount = seatMap.yCount %}
+                {% set tableLimit = seatMap.tableLimit %}
 
                 {% set seatNum = 1 %}
                 <div class="seatmap" style="position: absolute; left: {{ seatImagePosX }}px; top: {{ seatImagePosY }}px">
 
-                    {% set numRows = (numSeats / rowSize * blockSize) / 2 %}
+                    {% set numRows = (numSeats / xCount / yCount) %}
+
                     {% set tableCount = 0 %}
-                    {% set blockSizePx =  blockSize * 25 + 2.5 %}
+                    {% set blockSizePx =  xCount * 25 + 2.5 %}
 
-                    <div class="seat-row-wrapper" style="width: {{ blockSizePx * rowSize + (15 * numRows) }}px">
-
+                    <div class="seat-row-wrapper" style="width: {{ blockSizePx * tableLimit + (25 * tableLimit)}}px">
 
                         {% for row in 0..numRows if seatNum < numSeats %}
 
@@ -44,7 +45,7 @@
 
                                 <div class="seat-row">
 
-                                    {% for seat in 1..blockSize*tableSize %}
+                                    {% for seat in 1..xCount*yCount %}
                                         {% if seatNum > numSeats %}{% break %}{% endif %}
                                         {% set seatName = row+1~'.'~seat %}
                                         <div class="seat {% if seatName in takenSeats %}taken{% elseif seatName == userSeat %}yours{% else %}free{% endif %}">
@@ -56,7 +57,7 @@
                                                     {{ seatName }}
                                                 </a>
                                             {% else %}
-                                                <span title="{% if seatName == userSeat %}Dit is jou plek{% elseif seatName in takenSeats %}{{ seatMap[seatName] }}{% endif %}" data-toggle='tooltip'>
+                                                <span title="{% if seatName == userSeat %}Dit is jou plek{% elseif seatName in takenSeats %}{{ occupiedSeats[seatName] }}{% endif %}" data-toggle='tooltip'>
                                                     {{ seatName }}
                                                 </span>
                                             {% endif %}

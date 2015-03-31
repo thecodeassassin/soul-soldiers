@@ -120,7 +120,15 @@ class EventController extends \Soul\Controller\Base
 
         $this->verifyEventAndUser($event, $user);
 
+        $seatMap = $event->getSeatMap();
+        if (!$seatMap) {
+
+            // if there is no seat map, do not show this modal
+            return;
+        }
+
         $takenSeats = [];
+        $occupiedSeats = [];
         $userSeat = 0;
 
         foreach ($event->entries as $eventEntry) {
@@ -132,13 +140,14 @@ class EventController extends \Soul\Controller\Base
                 }
 
                 $takenSeats[] = (float)$eventEntry->seat;
-                $seatMap[$eventEntry->seat] = $eventEntry->user->nickName;
+                $occupiedSeats[$eventEntry->seat] = $eventEntry->user->nickName;
             }
         }
 
         $this->view->userSeat = $userSeat;
         $this->view->event = $event;
         $this->view->takenSeats = $takenSeats;
+        $this->view->occupiedSeats = $occupiedSeats;
         $this->view->seatMap = $seatMap;
         $this->view->seatingAvailable = $this->seatingAvailable($event);
 
@@ -164,20 +173,19 @@ class EventController extends \Soul\Controller\Base
             }
 
             $validSeatTable = [];
-            $numRows = ($event->maxEntries - $event->crewSize) / ($event->tableBlockSize * 2);
+            $seatMap = $event->getSeatMap();
+
+            $numRows = ($event->maxEntries - $event->crewSize) / $seatMap->xCount / $seatMap->yCount;
 
             for ($row = 1; $row <= $numRows; $row++) {
-                for ($seat = 1; $seat <= $event->tableBlockSize * 2; $seat++) {
+                for ($seat = 1; $seat <= $seatMap->xCount * $seatMap->yCount; $seat++) {
                     $validSeatTable[] = (float) $row.'.'.$seat;
                 }
             }
 
-
-
             if (!in_array($reserveSeat, $validSeatTable)) {
                 throw new SecurityException('Deze plaats bestaat niet!');
             }
-
 
             foreach ($event->entries as $eventEntry) {
                 if ($eventEntry->seat == $reserveSeat) {

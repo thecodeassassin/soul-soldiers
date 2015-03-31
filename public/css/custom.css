@@ -514,6 +514,7 @@ strong {
 .seatmap .seat-table {
     margin-right: 25px;
     margin-bottom: 5px;
+    margin-top: 25px;
     float: left;
 }
 

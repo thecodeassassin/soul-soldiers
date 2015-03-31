@@ -66,27 +66,12 @@ class Event extends Base
     /**
      * @var integer
      */
-    public $tableRowSize;
-
-    /**
-     * @var integer
-     */
-    public $tableBlockSize;
-
-    /**
-     * @var integer
-     */
     public $crewSize;
 
     /**
      * @var integer
      */
-    public $seatImagePosX;
-
-    /**
-     * @var integer
-     */
-    public $seatImagePosY;
+    public $seatMapId;
 
     /**
      * Initialize method for model.
@@ -96,6 +81,7 @@ class Event extends Base
 		$this->setSource('tblEvent');
 
         $this->hasOne('productId', '\Soul\Model\Product', 'productId', ['alias' => 'product']);
+        $this->hasOne('seatMapId', '\Soul\Model\SeatMap', 'seatMapId', ['alias' => 'seatmap']);
         $this->hasMany('eventId', '\Soul\Model\Entry', 'eventId', ['alias' => 'entries']);
 
     }
@@ -355,6 +341,14 @@ class Event extends Base
     }
 
     /**
+     * @return SeatMap|bool
+     */
+    public function getSeatMap()
+    {
+        return $this->seatmap;
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()
@@ -368,11 +362,8 @@ class Event extends Base
             'endDate' => 'endDate',
             'maxEntries' => 'maxEntries',
             'productId' => 'productId',
-            'tableBlockSize' => 'tableBlockSize',
-            'tableRowSize' => 'tableRowSize',
-            'crewSize' => 'crewSize',
-            'seatImagePosX' => 'seatImagePosX',
-            'seatImagePosY' => 'seatImagePosY'
+            'seatMapId' => 'seatMapId',
+            'crewSize' => 'crewSize'
         );
 
     }
