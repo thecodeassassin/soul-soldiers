@@ -374,7 +374,10 @@ Index / news / tweets
 }
 
 .index-tweet-container {
-    min-height: 347px;
+    min-height: 376px;
+    height: 376px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 
@@ -511,6 +514,7 @@ strong {
 .seatmap .seat-table {
     margin-right: 25px;
     margin-bottom: 5px;
+    margin-top: 25px;
     float: left;
 }
 

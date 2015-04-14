@@ -66,27 +66,12 @@ class Event extends Base
     /**
      * @var integer
      */
-    public $tableRowSize;
-
-    /**
-     * @var integer
-     */
-    public $tableBlockSize;
-
-    /**
-     * @var integer
-     */
     public $crewSize;
 
     /**
      * @var integer
      */
-    public $seatImagePosX;
-
-    /**
-     * @var integer
-     */
-    public $seatImagePosY;
+    public $seatMapId;
 
     /**
      * Initialize method for model.
@@ -96,6 +81,7 @@ class Event extends Base
 		$this->setSource('tblEvent');
 
         $this->hasOne('productId', '\Soul\Model\Product', 'productId', ['alias' => 'product']);
+        $this->hasOne('seatMapId', '\Soul\Model\SeatMap', 'seatMapId', ['alias' => 'seatmap']);
         $this->hasMany('eventId', '\Soul\Model\Entry', 'eventId', ['alias' => 'entries']);
 
     }
@@ -144,27 +130,30 @@ class Event extends Base
 
                 foreach ($fileList as $file) {
 
-                    $filePath = $eventPictureDir . '/' . $file;
-                    $thumbName =  '/thumb_' . $file;
-                    $thumbFile = $cacheDir . $thumbName;
+                    if (is_string($file)) {
+                        $filePath = $eventPictureDir . '/' . $file;
+                        $thumbName =  '/thumb_' . $file;
+                        $thumbFile = $cacheDir . $thumbName;
 
-                    $fileUrl = sprintf('%s/%s/%s', $imgUrl, $this->systemName, $file);
-                    $thumbUrl = '/static/image/' . $thumbName;
+                        $fileUrl = sprintf('%s/%s/%s', $imgUrl, $this->systemName, $file);
+                        $thumbUrl = '/static/image/' . $thumbName;
 
-                    // generate a thumnail
-                    $thumbnail = new GD($filePath);
-                    $thumbnail->resize(360, 360);
-                    $thumbnail->save($thumbFile);
+                        // generate a thumnail
+                        $thumbnail = new GD($filePath);
+                        $thumbnail->resize(360, 360);
+                        $thumbnail->save($thumbFile);
 
 
-                    if (Util::isImage($filePath) && Util::isImage($thumbFile)) {
-                        $files['images'][] = [
-                            'url' => $fileUrl,
-                            'thumb' => $thumbUrl
-                        ];
-                    } else {
-                        $files['other'][] = $fileUrl;
+                        if (Util::isImage($filePath) && Util::isImage($thumbFile)) {
+                            $files['images'][] = [
+                                'url' => $fileUrl,
+                                'thumb' => $thumbUrl
+                            ];
+                        } else {
+                            $files['other'][] = $fileUrl;
+                        }
                     }
+
                 }
 
                 $cache->save($cacheKey, $files);
@@ -344,6 +333,22 @@ class Event extends Base
     }
 
     /**
+     * @return bool
+     */
+    public function hasPassed()
+    {
+        return (bool) (strtotime($this->endDate) < time());
+    }
+
+    /**
+     * @return SeatMap|bool
+     */
+    public function getSeatMap()
+    {
+        return $this->seatmap;
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()
@@ -357,11 +362,8 @@ class Event extends Base
             'endDate' => 'endDate',
             'maxEntries' => 'maxEntries',
             'productId' => 'productId',
-            'tableBlockSize' => 'tableBlockSize',
-            'tableRowSize' => 'tableRowSize',
-            'crewSize' => 'crewSize',
-            'seatImagePosX' => 'seatImagePosX',
-            'seatImagePosY' => 'seatImagePosY'
+            'seatMapId' => 'seatMapId',
+            'crewSize' => 'crewSize'
         );
 
     }

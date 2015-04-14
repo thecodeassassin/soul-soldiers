@@ -14,17 +14,6 @@ $(function() {
         'autoplaySpeed': 4500
     });
 
-    $('.index-tweet-container').slick({
-        'autoplay': true,
-        'arrows': false,
-        'mobileFirst': true,
-        'pauseOnHover': false,
-        'vertical': true,
-        'autoplaySpeed': 3500,
-        'slidesToShow': 2,
-        'speed': 1000
-    });
-
     var emailEdit = $('.edit-email');
     emailEdit.click(function() {
         var emailField = $('.email-field'),
@@ -156,7 +145,7 @@ $(function() {
         var eventName = $(this).attr('eventName'),
             eventSystemName = $(this).attr('systemName');
 
-        bootbox.confirm("Weet je zeker dat je je wilt inschrijven voor " + eventName + "?", function(result) {
+        bootbox.confirm("<br /><h3>Weet je zeker dat je je wilt inschrijven voor " + eventName + "? </h3><br /><br /><strong>Door jezelf in te schrijven ga je akkoord met onze algemene voorwaarden die op het moment gelden.</strong>", function(result) {
             if (result) {
                 window.location = 'register/'+eventSystemName;
             }

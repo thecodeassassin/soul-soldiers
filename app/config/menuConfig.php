@@ -53,9 +53,9 @@ $menuConfig = [
 
             'Home' => BASE_URL . '/home',
             'Archief' => [
-                'Soul-Soldiers: The Reunion 2013' => BASE_URL.'/event/the-reunion',
-                'Soul-Soldiers 2014' => BASE_URL.'/event/soul-2014',
-                'Soul-Soldiers 2014: Autumn Edition' => BASE_URL.'/event/soul2014-autumn'
+                'Soul-Soldiers: The Reunion 2013' => BASE_URL.'/archive/the-reunion',
+                'Soul-Soldiers 2014' => BASE_URL.'/archive/soul-2014',
+                'Soul-Soldiers 2014: Autumn Edition' => BASE_URL.'/archive/soul2014-autumn'
             ],
             'Informatie' => [
                 'Nieuws' => BASE_URL.'/news',
@@ -63,11 +63,11 @@ $menuConfig = [
                 'LAN-Party checklist' => BASE_URL.'/content/checklist',
                 'Wat is een LAN-party?' => BASE_URL.'/content/lan-description'
             ],
-            'Aankomend evenement' => [
-                'link' => BASE_URL.'/event/current',
+            'Aankomend evenement' => BASE_URL.'/event/current', //[
+//                'link' => BASE_URL.'/event/current',
 //                'Soul-Soldiers 2014: Autumn edition' => BASE_URL.'/event/current'
 //                'Competities' => BASE_URL.'/content/compos'
-            ],
+//            ],
             'Forum' => BASE_URL.'/forum',
             'Mijn account' => BASE_URL.'/account/manage',
             'Admin' => BASE_URL.'/admin',

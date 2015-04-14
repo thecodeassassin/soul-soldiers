@@ -115,12 +115,19 @@ return [
             "userId" => 1
         ],
 
+
         /**
          * Event
          */
         '/event/([a-zA-Z0-9_-]+)' => [
             "controller" => "event",
             "action" => "show",
+            "systemName" => 1
+        ],
+
+        '/archive/([a-zA-Z0-9_-]+)' => [
+            "controller" => "archive",
+            "action" => "index",
             "systemName" => 1
         ],
 
