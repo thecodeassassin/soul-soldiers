@@ -1,8 +1,8 @@
 $(function (){
     $('#bracket').bracket({
-       init: $(this).attr('data-bracket'),
+       init: __BRACKET_DATA,
        render: function() {
-
+            //console.log((this).attr('data-bracket'));
        }
     });
 });

@@ -99,6 +99,11 @@ class Tournament extends Base
     public $image;
 
     /**
+     * @var string
+     */
+    public $data;
+
+    /**
      * @var array
      */
     public $playersArray = [];
@@ -272,9 +277,6 @@ class Tournament extends Base
     public function beforeDelete()
     {
 
-        // clear the menu cache
-        self::clearCache($this);
-
         // delete all players associated with this tournament
         $this->deletePlayers();
 
@@ -286,9 +288,6 @@ class Tournament extends Base
 
         if (!$this->onlyStateUpdate) {
 
-            // always delete player cache when updating a tournament
-            self::clearCache($this);
-
             $this->deletePlayers();
 
         }
@@ -296,14 +295,6 @@ class Tournament extends Base
         return true;
     }
 
-    /**
-     * before save event
-     */
-    public function beforeSave()
-    {
-        // remove the tournament menu caching before saving
-        self::clearCache($this);
-    }
 
     /**
      * @return \Phalcon\Mvc\Model\ResultsetInterface
@@ -433,8 +424,6 @@ class Tournament extends Base
         $tournamentUser->active = 1;
         $tournamentUser->save();
 
-        self::clearCache($this);
-
     }
 
     /**
@@ -463,21 +452,36 @@ class Tournament extends Base
         }
     }
 
-    public function getBracketData()
+    public function updateBracketData($rawData = null)
     {
-        $teams = $this->teams;
-        $tournamentTeams = [];
+        if ($rawData != null) {
+            $this->data = $rawData;
+        } else {
 
-        foreach ($teams as $team) {
+            $teams = $this->teams;
+            $tournamentTeams = [];
 
-            /** @var TournamentTeam $team */
-            $tournamentTeams[] = $team->name;
+            foreach ($teams as $team) {
+
+                /** @var TournamentTeam $team */
+                $tournamentTeams[] = $team->name;
+
+            }
+
+            $matches = array_chunk($tournamentTeams, 2);
+
+            $data = array(
+                'teams' => $matches,
+                'results' => array()
+            );
+
+            $this->data = json_encode($data);
 
         }
 
-        $matches = array_chunk($tournamentTeams, 2);
+        $this->onlyStateUpdate = true;
+        $this->save();
 
-//        die(var_dump($matches));
     }
 
     public function getTournamentTeams()
@@ -504,28 +508,6 @@ class Tournament extends Base
     }
 
     /**
-     * @param Tournament $tournament
-     *
-     * @return bool
-     */
-    public static function clearCache(Tournament $tournament)
-    {
-        $cache = $tournament->getCache();
-        $return = false;
-
-        if ($cache->exists($tournament->playerCacheKey)) {
-            $return = $cache->delete($tournament->playerCacheKey);
-        }
-
-        if ($cache->exists('tournament_menu')) {
-            $return = $cache->delete('tournament_menu');
-        }
-
-        return $return;
-
-    }
-
-    /**
      * Independent Column Mapping.
      */
     public function columnMap()
@@ -542,7 +524,8 @@ class Tournament extends Base
             'isTeamTournament' => 'isTeamTournament',
             'teamSize' => 'teamSize',
             'state' => 'state',
-            'image' => 'image'
+            'image' => 'image',
+            'data' => 'data'
         );
     }
 

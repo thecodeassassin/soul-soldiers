@@ -70,10 +70,13 @@
 {% endif %}
 
 {% if isTeamTournament and teams|length >= 2 %}
+<script type="text/javascript">
+    __BRACKET_DATA = {{ tournament.data }};
+</script>
 <div class="row">
     <div class="col-md-12 bracketcontainer">
         <div class="well">
-            <div id="bracket" data-bracket="{{ tournament.getBracketData() }}"></div>
+            <div id="bracket"></div>
         </div>
     </div>
 </div>

@@ -104,7 +104,6 @@ class TournamentController extends Base
                     $this->flashMessages($tournamentUser->getMessages(), 'error', true);
                 }
 
-                Tournament::clearCache($tournament);
             }
 
 
@@ -138,9 +137,6 @@ class TournamentController extends Base
                         sprintf('%s punten toegevoegd aan %s', $scoreCount, $tournamentUser->user->nickName), 'success', true
                     );
                 }
-
-                // delete the player cache
-                Tournament::clearCache($tournamentUser->tournament);
             }
         }
 
@@ -214,6 +210,8 @@ class TournamentController extends Base
 
                 $num += 1;
             }
+
+            $tournament->updateBracketData();
 
             $this->flashMessage(sprintf('Aantal teams gegenereerd: %d', count($teams)), 'success', true);
 
@@ -316,8 +314,6 @@ class TournamentController extends Base
             } else {
                 $tournamentUser->delete();
             }
-
-            Tournament::clearCache($tournament);
 
             return $this->response->redirect('tournament/view/'.$tournament->systemName);
         }
