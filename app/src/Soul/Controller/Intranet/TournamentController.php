@@ -43,15 +43,22 @@ class TournamentController extends Base
             }
         }
 
+        if ($tournament->type != Tournament::TYPE_TOP_SCORE) {
+            $this->assets->collection('scripts')->addJs('js/intranet/bracket.js');
+            $this->assets->collection('scripts')->addJs('js/intranet/elimination.js');
+        }
+
         if ($this->getUser()->isAdmin()) {
+             
+
             if ($tournament->type == Tournament::TYPE_TOP_SCORE) {
                 $this->assets->collection('scripts')->addJs('js/intranet/topscore.js');
             } else {
-                $this->assets->collection('scripts')->addJs('js/intranet/bracket.js');
                 $this->assets->collection('main')->addCss('css/intranet/bracket.css');
-                $this->assets->collection('scripts')->addJs('js/intranet/elimination.js');
+                $this->assets->collection('scripts')->addJs('js/intranet/eliminationAdmin.js');
             }
         }
+
         $this->view->tournament = $tournament;
     }
 
