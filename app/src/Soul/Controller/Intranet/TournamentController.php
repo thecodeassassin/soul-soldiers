@@ -45,18 +45,20 @@ class TournamentController extends Base
 
         if ($tournament->type != Tournament::TYPE_TOP_SCORE) {
             $this->assets->collection('scripts')->addJs('js/intranet/bracket.js');
-            $this->assets->collection('scripts')->addJs('js/intranet/elimination.js');
+            $this->assets->collection('main')->addCss('css/intranet/bracket.css');
+            $this->assets->collection('main')->addCss('css/intranet/bracket.custom.css');
         }
 
         if ($this->getUser()->isAdmin()) {
-             
+
 
             if ($tournament->type == Tournament::TYPE_TOP_SCORE) {
                 $this->assets->collection('scripts')->addJs('js/intranet/topscore.js');
             } else {
-                $this->assets->collection('main')->addCss('css/intranet/bracket.css');
                 $this->assets->collection('scripts')->addJs('js/intranet/eliminationAdmin.js');
             }
+        } elseif ($tournament->type != Tournament::TYPE_TOP_SCORE) {
+            $this->assets->collection('scripts')->addJs('js/intranet/elimination.js');
         }
 
         $this->view->tournament = $tournament;
@@ -174,6 +176,15 @@ class TournamentController extends Base
 
             if ($playerCount / $tournament->teamSize  == 1) {
                 throw new \Exception(sprintf('Er dienen minimaal %d mensen mee te doen.', (2 * $tournament->teamSize)));
+            }
+
+            if ($playerCount / $tournament->teamSize < 4 &&
+                in_array(
+                    $tournament->type,
+                    array(Tournament::TYPE_SINGLE_ELIMINATION, Tournament::TYPE_DOUBLE_ELIMINATION)
+                )
+            ) {
+//                throw new \Exception(sprintf('Er dienen minimaal 4 teams gemaakt te worden voor een single of double elimination tournooi.', (2 * $tournament->teamSize)));
             }
 
             // delete all existing teams first

@@ -1742,22 +1742,6 @@ header.navbar .navbar-brand {
     padding: 1px 5px;
 }
 
-div.jQBracket {
-    font-family: inherit !important;
-}
-
-div.jQBracket .np .connector, div.jQBracket .np .connector div.connector {
-    border-color: #428BCA !important;
-}
-
-div.jQBracket .team div.label {
-    color: #000000;
-}
-
-div.jQBracket .team.highlight {
-    background-color: #47A447 !important;
-}
-
 /* Tabs */
 .nav-tabs.nav-right > li {
     float: right;

@@ -72,6 +72,7 @@
 {% if isTeamTournament and teams|length >= 2 %}
 <script type="text/javascript">
     __BRACKET_DATA = {{ tournament.data }};
+    __IS_DOUBLE_ELIMINATION = {% if tournament.type == 3 %}true{% else %}false{% endif %};
 </script>
 <div class="row">
     <div class="col-md-12 bracketcontainer">

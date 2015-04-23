@@ -12,8 +12,11 @@ $(function (){
                console.log(json);
        },
        init: __BRACKET_DATA,
-       render: function() {
-            //console.log((this).attr('data-bracket'));
-       }
+       isDoubleElimination: __IS_DOUBLE_ELIMINATION,
+       disableTeamNameEdit: true
     });
+    //
+    //setTimeout(function() {
+    //    $('#bracket').find('.label').unbind('click');
+    //}, 500);
 });

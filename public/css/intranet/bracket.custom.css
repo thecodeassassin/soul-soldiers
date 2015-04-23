@@ -1,0 +1,24 @@
+div.jQBracket .team div.score {
+    color: #2F444C;
+    font-weight: bold;
+}
+
+div.jQBracket {
+    font-family: inherit;
+}
+
+div.jQBracket .np .connector, div.jQBracket .np .connector div.connector {
+    border-color: #428BCA;
+}
+
+div.jQBracket .connector div.connector, div.jQBracket .connector {
+    border-color: #8cff97;
+}
+
+div.jQBracket .team div.label {
+    color: #000000;
+}
+
+div.jQBracket .team.highlight {
+    background-color: #47A447;
+}
