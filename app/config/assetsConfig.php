@@ -84,6 +84,7 @@ return new \Phalcon\Config(
                     'css/intranet/themes/deepblue.css',
                     'css/intranet/main.css',
                     'css/ajax-loader.css',
+                    'css/datepicker.min.css',
                     'css/common.css'
                 ]
             ],
@@ -100,6 +101,7 @@ return new \Phalcon\Config(
                     'js/modernizr-2.6.1.min.js',
                     "js/magnificent.popup.min.js",
 //                    "js/jquery.loadmask.js",
+                    "js/datepicker.min.js",
                     "js-plugin/neko-contact-ajax-plugin/js/jquery.validate.min.js",
                     "js/jquery.validate.nl.js",
                     "js/bootbox.min.js",

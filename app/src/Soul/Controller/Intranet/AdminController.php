@@ -128,6 +128,7 @@ class AdminController extends \Soul\Controller\Website\AdminController
 
         $tournament = Tournament::findFirstBySystemName($systemName);
         if ($tournament) {
+            $tournament->deletePlayers();
             $tournament->generatePlayers($count);
         }
 

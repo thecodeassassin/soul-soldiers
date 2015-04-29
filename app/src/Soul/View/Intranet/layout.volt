@@ -1,38 +1,100 @@
-{% block header %}
 <!DOCTYPE html>
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-    <meta charset="utf-8">
+{% set loginPage = router.getActionName() in ['login','forgotPassword'] %}
+{% include 'header.volt' %}
 
-    <title>{{ title }}</title>
+    <body>
+    <!-- Page Container -->
+    <div id="page-container" class="header-fixed-top">
+        <!-- Header -->
+        <!-- Add the class .navbar-fixed-top or .navbar-fixed-bottom for a fixed header on top or bottom respectively -->
+        <header class="navbar navbar-inverse navbar-fixed-top">
+            <!-- <header class="navbar navbar-inverse navbar-fixed-bottom"> -->
+            <!-- Mobile Navigation, Shows up  on smaller screens -->
+            <ul class="navbar-nav-custom pull-right hidden-md hidden-lg">
+                <li class="divider-vertical"></li>
+                <li>
+                    <!-- It is set to open and close the main navigation on smaller screens. The class .navbar-main-collapse was added to aside#page-sidebar -->
+                    <a href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-main-collapse">
+                        <i class="icon-th-list"></i>
+                    </a>
+                </li>
+            </ul>
+            <!-- END Mobile Navigation -->
 
-    <meta name="description" content="Soul-Soldiers is een Nederlandse Lan-Party organisatie gefocust op kleinschalige lan parties">
-    <meta name="author" content="Soul-Soldiers">
-    <meta name="robots" content="noindex, nofollow">
+            <!-- Logo -->
+            <a href="{{ url('home') }}" class="navbar-brand">Soul-Soldiers Intranet</a>
 
-    <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <!-- Icons -->
-    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <link rel="apple-touch-icon" href="img/icon57.png" sizes="57x57">
-    <link rel="apple-touch-icon" href="img/icon72.png" sizes="72x72">
-    <link rel="apple-touch-icon" href="img/icon76.png" sizes="76x76">
-    <link rel="apple-touch-icon" href="img/icon114.png" sizes="114x114">
-    <link rel="apple-touch-icon" href="img/icon120.png" sizes="120x120">
-    <link rel="apple-touch-icon" href="img/icon144.png" sizes="144x144">
-    <link rel="apple-touch-icon" href="img/icon152.png" sizes="152x152">
-    <!-- END Icons -->
+            <!-- Header Widgets -->
+            <!-- You can create the widgets you want by replicating the following. Each one exists in a <li> element -->
+            <ul id="widgets" class="navbar-nav-custom pull-right">
 
-    <!-- Stylesheets -->
-    {# Output js/css content #}
-    {{ assets.outputCss('main') }}
-    {# Custom javascript #}
-</head>
-{% endblock %}
-    <body class="{% if router.getActionName() in ['login','forgotPassword']  %}login{% endif %}">
-    {% block body %}{% endblock %}
+                <li class="divider-vertical"></li>
+
+                {% if user %}
+                <!-- User Menu -->
+                <li class="dropdown pull-right dropdown-user">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-user-1"></span> {{ user.getNickName() }} <b class="caret"></b></a>
+                    {{ usermenu }}
+                </li>
+                <!-- END User Menu -->
+                {% endif %}
+            </ul>
+            <!-- END Header Widgets -->
+        </header>
+        <!-- END Header -->
+
+        <!-- Inner Container -->
+        <div id="inner-container">
+            <!-- Sidebar -->
+            <aside id="page-sidebar" class="collapse navbar-collapse navbar-main-collapse">
+
+                <!-- Primary Navigation -->
+                <nav id="primary-nav">
+                    <!-- Main navigation -->
+                    {{ menu }}
+                    <!-- End main navigation -->
+                </nav>
+                <!-- END Primary Navigation -->
+
+            </aside>
+            <!-- END Sidebar -->
+
+            <!-- Page Content -->
+            <div id="page-content">
+                <div class="inner">
+
+                    <div class="page-header page-header-top clearfix">
+                        <h4 class="pull-left">{{ pageTitle|default(router.getActionName())|capitalize }}</h4>
+                    </div>
+
+
+                    <div class="row">
+                        <div id="messages" class="col-md-12">
+                            {{ flash.output() }}
+                            {{ flashSession.output() }}
+                        </div>
+                    </div>
+
+                  {% block content %}{% endblock %}
+                </div>
+            </div>
+            <!-- END Page Content -->
+
+            <!-- Footer -->
+            <footer>
+                &copy; Soul-Soldiers 2014
+            </footer>
+            <!-- END Footer -->
+        </div>
+        <!-- END Inner Container -->
+    </div>
+    <!-- END Page Container -->
+
+    <!-- Scroll to top link, check main.js - scrollToTop() -->
+    <a href="javascript:void(0)" id="to-top"><span class="icon-up"></span></a>
 
     {% block footer %}
 

@@ -15,7 +15,6 @@ function activateToolTips(){
     $("[data-toggle='tooltip']").tooltip();
 }
 
-
 /**
  *
  * @param msg

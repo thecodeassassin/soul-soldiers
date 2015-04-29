@@ -1,3 +1,6 @@
+{% extends 'layout.volt' %}
+
+{% block content %}
 {% set pageTitle = '<i class="icon-gauge"></i> Admin' %}
 
 <div class="row">
@@ -8,3 +11,4 @@
     </div>
 
 </div>
+{% endblock %}

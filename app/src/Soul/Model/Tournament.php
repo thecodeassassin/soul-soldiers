@@ -452,6 +452,9 @@ class Tournament extends Base
         }
     }
 
+    /**
+     * @param null $rawData
+     */
     public function updateBracketData($rawData = null)
     {
         if ($rawData != null) {
@@ -561,7 +564,7 @@ class Tournament extends Base
     /**
      * Deletes all players associated with this tournament
      */
-    protected function deletePlayers()
+    public function deletePlayers()
     {
 
         // delete all the teams associated with this tournament

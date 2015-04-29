@@ -1,3 +1,6 @@
+{% extends 'layout.volt' %}
+
+{% block content %}
 {% set pageTitle = '<i class="icon-download"></i>&nbsp;Unreal Tournament 2004' %}
 {% set image_1 = 'img/downloads/ut2004_ingame.jpg' %}
 {% set image_2 = 'img/downloads/ut2004_ingame2.jpg' %}
@@ -32,3 +35,4 @@
         </div>
     </div>
 </div>
+{% endblock %}

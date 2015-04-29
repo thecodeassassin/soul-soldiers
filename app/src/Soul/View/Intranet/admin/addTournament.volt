@@ -1,3 +1,5 @@
+{% extends 'layout.volt' %}
+{% block content %}
 {% set pageTitle = '<i class="icon-gauge"></i> <a href="'~url('admin/index')~'">Admin</a> / <a href="'~url('admin/tournaments')~'">Toernooien</a> / Nieuw toernooi' %}
 
 <div class="row">
@@ -7,4 +9,5 @@
         </div>
     </div>
 </div>
+{% endblock %}
 

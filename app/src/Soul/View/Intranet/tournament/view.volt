@@ -1,3 +1,7 @@
+{% extends 'layout.volt' %}
+
+{% block content %}
+
 {% if tournament %}
     {% set pageTitle = '<i class="icon-award"></i> Toernooien / ' ~ tournament.name %}
 {% endif %}
@@ -213,3 +217,4 @@
         Dit toernooi kan nu niet geladen worden, probeer het later nogmaals.
     </div>
 {% endif %}
+{% endblock %}

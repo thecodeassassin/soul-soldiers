@@ -1,3 +1,6 @@
+{% extends 'layout.volt' %}
+
+{% block content %}
 {% set pageTitle = '<i class="icon-download"></i>&nbsp;Flatout 2' %}
 {% set image_1 = 'img/downloads/flatout_ingame.jpg' %}
 {% set image_2 = 'img/downloads/flatout_ingame2.jpg' %}
@@ -32,3 +35,4 @@
         </div>
     </div>
 </div>
+{% endblock %}

@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+{% include 'header.volt' %}
+
+<body class="login">
+{% block content %}
 <div class="container">
     <div class="row pt30">
         <div id="messages" class="col-md-12">
@@ -6,6 +13,7 @@
         </div>
     </div>
 </div>
+
 <!-- Login Container -->
 <div id="login-container">
     <div id="login-logo">
@@ -44,3 +52,7 @@
     <!-- END Login Form -->
 </div>
 <!-- END Login Container -->
+{% endblock %}
+</body>
+{% block javascript %}{% endblock %}
+</html>

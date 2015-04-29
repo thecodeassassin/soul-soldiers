@@ -1,3 +1,6 @@
+{% extends 'layout.volt' %}
+
+{% block content %}
 {% set pageTitle = '<i class="icon-download"></i>&nbsp;DC++' %}
 {% set image_1 = 'img/downloads/dc_install.jpg' %}
 {% set image_2 = 'img/downloads/dc_install2.jpg' %}
@@ -63,3 +66,4 @@
         </div>
     </div>
 </div>
+{% endblock %}

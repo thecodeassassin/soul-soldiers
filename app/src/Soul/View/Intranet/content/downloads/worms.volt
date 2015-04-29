@@ -1,3 +1,6 @@
+{% extends 'layout.volt' %}
+
+{% block content %}
 {% set pageTitle = '<i class="icon-download"></i>&nbsp;Worms World Party' %}
 {% set image_1 = 'img/downloads/wwp_ingame.jpg' %}
 {% set image_2 = 'img/downloads/wwp_ingame2.jpg' %}
@@ -36,3 +39,4 @@
         </div>
     </div>
 </div>
+{% endblock %}

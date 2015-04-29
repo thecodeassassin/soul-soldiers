@@ -1,3 +1,6 @@
+{% extends 'layout.volt' %}
+
+{% block content %}
 {% set pageTitle = '<i class="icon-download"></i>&nbsp;Call Of Duty - Modern Warfare' %}
 {% set image_1 = 'img/downloads/cod_ingame.jpg' %}
 {% set image_2 = 'img/downloads/cod_ingame2.jpg' %}
@@ -48,3 +51,4 @@
         </div>
     </div>
 </div>
+{% endblock %}

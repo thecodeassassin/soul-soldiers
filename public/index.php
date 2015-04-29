@@ -1,6 +1,6 @@
 <?php
-// Define path to application directory
 
+// Define path to application directory
 use Phalcon\DI\FactoryDefault;
 
 defined('APPLICATION_PATH')
@@ -14,7 +14,7 @@ defined('APPLICATION_ENV')
 defined('BASE_URL')
 || define('BASE_URL', sprintf('%s://%s', (array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] != null) ? 'https' : 'http', $_SERVER['HTTP_HOST']));
 
-$requiredExtensions = ['gd', 'curl', 'mcrypt', 'mysql', 'memcached'];
+$requiredExtensions = ['gd', 'curl', 'mcrypt', 'mysql', 'memcached', 'phalcon'];
 
 $missing = [];
 foreach ($requiredExtensions as $extension) {
@@ -49,12 +49,12 @@ if (!is_readable(APPLICATION_PATH . '/../vendor/autoload.php')) {
 
 // create the logfile if it doesn't exist
 $logFile = APPLICATION_PATH . '/log/'.APPLICATION_ENV.'.log';
+
+if (!is_writeable(dirname($logFile))) {
+    die(sprintf('Please make sure %s is writable ', dirname($logFile)));
+}
+
 if (!file_exists($logFile)) {
-
-    if (!is_writeable(dirname($logFile))) {
-        die('Please chmod 777 '.dirname($logFile));
-    }
-
     touch($logFile);
 }
 
@@ -68,6 +68,10 @@ $config = include __DIR__ . "/../app/config/config.php";
 //if ($config->count() != $configDist->count()) {
 //    die('Fatal: It seems that the configuration file does not contain all the requirements set by the config.dist.php');
 //}
+
+if (!is_writable($config->application->cacheDir)) {
+    die(sprintf('Please make sure %s is writable', $config->application->cacheDir));
+}
 
 /**
  * Require core services
