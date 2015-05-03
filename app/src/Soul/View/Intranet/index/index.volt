@@ -1,8 +1,8 @@
 {% extends 'layout.volt' %}
 
+{% block pageTitle %}<i class="icon-home"></i>&nbsp;Home{% endblock %}
 
 {% block content %}
-    {% set pageTitle = '<i class="icon-home"></i>Home' %}
     <div class="row">
 
     <div class="col-md-8">

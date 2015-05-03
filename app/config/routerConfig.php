@@ -200,12 +200,6 @@ return [
             "systemName" => 1
         ],
 
-        '/tournament/select-winner/([0-9]+)' => [
-            "controller" => "tournament",
-            "action" => 'selectWinner',
-            "systemName" => 1
-        ],
-
         '/tournament/overview/([0-9]+)' => [
             "controller" => "tournament",
             "action" => 'overview',

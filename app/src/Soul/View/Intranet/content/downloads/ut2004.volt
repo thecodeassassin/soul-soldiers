@@ -1,7 +1,8 @@
 {% extends 'layout.volt' %}
 
+{% block pageTitle %}<i class="icon-download"></i>&nbsp;Unreal Tournament 2004{% endblock %}
+
 {% block content %}
-{% set pageTitle = '<i class="icon-download"></i>&nbsp;Unreal Tournament 2004' %}
 {% set image_1 = 'img/downloads/ut2004_ingame.jpg' %}
 {% set image_2 = 'img/downloads/ut2004_ingame2.jpg' %}
 {% set image_3 = 'img/downloads/ut2004_ingame3.jpg' %}

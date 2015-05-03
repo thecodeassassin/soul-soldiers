@@ -1,7 +1,7 @@
 {% extends 'layout.volt' %}
 
+{% block pageTitle %}<i class="icon-download"></i>&nbsp;Flatout 2{% endblock %}
 {% block content %}
-{% set pageTitle = '<i class="icon-download"></i>&nbsp;Flatout 2' %}
 {% set image_1 = 'img/downloads/flatout_ingame.jpg' %}
 {% set image_2 = 'img/downloads/flatout_ingame2.jpg' %}
 {% set image_3 = 'img/downloads/flatout_ingame3.jpg' %}

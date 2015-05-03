@@ -83,6 +83,22 @@ class AdminController extends \Soul\Controller\Website\AdminController
     }
 
     /**
+     * Update tournament bracket data
+     */
+    public function updateTournamentDataAction()
+    {
+        $data = $this->request->getPost('data');
+        $tournamentId = $this->request->getPost('tournamentId');
+
+        $tournament = Tournament::findFirstById($tournamentId);
+
+        if ($tournament && $data) {
+            $tournament->updateBracketData(false, $data);
+        }
+
+    }
+
+    /**
      * @param $teamId
      *
      * @return \Phalcon\Http\ResponseInterface

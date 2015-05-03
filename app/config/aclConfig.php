@@ -130,7 +130,7 @@ return new \Phalcon\Config(
                     AclBuilder::ROLE_ADMIN => [
                         'admin' => '*',
                         'index' => ['generate', 'addNews', 'deleteNews', 'editNews'],
-                        'tournament' => ['addScore', 'removeUser', 'start', 'end', 'selectWinner', 'generateteams', 'editTeamName']
+                        'tournament' => ['addScore', 'removeUser', 'start', 'end', 'reset' , 'generateteams', 'editTeamName']
                     ]
                 ]
         ]

@@ -1,7 +1,6 @@
 {% extends 'layout.volt' %}
-
+{% block pageTitle %}<i class="icon-download"></i>&nbsp;Trackmania{% endblock %}
 {% block content %}
-{% set pageTitle = '<i class="icon-download"></i>&nbsp;TrackMania' %}
 {% set image_1 = 'img/downloads/trackmania_ingame.jpg' %}
 {% set image_2 = 'img/downloads/trackmania_ingame2.jpg' %}
 {% set image_3 = 'img/downloads/trackmania_ingame3.jpg' %}

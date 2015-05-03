@@ -1,13 +1,10 @@
 {% extends 'layout.volt' %}
 
+{% block pageTitle %}{{'<i class="icon-award"></i> Toernooien / ' ~ tournament.name }}{% endblock %}
+
 {% block content %}
 
-{% if tournament %}
-    {% set pageTitle = '<i class="icon-award"></i> Toernooien / ' ~ tournament.name %}
-{% endif %}
-
 {% if tournament and not tournament.hasError %}
-    {% set pageTitle = '<i class="icon-award"></i> Toernooien / ' ~ tournament.name %}
 
     {% set entered = tournament.hasEntered(user.userId) %}
     {% set id = tournament.tournamentId %}
@@ -47,11 +44,12 @@
                     <a class="btn btn-lg btn-primary action-btn" href="{{ url('tournament/start/' ~ tournament.systemName ) }}">Start toernooi</a>
                 {% elseif started %}
                     <a class="btn btn-lg btn-danger action-btn" href="{{ url('tournament/end/' ~ tournament.systemName ) }}">Beeindig toernooi</a>
+                    <a class="btn btn-lg btn-warning action-btn" href="{{ url('tournament/reset/' ~ tournament.systemName ) }}">
+                        <i class="icon-attention"></i> Reset toernooi
+                    </a>
                 {% endif %}
-            {% endif %}
 
-            {% if isChallonge and not scoreType and not pending %}
-               <a href="#matches{{ id }}" class="btn btn-lg btn-default matchLink" data-tournament-id="{{ tournament.systemName }}">Bekijk matches</a>
+                <a href="{{ url('admin/tournaments/manage/' ~ tournament.systemName) }}" class="action-btn btn btn-lg btn-default"><i class="icon-pencil-squared"></i> Aanpassen</a>
             {% endif %}
 
             {% if isTeamTournament and pending and isAdmin %}
@@ -59,13 +57,10 @@
                    href="{{ url('tournament/generateteams/' ~ tournament.systemName ) }}">Genereer teams</a>
             {% endif %}
 
-            {% if isAdmin %}
-                <a data-tournament-id="{{ tournament.systemName }}" class="generate-players btn btn-lg btn-default"><i class="icon-attention">
-
-                        </i> Genereer spelers
-
+            {% if isAdmin and pending %}
+                <a data-tournament-id="{{ tournament.systemName }}" class="generate-players btn btn-lg btn-primary">
+                    <i class="icon-attention"></i> Genereer spelers
                 </a>
-                <a href="{{ url('admin/tournaments/manage/' ~ tournament.systemName) }}" class="btn btn-lg btn-default"><i class="icon-pencil-squared"></i> Aanpassen</a>
             {% endif %}
 
         </div>
@@ -73,10 +68,17 @@
 </div>
 {% endif %}
 
-{% if isTeamTournament and teams|length >= 2 %}
+{% if started  %}
+
+{#{% block javascript %}#}
+
 <script type="text/javascript">
     __BRACKET_DATA = {{ tournament.data }};
     __IS_DOUBLE_ELIMINATION = {% if tournament.type == 3 %}true{% else %}false{% endif %};
+
+    {% if isAdmin %}
+    __TOURNAMENT_ID = {{ id }};
+    {% endif %}
 </script>
 <div class="row">
     <div class="col-md-12 bracketcontainer">
@@ -85,7 +87,10 @@
         </div>
     </div>
 </div>
+{#{% endblock %}#}
+
 {% endif %}
+
 
 <div class="row">
     <div class="col-md-4 tournament-container">

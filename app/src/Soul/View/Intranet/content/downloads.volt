@@ -1,7 +1,7 @@
 {% extends 'layout.volt' %}
 
+{% block pageTitle %}<i class="icon-download"></i>&nbsp; Downloads {% endblock %}
 {% block content %}
-{% set pageTitle = '<i class="icon-download"></i>&nbsp; Downloads' %}
 
 <div class="row">
 

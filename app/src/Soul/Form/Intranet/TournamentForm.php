@@ -13,7 +13,6 @@ use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Regex;
 use Soul\Model\Tournament;
 use Soul\Form\Base;
-use Soul\Tournaments\Challonge;
 
 
 /**

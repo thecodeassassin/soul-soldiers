@@ -31,6 +31,7 @@ class TournamentController extends Base
     {
         $tournament = Tournament::findFirstBySystemName($systemName) or null;
 
+
         if ($tournament) {
             if ($tournament->isTeamTournament()) {
                 $teamUserCount = count($tournament->teams) * $tournament->teamSize;
@@ -39,26 +40,27 @@ class TournamentController extends Base
                 if ($teamUserCount != $userCount && $this->view->user->isAdmin()) {
                     $this->flashMessage('Het aantal spelers in teams is niet gelijk aan het aantal inschrijvingen, regeneer de teams voordat het toernooi start.', 'error');
                 }
-
             }
         }
 
-        if ($tournament->type != Tournament::TYPE_TOP_SCORE) {
-            $this->assets->collection('scripts')->addJs('js/intranet/bracket.js');
-            $this->assets->collection('main')->addCss('css/intranet/bracket.css');
-            $this->assets->collection('main')->addCss('css/intranet/bracket.custom.css');
-        }
+        if ($tournament->state == Tournament::STATE_STARTED) {
 
-        if ($this->getUser()->isAdmin()) {
+            if ($this->getUser()->isAdmin()) {
 
-
-            if ($tournament->type == Tournament::TYPE_TOP_SCORE) {
-                $this->assets->collection('scripts')->addJs('js/intranet/topscore.js');
-            } else {
-                $this->assets->collection('scripts')->addJs('js/intranet/eliminationAdmin.js');
+                if ($tournament->type == Tournament::TYPE_TOP_SCORE) {
+                    $this->assets->collection('scripts')->addJs('js/intranet/topscore.js');
+                } else {
+                    $this->assets->collection('scripts')->addJs('js/intranet/eliminationAdmin.js');
+                }
             }
-        } elseif ($tournament->type != Tournament::TYPE_TOP_SCORE) {
-            $this->assets->collection('scripts')->addJs('js/intranet/elimination.js');
+
+            if ($tournament->type != Tournament::TYPE_TOP_SCORE) {
+                $this->assets->collection('scripts')->addJs('js/intranet/bracket.js');
+                $this->assets->collection('scripts')->addJs('js/intranet/elimination.js');
+                $this->assets->collection('main')->addCss('css/intranet/bracket.css');
+                $this->assets->collection('main')->addCss('css/intranet/bracket.custom.css');
+            }
+
         }
 
         $this->view->tournament = $tournament;
@@ -178,15 +180,6 @@ class TournamentController extends Base
                 throw new \Exception(sprintf('Er dienen minimaal %d mensen mee te doen.', (2 * $tournament->teamSize)));
             }
 
-            if ($playerCount / $tournament->teamSize < 4 &&
-                in_array(
-                    $tournament->type,
-                    array(Tournament::TYPE_SINGLE_ELIMINATION, Tournament::TYPE_DOUBLE_ELIMINATION)
-                )
-            ) {
-//                throw new \Exception(sprintf('Er dienen minimaal 4 teams gemaakt te worden voor een single of double elimination tournooi.', (2 * $tournament->teamSize)));
-            }
-
             // delete all existing teams first
             TournamentTeam::deleteAllByTournamentId($tournament->tournamentId);
 
@@ -229,8 +222,6 @@ class TournamentController extends Base
                 $num += 1;
             }
 
-            $tournament->updateBracketData();
-
             $this->flashMessage(sprintf('Aantal teams gegenereerd: %d', count($teams)), 'success', true);
 
         } catch (\Exception $e) {
@@ -250,19 +241,48 @@ class TournamentController extends Base
     {
         $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
         $tournament = Tournament::findFirstBySystemName($systemName);
-
         if ($tournament) {
 
-
-            if ($tournament->isTeamTournament() && count($tournament->teams) < $tournament->teamSize || count($tournament->players) < 2) {
+            if ($tournament->isTeamTournament() && count($tournament->players) % $tournament->teamSize != 0
+                || count($tournament->players) < 2) {
                 $this->flashMessage('Er zijn nog geen teams aangemaakt, of er zijn onvoldoende spelers!', 'error', true);
             } else {
+
+                $tournament->updateBracketData($tournament->isTeamTournament());
 
                 $tournament->state = Tournament::STATE_STARTED;
                 $tournament->onlyStateUpdate = true;
                 $tournament->save();
 
 
+            }
+
+        }
+
+        return $this->response->redirect('tournament/view/'.$systemName);
+    }
+
+    /**
+     * @param $systemName
+     *
+     * @return \Phalcon\Http\ResponseInterface
+     */
+    public function resetAction($systemName)
+    {
+        $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
+        $tournament = Tournament::findFirstBySystemName($systemName);
+        if ($tournament) {
+
+            if ($tournament->state == Tournament::STATE_STARTED) {
+
+                $tournament->updateBracketData(false, '');
+
+                $tournament->state = Tournament::STATE_PENDING;
+                $tournament->onlyStateUpdate = true;
+                $tournament->save();
+
+
+                $this->flashMessage('Het toernooi is gereset', 'success', true);
             }
 
         }
@@ -292,23 +312,6 @@ class TournamentController extends Base
 
         return $this->response->redirect('tournament/view/'.$systemName);
     }
-
-
-    /**
-     * @param string     $systemName
-     * @param string|int $matchId
-     */
-    public function selectWinnerAction($systemName, $matchId)
-    {
-//        $tournament = Tournament::findFirstBySystemName($systemName);
-//
-//        if ($tournament) {
-//            $match = $tournament->getChallongeTournament()->getMatchById($matchId);
-//
-//            die(var_dump($match));
-//        }
-    }
-
 
     /**
      * @param $systemName
@@ -349,20 +352,7 @@ class TournamentController extends Base
         $tournament->updateRanks($users);
     }
 
-    public function getTournamentData($tournamentId)
-    {
-
-    }
-
-    /**
-     * @param string $tournamentName
-     */
-    protected function getChallongeError()
-    {
-        $this->flashMessage(sprintf('Challonge is onbereikbaar, probeer het later nogmaals.'), 'error', true);
-    }
-
-    /**
+       /**
      * @param $systemName
      */
     public function overviewAction($systemName)

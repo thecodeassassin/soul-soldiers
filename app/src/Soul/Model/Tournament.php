@@ -46,11 +46,6 @@ class Tournament extends Base
      */
     public $startDateString;
 
-    /**
-     *
-     * @var string
-     */
-    public $challongeId;
 
 
     /**
@@ -344,33 +339,8 @@ class Tournament extends Base
 
         $this->startDateString = date('d-m-y H:i', strtotime($this->startDate));
 
-//        die(var_dump($this->players[0]->user));
-
     }
 
-    /**
-     * @deprecated
-     * @return bool
-     */
-    public function isCompleted()
-    {
-        // a top score tournament ends when there is only 1 contestent left
-        if ($this->type == self::TYPE_TOP_SCORE) {
-
-            $players = TournamentUser::query()
-                ->where("tournamentId = :id:")
-                ->andWhere("active = 1")
-                ->bind(array("id" => $this->tournamentId))
-                ->execute();
-
-            return count($this->playersArray) > 1 && count($players) == 1;
-
-        } elseif ($this->isChallonge) {
-            return $this->getChallongeTournament->isCompleted();
-        }
-
-        return false;
-    }
 
     /**
      * @param $userId
@@ -453,38 +423,124 @@ class Tournament extends Base
     }
 
     /**
-     * @param null $rawData
+     * @param bool $teamTournament
+     * @param bool $manualData
      */
-    public function updateBracketData($rawData = null)
+    public function updateBracketData($teamTournament = false, $manualData = false)
     {
-        if ($rawData != null) {
-            $this->data = $rawData;
-        } else {
 
-            $teams = $this->teams;
+        if ($manualData !== false) {
+            $this->data = $manualData;
+        } else {
+            $results = [];
             $tournamentTeams = [];
 
-            foreach ($teams as $team) {
+            if ($teamTournament) {
+                $teams = $this->teams;
+                $tournamentTeams = [];
 
-                /** @var TournamentTeam $team */
-                $tournamentTeams[] = $team->name;
+                foreach ($teams as $team) {
 
+                    /** @var TournamentTeam $team */
+                    $tournamentTeams[] = $team->name;
+                }
+
+
+            } else {
+                foreach ($this->players as $player) {
+
+                    /** @var TournamentUser $player */
+                    $tournamentTeams[] = $player->user->nickName;
+                }
             }
 
+            shuffle($tournamentTeams);
+
+            // check the matches
+            $this->checkMatches($tournamentTeams);
+
+            // make the matches
             $matches = array_chunk($tournamentTeams, 2);
+
+            // create the result array
+            $resultCount = count($matches);
+            while($resultCount % 2 == 0) {
+
+                $matchResults = [];
+
+                for ($i=0;$i<$resultCount;$i++) {
+                    $matchResults[] = [null,null];
+                }
+
+                $results[] = $matchResults;
+                $resultCount = $resultCount / 2;
+            }
+
+            // set auto bye wins
+            foreach ($results[0] as $roundNum => &$round) {
+                $match = $matches[$roundNum];
+                $player1 = $match[0];
+                $player2 = $match[1];
+
+                if ($player1 == 'FREE PASS') {
+                    $round[0] = 0;
+                    $round[1] = 1;
+                } else if ($player2 == 'FREE PASS') {
+                    $round[0] = 1;
+                    $round[1] = 0;
+                }
+            }
+
+
 
             $data = array(
                 'teams' => $matches,
-                'results' => array()
+                'results' => $results
             );
 
             $this->data = json_encode($data);
-
         }
 
         $this->onlyStateUpdate = true;
         $this->save();
 
+    }
+
+    /**
+     * @param $players
+     *
+     */
+    protected function checkMatches(&$players)
+    {
+
+        $playerCount = count($players);
+        $nextPowerOfTwo = Util::nextPowerOfTwo($playerCount);
+
+        if ($playerCount < $nextPowerOfTwo) {
+            for($i=0;$i< $nextPowerOfTwo - $playerCount;$i++) {
+                $players[] = 'FREE PASS';
+            }
+        }
+
+        $matches = array_chunk($players, 2);
+
+        foreach ($matches as $match) {
+            if ($match[0] == 'FREE PASS' && $match[1] == 'FREE PASS') {
+                shuffle($players);
+                $this->checkMatches($players);
+                break;
+            }
+        }
+
+
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEliminationTournament()
+    {
+        return (in_array($this->type, array(self::TYPE_DOUBLE_ELIMINATION, self::TYPE_SINGLE_ELIMINATION)));
     }
 
     public function getTournamentTeams()
@@ -520,7 +576,6 @@ class Tournament extends Base
             'name' => 'name',
             'type' => 'type',
             'startDate' => 'startDate',
-            'challongeId' => 'challongeId',
             'systemName' => 'systemName',
             'rules' => 'rules',
             'prizes' => 'prizes',

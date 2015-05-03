@@ -92,6 +92,7 @@ return new \Phalcon\Config(
             'scripts' => [
                 'js' => [
                     "js-plugin/jquery/jquery-1.10.2.min.js",
+                    "js/jquery.json.min.js",
                     "js/blockui.js",
                     "js/common.js",
                     "js/intranet/ckeditor/ckeditor.js",

@@ -66,8 +66,16 @@
             <div id="page-content">
                 <div class="inner">
 
+
                     <div class="page-header page-header-top clearfix">
-                        <h4 class="pull-left">{{ pageTitle|default(router.getActionName())|capitalize }}</h4>
+                            {% if pageTitle is not defined %} {% set pageTitle = null %} {% endif %}
+                            <div class="{% if pageTitle %}hasPageTitle{% endif %}">
+                               <h4 class="pull-left">{{ pageTitle|default('') }}</h4>
+                                <div class="pageTitleBlock">
+                                    <h4 class="pull-left">{% block pageTitle %}{{ router.getActionName()|capitalize  }}{% endblock %}</h4>
+                                </div>
+                            </div>
+
                     </div>
 
 
@@ -79,6 +87,7 @@
                     </div>
 
                   {% block content %}{% endblock %}
+
                 </div>
             </div>
             <!-- END Page Content -->

@@ -24,5 +24,6 @@
     <!-- Stylesheets -->
     {# Output js/css content #}
     {{ assets.outputCss('main') }}
-    {# Custom javascript #}
+
+    {% block stylesheets %}{% endblock %}
 </head>

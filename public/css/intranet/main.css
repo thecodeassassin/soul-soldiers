@@ -2742,3 +2742,7 @@ ul.menuList
 .ui-sortable-handle {
     cursor: pointer;
 }
+
+.hasPageTitle .pageTitleBlock {
+    display: none;
+}

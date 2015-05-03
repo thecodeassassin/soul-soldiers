@@ -316,4 +316,21 @@ class Util {
     {
         return DI::getDefault()->get('logger');
     }
+
+    /**
+     * @param $number
+     *
+     * @return int
+     */
+    public static function nextPowerOfTwo($number)
+    {
+        if($number < 2) return 1;
+        if (($number & ($number - 1)) == 0) return $number;
+
+        for($i = 0 ; $number > 1 ; $i++)
+        {
+            $number = $number >> 1;
+        }
+        return 1<<($i+1);
+    }
 }
