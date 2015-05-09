@@ -16,11 +16,11 @@ return new \Phalcon\Config(
 
             'main' => [
                 'css' => [
-                  'https://fonts.googleapis.com/css?family=Droid+Sans:400,700',
-                  'https://fonts.googleapis.com/css?family=Roboto:400,300,500,700',
+                  'css/droidsans.css',
+                  'css/roboto.css',
                   'font-icons/custom-icons/css/custom-icons-ie7.css',
                   'font-icons/custom-icons/css/custom-icons.css',
-                  'https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css',
+                  'css/bootstrap.min.css',
                   'css/soul-color.css',
                   'js-plugin/magnific-popup/magnific-popup.css',
                   'css/layout.css',
@@ -41,7 +41,7 @@ return new \Phalcon\Config(
                     "js/blockui.js",
                     "js/common.js",
                     "js/jquery-ui.min.js",
-                    "https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js",
+                    "js/bootstrap.min.js",
                     "js-plugin/easing/jquery.easing.1.3.js",
 
                     "js-plugin/neko-contact-ajax-plugin/js/jquery.form.js",
@@ -74,8 +74,8 @@ return new \Phalcon\Config(
 
             'main' => [
                 'css' => [
-                    'https://fonts.googleapis.com/css?family=Roboto:400,300,500,700',
-                    'https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css',
+                    'css/roboto.css',
+                    'css/bootstrap.min.css',
 //                    'css/intranet/bootstrap.css',
                     'font-icons/custom-icons/css/custom-icons-ie7.css',
                     'font-icons/custom-icons/css/custom-icons.css',
@@ -95,21 +95,16 @@ return new \Phalcon\Config(
                     "js/jquery.json.min.js",
                     "js/blockui.js",
                     "js/common.js",
-                    "js/intranet/ckeditor/ckeditor.js",
                     "js/intranet/plugins.js",
-//                    "js/intranet/challonge.js",
                     "js/maskedinput.js",
                     'js/modernizr-2.6.1.min.js',
                     "js/magnificent.popup.min.js",
 //                    "js/jquery.loadmask.js",
-                    "js/datepicker.min.js",
-                    "js-plugin/neko-contact-ajax-plugin/js/jquery.validate.min.js",
-                    "js/jquery.validate.nl.js",
                     "js/bootbox.min.js",
                     "js/remote-modal.js",
-                    "js/jquery-ui.min.js",
+//                    "js/jquery-ui.min.js",
                     "js/intranet/main.js",
-                    "https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
+                    "js/bootstrap.min.js"
                 ]
             ]
         ]

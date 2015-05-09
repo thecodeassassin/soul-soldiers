@@ -380,4 +380,19 @@ class Base extends Controller
     {
         return $this->authService->getAuthData();
     }
+
+    /**
+     * @return bool
+     */
+    protected function isAdmin()
+    {
+        $user = $this->getUser();
+        $result = false;
+
+        if ($user) {
+            $result = $user->isAdmin();
+        }
+
+        return $result;
+    }
 }

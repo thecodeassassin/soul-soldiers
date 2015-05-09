@@ -139,6 +139,8 @@ class Tournament extends Base
     const STATE_STARTED = 1;
     const STATE_FINISHED = 2;
 
+    const BYE = 'FREE PASS';
+
     /**
      * @var ChallongeTournament
      */
@@ -284,6 +286,7 @@ class Tournament extends Base
         if (!$this->onlyStateUpdate) {
 
             $this->deletePlayers();
+            $this->reset();
 
         }
 
@@ -423,11 +426,25 @@ class Tournament extends Base
     }
 
     /**
+     *
+     */
+    public function start()
+    {
+        $this->state = Tournament::STATE_STARTED;
+        $this->onlyStateUpdate = true;
+        $this->save();
+    }
+
+    /**
      * @param bool $teamTournament
      * @param bool $manualData
      */
     public function updateBracketData($teamTournament = false, $manualData = false)
     {
+
+        if (!$this->isEliminationTournament()) {
+            $manualData = '[]';
+        }
 
         if ($manualData !== false) {
             $this->data = $manualData;
@@ -447,17 +464,30 @@ class Tournament extends Base
 
 
             } else {
-                foreach ($this->players as $player) {
+                $tournamentPlayers = $this->getTournamentPlayers();
+                foreach ($tournamentPlayers as $player) {
 
                     /** @var TournamentUser $player */
                     $tournamentTeams[] = $player->user->nickName;
                 }
             }
 
-            shuffle($tournamentTeams);
+            // generate byes
+            $playerCount = count($tournamentTeams);
+            $nextPowerOfTwo = Util::nextPowerOfTwo($playerCount);
+            $tempTeams = [];
 
-            // check the matches
-            $this->checkMatches($tournamentTeams);
+            $tournamentTeams = $this->sortBySeed($tournamentTeams);
+            if ($playerCount < $nextPowerOfTwo) {
+                for($i=0;$i< $nextPowerOfTwo - $playerCount;$i++) {
+                    $player = array_pop($tournamentTeams);
+
+                    $tempTeams[] = $player;
+                    $tempTeams[] = self::BYE;
+
+                }
+            }
+            $tournamentTeams = array_merge($tournamentTeams, $tempTeams);
 
             // make the matches
             $matches = array_chunk($tournamentTeams, 2);
@@ -482,10 +512,10 @@ class Tournament extends Base
                 $player1 = $match[0];
                 $player2 = $match[1];
 
-                if ($player1 == 'FREE PASS') {
+                if ($player1 == self::BYE) {
                     $round[0] = 0;
                     $round[1] = 1;
-                } else if ($player2 == 'FREE PASS') {
+                } else if ($player2 == self::BYE) {
                     $round[0] = 1;
                     $round[1] = 0;
                 }
@@ -507,35 +537,6 @@ class Tournament extends Base
     }
 
     /**
-     * @param $players
-     *
-     */
-    protected function checkMatches(&$players)
-    {
-
-        $playerCount = count($players);
-        $nextPowerOfTwo = Util::nextPowerOfTwo($playerCount);
-
-        if ($playerCount < $nextPowerOfTwo) {
-            for($i=0;$i< $nextPowerOfTwo - $playerCount;$i++) {
-                $players[] = 'FREE PASS';
-            }
-        }
-
-        $matches = array_chunk($players, 2);
-
-        foreach ($matches as $match) {
-            if ($match[0] == 'FREE PASS' && $match[1] == 'FREE PASS') {
-                shuffle($players);
-                $this->checkMatches($players);
-                break;
-            }
-        }
-
-
-    }
-
-    /**
      * @return bool
      */
     public function isEliminationTournament()
@@ -543,10 +544,54 @@ class Tournament extends Base
         return (in_array($this->type, array(self::TYPE_DOUBLE_ELIMINATION, self::TYPE_SINGLE_ELIMINATION)));
     }
 
-    public function getTournamentTeams()
+    public function generateTeams()
     {
-        /** @var Simple $teams */
-        $teams = $this->getTeams(['order' => 'seed ASC']);
+        $teams = [];
+        $players = [];
+
+        // delete all existing teams first
+        TournamentTeam::deleteAllByTournamentId($this->tournamentId);
+
+        $tournamentPlayers = $this->getTournamentPlayers();
+        foreach ($tournamentPlayers as $player) {
+            $players[] = $player->userId;
+        }
+
+
+
+        while (count($players) > 0) {
+
+            $newPlayers = array_splice($players, $this->teamSize);
+            $teams[] = $players;
+
+            $players = $newPlayers;
+        }
+
+        $num = 1;
+        foreach ($teams as $team) {
+            $tournamentTeam = new TournamentTeam();
+//                $teamNames = [];
+//
+//                foreach ($team as $userId) {
+//                    $user = User::findFirstByUserId($userId);
+//                    $teamNames[] = $user->nickName;
+//                }
+
+            $tournamentTeam->name = 'Team '.$num;
+            $tournamentTeam->tournamentId = $this->tournamentId;
+            $tournamentTeam->save();
+
+            // add all the players to the team
+            foreach ($team as $teamPlayer) {
+                $tournamentUser = TournamentUser::findFirstByTournamentIdAndUserId($this->tournamentId, $teamPlayer);
+                $tournamentUser->teamId = $tournamentTeam->teamId;
+                $tournamentUser->save();
+            }
+
+            $num += 1;
+        }
+
+        return $teams;
     }
 
     /**
@@ -640,6 +685,19 @@ class Tournament extends Base
             }
         }
 
+        $this->updateBracketData(false, null);
+    }
+
+    /**
+     *
+     */
+    public function reset()
+    {
+        $this->updateBracketData(false, null);
+
+        $this->state = Tournament::STATE_PENDING;
+        $this->onlyStateUpdate = true;
+        $this->save();
     }
 
     /**
@@ -681,6 +739,40 @@ class Tournament extends Base
                 $this->appendMessage(new Message($error));
             }
         }
+    }
+
+    /**
+     * http://stackoverflow.com/questions/8355264/tournament-bracket-placement-algorithm
+     * Author: DarkAngel
+     *
+     * Simply ensures that the top player (first player) is seeded/ ordered against the worst player.
+     *  1 vs 8, 4 vs 5, 2 vs 7, 3 vs 6 <-- Typical seeding outcome from this sorting.
+     *
+     * @param $players
+     *
+     * @return array
+     */
+    protected  function sortBySeed($players)
+    {
+
+        $count = count($players);
+
+        for ($i = 0; $i < log($count / 2, 2); $i++) {
+            $out = array();
+
+            foreach ($players as $player) {
+                $splice = pow(2, $i);
+
+                $out = array_merge($out, array_splice($players, 0, $splice));
+
+                $out = array_merge($out, array_splice($players, -$splice));
+            }
+
+            $players = $out;
+        }
+//
+        return $players;
+
     }
 
 }

@@ -45,22 +45,26 @@ class TournamentController extends Base
 
         if ($tournament->state == Tournament::STATE_STARTED) {
 
-            if ($this->getUser()->isAdmin()) {
+            if ($this->isAdmin()) {
 
-                if ($tournament->type == Tournament::TYPE_TOP_SCORE) {
-                    $this->assets->collection('scripts')->addJs('js/intranet/topscore.js');
-                } else {
+                if ($tournament->isEliminationTournament()) {
                     $this->assets->collection('scripts')->addJs('js/intranet/eliminationAdmin.js');
                 }
             }
 
-            if ($tournament->type != Tournament::TYPE_TOP_SCORE) {
+            if ($tournament->isEliminationTournament()) {
                 $this->assets->collection('scripts')->addJs('js/intranet/bracket.js');
                 $this->assets->collection('scripts')->addJs('js/intranet/elimination.js');
                 $this->assets->collection('main')->addCss('css/intranet/bracket.css');
                 $this->assets->collection('main')->addCss('css/intranet/bracket.custom.css');
             }
 
+        }
+
+        if (($tournament->isEliminationTournament() && $tournament->state != Tournament::STATE_STARTED
+            ) || !$tournament->isEliminationTournament()) {
+            $this->assets->collection('scripts')->addJs('js/jquery-ui.min.js');
+            $this->assets->collection('scripts')->addJs('js/intranet/topscore.js');
         }
 
         $this->view->tournament = $tournament;
@@ -161,8 +165,6 @@ class TournamentController extends Base
     public function generateTeamsAction($systemName)
     {
         $tournament = Tournament::findFirstBySystemName($systemName);
-        $teams = [];
-        $players = [];
 
         try {
 
@@ -180,47 +182,7 @@ class TournamentController extends Base
                 throw new \Exception(sprintf('Er dienen minimaal %d mensen mee te doen.', (2 * $tournament->teamSize)));
             }
 
-            // delete all existing teams first
-            TournamentTeam::deleteAllByTournamentId($tournament->tournamentId);
-
-            foreach ($tournament->players as $player) {
-                $players[] = $player->userId;
-            }
-
-            // shuffle the array
-            shuffle($players);
-
-            while (count($players) > 0) {
-
-                $newPlayers = array_splice($players, $tournament->teamSize);
-                $teams[] = $players;
-
-                $players = $newPlayers;
-            }
-
-            $num = 1;
-            foreach ($teams as $team) {
-                $tournamentTeam = new TournamentTeam();
-//                $teamNames = [];
-//
-//                foreach ($team as $userId) {
-//                    $user = User::findFirstByUserId($userId);
-//                    $teamNames[] = $user->nickName;
-//                }
-
-                $tournamentTeam->name = 'Team '.$num;
-                $tournamentTeam->tournamentId = $tournament->tournamentId;
-                $tournamentTeam->save();
-
-                // add all the players to the team
-                foreach ($team as $teamPlayer) {
-                    $tournamentUser = TournamentUser::findFirstByTournamentIdAndUserId($tournament->tournamentId, $teamPlayer);
-                    $tournamentUser->teamId = $tournamentTeam->teamId;
-                    $tournamentUser->save();
-                }
-
-                $num += 1;
-            }
+            $teams = $tournament->generateTeams();
 
             $this->flashMessage(sprintf('Aantal teams gegenereerd: %d', count($teams)), 'success', true);
 
@@ -249,12 +211,7 @@ class TournamentController extends Base
             } else {
 
                 $tournament->updateBracketData($tournament->isTeamTournament());
-
-                $tournament->state = Tournament::STATE_STARTED;
-                $tournament->onlyStateUpdate = true;
-                $tournament->save();
-
-
+                $tournament->start();
             }
 
         }
@@ -275,13 +232,7 @@ class TournamentController extends Base
 
             if ($tournament->state == Tournament::STATE_STARTED) {
 
-                $tournament->updateBracketData(false, '');
-
-                $tournament->state = Tournament::STATE_PENDING;
-                $tournament->onlyStateUpdate = true;
-                $tournament->save();
-
-
+                $tournament->reset();
                 $this->flashMessage('Het toernooi is gereset', 'success', true);
             }
 

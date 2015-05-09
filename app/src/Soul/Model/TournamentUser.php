@@ -45,6 +45,11 @@ class TournamentUser extends Base
     public $rank;
 
     /**
+     * @var integer
+     */
+    public $seed;
+
+    /**
      * @var bool Skips deletion checks, use with care
      */
     public $deleteForce = false;
@@ -126,7 +131,7 @@ class TournamentUser extends Base
      */
     public static function findByTeamId($teamId)
     {
-        return self::find('teamId = \''.$teamId.'\'');
+        return self::find(['teamId = \''.$teamId.'\'', 'order' => 'rank ASC']);
     }
 
     /**
@@ -141,7 +146,8 @@ class TournamentUser extends Base
             'active' => 'active',
             'teamId' => 'teamId',
             'participantId' => 'participantId',
-            'rank' => 'rank'
+            'rank' => 'rank',
+            'seed' => 'seed'
         );
     }
 

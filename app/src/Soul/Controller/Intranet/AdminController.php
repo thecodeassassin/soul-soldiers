@@ -38,7 +38,6 @@ class AdminController extends \Soul\Controller\Website\AdminController
     {
         $tournament = Tournament::findFirstBySystemName($systemName);
         $this->tournamentForm($tournament);
-
     }
 
     /**
@@ -158,6 +157,10 @@ class AdminController extends \Soul\Controller\Website\AdminController
     {
         $tournamentForm = new TournamentForm();
         $error = false;
+
+        // add ckeditor JS
+        $this->assets->collection('scripts')->addJs('js/intranet/ckeditor/ckeditor.js');
+        $this->assets->collection('scripts')->addJs('js/datepicker.min.js');
 
         if ($this->request->isPost()) {
 

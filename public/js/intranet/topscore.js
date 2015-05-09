@@ -5,11 +5,15 @@ $(function(){
             var data = $(this).sortable('serialize', {attribute: 'data-player-id'}),
                 tournamentId = $(this).attr('data-tournament-id');
 
+            ajaxLoad(true);
             // POST to server using $.post or $.ajax
             $.ajax({
                 data: data,
                 type: 'POST',
-                url: '/tournament/updateRank/'+tournamentId
+                url: '/tournament/updateRank/'+tournamentId,
+                complete: function() {
+                    window.location.reload(true);
+                }
             });
         }
     });

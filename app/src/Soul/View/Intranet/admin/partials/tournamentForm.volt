@@ -78,7 +78,9 @@
 <div class="form-group">
     <div class="{% if mode is 'edit' %} col-md-5 col-md-offset-8 {% else %} col-md-2 col-md-offset-10 {% endif %}">
         {% if mode is 'edit' %}
-        <a class="btn btn-danger btn-lg" href="{{ url('admin/tournaments/delete/' ~ tournament.systemName) }}" onclick="return confirm('Zeker weten?')"><i class="icon-remove-circle">Verwijderen</i></a>
+        <a class="btn btn-danger btn-lg" href="{{ url('admin/tournaments/delete/' ~ tournament.systemName) }}" onclick="return confirm('Zeker weten?')">
+            Verwijderen
+        </a>
         {% endif %}
         {{ form.render('Opslaan') }}
     </div>

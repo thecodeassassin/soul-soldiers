@@ -18,7 +18,7 @@
     {% set complete = tournament.state == constant('\Soul\Model\Tournament::STATE_FINISHED') %}
     {% set pending = tournament.state == constant('\Soul\Model\Tournament::STATE_PENDING') %}
     {% set started = tournament.state == constant('\Soul\Model\Tournament::STATE_STARTED') %}
-
+    {% set byeStr = constant('\Soul\Model\Tournament::BYE') %}
 
 {% if complete %}
    <div class="alert alert-warning">
@@ -68,13 +68,14 @@
 </div>
 {% endif %}
 
-{% if started  %}
+{% if started and tournament.isEliminationTournament() %}
 
 {#{% block javascript %}#}
 
 <script type="text/javascript">
     __BRACKET_DATA = {{ tournament.data }};
     __IS_DOUBLE_ELIMINATION = {% if tournament.type == 3 %}true{% else %}false{% endif %};
+    __BYE_STR = '{{ byeStr }}';
 
     {% if isAdmin %}
     __TOURNAMENT_ID = {{ id }};
@@ -83,7 +84,7 @@
 <div class="row">
     <div class="col-md-12 bracketcontainer">
         <div class="well">
-            <div id="bracket"></div>
+            <div id="bracket"><img src="/img/ajax-loader.gif" height="25" width="25"> Bezig met bracket laden...</div>
         </div>
     </div>
 </div>
@@ -142,13 +143,15 @@
                 <h3>Deelnemers ({{ tournament.players|length }})</h3>
 
                 <ul class="list-group" data-tournament-id="{{ tournament.tournamentId }}">
+                    {% set i = 0 %}
                     {% for place,player in tournamentPlayers %}
 
                     {% set removed = player.active is '0' %}
 
-                    <li class="list-group-item {% if removed %} disabled{% endif %}" data-player-id="userId_{{ player.userId }}">
+                    <li class="list-group-item {% if isTeamTournament and i != 0 and (i % tournament.teamSize == 0 )%}team-seperator{% endif %}
+                      {% if removed %} disabled{% endif %}" data-player-id="userId_{{ player.userId }}">
 
-                        {% if isAdmin and scoreType %}
+                        {% if isAdmin and not (started and tournament.isEliminationTournament())%}
                         <span class="glyphicon glyphicon-sort"></span>
                         {% endif %}
 
@@ -164,13 +167,15 @@
                         {% if isAdmin %}
                         <div class="scoreControls">
 
-                        {% if pending or (scoreType and not complete and player['active']) %}
+                        {% if pending or (scoreType and not complete and player.active) %}
                         <a href="{{ url('tournament/removeUser/'~ tournament.systemName ~ '/' ~ player.tournamentUserId) }}" onclick="return ajaxConfirm('Weet je zeker dat deze gebruiker niet meer mee doet?');"
                            class="pull-left btn btn-sm {% if started and scoreType %}btn-default{% else %}btn-danger{% endif %} removeUser"><i class="icon-trash"></i></a>
                         {% endif %}
                         </div>
                         {% endif %}
                     </li>
+                    {% set i += 1 %}
+
                     {% else %}
                 </ul>
                 <h5>Er zijn nog geen inschrijvingen</h5>

@@ -32,6 +32,8 @@ class Intranet extends Security
             return $this->response->redirect('login');
         }
 
-        parent::beforeDispatch($event, $dispatcher);
+
+
+        return parent::beforeDispatch($event, $dispatcher);
     }
 }

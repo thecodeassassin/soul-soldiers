@@ -1742,6 +1742,10 @@ header.navbar .navbar-brand {
     padding: 1px 5px;
 }
 
+.team-seperator {
+    margin-top: 15px;
+}
+
 /* Tabs */
 .nav-tabs.nav-right > li {
     float: right;

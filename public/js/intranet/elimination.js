@@ -13,14 +13,18 @@ $(function (){
 
     $('.team').find('.label').each(function() {
        var originalFunction,
-           parentElem = $(this).parent();
-       parentElem.attr('title', $(this).html());
-       parentElem.tooltip({
-           trigger: 'manual'
-       });
-       parentElem.hover(function() {
-           $(this).tooltip('toggle')
-       });
+           parentElem = $(this).parent(),
+           title = $(this).html();
+       parentElem.attr('title', title);
+
+        if (title != '--' && title != __BYE_STR) {
+            parentElem.tooltip({
+                trigger: 'manual'
+            });
+            parentElem.hover(function() {
+                $(this).tooltip('toggle')
+            });
+        }
     });
     jqBracket = $('.jQBracket');
 
