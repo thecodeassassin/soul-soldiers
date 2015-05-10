@@ -20,7 +20,6 @@
                 De verliezer komt dan terecht in de verliezers competitie, deze werkt op dezelfde manier als de normale competitie. <br />
                 Dit gaat door tot er 2 spelers overblijven (de winnaar van de normale competitie en de winnaar van de verliezers competitie.)<br />
                 Deze spelers zullen een 'best of 3' games spelen om de uiteindelijke winnaar te bepalen.<br /><br />
-                {#Inschrijven voor deze compo :<a href="http://challonge.com/tournaments/signup/OPxeG1QZwl" target="_blank"> Inschijven voor Starcraft 2</a> </p> <br />#}
             <br /><br />
 
             <h3>Compo 2 : Trackmania </h3>
@@ -35,7 +34,6 @@
                 De deelnemer die aan het einde van alle rondes de meeste punten heeft, is de winnaar van deze competitie.<br />
                 Mochten er meerdere spelers de zelfde (hoogste) score hebben, wordt de winaar bepaald door nogmaals de Mixed round te spelen.<br />
                 <br />
-                {#Inschrijven voor deze compo : <a href="http://soulsoldiers.challonge.com/tournaments/signup/bMsP70x0Up" target="_blank"> Inschijven voor Trackmania</a></p> <br />#}
             <br /><br />
 
             <h3>Compo 3 : Unreal Tournament 2004 </h3>
@@ -52,7 +50,6 @@
                 De deelnemer die aan het einde van alle rondes de meeste punten heeft, is de winnaar van deze competitie.<br />
                 Mochten er meerdere spelers de zelfde (hoogste) score hebben, zal de winnaar in een FFA van 10 minuten bepaald worden. <br />
                 <br />
-                {#Inschrijven voor deze compo :  <a href="http://soulsoldiers.challonge.com/tournaments/signup/zvyX1T2L7O" target="_blank">Inschijven voor Unreal Tournament 2004</a></p> <br />#}
                 <br /><br />
 
 

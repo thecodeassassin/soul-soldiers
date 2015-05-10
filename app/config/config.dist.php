@@ -63,10 +63,6 @@ return new \Phalcon\Config(
         'crypt' => [
             'key' => ''
         ],
-        'challonge' => [
-            'apiKey' => '',
-            'subdomain' => ''
-        ],
         'twitter' => [
             'key' => '',
             'secret' => '',

@@ -158,13 +158,14 @@ class AdminController extends \Soul\Controller\Website\AdminController
         $tournamentForm = new TournamentForm();
         $error = false;
 
+
         // add ckeditor JS
         $this->assets->collection('scripts')->addJs('js/intranet/ckeditor/ckeditor.js');
         $this->assets->collection('scripts')->addJs('js/datepicker.min.js');
 
         if ($this->request->isPost()) {
 
-
+            $backToTournament = $this->request->getPost('back');
             $tournamentForm->bind($this->request->getPost(), $tournament);
 
             // if isTeamTournament is empty, set the value to 0
@@ -207,6 +208,10 @@ class AdminController extends \Soul\Controller\Website\AdminController
                     if ($saveState && !$error) {
 
                         $this->flashMessage('Het toernooi is opgeslagen', 'success', true);
+
+                        if ($backToTournament) {
+                            return $this->response->redirect('tournament/view/' . $tournament->systemName);
+                        }
 
                         return $this->response->redirect('admin/tournaments');
                     } else {

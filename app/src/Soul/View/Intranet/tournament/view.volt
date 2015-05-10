@@ -49,7 +49,7 @@
                     </a>
                 {% endif %}
 
-                <a href="{{ url('admin/tournaments/manage/' ~ tournament.systemName) }}" class="action-btn btn btn-lg btn-default"><i class="icon-pencil-squared"></i> Aanpassen</a>
+                <a href="{{ url('admin/tournaments/manage/' ~ tournament.systemName ~ '?back=true') }}" class="action-btn btn btn-lg btn-default"><i class="icon-pencil-squared"></i> Aanpassen</a>
             {% endif %}
 
             {% if isTeamTournament and pending and isAdmin %}

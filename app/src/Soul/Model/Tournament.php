@@ -142,16 +142,6 @@ class Tournament extends Base
     const BYE = 'FREE PASS';
 
     /**
-     * @var ChallongeTournament
-     */
-    public $challonge;
-
-    public $challongeTypes = [
-        self::TYPE_SINGLE_ELIMINATION => 'single elimination',
-        self::TYPE_DOUBLE_ELIMINATION => 'double elimination',
-    ];
-
-    /**
      * @var
      */
     public $playerCacheKey;
@@ -230,27 +220,34 @@ class Tournament extends Base
      */
     public function beforeValidationOnUpdate()
     {
-        $existing = self::findFirstBySystemName($this->systemName);
 
-        if (!$this->isTeamTournament && $existing->isTeamTournament()) {
-            $this->setTeamTournament(false);
+        if (!$this->onlyStateUpdate) {
+            $existing = self::findFirstBySystemName($this->systemName);
 
-            $this->teamSize = null;
+            // on important changes, we have to reset the tournament
+            if ($this->type != $existing->type
+                || $this->isTeamTournament != $existing->isTeamTournament()
+                || $this->teamSize != $existing->teamSize
+            ) {
 
-            // remove any teams associated with this tournament
-            $tournamentTeams = TournamentTeam::findByTournamentId($this->tournamentId);
+                // remove any teams associated with this tournament
+                $tournamentTeams = TournamentTeam::findByTournamentId($this->tournamentId);
 
-            foreach ($tournamentTeams as $team) {
-                $players = $team->getPlayers();
+                foreach ($tournamentTeams as $team) {
+                    $players = $team->getPlayers();
 
-                // remove users from the team
-                foreach ($players as $player) {
-                    $player->teamId = null;
-                    $player->save();
+                    // remove users from the team
+                    foreach ($players as $player) {
+                        $player->teamId = null;
+                        $player->save();
+                    }
+
+                    // delete the team
+                    $team->delete();
                 }
 
-                // delete the tournament
-                $team->delete();
+                $this->reset();
+
             }
 
         }
@@ -270,20 +267,6 @@ class Tournament extends Base
 
         return true;
     }
-
-    public function beforeUpdate()
-    {
-
-        if (!$this->onlyStateUpdate) {
-
-            $this->deletePlayers();
-            $this->reset();
-
-        }
-
-        return true;
-    }
-
 
     /**
      * @return \Phalcon\Mvc\Model\ResultsetInterface
@@ -637,22 +620,6 @@ class Tournament extends Base
     }
 
     /**
-     * @return null|ChallongeTournament
-     */
-    public function getChallongeTournament()
-    {
-        try {
-            return new ChallongeTournament($this->challongeId);
-
-        } catch(ChallongeException $e) {
-            $this->hasError = true;
-            $challonge = null;
-        }
-
-        return null;
-    }
-
-    /**
      * Deletes all players associated with this tournament
      */
     public function deletePlayers()
@@ -700,36 +667,6 @@ class Tournament extends Base
         $startDate->setTimezone(new \DateTimeZone('Europe/Amsterdam'));
 
         return (string)$startDate->format('Y-m-d H:i:s O');
-    }
-
-    /**
-     * Checks whether or not this tournament is linked on challonge
-     * @return bool
-     */
-    public function isChallongeTournament()
-    {
-        return in_array($this->type, [self::TYPE_SINGLE_ELIMINATION, self::TYPE_DOUBLE_ELIMINATION]);
-    }
-
-    /**
-     * @return Challonge
-     */
-    protected function getChallongeAPI()
-    {
-        return $this->getDI()->get('challonge');
-    }
-
-    /**
-     * @param Challonge $challonge
-     */
-    protected function appendChallongeErrors(Challonge $challonge)
-    {
-        foreach ($challonge->errors as $error) {
-            $error = (string) $error;
-            if (!empty($error)) {
-                $this->appendMessage(new Message($error));
-            }
-        }
     }
 
     /**

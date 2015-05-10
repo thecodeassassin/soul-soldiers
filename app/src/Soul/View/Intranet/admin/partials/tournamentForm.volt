@@ -85,4 +85,8 @@
         {{ form.render('Opslaan') }}
     </div>
 </div>
+{% if request.get('back') %}
+    <input type="hidden" name="back" value="true" />
+{% endif %}
+
 {{ endform() }}
