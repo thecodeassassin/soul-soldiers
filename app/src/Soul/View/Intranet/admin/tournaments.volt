@@ -5,7 +5,7 @@
 <div class="row">
 
     <div class="col-md-12 pt15 pb15">
-        <a class="btn btn-primary" href="{{ url('admin/tournaments/add') }}"><i class="icon-plus-circled">Nieuw toernooi</i></a>
+        <a class="btn btn-primary" href="{{ url('admin/tournaments/add') }}"><i class="icon-plus-circled">&nbsp;</i>Nieuw toernooi</a>
     </div>
 
     <div class="col-md-12">
@@ -37,8 +37,8 @@
                         <td>{% if tournament.hasError %}<span class="text-danger"><i class="icon-attention-circle"></i> </span>{% else %}<span class="text-success"><i class="icon-check"></i> </span>{% endif %}</td>
                         <td>{% if tournament.isTeamTournament() %}Ja{% else %}Nee{% endif %}</td>
                         <td>
-                            <a class="btn btn-default" href="{{ url('admin/tournaments/manage/' ~ tournament.systemName) }}"><i class="icon-edit">Aanpassen</i></a>
-                            <a class="btn btn-danger" href="{{ url('admin/tournaments/delete/' ~ tournament.systemName) }}" onclick="return confirm('Zeker weten?')"><i class="icon-remove-circle">Verwijderen</i></a>
+                            <a class="btn btn-default" href="{{ url('admin/tournaments/manage/' ~ tournament.systemName) }}"><i class="icon-edit">&nbsp;</i>Aanpassen</a>
+                            <a class="btn btn-danger" href="{{ url('admin/tournaments/delete/' ~ tournament.systemName) }}" onclick="return confirm('Zeker weten?')"><i class="icon-remove-circle">&nbsp;</i>Verwijderen</a>
 
                             {% if tournament.isChallonge %}
                                 <a class="btn btn-info matchLink" data-toggle="tooltip" title="Bekijk matches" href="#matches{{ tournament.tournamentId }}" data-tournament-id="{{ tournament.systemName }}"><i class="icon-eye"></i> </a>

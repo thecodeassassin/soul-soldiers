@@ -211,20 +211,11 @@ class Tournament extends Base
     }
 
     /**
-     * Sanitize the system name before saving the tournament
-     */
-    public function beforeCreate()
-    {
-
-        $this->systemName = preg_replace('/[^A-Za-z0-9\_]/', '', strtolower(str_replace(' ', '_', $this->name)));
-
-    }
-
-    /**
      * When creating
      */
     public function beforeValidationOnCreate()
     {
+        $this->systemName = preg_replace('/[^A-Za-z0-9\_]/', '', strtolower(str_replace(' ', '_', $this->name)));
 
         if (!$this->isTeamTournament) {
             $this->setTeamTournament(false);

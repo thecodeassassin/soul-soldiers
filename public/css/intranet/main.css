@@ -31,6 +31,10 @@ body.login {
     background-size: 6px 1px;
 }
 
+body.login h3 {
+    color: #ffffff;
+}
+
 #login-container {
     padding: 20px;
     margin: 0 auto;

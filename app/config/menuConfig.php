@@ -27,21 +27,15 @@ $tournamentNames = [];
 if (ACTIVE_MODULE == 'intranet') {
     $cache = Phalcon\DI::getDefault()->get('cache');
     $url = Phalcon\DI::getDefault()->get('url');
-    $tournamentNames = $cache->get('tournament_menu');
 
-    if (!$tournamentNames) {
-        $tournaments = \Soul\Model\Tournament::find();
-        $tournamentNames = [];
-        if ($tournaments) {
-            foreach ($tournaments as $tournament) {
-                $tournamentNames[$tournament->name] = $url->get('tournament/view/'.$tournament->systemName);
-            }
+    $tournaments = \Soul\Model\Tournament::find();
+    $tournamentNames = [];
+    if ($tournaments) {
+        foreach ($tournaments as $tournament) {
+            $tournamentNames[$tournament->name] = $url->get('tournament/view/'.$tournament->systemName);
         }
-
-        // cache the menu for a day
-        $cache->save('tournament_menu', $tournamentNames, 86400);
-
     }
+
 }
 
 // menu available for everybody
