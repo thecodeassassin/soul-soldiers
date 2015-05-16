@@ -11,6 +11,7 @@ use Phalcon\Logger;
 use Phalcon\Logger\Adapter;
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\View;
+use Phalcon\Validation\Message\Group;
 use Soul\AclBuilder;
 use Soul\Auth\AuthService;
 use Soul\Cms\Editor;
@@ -291,7 +292,7 @@ class Base extends Controller
     /**
      * Flash an array of messages
      *
-     * @param array|\stdClass $messages
+     * @param array|\stdClass |Group $messages
      * @param string          $type
      * @param bool            $isSession
      */

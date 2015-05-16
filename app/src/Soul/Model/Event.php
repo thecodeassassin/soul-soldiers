@@ -333,6 +333,21 @@ class Event extends Base
     }
 
     /**
+     * Returns a list of payed users
+     *
+     * @return array
+     */
+    public function getUsers()
+    {
+        $users = [];
+        foreach ($this->entries as $entry) {
+                $users[] = $entry->user;
+        }
+
+        return $users;
+    }
+
+    /**
      * @return bool
      */
     public function hasPassed()

@@ -9,6 +9,7 @@ use Phalcon\Http\Response;
 use Phalcon\Mvc\View;
 use Soul\AclBuilder;
 use Soul\Form\EditUserForm;
+use Soul\Form\MassMailForm;
 use Soul\Model\Event;
 use Soul\Model\Payment;
 use Soul\Model\StaticModel\DataList;
@@ -39,7 +40,55 @@ class AdminController extends \Soul\Controller\Base
 
     public function massMailAction()
     {
-        $this->view->page = 'massmail';
+        $event = Event::getCurrent();
+
+        if ($event) {
+
+            $submitted = false;
+            $massmailForm = new MassMailForm(null, $event->getUsers());
+
+            if ($this->request->isPost()) {
+
+                $emailString = $this->request->getPost('emails');
+                $emailContent = $this->request->getPost('content', 'string');
+                $subject = $this->request->getPost('subject', 'string');
+                preg_match_all("/\<(.+?)\>(.+?);/", $emailString, $emailAddresses);
+
+                // if the form is invalid, show the messages to the user
+                if ($massmailForm->isValid($this->request->getPost()) == false) {
+                    $this->flashMessages($massmailForm->getMessages(), 'error');
+
+                } else {
+                    $submitted = true;
+
+                    if (count($emailAddresses[1]) > 0 && count($emailAddresses[2]) > 0) {
+
+                        $emails = [];
+
+                        for($i=0;$i<count($emailAddresses[1]);$i++) {
+                            $emails[trim($emailAddresses[2][$i])] = trim($emailAddresses[1][$i]);
+                        }
+
+                        $user = null;
+
+                        // if the form is valid, inform the adminEmail
+                        $this->getMail()->send(
+                        $emails,
+                        $subject,
+                        'massmail',
+                        compact('subject', 'emailContent', 'user'));
+                    } else {
+                        $this->flashMessage('Ongeldige email adressessen', 'error');
+                    }
+
+                }
+
+            }
+
+            $this->view->submitted = $submitted;
+            $this->view->form = $massmailForm;
+            $this->view->page = 'massmail';
+        }
     }
 
     public function usersAction()
