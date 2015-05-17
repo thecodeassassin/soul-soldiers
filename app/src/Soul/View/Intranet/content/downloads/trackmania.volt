@@ -12,8 +12,8 @@
             <h1>Installatie instructies</h1>
            <br />
                 Download het bestand wat op de download pagina te vinden is.<br />
-                         Installeer het spel ( met behulp van de gedownloade exe file). <br />
-                         In de map waar je het spel heb geinstalleerd staat de file ra2md.exe, start hiermee het spel op.<br /><br />
+                Installeer het spel ( met behulp van de gedownloade exe file). <br />
+                In de map waar je het spel heb geinstalleerd staat de file TmForever.exe, start hiermee het spel op.<br /><br />
                 </p><p>
                 Indien je steam bezit kan je trackmania nations forever ( gratis ) ook met steam downloaden.
 
