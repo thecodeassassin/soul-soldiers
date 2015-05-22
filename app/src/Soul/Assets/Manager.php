@@ -137,7 +137,7 @@ class Manager extends \Phalcon\Assets\Manager
     {
 
         if ($collectionObj = $this->get($collection)) {
-            if (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT &&  is_readable($collectionObj->getTargetPath())) {
+            if (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT &&  is_readable($collectionObj->getTargetPath() && ACTIVE_MODULE == 'website')) {
                 return Tag::stylesheetLink([$collectionObj->getTargetUri()]);
             } else {
                 parent::outputCss($collection);

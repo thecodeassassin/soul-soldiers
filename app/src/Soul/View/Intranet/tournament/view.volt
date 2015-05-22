@@ -52,9 +52,12 @@
                     <a class="btn btn-lg btn-primary action-btn" href="{{ url('tournament/start/' ~ tournament.systemName ) }}">Start toernooi</a>
                 {% elseif started %}
                     <a class="btn btn-lg btn-danger action-btn" href="{{ url('tournament/end/' ~ tournament.systemName ) }}">Beeindig toernooi</a>
+
+                    {% if env == 'development' %}
                     <a class="btn btn-lg btn-warning action-btn" href="{{ url('tournament/reset/' ~ tournament.systemName ) }}">
                         <i class="icon-attention"></i> Reset toernooi
                     </a>
+                    {% endif %}
                 {% endif %}
 
                 <a href="{{ url('admin/tournaments/manage/' ~ tournament.systemName ~ '?back=true') }}" class="action-btn btn btn-lg btn-default"><i class="icon-pencil-squared"></i> Aanpassen</a>
