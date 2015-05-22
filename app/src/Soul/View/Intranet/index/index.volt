@@ -67,7 +67,7 @@
                     <div class="mt30">
                         <h3><span class="icon-award"></span> Toernooien</h3>
                         <p>
-                            Om deel te nemen aan een toernooi dien je enkel naar de pagina <a href="{{ url('tournaments') }}">Toernooien</a> te gaan
+                            Om deel te nemen aan een toernooi dien je enkel naar de pagina van het toernooi te gaan
                             en op 'Inschrijven' te klikken. De scores worden door de crew bijgewerkt. <br /> <br />
 
                             {#<i class="icon-attention-circle"></i>&nbsp; Let op! Voor Starcraft II is het verplicht om door te geven wie er heeft gewonnen en het maken van#}

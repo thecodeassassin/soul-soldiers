@@ -19,7 +19,7 @@
     {% set pending = tournament.state == constant('\Soul\Model\Tournament::STATE_PENDING') %}
     {% set started = tournament.state == constant('\Soul\Model\Tournament::STATE_STARTED') %}
     {% set byeStr = constant('\Soul\Model\Tournament::BYE') %}
-
+    {% set env = constant('APPLICATION_ENV') %}
 {% if complete %}
    <div class="alert alert-warning">
        <span><i class="icon-info-circled"></i>  Het toernooi is afgelopen</span>
@@ -65,7 +65,7 @@
                    href="{{ url('tournament/generateteams/' ~ tournament.systemName ) }}">Genereer teams</a>
             {% endif %}
 
-            {% if isAdmin and pending %}
+            {% if isAdmin and pending and env == 'development' %}
                 <a data-tournament-id="{{ tournament.systemName }}" class="generate-players btn btn-lg btn-primary">
                     <i class="icon-attention"></i> Genereer spelers
                 </a>
