@@ -26,12 +26,16 @@
    </div>
 {% endif %}
 
-{% if (pending and scoreType) or (not entered and pending) or isAdmin or (isChallonge and not isTeamTournament) or (isTeamTournament and teams|length == 0) %}
+{% if (pending and scoreType) or (not entered and pending) or isAdmin or (isChallonge and not isTeamTournament) or (isTeamTournament and teams|length == 0) or entered %}
 <div class="row">
     <div class="col-md-12">
         <div class="gutter well">
             {% if not entered and pending %}
                 <a class="btn btn-lg btn-success action-btn" href="{{ url('tournament/signup/' ~ tournament.systemName ) }}">Inschrijven</a>
+            {% endif %}
+
+            {% if entered %}
+                <a class="btn btn-lg btn-default disabled" disabled="disabled" href="">Ingeschreven</a>
             {% endif %}
 
             {% if entered and pending and not isTeamTournament or (entered and isTeamTournament and teams|length == 0) %}

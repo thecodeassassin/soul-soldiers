@@ -43,16 +43,15 @@
                         <h4>Menu</h4>
                         <ul class="menuList">
                             <li>Huisgemaakte Nasi</li>
-                            <li>Huisgemaakte thaise loempia's</li>
+                            <li>Thaise Laab Kai (Thaise salde van kipdij gehakt, koriander en ui)</li>
                             <li>Kipsate</li>
-                            <li>Salade</li>
                         </ul>
                     {% endif %}
 
                     <h4>Eten/Drinken</h4>
                     <p>
-                        Er is bij de crew energy drink te koop voor &euro; 1 euro per stuk. Tijdens deze lan geld tevens 3 halen 2 betalen voor de energy drink :) <br />
-
+                        {#Er is bij de crew energy drink te koop voor &euro; 1 euro per stuk. Tijdens deze lan geld tevens 3 halen 2 betalen voor de energy drink :) <br />#}
+                        Iedereen is verantwoordelijk voor z'n eigen eten en drinken tijdens de LAN party.
                     </p>
                     <h4>Chat / Bestanden</h4>
                     <p>

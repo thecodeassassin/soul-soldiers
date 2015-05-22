@@ -125,12 +125,12 @@ return new \Phalcon\Config(
                     ],
                     AclBuilder::ROLE_USER => [
                         'account' => ['logout', 'manage'],
-                        'tournament' => ['index', 'signup', 'overview', 'view', 'cancel', 'updateRank']
+                        'tournament' => ['index', 'signup', 'overview', 'view', 'cancel']
                     ],
                     AclBuilder::ROLE_ADMIN => [
                         'admin' => '*',
                         'index' => ['generate', 'addNews', 'deleteNews', 'editNews'],
-                        'tournament' => ['addScore', 'removeUser', 'start', 'end', 'reset' , 'generateteams', 'editTeamName']
+                        'tournament' => ['addScore', 'removeUser', 'start', 'end', 'reset' , 'generateteams', 'editTeamName', 'updateRank']
                     ]
                 ]
         ]

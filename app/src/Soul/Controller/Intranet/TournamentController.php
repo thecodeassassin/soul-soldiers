@@ -37,7 +37,7 @@ class TournamentController extends Base
                 $teamUserCount = count($tournament->teams) * $tournament->teamSize;
                 $userCount = count($tournament->players);
 
-                if ($teamUserCount != $userCount && $this->view->user->isAdmin()) {
+                if ($teamUserCount != $userCount && $this->isAdmin()) {
                     $this->flashMessage('Het aantal spelers in teams is niet gelijk aan het aantal inschrijvingen, regeneer de teams voordat het toernooi start.', 'error');
                 }
             }
@@ -61,8 +61,9 @@ class TournamentController extends Base
 
         }
 
-        if (($tournament->isEliminationTournament() && $tournament->state != Tournament::STATE_STARTED
-            ) || !$tournament->isEliminationTournament()) {
+        if ((($tournament->isEliminationTournament() && $tournament->state != Tournament::STATE_STARTED
+            ) || !$tournament->isEliminationTournament())&& $this->isAdmin()) {
+
             $this->assets->collection('scripts')->addJs('js/jquery-ui.min.js');
             $this->assets->collection('scripts')->addJs('js/intranet/topscore.js');
         }
