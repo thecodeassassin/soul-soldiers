@@ -51,7 +51,7 @@
                     <h4>Eten/Drinken</h4>
                     <p>
                         {#Er is bij de crew energy drink te koop voor &euro; 1 euro per stuk. Tijdens deze lan geld tevens 3 halen 2 betalen voor de energy drink :) <br />#}
-                        Iedereen is verantwoordelijk voor z'n eigen eten en drinken tijdens de LAN party.
+                        Iedereen is verantwoordelijk voor z'n eigen eten en drinken tijdens de LAN party. <br />Er staat een koelkast in de zaal die vrij te gebruiken is.
                     </p>
                     <h4>Chat / Bestanden</h4>
                     <p>
