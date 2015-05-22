@@ -103,13 +103,9 @@ class Manager extends \Phalcon\Assets\Manager
             $type = $this->collectionTypes[$name];
 
             // do not minify css/js on dev (takes too much time and is not relevant)
-            if (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT) {
+            if ((APPLICATION_ENV != Kernel::ENV_DEVELOPMENT) && ACTIVE_MODULE == 'website') {
                 if ($type == 'css') {
-
-                    if (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT) {
-                        $filters[] = new YuiCompressor();
-                    }
-
+                    $filters[] = new YuiCompressor();
                 } elseif ($type == 'js') {
                     $filters[] = new Jsmin();
                 }
