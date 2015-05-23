@@ -1,12 +1,13 @@
 $(function (){
     var bracketOptions = {
-      init: __BRACKET_DATA
-    },
-    jqBracket,
-    height = 0;
+            init: __BRACKET_DATA,
+            skipSecondaryFinal: true
+        },
+        jqBracket,
+        height = 0;
 
     if (typeof __BRACKET_OPTS != 'undefined') {
-        bracketOptions = __BRACKET_OPTS;
+        bracketOptions = $.extend({}, bracketOptions, __BRACKET_OPTS);
     }
 
     $('#bracket').bracket(bracketOptions);
