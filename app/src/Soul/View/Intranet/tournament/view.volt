@@ -42,7 +42,7 @@
                 <a class="btn btn-lg btn-danger" onclick="return ajaxConfirm('Weet je het zeker?');" href="{{ url('tournament/cancel/' ~ tournament.systemName ) }}">Uitschrijven</a>
             {% endif %}
 
-            {% if entered and isTeamTournament and teams|length > 0 %}
+            {% if entered and isTeamTournament and teams|length == 0 %}
                 <a class="btn btn-lg btn-danger" onclick="return ajaxConfirm('Weet je het zeker?');" href="{{ url('tournament/cancel/' ~ tournament.systemName ) }}">Uitschrijven</a>
             {% endif %}
 
