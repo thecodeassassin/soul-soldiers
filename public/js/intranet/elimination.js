@@ -1,7 +1,7 @@
 $(function (){
     var bracketOptions = {
-            init: __BRACKET_DATA,
-            skipSecondaryFinal: true
+            init: __BRACKET_DATA
+            //skipSecondaryFinal: true
         },
         jqBracket,
         height = 0;
