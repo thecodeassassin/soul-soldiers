@@ -43,7 +43,7 @@ class TournamentController extends Base
             }
         }
 
-        if ($tournament->state == Tournament::STATE_STARTED) {
+        if ($tournament->state == Tournament::STATE_STARTED || $tournament->state == Tournament::STATE_FINISHED) {
 
             if ($this->isAdmin()) {
 
