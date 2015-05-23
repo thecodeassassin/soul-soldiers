@@ -79,7 +79,7 @@
 </div>
 {% endif %}
 
-{% if started or complete and tournament.isEliminationTournament() %}
+{% if (started or complete) and tournament.isEliminationTournament() %}
 
 {#{% block javascript %}#}
 

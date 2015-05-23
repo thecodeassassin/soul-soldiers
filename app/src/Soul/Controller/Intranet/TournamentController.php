@@ -61,8 +61,8 @@ class TournamentController extends Base
 
         }
 
-        if ((($tournament->isEliminationTournament() && $tournament->state != Tournament::STATE_STARTED
-            ) || !$tournament->isEliminationTournament())&& $this->isAdmin()) {
+        if ((($tournament->isEliminationTournament() && !in_array($tournament->state, [Tournament::STATE_STARTED, Tournament::STATE_FINISHED])
+            ) || !$tournament->isEliminationTournament()) && $this->isAdmin()) {
 
             $this->assets->collection('scripts')->addJs('js/jquery-ui.min.js');
             $this->assets->collection('scripts')->addJs('js/intranet/topscore.js');
