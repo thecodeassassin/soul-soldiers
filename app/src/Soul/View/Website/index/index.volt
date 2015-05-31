@@ -18,17 +18,26 @@
             <div class="index-caroussel">
                 <div class="p40 slide1">
                     <div class="text">
-                        <h3>Soul-Soldiers 2015: 22, 23 en 24 Mei 2015</h3>
+                        <h3>LAN-Parties met oog op gezelligheid en competiviteit!</h3>
 
                         <p>
-                            We organiseren ook dit jaar weer een nieuwe gezellige LAN-Party. <br />
-                            Soul-Soldiers 2015 zal plaatsvinden in buurtcentrum het Eiland in Bijnsdorp. <br/>
-                            Unreal Tournament 2004: Instagib zal natuurlijk weer een comeback maken als <br /> toernooi
-                            en natuurlijk spelen zoals elk jaar de games die <strong>jullie</strong> leuk vinden. <br/>
-                            <br/>
-                            Tournament gaming met prijzen en een fantastische sfeer, waar wacht je nog op? <br/><br/>
-                            Ga naar de <a href="{{ url('event/current') }}">evenements </a> pagina en schrijf je vandaag
-                            nog in!
+                            Wij van Soul-Soldiers zijn gedreven om het uiterste uit onze evenementen te halen.
+                            De deelnemer van onze LAN-Party's hebben zich keer op keer positief uitgelaten over onze
+                            evenementen en dit haalt ook het uiterste uit ons.<br /> We streven er voor om altijd de leukste
+                            en gezelligste evenementen te organiseren.
+                        </p>
+
+                        <h2>Competitief gamen</h2>
+                        <p>
+                            Ook voor de competieve gamer is het leuk om naar een LAN van Soul-Soldiers te gaan.
+                            We organiseren altijd evenementen met leuke spellen als toernooi spelen<br /> en uiteraard
+                            hebben we altijd prijzen voor onze deelnemers! <br />
+                        </p>
+
+                        <h2>Casual gaming</h2>
+                        <p>Natuurlijk is de casual gamer ook van harte welkom bij Soul-Soldiers! <br >
+                        Er zijn altijd wel mensen in voor een klassiek spelletje Command & Conquer &trade;, Age Of Empires II &trade; of Serious Sam &trade;!
+
                         </p>
                     </div>
                 </div>
