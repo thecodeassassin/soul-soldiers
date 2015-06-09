@@ -102,12 +102,20 @@ class Manager extends \Phalcon\Assets\Manager
             $filters = [];
             $type = $this->collectionTypes[$name];
 
+            $newFile = sprintf('%s/%s.%s', $this->config->application->cacheDir, ACTIVE_MODULE, $type);
+
+
             // do not minify css/js on dev (takes too much time and is not relevant)
             if ((APPLICATION_ENV != Kernel::ENV_DEVELOPMENT) && ACTIVE_MODULE == 'website') {
-                if ($type == 'css') {
-                    $filters[] = new YuiCompressor();
-                } elseif ($type == 'js') {
-                    $filters[] = new Jsmin();
+
+                // on production, do not regenerate the CSS/JS files as they are static
+                if (!file_exists($newFile)) {
+
+                    if ($type == 'css') {
+                        $filters[] = new YuiCompressor();
+                    } elseif ($type == 'js') {
+                        $filters[] = new Jsmin();
+                    }
                 }
             }
 
