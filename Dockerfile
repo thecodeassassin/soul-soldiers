@@ -3,11 +3,13 @@ from centos:latest
 RUN yum -y remove iputils
 
 RUN yum -y install yum-plugin-priorities yum-plugin-fastestmirror
+
+# install epel-release before installing nginx
+RUN yum -y install epel-release
+
 RUN yum -y update
 
-RUN yum -y install nginx php-fpm
-
-RUN yum -y install php-devel php-mysql php-memcached php-curl php-sockets php-mcrypt php-gd php-pdo php-mbstring gcc libtool git make
+RUN yum -y install nginx php-fpm php-devel php-mysql php-memcached php-curl php-sockets php-mcrypt php-gd php-pdo php-mbstring gcc libtool git make
 
 # add the soul-soldiers
 ADD docker/site-http /etc/nginx/conf.d/soul-soldiers.conf
@@ -26,7 +28,7 @@ RUN /usr/bin/git clone git://github.com/phalcon/cphalcon.git && \
 
 RUN /bin/echo 'extension=phalcon.so' > /etc/php.d/phalcon.ini
 
-RUN /usr/sbin/php5enmod phalcon
+#RUN /usr/sbin/php5enmod phalcon
 
 #RUN /usr/sbin/a2enmod rewrite
 
