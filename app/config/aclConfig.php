@@ -53,7 +53,7 @@ return new \Phalcon\Config(
              */
             'resources' =>
             [
-                AclBuilder::ROLE_GUEST => [
+                AclBuilder::ROLE_NAME_GUEST => [
                     'account' => [
                         'register',
                         'login',
@@ -65,11 +65,11 @@ return new \Phalcon\Config(
                     'event' => ['show']
 
                 ],
-                AclBuilder::ROLE_USER => [
+                AclBuilder::ROLE_NAME_USER => [
                     'account' => ['logout', 'manage'],
                     'event' => ['pay', 'register', 'seat', 'reserveSeat']
                 ],
-                AclBuilder::ROLE_ADMIN => [
+                AclBuilder::ROLE_NAME_ADMIN => [
                     'admin' => '*',
                     'index' => ['generate', 'addNews', 'deleteNews', 'editNews'],
                     'forum' => '*' //disable when forum goes live
@@ -117,17 +117,17 @@ return new \Phalcon\Config(
              */
             'resources' =>
                 [
-                    AclBuilder::ROLE_GUEST => [
+                    AclBuilder::ROLE_NAME_GUEST => [
                         'account' => [
                             'login'
                         ]
 
                     ],
-                    AclBuilder::ROLE_USER => [
+                    AclBuilder::ROLE_NAME_USER => [
                         'account' => ['logout', 'manage'],
                         'tournament' => ['index', 'signup', 'overview', 'view', 'cancel']
                     ],
-                    AclBuilder::ROLE_ADMIN => [
+                    AclBuilder::ROLE_NAME_ADMIN => [
                         'admin' => '*',
                         'index' => ['generate', 'addNews', 'deleteNews', 'editNews'],
                         'tournament' => ['addScore', 'removeUser', 'start', 'end', 'reset' , 'generateteams', 'editTeamName', 'updateRank']

@@ -27,6 +27,18 @@ class AclBuilder extends Plugin
     const ROLE_USER = 1;
     const ROLE_GUEST = 0;
 
+    const ROLE_NAME_ADMIN = 'admin';
+    const ROLE_NAME_MODERATOR = 'moderator';
+    const ROLE_NAME_USER = 'user';
+    const ROLE_NAME_GUEST = 'guest';
+
+    static $roleMap = [
+        self::ROLE_ADMIN => 'admin',
+        self::ROLE_MODERATOR => 'moderator',
+        self::ROLE_USER => 'user',
+        self::ROLE_GUEST => 'guest'
+    ];
+
     /**
      * @var Acl\Adapter\Memory
      */
@@ -78,7 +90,9 @@ class AclBuilder extends Plugin
     protected function addRoles()
     {
         foreach($this->config->roles as $role) {
-            $this->acl->addRole($this->roles[strtolower($role)] = new Acl\Role($role));
+            $roleName = strtolower(static::$roleMap[$role]);
+
+            $this->acl->addRole($this->roles[$roleName] = new Acl\Role($roleName));
         }
     }
 
@@ -101,6 +115,7 @@ class AclBuilder extends Plugin
             if (!is_string($controller)) {
                 throw new Acl\Exception('Invalid controller specified as public');
             }
+
 
             foreach ($this->roles as $role) {
                 $this->processActions($role, $controller, '*');
@@ -161,26 +176,27 @@ class AclBuilder extends Plugin
     }
 
     /**
-     * @param Acl\Role $role
+     * @param Acl\Role|string $role
      * @param string   $controller
      * @param array    $actions
      * @param string   $method
      *
      * @throws \Phalcon\Acl\Exception
      */
-    protected function processActions(Acl\Role $role, $controller, $actions, $method = 'allow')
+    protected function processActions($role, $controller, $actions, $method = 'allow')
     {
         if(!in_array($method, array('allow', 'deny'))){
             throw new Acl\Exception(sprintf('Invalid %s method: %s. Allowed methods: allow, deny', __FUNCTION__, $method));
         }
-
+        var_dump('allow', $role, $controller, $actions, PHP_EOL, PHP_EOL);
         $this->acl->addResource(new Acl\Resource($controller), $actions);
+        $activeRole = (is_string($role) ? $role : $role->getName());
 
         if (is_string($actions)) {
-            $this->acl->$method($role->getName(), $controller, $actions);
+            $this->acl->$method($activeRole, $controller, $actions);
         } elseif (is_array($actions)) {
             foreach ($actions as $action) {
-                $this->acl->$method($role->getName(), $controller, $action);
+                $this->acl->$method($activeRole, $controller, $action);
             }
         }
 
@@ -197,12 +213,11 @@ class AclBuilder extends Plugin
         // add the roles to the acl
         $obj->addRoles();
 
-        // process the public controllers
-        $obj->processPublicControllers();
-
         // process the resources
         $obj->processResources();
 
+        // process the public controllers
+        $obj->processPublicControllers();
     }
 
 }

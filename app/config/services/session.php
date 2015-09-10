@@ -4,12 +4,20 @@
  */
 $di->setShared('session', function() {
 
-    $session = new \Phalcon\Session\Adapter\Memcache(
-        [
-            'host' => 'localhost',
-            'lifetime' => 43200 // store for 12 hours
-        ]
-    );
+    if (APPLICATION_ENV == 'development') {
+        $session = new \Phalcon\Session\Adapter\Files(
+            [
+                'uniqueId' => 'soul-soldiers'
+            ]
+        );
+    } else {
+        $session = new \Phalcon\Session\Adapter\Libmemcached(
+            [
+                'host' => 'localhost',
+                'lifetime' => 43200 // store for 12 hours
+            ]
+        );
+    }
 
     $session->start();
 

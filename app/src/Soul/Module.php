@@ -7,6 +7,7 @@ namespace Soul;
 use Phalcon\Cache\Backend\Memcache;
 use Phalcon\Config;
 use Phalcon\Crypt;
+use Phalcon\DiInterface;
 use Phalcon\Logger\Adapter;
 use Phalcon\Mvc\User\Plugin;
 use Phalcon\DI as DI;
@@ -62,9 +63,9 @@ abstract class Module extends Plugin
     }
 
     /**
-     * @param \Phalcon\DI $di
+     * @param DI|DiInterface $di
      */
-    public function setDi($di)
+    public function setDi(DiInterface $di)
     {
         $this->di = $di;
     }

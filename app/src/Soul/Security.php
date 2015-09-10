@@ -45,7 +45,7 @@ class Security extends Module
 
 
             if ($auth->getUserType() == AclBuilder::ROLE_ADMIN) {
-                $role = AclBuilder::ROLE_ADMIN;
+                $role = AclBuilder::ROLE_NAME_ADMIN;
             }
         }
 
@@ -60,6 +60,9 @@ class Security extends Module
 
         //Check if the Role have access to the controller (resource)
         $allowed = $acl->isAllowed($role, $controller, $action);
+
+        var_dump($allowed, $role, $controller, $action);
+        die;
 
         if ($allowed != Acl::ALLOW) {
 

@@ -56,9 +56,6 @@ return new \Phalcon\Config(
                     "js/neko.js",
                     "js/bootstrap-remote-data.min.js",
                     "js/jquery.stellar.min.js",
-                    "js/jquery.stellar.min.js",
-
-
                     "js/soul.js",
                     "js/forum.js",
                     "js/slick.min.js"

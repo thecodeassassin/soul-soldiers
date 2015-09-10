@@ -1,7 +1,7 @@
 <VirtualHost *:80>
         ServerAdmin webmaster@localhost
 
-        DocumentRoot /var/www/phalcon/public
+        DocumentRoot /var/www/soul-soldiers/public
         <Directory />
                 Options FollowSymLinks
                 AllowOverride None

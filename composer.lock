@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "191bf21500fa51d74b3896466f2548f9",
+    "hash": "d0fdf6d6edff7643adf8646c877f7659",
     "packages": [
         {
             "name": "dg/twitter-php",
@@ -46,21 +46,27 @@
         },
         {
             "name": "mrclay/minify",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mrclay/minify.git",
-                "reference": "d245bca4987dec197d1e6d7dc117614b60ff7494"
+                "reference": "3c11ba8232a2155a1a29552aafc528be5fb0a662"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mrclay/minify/zipball/d245bca4987dec197d1e6d7dc117614b60ff7494",
-                "reference": "d245bca4987dec197d1e6d7dc117614b60ff7494",
+                "url": "https://api.github.com/repos/mrclay/minify/zipball/3c11ba8232a2155a1a29552aafc528be5fb0a662",
+                "reference": "3c11ba8232a2155a1a29552aafc528be5fb0a662",
                 "shasum": ""
             },
             "require": {
                 "ext-pcre": "*",
                 "php": ">=5.2.1"
+            },
+            "require-dev": {
+                "tubalmartin/cssmin": "~2.4.8"
+            },
+            "suggest": {
+                "tubalmartin/cssmin": "Support minify with CSSMin (YUI PHP port)"
             },
             "type": "library",
             "autoload": {
@@ -76,13 +82,12 @@
                 {
                     "name": "Stephen Clay",
                     "email": "steve@mrclay.org",
-                    "homepage": "http://www.mrclay.org/",
                     "role": "Developer"
                 }
             ],
             "description": "Minify is a PHP5 app that helps you follow several rules for client-side performance. It combines multiple CSS or Javascript files, removes unnecessary whitespace and comments, and serves them with gzip encoding and optimal client-side cache headers",
             "homepage": "http://code.google.com/p/minify/",
-            "time": "2014-03-12 12:54:23"
+            "time": "2014-10-30 22:58:02"
         },
         {
             "name": "phalcon/incubator",
@@ -162,8 +167,7 @@
         "ext-mcrypt": "*",
         "ext-mysql": "*",
         "ext-pdo_mysql": "*",
-        "ext-memcached": "*",
-        "ext-memcache": "*"
+        "ext-memcached": "*"
     },
     "platform-dev": []
 }

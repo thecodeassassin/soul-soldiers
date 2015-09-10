@@ -21,6 +21,7 @@ AddDefaultCharset UTF-8
     RewriteCond %{REQUEST_URI} !/\.svg.?
 
     RewriteCond %{REQUEST_URI} !/css/?
+    RewriteCond %{REQUEST_URI} !/font-icons/?
     RewriteCond %{REQUEST_URI} !/js/?
 
     RewriteCond %{REQUEST_FILENAME} !-f
