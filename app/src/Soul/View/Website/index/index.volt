@@ -49,24 +49,23 @@
         </div>
         <div class="col-md-4 right-container">
             <div class="gutter">
-                <h2>Tweets</h2>
+                <h2>Volgende evenement</h2>
 
-                <div class="index-news-wrapper">
-                    <div class="index-tweet-container">
-                        {% for item in twitterPosts %}
-                            <div>
-                                <div class="news panel">
-                                    <div class="panel-heading">
-                                        <span class="news-title">{{ item.date }}</span>
-                                        {#<div class="pull-right news-date">{{ item.published }}</div>#}
-                                    </div>
-                                    <div class="panel-body news-body">
-                                        {{ item.text }}
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
+                <div class="text" style="padding: 10px;">
+                    <h3>Soul-Soldiers 2015: Autumn Edition</h3> Het evenement wordt opnieuw georganiseerd in
+                    Dorpshuis het Eiland in Beinsdorp. Ook deze keer hebben we leuke competitities en prijzen! <br /><br />
+
+                    De volgende competities zullen worden gespeeld tijdens Soul-Soldiers 2015: Autumn edition: <br  /><br />
+
+                    <ul>
+                        <li>Unreal Tournament 2004: Instagib</li>
+                        <li>Counter-Strike: Global Offensive</li>
+                        <li>C&C 3: Tiberium War Kanes Wrath</li>
+                        <li>Rocket League (Fun compo)</li>
+                    </ul>
+
+                    <br /><br />
+                    <a href="{{ url('event/current') }}" class="btn btn-primary">Naar evenements pagina</a>
                 </div>
             </div>
         </div>
