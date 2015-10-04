@@ -52,7 +52,9 @@
                 <h2>Volgende evenement</h2>
 
                 <div class="text" style="padding: 10px;">
-                    <h3>Soul-Soldiers 2015: Autumn Edition</h3> Het evenement wordt opnieuw georganiseerd in
+                    <h3>Soul-Soldiers 2015: Autumn Edition</h3>
+                    <h4>16, 17 en 18 oktober 2015</h4>
+                    Het evenement wordt opnieuw georganiseerd in
                     Dorpshuis het Eiland in Beinsdorp. Ook deze keer hebben we leuke competitities en prijzen! <br /><br />
 
                     De volgende competities zullen worden gespeeld tijdens Soul-Soldiers 2015: Autumn edition: <br  /><br />

@@ -360,7 +360,20 @@ class Event extends Base
      */
     public function getSeatMap()
     {
-        return $this->seatmap;
+
+        /** @var SeatMap $seatmap */
+        $seatmap = $this->seatmap;
+
+        $cacheDir = $this->getConfig()->application->cacheDir;
+        $cachedSeatMap = sprintf('%s_seatmap.png', $this->systemName);
+
+        if (!file_exists($cacheDir.$cachedSeatMap)) {
+            file_put_contents($cacheDir.$cachedSeatMap, $seatmap->image);
+        }
+
+        $seatmap->url = sprintf('/static/image/%s', $cachedSeatMap);
+
+        return $seatmap;
     }
 
     /**

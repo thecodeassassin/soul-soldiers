@@ -130,17 +130,20 @@ class Base extends Controller
         $post = $this->request->getPost();
         $newPost = new News();
 
-        $this->newsAddForm->bind($post, $newPost);
-
         if ($this->request->isPost()) {
+
             if ($this->newsAddForm->isValid($this->request->getPost()) == false) {
                 $this->flashMessages($this->newsAddForm->getMessages(), 'error');
             } else {
+
+                $newPost->body = $post['body'];
+                $newPost->title = $post['title'];
 
                 // create the new user
                 $newPost->module = ACTIVE_MODULE;
 
                 $newPost->published = date('Y-m-d H:i:s', time());
+                
                 if (!$newPost->save()) {
                     $this->flashMessages($newPost->newsAddForm->getMessages(), 'error');
                 }

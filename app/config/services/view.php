@@ -101,6 +101,17 @@ $di->setShared(
                         }
                     );
 
+                    $compiler->addFilter(
+                        'replace',
+                        function ($resolvedArgs, $exprArgs) use ($compiler) {
+
+                            $str = $exprArgs[0]['expr']['value'];
+                            $find = $exprArgs[1]['expr']['value'];
+                            $replace = $exprArgs[2]['expr']['value'];
+
+                            return "str_replace('$find', '$replace', $str)";
+                        }
+                    );
 
                     return $volt;
                 },

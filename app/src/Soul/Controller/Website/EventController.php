@@ -121,6 +121,7 @@ class EventController extends \Soul\Controller\Base
         $this->verifyEventAndUser($event, $user);
 
         $seatMap = $event->getSeatMap();
+
         if (!$seatMap) {
 
             // if there is no seat map, do not show this modal
