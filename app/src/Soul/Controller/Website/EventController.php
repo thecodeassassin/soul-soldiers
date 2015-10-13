@@ -348,7 +348,7 @@ class EventController extends \Soul\Controller\Base
      */
     protected function seatingAvailable(Event $event)
     {
-        return  ((strtotime($event->startDate) - 604800) > time());
+        return  ((strtotime($event->startDate) - 3600) > time());
     }
 
 
