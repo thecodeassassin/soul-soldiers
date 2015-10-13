@@ -65,6 +65,9 @@
                         <li>C&C 3: Tiberium War Kanes Wrath</li>
                         <li>Rocket League (Fun compo)</li>
                     </ul>
+                    
+                    <strong>Sponsored by:</strong>
+                    <img src="/img/pyka.png" width="310" height="95"/>
 
                     <br /><br />
                     <a href="{{ url('event/current') }}" class="btn btn-primary">Naar evenements pagina</a>
