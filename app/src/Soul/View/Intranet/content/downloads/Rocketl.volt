@@ -1,10 +1,10 @@
 {% extends 'layout.volt' %}
 
-{% block pageTitle %}<i class="icon-download"></i>&nbsp;Red Aler 2{% endblock %}
+{% block pageTitle %}<i class="icon-download"></i>&nbsp;Rocket League{% endblock %}
 {% block content %}
-{% set image_1 = 'img/downloads/ra2_ingame.jpg' %}
-{% set image_2 = 'img/downloads/ra2_ingame2.jpg' %}
-{% set image_3 = 'img/downloads/ra2_ingame3.jpg' %}
+{% set image_1 = 'img/downloads/rl_ingame.jpg' %}
+{% set image_2 = 'img/downloads/rl_ingame2.jpg' %}
+{% set image_3 = 'img/downloads/rl_ingame3.jpg' %}
 
 <div class="row">
 
@@ -13,9 +13,13 @@
 
          <h1>Installatie instructies</h1>
          <p><br />
-         Download het bestand wat op de download pagina te vinden is.<br />
-         Installeer het spel ( met behulp van de gedownloade exe file). <br />
-         In de map waar je het spel heb geinstalleerd staat de file ra2md.exe, start hiermee het spel op.<br /><br />
+         Download en installeer het spel <br />
+         Start het spel op met behulp van het bestand RocketLeague.exe, deze is te vinden in \binaries\win32<br /><br />
+
+         BELANGRIJK !!<br />
+         Voor dit spel is Steam met een steam account nodig ( steam is te downloaden op www.steampowered.com )<br />
+         Aangezien dit spel gebruikt maakt van officiele servers is aan te raden om een los/nieuw steamaccount voor dit spel aan te maken<br />
+
 
          </p>
 

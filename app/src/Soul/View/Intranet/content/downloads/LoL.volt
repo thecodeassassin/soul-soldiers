@@ -1,10 +1,11 @@
 {% extends 'layout.volt' %}
 
-{% block pageTitle %}<i class="icon-download"></i>&nbsp;Counter Strike Source{% endblock %}
+{% block pageTitle %}<i class="icon-download"></i>&nbsp;League of Legends {% endblock %}
 {% block content %}
-{% set image_1 = 'img/downloads/css_ingame.jpg' %}
-{% set image_2 = 'img/downloads/css_ingame2.jpg' %}
-{% set image_3 = 'img/downloads/css_ingame3.jpg' %}
+
+{% set image_1 = 'img/downloads/sc2_ingame.jpg' %}
+{% set image_2 = 'img/downloads/sc2_ingame2.jpg' %}
+{% set image_3 = 'img/downloads/sc2_ingame3.jpg' %}
 
 <div class="row">
 
@@ -13,10 +14,12 @@
 
          <h1>Installatie instructies</h1>
          <p><br />
-         Download het bestand wat op de download pagina te vinden is.<br />
-         Installeer het spel ( met behulp van de gedownloade exe file). <br />
-         In de map waar je het spel heb geinstalleerd staat de file counter-strike_source.exe, start hiermee het spel op.<br />
-         Note : Om het spel te kunnen spelen moet je steam wel uit staan, anders krijg je een error<br /><br />
+         Download de 2 bestanden en installeer deze. <br />
+         Start het spel op lol.launcher.exe <br /> <br />
+
+         Belangrijk !!<br />
+         Om dit spel te kunnen spelen heb je een account op : https://signup.euw.leagueoflegends.com <br />
+
 
          </p>
 

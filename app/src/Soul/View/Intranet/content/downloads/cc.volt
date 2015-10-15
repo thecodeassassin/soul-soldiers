@@ -1,10 +1,10 @@
 {% extends 'layout.volt' %}
 
-{% block pageTitle %}<i class="icon-download"></i>&nbsp;Warcraft 3{% endblock %}
+{% block pageTitle %}<i class="icon-download"></i>&nbsp;C&C 3 Kane's Wrath{% endblock %}
 {% block content %}
-{% set image_1 = 'img/downloads/wc3_ingame.jpg' %}
-{% set image_2 = 'img/downloads/wc3_ingame2.jpg' %}
-{% set image_3 = 'img/downloads/wc3_ingame3.jpg' %}
+{% set image_1 = 'img/downloads/cc3_ingame.jpg' %}
+{% set image_2 = 'img/downloads/cc3_ingame2.jpg' %}
+{% set image_3 = 'img/downloads/cc3_ingame3.jpg' %}
 
 <div class="row">
 
@@ -13,10 +13,8 @@
 
          <h1>Installatie instructies</h1>
          <p><br />
-         Download het bestand wat op de download pagina te vinden is.<br />
-         Installeer het spel ( met behulp van de gedownloade exe file). <br />
-         In de map waar je het spel heb geinstalleerd staat de file Frozen Throne.exe, start hiermee het spel op.<br /><br />
-
+         Download alle 3 de bestanden en pak installeer deze met behulp van de .exe<br />
+         Start het spel op met cnc3ep1.exe die je kan vinden in de Kane's Wrath folder
          </p>
 
          <H1>Screenshots</H1>

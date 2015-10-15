@@ -21,33 +21,34 @@
                     <h3>Counter Strike : GO</h3>
                     <p>Download links :<br />
                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/CS Go/Counter-Strike Global Offensive.part1.exe"> Installer</a> <br />
-                       Download link 2 : <a href="http://filemaster.intranet.lan/Games/CS Go/Counter-Strike Global Offensive.part2.rar"> Installer</a> <br /> <br /> <br />
-                    <a href="downloads/csg" target="_blank"> Installatie uitleg + screenshots</a></p>
+                       Download link 2 : <a href="http://filemaster.intranet.lan/Games/CS Go/Counter-Strike Global Offensive.part2.rar"> Part 2</a> <br /> <br /> <br />
+                    <a href="downloads/csg" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
-                    <h3>Counter Strike : Source </h3>
+                    <h3>Rocket League </h3>
                     <p>Download links :<br />
-                       Download link 1 : <a href="http://filemaster.intranet.lan/Games/CS Source/Counter-Strike Source.exe"> Installer</a> <br /> <br /> <br /> <br />
-                    <a href="downloads/cs" target="_blank"> Installatie uitleg + screenshots</a></p>
+                       Download link 1 : <a href="http://filemaster.intranet.lan/Games/Rocket League/Rocket League.exe"> Installer</a> <br /> <br /> <br /> <br />
+                    <a href="downloads/Rocketl" target="_blank"> Readme + Screenshots</a></p>
+                </div>
+
+                <div class="col-md-3">
+                    <h3>C&C 3 Kane's Wrath</h3>
+                    <p>Download links : <br />
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/C&C3/c&c3.part1.exe"> Installer</a> <br/>
+                        Download link 2 : <a href="http://filemaster.intranet.lan/Games/C&C3/c&c3.part2.rar"> Part 2 </a> <br/>
+                        Download link 3 : <a href="http://filemaster.intranet.lan/Games/C&C3/c&c3.part3.rar"> Part 3</a> <br/> <br/>
+                        <a href="downloads/cc" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
                     <h3>Unreal Tournament 2004 </h3>
                     <p>Download links : <br />
                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/UT/Unreal Tournament 2004.exe"> Installer</a> <br/><br /> <br /> <br />
-                    <a href="downloads/ut2004" target="_blank"> Installatie uitleg + screenshots</a></p>
+                    <a href="downloads/ut2004" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
-                <div class="col-md-3">
-                    <h3>Starcraft 2</h3>
-                    <p>Download links : <br />
-                       Download link 1 : <a href="http://filemaster.intranet.lan/Games/Starcraft 2/StarCraft II.part1.exe"> Installer</a> <br />
-                       Download link 2 : <a href="http://filemaster.intranet.lan/Games/Starcraft 2/StarCraft II.part2.rar"> Installer deel 2</a> <br />
-                       Download link 3 : <a href="http://filemaster.intranet.lan/Games/Starcraft 2/StarCraft II.part3.rar"> Installer deel 3</a> <br />
-                       Download link 4 : <a href="http://filemaster.intranet.lan/Games/Starcraft 2/StarCraft II.part4.rar"> Installer deel 4</a> <br /><br />
-                    <a href="downloads/Starcraft2" target="_blank"> Installatie uitleg + screenshots</a></p>
-                </div>
+
 
             </div>
 
@@ -58,7 +59,7 @@
                     <h3>Trackmania </h3>
                     <p>Download links : <br />
                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Trackmania/Tm.exe"> Installer</a> <br /><br/>
-                    <a href="downloads/trackmania" target="_blank"> Installatie uitleg + screenshots</a></p>
+                    <a href="downloads/trackmania" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
 
@@ -66,21 +67,22 @@
                     <h3> Flatout 2</h3>
                     <p>Download links : <br />
                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Flatout/FlatOut2.exe"> Installer</a> <br/> <br/>
-                    <a href="downloads/Flatout2" target="_blank"> Installatie uitleg + screenshots</a></p>
+                    <a href="downloads/Flatout2" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
-                    <h3>Warcraft 3</h3>
+                    <h3>League Of Legends</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Warcraft 3/Warcraft III.exe"> Installer</a> <br/> <br/>
-                        <a href="downloads/warcraft3" target="_blank"> Installatie uitleg</a></p>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/LoL/League Of Legends.part1.exe"> Installer</a> <br />
+                        Download link 2 : <a href="http://filemaster.intranet.lan/Games/LoL/League Of Legends.part2.rar"> Part 2</a> <br /> <br />
+                        <a href="downloads/LoL" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
                      <h3>DC++</h3>
                      <p>Download links : <br />
                         Download link 1 : <a href="http://filemaster.intranet.lan/Apps/DC++.exe"> Installer</a> <br/> <br/>
-                     <a href="downloads/dc" target="_blank"> Installatie uitleg</a></p>
+                     <a href="downloads/dc" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
 
