@@ -3,9 +3,9 @@
 {% block pageTitle %}<i class="icon-download"></i>&nbsp;League of Legends {% endblock %}
 {% block content %}
 
-{% set image_1 = 'img/downloads/sc2_ingame.jpg' %}
-{% set image_2 = 'img/downloads/sc2_ingame2.jpg' %}
-{% set image_3 = 'img/downloads/sc2_ingame3.jpg' %}
+{% set image_1 = 'img/downloads/lol_ingame.jpg' %}
+{% set image_2 = 'img/downloads/lol_ingame2.jpg' %}
+{% set image_3 = 'img/downloads/lol_ingame3.jpg' %}
 
 <div class="row">
 
