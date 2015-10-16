@@ -32,21 +32,25 @@
                 <div class="gutter well">
                     <h3><i class="icon-info-circled"></i> Informatie</h3>
 
-                    {% if payedForBuffet %}
-                        <hr />
-                        <h3>Buffet</h3>
-                        <p>
-                            Fantastisch dat je mee eet met ons buffet op Zaterdag avond. We starten met het serveren van eten om 19:00. <br />
-                            Zorg dus dat je op tijd bij de bar staat om gezellig met ons te eten.
 
-                        </p>
-                        <h4>Menu</h4>
-                        <ul class="menuList">
-                            <li>Huisgemaakte Nasi</li>
-                            <li>Thaise Laab Kai (Thaise salde van kipdij gehakt, koriander en ui)</li>
-                            <li>Kipsate</li>
-                        </ul>
-                    {% endif %}
+
+
+                    <hr />
+                    <h3>Buffet (Zaterdag 19:00)</h3>
+                    <p>
+                        {% if payedForBuffet %}
+                        Fantastisch dat je mee eet met ons buffet op Zaterdag avond. We starten met het serveren van eten om 19:00. <br />
+                        Zorg dus dat je op tijd bij de bar staat om gezellig met ons te eten.
+                        {% else %}
+                        Je hebt (nog) niet betaald voor het buffet. Mocht je hier toch aan mee willen doen, geef dit dan aan bij 1 van de crewleden.
+                        {% endif %}
+                    </p>
+                    <h4>Menu</h4>
+                    <ul class="menuList">
+                        <li>Huisgemaakte Pasta del Soul met Tomaat-Mascarpone saus</li>
+                        <li>Caprese van tomaat, mozzarella, basillicum en extra virgin olijfolie</li>
+                        <li>Sla met olijfolie/balsamico dressing</li>
+                    </ul>
 
                     <h4>Eten/Drinken</h4>
                     <p>
