@@ -35,9 +35,9 @@
                 <div class="col-md-3">
                     <h3>C&C 3 Kane's Wrath</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/C&C3/c&c3.part1.exe"> Installer</a> <br/>
-                        Download link 2 : <a href="http://filemaster.intranet.lan/Games/C&C3/c&c3.part2.rar"> Part 2 </a> <br/>
-                        Download link 3 : <a href="http://filemaster.intranet.lan/Games/C&C3/c&c3.part3.rar"> Part 3</a> <br/> <br/>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Command & Conquer 3 Kanes Wrath/c&c3.part1.exe"> Installer</a> <br/>
+                        Download link 2 : <a href="http://filemaster.intranet.lan/Games/Command & Conquer 3 Kanes Wrath/c&c3.part2.rar"> Part 2 </a> <br/>
+                        Download link 3 : <a href="http://filemaster.intranet.lan/Games/Command & Conquer 3 Kanes Wrath/c&c3.part3.rar"> Part 3</a> <br/> <br/>
                         <a href="downloads/cc" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
