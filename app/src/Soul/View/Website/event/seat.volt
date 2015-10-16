@@ -23,7 +23,7 @@
     <div class="col-md-12">
 
         <div class="seating-table">
-            <div class="seatmap-wrapper" style="background-image: url(data:image/png;base64,{{ seatMap.image|base64 }})">
+            <div class="seatmap-wrapper" style="background-image: url({{ seatMap.url }})">
 
                 {% set xCount = seatMap.xCount %}
                 {% set yCount = seatMap.yCount %}

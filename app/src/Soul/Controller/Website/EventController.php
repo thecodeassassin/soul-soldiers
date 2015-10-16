@@ -121,6 +121,7 @@ class EventController extends \Soul\Controller\Base
         $this->verifyEventAndUser($event, $user);
 
         $seatMap = $event->getSeatMap();
+
         if (!$seatMap) {
 
             // if there is no seat map, do not show this modal
@@ -347,7 +348,7 @@ class EventController extends \Soul\Controller\Base
      */
     protected function seatingAvailable(Event $event)
     {
-        return  ((strtotime($event->startDate) - 604800) > time());
+        return  ((strtotime($event->startDate) - 3600) > time());
     }
 
 

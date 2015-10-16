@@ -31,7 +31,7 @@
                 {% if admin and editMode %}
                     <textarea class="form-control" name="content" rows="5" class="news-content" data-news-id="{{ item.newsId }}">{{ item.body }}</textarea>
                     <input type="hidden" name="newsId" value="{{ item.newsId }}" />
-                    <button type="submit" class="btn btn-primary"><i class="icon-edit"></i></button>
+                    <button type="submit" class="btn btn-primary"><i class="icon-floppy"></i></button>
                     <a href="{{ url('/news/delete/' ~ item.newsId) }}">
                         <button type="button" class="btn btn-danger" onclick="return confirm('Zeker weten?')"><i class="icon-trash"></i></button>
                     </a>

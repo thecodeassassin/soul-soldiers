@@ -39,7 +39,7 @@ return [
             "action"     => "addNews"
         ],
 
-        '/news/delete/([0-9])' => [
+        '/news/delete/(.*)' => [
             "controller" => "index",
             "action"     => "deleteNews",
             "newsId" => 1

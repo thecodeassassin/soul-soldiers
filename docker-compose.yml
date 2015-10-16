@@ -1,0 +1,9 @@
+web:
+  build: .
+  ports:
+    - "8085:80"
+  volumes:
+    - .:/var/www/soul-soldiers
+  environment:
+    - APPLICATION_ENV=development
+  restart: always
