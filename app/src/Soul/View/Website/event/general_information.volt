@@ -4,7 +4,7 @@
     <table class="table noborders">
         <tr>
             <td><strong>Datum</strong></td>
-            <td>Vrijdag 16 oktober 2015 19:00 - Zondag 18 oktober 2015 17:00</td>
+            <td>Vrijdag 6 mei 2016 19:00 - Zondag 8 mei 2016 16:00</td>
         </tr>
         <tr>
             <td><strong>Locatie</strong></td>

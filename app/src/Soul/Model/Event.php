@@ -93,7 +93,7 @@ class Event extends Base
      */
     public static function getCurrent()
     {
-        $event =  self::findFirst(['order' => 'abs(now() - startDate) asc']);
+        $event =  self::findFirst(['order' => 'startDate DESC']);
         return $event;
     }
 
