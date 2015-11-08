@@ -19,8 +19,7 @@
         "ext-memcached" : "*",
         "ext-memcache" : "*",
         "swiftmailer/swiftmailer" : "5.0.*",
-        "dg/twitter-php": "dev-master",
-        "cboden/ratchet": "0.3.*"
+        "dg/twitter-php": "dev-master"
     },
     "repositories": [
         {
