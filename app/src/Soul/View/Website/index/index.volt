@@ -66,10 +66,10 @@
                         {#<li>Rocket League (Fun compo)</li>#}
                     {#</ul>#}
 
-                    {#<strong>Sponsored by:</strong>#}
-                    {#<a href="https://www.pyka-wifi.com" target="_blank">#}
-                        {#<img src="/img/pyka.png" width="310" height="95" border="0"/>#}
-                    {#</a>#}
+                    <strong>Sponsored by:</strong>
+                    <a href="https://www.pyka-wifi.com" target="_blank">
+                        <img src="/img/pyka.png" width="310" height="95" border="0"/>
+                    </a>
                     <br /><br />
                     <a href="{{ url('event/current') }}" class="btn btn-primary">Naar evenements pagina</a>
                 </div>
