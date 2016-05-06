@@ -28,13 +28,13 @@
                     <div class="mt15 mb30">
                         {% if dinerAvailable %}
                         <div class="checkbox form-group">
-                            <label data-toggle="tooltip" data-placement="top" title="Het buffet bestaat uit Nasi, kipsate en sla. Drinken is tevens beschikbaar.">
+                            <label data-toggle="tooltip" data-placement="top" title="Het eten is altijd een huisgemaakte maaltijd bereid door de crew van Soul-Soldiers.">
                                 <input type="checkbox" value="yes" class="input-control" name="dinner_option" />
-                                <strong> Buffet op zaterdagavond (&euro; {{ '%01.2f'|format(dinnerPrice) }} extra)</strong>
+                                <strong> Avondeten op zaterdagavond (&euro; {{ '%01.2f'|format(dinnerPrice) }} extra)</strong>
                             </label>
                         </div>
                         {% else %}
-                        <strong><i class="icon-attention-circle" style="color: yellow;"></i> Buffet optie niet langer beschikbaar</strong>
+                        <strong><i class="icon-attention-circle" style="color: yellow;"></i> Avondeten optie niet langer beschikbaar</strong>
                         {% endif %}
                     </div>
 

@@ -25,7 +25,7 @@ use Soul\Security\Exception as SecurityException;
 class EventController extends \Soul\Controller\Base
 {
 
-    const DINNER_OPTION_PRICE = 10;
+    const DINNER_OPTION_PRICE = 7.50;
 
     /**
      * @var TargetPay
@@ -58,9 +58,8 @@ class EventController extends \Soul\Controller\Base
 
         if ($systemName == 'current') {
             $event = Event::getCurrent();
-
             if ($event && $event->hasPassed()) {
-                return $this->response->redirect('event/'.$event->systemName);
+                return $this->response->redirect('home');
             }
         } else {
 
