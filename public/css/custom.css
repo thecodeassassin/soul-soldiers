@@ -118,8 +118,13 @@ div.signup .register-submit {
 
 /* End Form Elements */
 
-div.homepage {
-    background: url('../img/background_home_b.jpg') no-repeat center center fixed;
+div.main-page .homepage, div.right-container div.home-gutter, div.lan-info, div.event-page {
+    background-color: rgba(0,0,0,0.5) !important;
+}
+
+#content {
+    /*background: url('../img/new-bg.jpg') no-repeat 200 500 fixed;*/
+    background: url('../img/home_slider/slider1.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -416,7 +421,11 @@ Index / news / tweets
 }
 
 .slide1 {
-    background-image: url('../img/home_slider/slider1.jpg');
+    background: url('../img/new-bg.jpg') no-repeat center 140px fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .slide2 {
@@ -425,28 +434,28 @@ Index / news / tweets
 
 /** Events **/
 .lan-info {
-    background-image: url('../img/lan_bg_1.png');
-    background-color: rgba(255,255,255,0);
-    background-size: 100%;
-    background-position: 24% 10% !important;
+    /*background-image: url('../img/lan_bg_1.png');*/
+    /*background-color: rgba(255,255,255,0);*/
+    /*background-size: 100%;*/
+    /*background-position: 24% 10% !important;*/
     /*background-attachment: fixed;*/
-    background-repeat: no-repeat;
+    /*background-repeat: no-repeat;*/
 }
 
 .lan-info-1 {
-    background-image: url('../img/lan_bg_1.png');
+    /*background-image: url('../img/lan_bg_1.png');*/
 }
 
 .lan-info-2 {
-    background-image: url('../img/lan_bg_2.png');
+    /*background-image: url('../img/lan_bg_2.png');*/
 }
 
 .lan-info-3 {
-    background-image: url('../img/lan_bg_3.png');
+    /*background-image: url('../img/lan_bg_3.png');*/
 }
 
 .lan-info-4 {
-    background-image: url('../img/lan_bg_4.png');
+    /*background-image: url('../img/lan_bg_4.png');*/
 }
 
 

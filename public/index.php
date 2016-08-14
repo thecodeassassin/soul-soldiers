@@ -12,7 +12,8 @@ defined('APPLICATION_ENV')
 || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
 
 defined('BASE_URL')
-|| define('BASE_URL', sprintf('%s://%s', (array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] != null) ? 'https' : 'http', $_SERVER['HTTP_HOST']));
+|| define('BASE_URL', sprintf('%s://%s', (array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] != null) ||
+(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ? 'https' : 'http', $_SERVER['HTTP_HOST']));
 
 $requiredExtensions = ['gd', 'curl', 'mcrypt', 'mysql', 'memcached', 'phalcon'];
 

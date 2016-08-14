@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container main-page">
     <div class="row">
         <div class="jumbotron color0 homepage">
             <h1>Welkom bij Soul-Soldiers!</h1>
@@ -48,15 +48,16 @@
 
         </div>
         <div class="col-md-4 right-container">
-            <div class="gutter">
+            <div class="gutter home-gutter">
                 <h2>Volgende evenement</h2>
 
                 <div class="text" style="padding: 10px;">
-                    <h3>Soul-Soldiers 2016</h3>
-                    <h4>6, 7 en 8 mei 2016</h4>
-                    Het evenement wordt opnieuw georganiseerd in
-                    Dorpshuis het Eiland in Beinsdorp. Ook deze keer hebben we leuke competitities en prijzen! <br /><br />
+                    <h3>Soul-Soldiers 2016: 2nd edition</h3>
+                    <h4>11, 12 en 14 november 2016</h4>
+                    Deze editie zal plaats vinden in JC Solution in Hillegom. Ook deze keer hebben we leuke competitities en prijzen! <br /><br />
 
+                    De competities zullen z.s.m. bekend gemaakt worden.
+                        
                     {#De volgende competities zullen worden gespeeld tijdens Soul-Soldiers 2015: Autumn edition: <br  /><br />#}
 
                     {#<ul>#}
@@ -66,10 +67,10 @@
                         {#<li>Rocket League (Fun compo)</li>#}
                     {#</ul>#}
 
-                    <strong>Sponsored by:</strong>
+                    {#<strong>Sponsored by:</strong>
                     <a href="https://www.pyka-wifi.com" target="_blank">
                         <img src="/img/pyka.png" width="310" height="95" border="0"/>
-                    </a>
+                    </a>#}
                     <br /><br />
                     <a href="{{ url('event/current') }}" class="btn btn-primary">Naar evenements pagina</a>
                 </div>

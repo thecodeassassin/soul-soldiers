@@ -4,13 +4,16 @@
     <table class="table noborders">
         <tr>
             <td><strong>Datum</strong></td>
-            <td>Vrijdag 6 mei 2016 19:00 - Zondag 8 mei 2016 16:00</td>
+            <td>
+                Vrijdag 11 november 2016 - Zondag 13 november 2016
+            </td>
         </tr>
         <tr>
             <td><strong>Locatie</strong></td>
             <td><address>
-                    Het Eiland  <br />
-                    Rietkraag 5, 2144 KA Beinsdorp
+                    Ojc Solution<br />
+                    van den Endelaan 7 (Sportpark “De Zanderij”)<br />
+                    2182 ES Hillegom
                 </address>
             </td>
         </tr>

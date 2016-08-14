@@ -51,12 +51,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mrclay/minify.git",
-                "reference": "1c3c370dd4e92da3f49bf6a3d17d577637965cfb"
+                "reference": "49bd730e1ae05944288a40791cee2bbdd4d8de29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mrclay/minify/zipball/1c3c370dd4e92da3f49bf6a3d17d577637965cfb",
-                "reference": "1c3c370dd4e92da3f49bf6a3d17d577637965cfb",
+                "url": "https://api.github.com/repos/mrclay/minify/zipball/49bd730e1ae05944288a40791cee2bbdd4d8de29",
+                "reference": "49bd730e1ae05944288a40791cee2bbdd4d8de29",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
             ],
             "description": "Minify is a PHP5 app that helps you follow several rules for client-side performance. It combines multiple CSS or Javascript files, removes unnecessary whitespace and comments, and serves them with gzip encoding and optimal client-side cache headers",
             "homepage": "http://code.google.com/p/minify/",
-            "time": "2015-09-27 03:27:29"
+            "time": "2016-06-28 18:51:40"
         },
         {
             "name": "phalcon/incubator",
@@ -99,7 +99,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-07-10 09:20:33"
+            "time": "2016-07-29 21:38:28"
         },
         {
             "name": "swiftmailer/swiftmailer",

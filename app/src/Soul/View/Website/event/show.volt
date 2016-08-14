@@ -57,7 +57,7 @@
         </div>
     </div>
 </div>
-<div class="row color0">
+<div class="row color0 event-page">
 
     <div class="col-md-5 col-md-offset-1 pb15 pt15">
         <h2>Inschrijvingen ({{ event.entries|length }}/{{ event.maxEntries }})</h2>

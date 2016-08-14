@@ -17,6 +17,7 @@
         "ext-mysql" : "*",
         "ext-pdo_mysql" : "*",
         "ext-memcached" : "*",
+        "ext-curl" : "*",
         "ext-memcache" : "*",
         "swiftmailer/swiftmailer" : "5.0.*",
         "dg/twitter-php": "dev-master"
