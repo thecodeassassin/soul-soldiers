@@ -53,7 +53,7 @@
 
                 <div class="text" style="padding: 10px;">
                     <h3>Soul-Soldiers 2016: 2nd edition</h3>
-                    <h4>11, 12 en 14 november 2016</h4>
+                    <h4>11, 12 en 13 november 2016</h4>
                     Deze editie zal plaats vinden in JC Solution in Hillegom. Ook deze keer hebben we leuke competitities en prijzen! <br /><br />
 
                     De competities zullen z.s.m. bekend gemaakt worden.
