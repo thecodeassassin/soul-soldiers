@@ -122,7 +122,7 @@ div.main-page .homepage, div.right-container div.home-gutter, div.lan-info, div.
     background-color: rgba(0,0,0,0.5) !important;
 }
 
-#content {
+section#content {
     /*background: url('../img/new-bg.jpg') no-repeat 200 500 fixed;*/
     background: url('../img/home_slider/slider1.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
