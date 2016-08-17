@@ -415,7 +415,7 @@ Index / news / tweets
 }
 
 .index-caroussel .text {
-    background: url('../img/transparant_tile_50.png');
+    /*background: url('../img/transparant_tile_50.png');*/
     padding: 20px;
     font-size: 18px;
 }
