@@ -74,7 +74,7 @@
                         Betaalgegevens:
                         <br /><br />
                         - IBAN:  NL63 INGB 0003 7831 47 <br />
-                        - T.n.v Soul-Soldiers te Hoofddorp <br />
+                        - T.n.v Soul-Soldiers te Haarlem <br />
                         - Omschrijving: Betaling {{ user.getRealName() }} - {{ event.name }}
                     </p>
                 </div>
