@@ -49,8 +49,8 @@ class Event extends Base
      *
      * @var string
      */
-    public $endDate;
-
+    public $endDate; 
+    
     /**
      *
      * @var integer
@@ -229,7 +229,7 @@ class Event extends Base
     public function hasPayed($userId)
     {
         if ($entry = static::findEntryByUserIdAndEventId($userId, $this->eventId)) {
-
+            
             if ($entry->payment) {
                 return (bool) $entry->payment->confirmed;
             }
@@ -372,6 +372,9 @@ class Event extends Base
         }
 
         $seatmap->url = sprintf('/static/image/%s', $cachedSeatMap);
+        
+        // set blocked seats
+        $seatmap->blockedSeats = json_decode($seatmap->blockedSeats);
 
         return $seatmap;
     }

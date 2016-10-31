@@ -2,7 +2,8 @@
 {% set seatImagePosY = seatMap.posY %}
 {% set crewSize = event.crewSize %}
 {% set tableSize = 2 %}
-{% set numSeats = event.maxEntries - crewSize %}
+{% set numSeats = seatMap.numSeats %}
+{% set blockedSeats = seatMap.blockedSeats|json_encode %}
 
 <h1>Plek reserveren</h1>
 {% if not seatingAvailable %}
@@ -22,44 +23,39 @@
 
     <div class="col-md-12">
 
-        <div class="seating-table">
+        <div class="seating-table {{ seatMap.cssClass|default('') }}">
             <div class="seatmap-wrapper" style="background-image: url({{ seatMap.url }})">
-
-                {% set xCount = seatMap.xCount %}
-                {% set yCount = seatMap.yCount %}
-                {% set tableLimit = seatMap.tableLimit %}
 
                 {% set seatNum = 1 %}
                 <div class="seatmap" style="position: absolute; left: {{ seatImagePosX }}px; top: {{ seatImagePosY }}px">
 
-                    {% set numRows = (numSeats / xCount / yCount) %}
+                    <div class="seat-row-wrapper" style="width: {{ blockSizePx }}px">
 
-                    {% set tableCount = 0 %}
-                    {% set blockSizePx =  xCount * 25 + 2.5 %}
-
-                    <div class="seat-row-wrapper" style="width: {{ blockSizePx * tableLimit + (25 * tableLimit)}}px">
-
-                        {% for row in 0..numRows if seatNum < numSeats %}
+                        {% for row in map %}
 
                             <div class="seat-table" style="width:{{ blockSizePx }}px">
 
                                 <div class="seat-row">
 
-                                    {% for seat in 1..xCount*yCount %}
-                                        {% if seatNum > numSeats %}{% break %}{% endif %}
-                                        {% set seatName = row+1~'.'~seat %}
-                                        <div class="seat {% if seatName in takenSeats %}taken{% elseif seatName == userSeat %}yours{% else %}free{% endif %}">
-                                            {% if seatName not in takenSeats and seatName != userSeat and seatingAvailable %}
-                                                <a href="{{ url('event/'~ event.systemName ~ '/reserve-seat/' ~ seatName ) }}"
-                                                   data-toggle='tooltip'
-                                                   title="Deze plek is vrij"
-                                                   onclick="return reserveSeat()">
-                                                    {{ seatName }}
-                                                </a>
-                                            {% else %}
-                                                <span title="{% if seatName == userSeat %}Dit is jou plek{% elseif seatName in takenSeats %}{{ occupiedSeats[seatName] }}{% endif %}" data-toggle='tooltip'>
-                                                    {{ seatName }}
-                                                </span>
+                                    {% for seatName in row %}
+                                    
+                                        {% set seatBlocked = (seatName == "") %}
+                                        
+                                        <div class="seat {% if seatBlocked %} blocked {% else %} {% if seatName in takenSeats %}taken{% elseif seatName == userSeat %}yours{% else %}free{% endif %} {% endif %}">
+                                            
+                                            {% if not seatBlocked %}
+                                                {% if seatName not in takenSeats and seatName != userSeat and seatingAvailable %}
+                                                    <a href="{{ url('event/'~ event.systemName ~ '/reserve-seat/' ~ seatName ) }}"
+                                                       data-toggle='tooltip'
+                                                       title="Deze plek is vrij"
+                                                       onclick="return reserveSeat()">
+                                                        {{ seatName }}
+                                                    </a>
+                                                {% else %}
+                                                    <span title="{% if seatName == userSeat %}Dit is jou plek{% elseif seatName in takenSeats %}{{ occupiedSeats[seatName] }}{% endif %}" data-toggle='tooltip'>
+                                                        {{ seatName }}
+                                                    </span>
+                                                {% endif %}
                                             {% endif %}
 
                                             {% set seatNum += 1 %}

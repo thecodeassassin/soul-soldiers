@@ -126,6 +126,10 @@ class EventController extends \Soul\Controller\Base
             // if there is no seat map, do not show this modal
             return;
         }
+        // $smap = $seatMap->toArray();
+        // $smap['image'] = null;
+        
+        // die(var_dump($seatMap->getMap()));
 
         $takenSeats = [];
         $occupiedSeats = [];
@@ -143,7 +147,11 @@ class EventController extends \Soul\Controller\Base
                 $occupiedSeats[$eventEntry->seat] = $eventEntry->user->nickName;
             }
         }
-
+        
+        $parsedMap = $seatMap->getParsedMap();
+        
+        $this->view->blockSizePx = $parsedMap['blockSizePx'];
+        $this->view->map = $parsedMap['map'];
         $this->view->userSeat = $userSeat;
         $this->view->event = $event;
         $this->view->takenSeats = $takenSeats;
@@ -173,17 +181,10 @@ class EventController extends \Soul\Controller\Base
             }
 
             $validSeatTable = [];
-            $seatMap = $event->getSeatMap();
+            $seatMap = $event->getSeatMap()->getParsedMap(true);
+            $map = $seatMap['map'];
 
-            $numRows = ($event->maxEntries - $event->crewSize) / $seatMap->xCount / $seatMap->yCount;
-
-            for ($row = 1; $row <= $numRows; $row++) {
-                for ($seat = 1; $seat <= $seatMap->xCount * $seatMap->yCount; $seat++) {
-                    $validSeatTable[] = (float) $row.'.'.$seat;
-                }
-            }
-
-            if (!in_array($reserveSeat, $validSeatTable)) {
+            if (!in_array($reserveSeat, $map)) {
                 throw new SecurityException('Deze plaats bestaat niet!');
             }
 

@@ -23,21 +23,16 @@ class SeatMap extends Base
     public $image;
 
     /**
-     *
-     * @var integer
-     */
-    public $xCount;
-
+     * 
+     * @var string 
+    */
+    public $cssClass;
+    
     /**
-     *
-     * @var integer
-     */
-    public $yCount;
-
-    /**
-     * @var integer
-     */
-    public $tableLimit;
+     * 
+     * @var string 
+    */
+    public $map;
 
     /**
      * Initialize method for model.
@@ -47,6 +42,45 @@ class SeatMap extends Base
 		$this->setSource('tblSeatMap');
 
         $this->belongsTo('seatMapId', '\Soul\Model\Event', 'seatMapId');
+    }
+    
+    public function getMap() 
+    {
+        return json_decode($this->map);
+    }
+    
+    public function getParsedMap($flat = false)
+    {
+        $map = $this->getMap();
+        $parsedMap = [];
+        $blockSizePx = 0;
+        
+        if (is_array($map)) {
+            foreach ($map as $idx => $blocks) {
+                $largestBlockSize = count($blocks[0]) * 35;
+                $sNum = 1;
+                if ($blockSizePx < $largestBlockSize) $blockSizePx = $largestBlockSize;
+                
+                foreach ($blocks as $block) {
+                    foreach ($block as $seat) {
+                        if ($seat == 's') {
+                            $seatName = $idx+1 . ".$sNum";
+                            $sNum += 1;
+                            if ($flat) $parsedMap[] = $seatName;
+                        } else {
+                            $seatName = "";
+                        }
+                        if (!$flat) {
+                            $parsedMap[$idx+1][] = $seatName;
+                        }
+                    }
+                }
+            }
+        } else {
+            throw new \Exception('Cannot read seatmap!, invalid JSON');
+        }
+        
+        return ["blockSizePx" => $blockSizePx, 'map' => $parsedMap];
     }
 
     /**
@@ -58,11 +92,12 @@ class SeatMap extends Base
             'seatMapId' => 'seatMapId',
             'description' => 'description',
             'image' => 'image',
-            'xCount' => 'xCount',
-            'yCount' => 'yCount',
-            'tableLimit' => 'tableLimit',
             'posX' => 'posX',
-            'posY' => 'posY'
+            'posY' => 'posY',
+            'map' => 'map',
+            'blockedSeats' => 'blockedSeats',
+            'cssClass' => 'cssClass'
+
         );
     }
 
