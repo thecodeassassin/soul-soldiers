@@ -18,25 +18,27 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <h3>Trackmania </h3>
+                    <h3>CS : GO </h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Trackmania/Tm.exe"> Installer</a> <br /><br/>
-                        <a href="downloads/trackmania" target="_blank"> Readme + Screenshots</a></p>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Csgo/Setup.exe"> Installer</a> <br/>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Csgo/Setup-1.bin"> Bestand 2</a> <br />
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Csgo/Setup-2.bin"> Bestand 3</a> <br />
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Csgo/Setup-3.bin"> Bestand 4</a> <br /> <br />
+                        <a href="downloads/csgo" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
-                    <h3>League Of Legends</h3>
+                    <h3>Keep Talking and nobody explodes</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/LoL/League Of Legends.part1.exe"> Installer</a> <br />
-                        Download link 2 : <a href="http://filemaster.intranet.lan/Games/LoL/League Of Legends.part2.rar"> Part 2</a> <br /> <br />
-                        <a href="downloads/LoL" target="_blank"> Readme + Screenshots</a></p>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/keeptalking/Setupkeeptalking.exe"> Installer</a> <br /> <br />
+                        <a href="downloads/talking" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
-                    <h3>C&C 2 Yuri's revenge</h3>
+                    <h3>Worms</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/RA2/Ra2.exe"> Installer</a> <br /> <br />
-                        <a href="downloads/cc" target="_blank"> Readme + Screenshots</a></p>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/worms/Setupworms.exe"> Installer</a> <br /> <br />
+                        <a href="downloads/worms" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
@@ -54,10 +56,10 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <h3>Duck Game </h3>
+                    <h3>Muziek Request </h3>
                     <p>Download links : <br />
-                       Download link 1 : <a href="http://filemaster.intranet.lan/Games/Duck/Duck.exe"> Installer</a> <br /><br/>
-                    <a href="downloads/duck" target="_blank"> Readme + Screenshots</a></p>
+                       Download link 1 : <a href="http://filemaster.intranet.lan/Apps/songrequest.zip"> Installer</a> <br /><br/>
+                    <a href="downloads/muziek" target="_blank"> Readme</a></p>
                 </div>
 
 
