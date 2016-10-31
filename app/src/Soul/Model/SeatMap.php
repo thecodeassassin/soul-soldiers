@@ -56,15 +56,16 @@ class SeatMap extends Base
         $blockSizePx = 0;
         
         if (is_array($map)) {
+            $rowNum = 1;
             foreach ($map as $idx => $blocks) {
                 $largestBlockSize = count($blocks[0]) * 35;
-                $sNum = 1;
                 if ($blockSizePx < $largestBlockSize) $blockSizePx = $largestBlockSize;
                 
                 foreach ($blocks as $block) {
+                    $sNum = 1;
                     foreach ($block as $seat) {
                         if ($seat == 's') {
-                            $seatName = $idx+1 . ".$sNum";
+                            $seatName = $rowNum . ".$sNum";
                             $sNum += 1;
                             if ($flat) $parsedMap[] = $seatName;
                         } else {
@@ -74,6 +75,7 @@ class SeatMap extends Base
                             $parsedMap[$idx+1][] = $seatName;
                         }
                     }
+                    $rowNum += 1;
                 }
             }
         } else {

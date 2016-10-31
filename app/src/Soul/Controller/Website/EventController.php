@@ -126,10 +126,6 @@ class EventController extends \Soul\Controller\Base
             // if there is no seat map, do not show this modal
             return;
         }
-        // $smap = $seatMap->toArray();
-        // $smap['image'] = null;
-        
-        // die(var_dump($seatMap->getMap()));
 
         $takenSeats = [];
         $occupiedSeats = [];
@@ -139,11 +135,11 @@ class EventController extends \Soul\Controller\Base
             if ($eventEntry->seat != 0 && $eventEntry->seat != null) {
 
                 if ($eventEntry->userId == $user->getUserId()) {
-                    $userSeat = $eventEntry->seat;
+                    $userSeat = (string) $eventEntry->seat;
                     continue;
                 }
 
-                $takenSeats[] = (float)$eventEntry->seat;
+                $takenSeats[] = (string) $eventEntry->seat;
                 $occupiedSeats[$eventEntry->seat] = $eventEntry->user->nickName;
             }
         }
@@ -170,7 +166,7 @@ class EventController extends \Soul\Controller\Base
     {
 
         try {
-
+            
             $user = $this->authService->getAuthData();
             $event = Event::findBySystemName($systemName);
 
@@ -189,16 +185,17 @@ class EventController extends \Soul\Controller\Base
             }
 
             foreach ($event->entries as $eventEntry) {
-                if ($eventEntry->seat == $reserveSeat) {
+                
+                if ($eventEntry->seat === $reserveSeat) {
                     throw new SecurityException('U heeft geprobeerd een plek te reserveren die al is gereserveerd!');
                 }
             }
 
             // if the seat is indeed available, save the seat to the user
             $entry = Event::findEntryByUserIdAndEventId($user->getUserId(), $event->eventId);
-            $entry->seat = $reserveSeat;
+            $entry->seat = sprintf('%.2f', $reserveSeat);
             $entry->save();
-
+            
             $this->flashMessage(sprintf('U heeft plek %s gereserveerd', $reserveSeat), 'success', true);
 
         } catch (SecurityException $e) {
