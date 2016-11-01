@@ -549,8 +549,12 @@ strong {
     background-color: darkgreen;
 }
 
-.solution .seatmap {
+.solution .seatmap .seat-row {
     transform: rotate(-10deg);
+}
+
+div.tooltip {
+    transform: none !important;
 }
 
 /*Nav pill styling*/
