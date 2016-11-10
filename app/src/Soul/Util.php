@@ -333,4 +333,15 @@ class Util {
         }
         return 1<<($i+1);
     }
+    
+    
+    /**
+     * @param string
+     * 
+     * @return int   
+     */
+    public static function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
 }

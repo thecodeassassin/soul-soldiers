@@ -100,7 +100,8 @@ return new \Phalcon\Config(
                 'error',
                 'static',
                 'content',
-                'contact'
+                'contact',
+                'chat'
             ],
             /**
              * <pre>

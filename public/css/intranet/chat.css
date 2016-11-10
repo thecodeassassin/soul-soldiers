@@ -1,0 +1,153 @@
+
+.soul-chat .chat-input {
+    background-color: rgb(29, 29, 29);
+    padding: 5px;
+    height: 50px;   
+}
+
+.soul-chat .chat-input-inner {
+    margin-left: 0;
+    /*margin-right: 45px;*/
+}
+
+.soul-chat .chat-messages {
+    background-color: rgb(29, 29, 29);
+    position: relative;
+}
+
+.soul-chat .chat-messages li {
+    background-color: #585858;
+    border-radius: 10px;
+    min-height: 85px;
+}
+
+.soul-chat .chat-messages li.chat-msg-left {
+    background-color: #304c5a;
+}
+
+.soul-chat .chat-messages .chat-msg-right img {
+    top: 8px;
+    right: 8px;
+}
+
+.soul-chat .chat-messages .chat-msg-left img {
+    top: 8px;
+    left: 8px;
+}
+.soul-chat .chat-messages .chat-msg-left p {
+    margin-left: 10px;
+    word-break: break-all;
+    font-size: 15px;
+}
+
+.soul-chat .chat-messages .chat-msg-right p {
+    margin-right: 10px;
+    word-break: break-all;
+    font-size: 15px;
+}
+
+.soul-chat .chat-messages h5 {
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    width: 100%;
+    display: none;
+}
+
+.soul-chat .chat-people {
+    display: none;
+}
+
+.soul-chat .chat-people li.active div {
+    background: #ddd;
+    color: #000;
+}
+
+.soul-chat .chat-people li div {
+    min-height: 50px;
+    display: block;
+    color: #fff;
+    padding: 5px 10px 5px 15px;
+    margin: 0 0 2px;
+    font-weight: bold;
+    position: relative;
+}
+
+
+.soul-chat .chat-people li a:hover {
+    background: none;
+    color: #fff;
+}
+
+#user-list img {
+    position: absolute;
+    top: 7px;
+    margin: 0;
+}
+
+#user-list .chat-name {
+    position: absolute;
+    left: 60px;
+    margin: 0;
+}
+
+
+.soul-chat .chat-info {
+    color: #b5b5b5;
+}
+
+#user-list .chat-info {
+    position: absolute;
+    left: 59px;
+    top: 20px;
+}
+
+
+.system-message {
+    display: none; 
+    position: absolute;
+    width: 100%;
+    height: 45px;
+    z-index: 5;
+    background-color: rgba(33, 107, 243, 0.75);
+    font-weight: bold;
+}
+
+.soul-chat .chat-messages .chat-msg-left .chat-msg-time {
+    right: 3px;
+    left: inherit;
+    color: #b5b5b5;
+}
+
+.soul-chat .chat-messages .chat-msg-right .chat-msg-time {
+    left: 3px;
+    right: inherit;
+    color: #b5b5b5;
+}
+
+.soul-chat li.active .chat-info {
+    color: #000;
+}
+
+.system-message .icon {
+    margin-left: 10px;
+}
+
+.system-message span {
+    line-height: 45px;
+    margin-left: 5px;
+}
+
+#user-list {
+    margin-top: 20px;
+}
+
+.chat-notify span {
+    margin-left: 5px;
+}
+
+.chat-notify {
+    position: absolute;
+    right: 15px;
+    bottom: 0px;
+}

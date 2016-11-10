@@ -81,6 +81,7 @@ return new \Phalcon\Config(
                     'font-icons/custom-icons/css/custom-icons.css',
                     'js-plugin/magnific-popup/magnific-popup.css',
                     'css/intranet/plugins.css',
+                    'css/intranet/chat.css',
                     'css/intranet/themes/deepblue.css',
                     'css/intranet/main.css',
                     'css/ajax-loader.css',
@@ -104,6 +105,10 @@ return new \Phalcon\Config(
                     "js/remote-modal.js",
 //                    "js/jquery-ui.min.js",
                     "js/intranet/main.js",
+                    "js/intranet/handlebars.min.js",
+                    "js/notify.js",
+                    "js/noty.js",
+                    // "js/nanoscroller.js",
                     "js/bootstrap.min.js"
                 ]
             ]

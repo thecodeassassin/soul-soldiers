@@ -97,6 +97,7 @@ $menuConfig = [
         'menu'=> [
             '<span class="icon-home"></span> Home' => BASE_URL . '/home',
             '<span class="icon-award"></span> Toernooien' => $tournamentNames,
+            '<span class="icon-chat"></span> Chat' => BASE_URL . '/chat',
             '<span class="icon-download"></span> Downloads' => BASE_URL . '/content/downloads',
             'Admin' => [
                  'Dashboard' => BASE_URL . '/admin/index',
@@ -110,7 +111,7 @@ $menuConfig = [
         ],
         // authenticated only menu items
         'authenticated' => [
-            'Tournooien'
+            'Toernooien'
         ],
 
         // Admin only menu items
