@@ -28,12 +28,12 @@ if (count($missing) > 0) {
     die(sprintf('The following php extensions are not installed or enabled: %s', implode(', ',$missing)));
 }
 
-define('ACTIVE_MODULE', 'intranet');
-// if (strpos(BASE_URL, '.lan') !== false || strpos(BASE_URL, 'intranet') !== false) {
-//     define('ACTIVE_MODULE', 'intranet');
-// } else {
-//     define('ACTIVE_MODULE', 'website');
-// }
+// define('ACTIVE_MODULE', 'intranet');
+if (strpos(BASE_URL, '.lan') !== false || strpos(BASE_URL, 'intranet') !== false) {
+    define('ACTIVE_MODULE', 'intranet');
+} else {
+    define('ACTIVE_MODULE', 'website');
+}
 
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APPLICATION_PATH . '/library'),
