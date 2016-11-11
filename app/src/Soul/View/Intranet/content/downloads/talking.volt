@@ -18,7 +18,7 @@
          Start het spel op met ktane.exe <br /> <br />
 
          Belangrijk !!<br />
-         Om dit spel te kunnen spelen heeft speler 2 de manual nodig : http://www.bombmanual.com/ <br />
+         Om dit spel te kunnen spelen heeft speler 2 de handleiding nodig :  <a target="_blank" href="http://www.bombmanual.com/manual/1/pdf/Bomb-Defusal-Manual_1.pdf">Handleiding</a> <br />
 
 
          </p>
