@@ -20,7 +20,8 @@
         "ext-curl" : "*",
         "ext-memcache" : "*",
         "swiftmailer/swiftmailer" : "5.0.*",
-        "dg/twitter-php": "dev-master"
+        "dg/twitter-php": "dev-master",
+ 	"cboden/ratchet": "~0.3.5"
     },
     "repositories": [
         {
