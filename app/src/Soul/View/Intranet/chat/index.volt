@@ -51,7 +51,7 @@ __CHAT_IMAGE_HASH = '{{ chatImageHash }}';
     
     <li class="{{'{{'}}#if_me author {{'}}'}}chat-msg-left{{'{{'}}else{{'}}'}}chat-msg-right{{'{{'}}/if_me{{'}}'}}">
         <span class="label chat-msg-time"><em>{{'{{'}}time{{'}}'}}</em> / <em>{{'{{'}}author{{'}}'}}</em></span>
-        <img src="https://www.gravatar.com/avatar/{{'{{'}}imageHash{{'}}'}}?s=64" alt="avatar"/>
+        <img src="https://www.gravatar.com/avatar/{{'{{'}}imageHash{{'}}'}}?s=64&r=x&default=https%3A%2F%2Fsoul-soldiers.nl%2Fimg%2Fgravatar_default.jpg" alt="avatar"/>
         <p>{{'{{'}}message{{'}}'}}</p>
     </li>
     {{'{{'}}/each{{'}}'}}
@@ -62,12 +62,13 @@ __CHAT_IMAGE_HASH = '{{ chatImageHash }}';
  {{'{{'}}#each users{{'}}'}}
    <li>
         <div data-placement="left" title="">
-         <img src="https://www.gravatar.com/avatar/{{'{{'}}imageHash{{'}}'}}?s=32" alt="avatar"/>
+         <img src="https://www.gravatar.com/avatar/{{'{{'}}imageHash{{'}}'}}?s=32&r=x&default=https%3A%2F%2Fsoul-soldiers.nl%2Fimg%2Fgravatar_default_32.jpg" alt="avatar"/>
         <span class="chat-name">{{'{{'}}nickname{{'}}'}}</span><br>
         <span class="chat-info">{{'{{'}}realName{{'}}'}}</span>
         </div>
     </li>    
  {{'{{'}}/each{{'}}'}}
 </script>
+
 
 {% endblock %}

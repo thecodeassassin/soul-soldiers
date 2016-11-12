@@ -113,16 +113,21 @@
     font-weight: bold;
 }
 
+
+.soul-chat .chat-msg-time {
+    color: #fff;
+    font-size: 14px;
+}
+
+
 .soul-chat .chat-messages .chat-msg-left .chat-msg-time {
     right: 3px;
     left: inherit;
-    color: #b5b5b5;
 }
 
 .soul-chat .chat-messages .chat-msg-right .chat-msg-time {
     left: 3px;
     right: inherit;
-    color: #b5b5b5;
 }
 
 .soul-chat li.active .chat-info {

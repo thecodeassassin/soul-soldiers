@@ -10,6 +10,12 @@
     var notifyEnabled = false;
     
     setupWebSocket();
+
+     if (Notify.needsPermission) {
+    	 Notify.requestPermission(function() { notifyEnabled = true; });
+     } else {
+         notifyEnabled = true;
+     }	
     
     // check if the chat is working
     setTimeout(function() {
@@ -62,20 +68,33 @@
             if (msg.author == 'system') {
                 showSystemMessage(msg.message, msg.type)
             } else {
+		if (notifyEnabled && msg.author != nickname) {
+		    var notifymsg = new Notify(msg.author, {
+	                    body: msg.message,
+        	            tag: token,
+	                    timeout: 4
+                    });
+
+        	    notifymsg.show();	            
+		}
                 updateMessages(msg);
             }
         }
-    };
+    }
     
     conn.onclose = function(e) {
-        
-        // user left, reload the page
-        window.location.reload(1);
+	
+	ajaxLoad(true);
+	setTimeout(function() {        
+            // user left, reload the page
+            window.location.reload(1);
+	}, 5000)
+
     }
     
     
     $('#chatinput').keydown(function(event) {
-        if (event.keyCode == 13) {
+        if (event.keyCode == 13 && $(this).val() != '') {
             var message = $(this).val();
             var dt = new Date();
             var time = addZero(dt.getHours()) + ":" + addZero(dt.getMinutes()) + ":" + addZero(dt.getSeconds());

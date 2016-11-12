@@ -11,7 +11,7 @@
                 <div class="gutter well">
                     <h1>Welkom op het intranet van Soul-Soldiers!</h1>
                     <p>
-                        Op het intranet kun je je inschrijven voor toornooien, games voor de toernooien downloaden en het laatste nieuws lezen. <br />
+                        Op het intranet kun je je inschrijven voor toernooien, games voor de toernooien downloaden en het laatste nieuws lezen. <br />
                     </p>
                 </div>
             </div>
@@ -32,36 +32,28 @@
                 <div class="gutter well">
                     <h3><i class="icon-info-circled"></i> Informatie</h3>
 
-
-
-
                     <hr />
-                    <h3>Buffet (Zaterdag 19:00)</h3>
+                    <h3>Avondeten (Zaterdag 19:00)</h3>
                     <p>
                         {% if payedForBuffet %}
-                        Fantastisch dat je mee eet met ons buffet op Zaterdag avond. We starten met het serveren van eten om 19:00. <br />
-                        Zorg dus dat je op tijd bij de bar staat om gezellig met ons te eten.
+                        Fantastisch dat je mee eet op Zaterdag avond! We starten met het serveren van eten om 19:00. <br />
+                        Zorg dus dat je op tijd buiten staat om gezellig met ons te eten.
                         {% else %}
-                        Je hebt (nog) niet betaald voor het buffet. Mocht je hier toch aan mee willen doen, geef dit dan aan bij 1 van de crewleden.
+                        Je hebt (nog) niet betaald voor het avondeten. Mocht je hier toch aan mee willen doen, geef dit dan aan bij 1 van de crewleden. <br />
+			De kosten zijn 7,50 per persoon.
                         {% endif %}
                     </p>
-                    <h4>Menu</h4>
-                    <ul class="menuList">
-                        <li>Huisgemaakte Pasta del Soul met Tomaat-Mascarpone saus</li>
-                        <li>Caprese van tomaat, mozzarella, basillicum en extra virgin olijfolie</li>
-                        <li>Sla met olijfolie/balsamico dressing</li>
-                    </ul>
 
                     <h4>Eten/Drinken</h4>
                     <p>
                         {#Er is bij de crew energy drink te koop voor &euro; 1 euro per stuk. Tijdens deze lan geld tevens 3 halen 2 betalen voor de energy drink :) <br />#}
                         Iedereen is verantwoordelijk voor z'n eigen eten en drinken tijdens de LAN party. <br />Er staat een koelkast in de zaal die vrij te gebruiken is.
                     </p>
-                    <h4>Chat / Bestanden</h4>
-                    <p>
-                        Alle bestanden kunnen geshared worden via DC++, daar is tevens een chat aanwezig. DC++ is te downloaden op de <a href="{{ url('content/downloads') }}">downloads</a>
-                        pagina.
-                    </p>
+                    <h4>Filesharing</h4>
+                    <ul>
+                        <li><a href="{{ url('content/downloads') }}">Downloads pagina</a></li>
+			<li>Fileserver: \\FILESERVER</li>
+                    </li>
                 </div>
             </div>
         </div>
