@@ -118,6 +118,9 @@ class Chat implements MessageComponentInterface {
                         $messageString = json_encode($msg);
                         $messageHash = sha1($messageString);
                         
+                        // strip all tags except links
+                        $msg->message = strip_tags($msg->message, 'a');
+                        
                         // store the message to load when opening the window 
                         $this->cache->set($messageHash, $msg, 300); // store messages for up to one hour
                         $this->storedMessages[] = $messageHash;

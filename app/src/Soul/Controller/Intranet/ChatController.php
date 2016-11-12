@@ -35,7 +35,7 @@ class ChatController extends Base
         $this->view->chatHost = 'ws://' . $baseUrl['host'] . ':8081';
         
         $this->assets->collection('scripts')->addJs('js/intranet/chat.js');
-        
+        $this->assets->collection('scripts')->addJs('js/intranet/anchorme.min.js');
     }
 
 }
