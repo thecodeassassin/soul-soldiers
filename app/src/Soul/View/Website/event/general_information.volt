@@ -5,7 +5,7 @@
         <tr>
             <td><strong>Datum</strong></td>
             <td>
-                Vrijdag 11 november 2016 - Zondag 13 november 2016
+                Vrijdag 28 april 2017 - Zondag 30 april 2017
             </td>
         </tr>
         <tr>
