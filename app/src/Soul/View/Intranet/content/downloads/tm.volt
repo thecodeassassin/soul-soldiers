@@ -1,22 +1,28 @@
 {% extends 'layout.volt' %}
 
-{% block pageTitle %}<i class="icon-download"></i>&nbsp;Minecraft{% endblock %}
+{% block pageTitle %}<i class="icon-download"></i>Keep Talking and nobody explodes{% endblock %}
 {% block content %}
-{% set image_1 = 'img/downloads/mine_ingame.jpg' %}
-{% set image_2 = 'img/downloads/mine_ingame2.jpg' %}
-{% set image_3 = 'img/downloads/mine_ingame3.jpg' %}
+
+{% set image_1 = 'img/downloads/tm_ingame.jpg' %}
+{% set image_2 = 'img/downloads/tm_ingame2.jpg' %}
+{% set image_3 = 'img/downloads/tm_ingame3.jpg' %}
+
 <div class="row">
 
     <div class="col-md-12">
         <div class="gutter well">
 
-            <h1>Installatie instructies</h1>
-            <p>Download de file en installeer deze.<br />
-               Minecraft installeerd naar een bepaalde folder in windows. het is raadzaam om de snelkopeling aan te laten maken</p>
+         <h1>Installatie instructies</h1>
+         <p><br />
+         Download het bestand en installeer deze. <br />
+         Start het spel op met het .exe bestand <br /> <br />
 
+        Ook is het mogelijk om de Steam versie te gebruiken <br />
 
-            <H1>Screenshots</H1>
-            <p>Klik op de plaatjes om ze in het groot te bekijken</p>
+         </p>
+
+         <H1>Screenshots</H1>
+         <p>Klik op de plaatjes om ze in het groot te bekijken</p>
 
 
             <a href="{{ url(image_1) }}" class="image-link">

@@ -18,27 +18,25 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <h3>CS : GO </h3>
+                    <h3>Call of Duty 4 : Modern Warfare</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Csgo/Setup.exe"> Installer</a> <br/>
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Csgo/Setup-1.bin"> Bestand 2</a> <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Csgo/Setup-2.bin"> Bestand 3</a> <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Csgo/Setup-3.bin"> Bestand 4</a> <br /> <br />
-                        <a href="downloads/csgo" target="_blank"> Readme + Screenshots</a></p>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Call of Duty 4/Call of Duty Modern Warfare.part1.exe"> Installer</a> <br/>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Call of Duty 4/Call of Duty Modern Warfare.part2.rar"> Bestand 2</a> <br /> <br />
+                        <a href="downloads/cod" target="_blank"> Readme ( BELANGRIJK! ) + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
-                    <h3>Keep Talking and nobody explodes</h3>
+                    <h3>Trackmania</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/keeptalking/Setupkeeptalking.exe"> Installer</a> <br /> <br />
-                        <a href="downloads/talking" target="_blank"> Readme + Screenshots</a></p>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Trackmania/Tm.exe"> Installer</a> <br /> <br />
+                        <a href="downloads/tm" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
-                    <h3>Worms</h3>
+                    <h3>Age of Mythology</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/worms/Setupworms.exe"> Installer</a> <br /> <br />
-                        <a href="downloads/worms" target="_blank"> Readme + Screenshots</a></p>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/AoM/AoM.exe"> Installer</a> <br /> <br />
+                        <a href="downloads/aom" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
@@ -70,12 +68,7 @@
                     <a href="downloads/flatout2" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
-                <div class="col-md-3">
-                    <h3>Minecraft</h3>
-                    <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Minecraft/Minecraft.exe"> Installer</a> <br /><br />
-                        <a href="downloads/minecraft" target="_blank"> Readme + Screenshots</a></p>
-                </div>
+               
 
                 <div class="col-md-3">
                      <h3>DC++</h3>
