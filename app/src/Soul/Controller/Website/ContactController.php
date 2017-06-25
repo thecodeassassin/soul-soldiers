@@ -7,6 +7,7 @@ namespace Soul\Controller\Website;
 
 use Soul\Form\ContactForm;
 use Soul\Model\User;
+use Soul\Util;
 
 /**
  * Class ContactController
@@ -23,16 +24,31 @@ class ContactController extends \Soul\Controller\Base
         $contactForm = new ContactForm();
         $submitted = false;
         $user = $this->authService->getAuthData();
-
+        $siteKey = $this->config->captcha->siteKey;
+        $secretKey = $this->config->captcha->secretKey;
+        
         if ($this->request->isPost()) {
 
             $userEmail = $this->request->getPost('email', 'email');
             $userFullName = $this->request->getPost('realName', 'string');
             $emailContent = $this->request->getPost('content', 'string');
+            $captchaResponse = $this->request->getPost('g-recaptcha-response', 'string');
+            $messages = $contactForm->getMessages();
+            $captchaFailed = false;
+          
+            
+            $recaptcha = new \ReCaptcha\ReCaptcha($secretKey);
+            $resp = $recaptcha->verify($captchaResponse, Util::getClientIp());
+            if (!$resp->isSuccess()) {
+                $captchaFailed = true;
+                $messages->appendMessage(
+                    new \Phalcon\Validation\Message('Captcha niet geldig')
+                );
+            }
 
             // if the form is invalid, show the messages to the user
-            if ($contactForm->isValid($this->request->getPost()) == false) {
-                $this->flashMessages($contactForm->getMessages(), 'error');
+            if ($captchaFailed || $contactForm->isValid($this->request->getPost()) == false) {
+                $this->flashMessages($messages, 'error');
 
             } else {
                 $submitted = true;

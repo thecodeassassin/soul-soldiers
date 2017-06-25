@@ -68,6 +68,10 @@ return new \Phalcon\Config(
             'secret' => '',
             'token' => '',
             'tokenSecret' => ''
+        ],
+        'captcha' => [
+            'siteKey' => '',
+            'secretKey' => ''
         ]
     ]
 );

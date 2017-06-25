@@ -21,7 +21,8 @@
         "ext-memcache" : "*",
         "swiftmailer/swiftmailer" : "5.0.*",
         "dg/twitter-php": "dev-master",
- 	"cboden/ratchet": "~0.3.5"
+ 	"cboden/ratchet": "~0.3.5",
+        "google/recaptcha": "~1.1"
     },
     "repositories": [
         {

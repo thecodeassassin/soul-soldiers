@@ -2,6 +2,7 @@
     {{ partial('contact/send') }}
 {% else %}
 
+<script src="https://www.google.com/recaptcha/api.js?hl=nl"></script>
 <div class="row">
     <div class="container">
         <h1>Contact opnemen</h1>
@@ -19,17 +20,23 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-5 control-label">Volledige naam *</label>
+                <label for="inputRealName" class="col-sm-5 control-label">Volledige naam *</label>
                 <div class="col-sm-7 noaddon">
                     {{ form.render('realName') }}
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-5 control-label">Uw vraag/opmerking *</label>
+                <label for="inputContent" class="col-sm-5 control-label">Uw vraag/opmerking *</label>
                 <div class="col-sm-7 noaddon">
                     {{ form.render('content') }}
                 </div>
             </div>
+            <div class="form-group">
+                <label for="inputCaptcha" class="col-sm-5 control-label">Verificatie *</label>
+                <div class="col-sm-7 noaddon">
+                    <div class="g-recaptcha" data-sitekey="{{ form.getCaptchaSiteKey() }} "></div>
+                </div>
+            </div
 
             <div class="form-group">
                 <div class="col-md-2 col-md-offset-10">

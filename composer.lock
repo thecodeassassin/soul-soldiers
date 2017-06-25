@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9b4f20cb940304e7c4995c6e9cf7d609",
-    "content-hash": "395fe3ccf75f122dd644617375e85fb3",
+    "hash": "62243a61adb0528a5a87c5a7fa658aa1",
+    "content-hash": "af1a2c87625cca8375b1ab8ef10b9f8d",
     "packages": [
         {
             "name": "cboden/ratchet",
@@ -142,6 +142,51 @@
                 "event-emitter"
             ],
             "time": "2014-07-09 21:08:03"
+        },
+        {
+            "name": "google/recaptcha",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/google/recaptcha.git",
+                "reference": "6990961e664372ddbed7ebc1cd673da7077552e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/google/recaptcha/zipball/6990961e664372ddbed7ebc1cd673da7077552e5",
+                "reference": "6990961e664372ddbed7ebc1cd673da7077552e5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ReCaptcha\\": "src/ReCaptcha"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Client library for reCAPTCHA, a free service that protect websites from spam and abuse.",
+            "homepage": "http://www.google.com/recaptcha/",
+            "keywords": [
+                "Abuse",
+                "captcha",
+                "recaptcha",
+                "spam"
+            ],
+            "time": "2017-03-09 18:57:45"
         },
         {
             "name": "guzzle/common",
@@ -399,7 +444,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2014-10-08 10:51:14"
+            "time": "2016-07-29 21:38:28"
         },
         {
             "name": "react/event-loop",

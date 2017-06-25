@@ -19,6 +19,7 @@ use Phalcon\Validation\Validator\Email;
 use Phalcon\Validation\Validator\Identical;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Regex;
+use Phalcon\Di;
 
 /**
  * Class Base
@@ -44,6 +45,15 @@ abstract class Base extends Form
 
         return $csrf;
     }
+    
+    public function getCaptchaSiteKey() 
+    {
+        $di = Di::getDefault();
+        $config = $di->getConfig();
+        return $config->captcha->siteKey;
+    }
+
+
 
     /**
      * @param string $placeholder Placeholder
