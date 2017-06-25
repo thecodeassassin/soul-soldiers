@@ -52,20 +52,20 @@
                 <h2>Volgende evenement</h2>
 
                 <div class="text" style="padding: 10px;">
-                    <h3>Soul-Soldiers 2017</h3>
-                    <h4>28, 29 en 30 april 2017</h4>
-                    Deze editie zal plaats vinden in JC Solution in Hillegom. Ook deze keer hebben we leuke competitities en prijzen! <br /><br />
+                    <h3>Soul-Soldiers 2017: Autumn Edition</h3>
+                    <h4>27, 28 en 29 Oktober 2017</h4>
+                    Deze editie zal opnieuw plaats vinden in JC Solution in Hillegom. Ook deze keer hebben we leuke competitities en prijzen! <br /><br />
 
-                    {#De competities zullen z.s.m. bekend gemaakt worden.#}
+                    De competities en prijzen zullen z.s.m. bekend gemaakt worden.
                         
-                    De volgende competities zullen worden gespeeld tijdens de lan: <br  /><br />
+                    {#De volgende competities zullen worden gespeeld tijdens de lan: <br  /><br />
 
                     <ul>
                         <li>Unreal Tournament 2004: Instagib</li>
                         <li>Call of Duty 4: Modern Warfare</li>
-                        <li>Age Of Mythology</li>
+                        <li>Warcraft 3: Frozen Throne</li>
                         <li>Trackmania</li>
-                    </ul>
+                    </ul>#}
 
                     {#<strong>Sponsored by:</strong>
                     <a href="https://www.pyka-wifi.com" target="_blank">
