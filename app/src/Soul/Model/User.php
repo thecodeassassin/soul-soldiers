@@ -209,7 +209,8 @@ class User extends Base
      */
     public function initialize()
     {
-		$this->setSource('tblUser');
+        $this->setSource('tblUser');
+        $this->hasMany('userId', '\Soul\Model\Entry', 'userId', ['alias' => 'entries']);
     }
 
     /**
@@ -224,6 +225,23 @@ class User extends Base
         $this->userType = AclBuilder::ROLE_USER;
         $this->password = sha1($this->password);
     }
+    
+    /**
+     * Before deleting a User
+     *
+     * @return bool
+     */
+    public function beforeDelete()
+    {
+        if (count($this->entries) > 0) {
+            foreach ($this->entries as $entry) {
+                $entry->delete();
+            }
+        }
+
+        return true;
+    }
+
 
     /**
      * Authenticate a user
