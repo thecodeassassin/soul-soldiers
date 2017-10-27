@@ -4,7 +4,7 @@
 {% block content %}
 {% set image_1 = 'img/downloads/wc_ingame.jpg' %}
 {% set image_2 = 'img/downloads/wc_ingame2.jpg' %}
-{% set image_3 = 'img/downloads/wc_ingame3.jpeg' %}
+{% set image_3 = 'img/downloads/wc_ingame3.jpg' %}
 <div class="row">
 
     <div class="col-md-12">
