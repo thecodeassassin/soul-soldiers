@@ -18,25 +18,26 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <h3>Call of Duty 4 : Modern Warfare</h3>
+                    <h3>Golden Eye : Source</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Call of Duty 4/Call of Duty Modern Warfare.part1.exe"> Installer</a> <br/>
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Call of Duty 4/Call of Duty Modern Warfare.part2.rar"> Bestand 2</a> <br /> <br />
+                        Download link 1 : <a href="https://steamcdn-a.akamaihd.net/client/installer/SteamSetup.exe"> Steam</a> <br/>
+                        Download link 2 : <a href="steam://install/218"> SDK 2007</a> <br /> 
+                        Download link 3 : <a href="http://filemaster.intranet.lan/Games/GoldenEYE/GoldenEye.exe"> Golden Eye 2</a> <br /> <br />
                         <a href="downloads/cod" target="_blank"> Readme ( BELANGRIJK! ) + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
-                    <h3>Trackmania</h3>
+                    <h3>Rocket League</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Trackmania/Tm.exe"> Installer</a> <br /> <br />
-                        <a href="downloads/tm" target="_blank"> Readme + Screenshots</a></p>
+                        Download link 1 : <a href="steam://install/252950"> Steam Installer</a> <br /> <br />
+                        <a href="downloads/rocket" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
-                    <h3>Age of Mythology</h3>
+                    <h3>Warcraft 3</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/AoM/AoM.exe"> Installer</a> <br /> <br />
-                        <a href="downloads/aom" target="_blank"> Readme + Screenshots</a></p>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Warcraft3/Warcraft3.exe"> Installer</a> <br /> <br />
+                        <a href="downloads/wc3" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
