@@ -23,7 +23,7 @@
                         Download link 1 : <a href="https://steamcdn-a.akamaihd.net/client/installer/SteamSetup.exe"> Steam</a> <br/>
                         Download link 2 : <a href="steam://install/218"> SDK 2007</a> <br /> 
                         Download link 3 : <a href="http://filemaster.intranet.lan/Games/GoldenEYE/GoldenEye.exe"> Golden Eye 2</a> <br /> <br />
-                        <a href="downloads/cod" target="_blank"> Readme ( BELANGRIJK! ) + Screenshots</a></p>
+                        <a href="downloads/eye" target="_blank"> Readme ( BELANGRIJK! ) + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
