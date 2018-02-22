@@ -5,7 +5,7 @@
         <tr>
             <td><strong>Datum</strong></td>
             <td>
-                Vrijdag 27 Oktober 2017 - Zondag 29 Oktober 2017
+                Vrijdag 13 April 2018 - Zondag 15 April 2018
             </td>
         </tr>
         <tr>
