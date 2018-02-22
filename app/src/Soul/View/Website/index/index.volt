@@ -52,8 +52,8 @@
                 <h2>Volgende evenement</h2>
 
                 <div class="text" style="padding: 10px;">
-                    <h3>Soul-Soldiers 2017: Autumn Edition</h3>
-                    <h4>27, 28 en 29 Oktober 2017</h4>
+                    <h3>Soul-Soldiers 2018</h3>
+                    <h4>13, 14 en 15 April 2018</h4>
                     Deze editie zal opnieuw plaats vinden in JC Solution in Hillegom. Ook deze keer hebben we leuke competitities en prijzen! <br /><br />
 
                     De competities en prijzen zullen z.s.m. bekend gemaakt worden.
