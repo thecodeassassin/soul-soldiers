@@ -211,6 +211,8 @@ class User extends Base
     {
         $this->setSource('tblUser');
         $this->hasMany('userId', '\Soul\Model\Entry', 'userId', ['alias' => 'entries']);
+        $this->hasMany('userId', '\Soul\Model\Payment', 'userId', ['alias' => 'payments']);
+        $this->hasMany('userId', '\Soul\Model\TournamentUser', 'userId', ['alias' => 'tournamentEntries']);
     }
 
     /**
@@ -233,9 +235,22 @@ class User extends Base
      */
     public function beforeDelete()
     {
+        // delete all related information from this user
+        if (count($this->tournamentEntries) > 0) {
+            foreach ($this->tournamentEntries as $tournamentEntry) {
+                $tournamentEntry->delete();
+            }
+        }
+
         if (count($this->entries) > 0) {
             foreach ($this->entries as $entry) {
                 $entry->delete();
+            }
+        }
+
+        if (count($this->payments) > 0) {
+            foreach ($this->payments as $payment) {
+                $payment->delete();
             }
         }
 
