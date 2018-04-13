@@ -35,7 +35,7 @@
                 <div class="col-md-3">
                     <h3>Command Conquer 3 Kanes Wrath</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.exe"> Installer</a> <br />
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part1.exe"> Installer</a> <br />
                         Download link 2 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part2.rar"> Bestand 2</a> <br />
                         Download link 3 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part3.rar"> Bestand 3</a> <br />
                         Download link 4 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part4.rar"> Bestand 4</a> <br /> <br />
