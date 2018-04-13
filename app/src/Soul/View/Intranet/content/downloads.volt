@@ -18,12 +18,11 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <h3>Golden Eye : Source</h3>
+                    <h3>Call Of Duty 4</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="https://steamcdn-a.akamaihd.net/client/installer/SteamSetup.exe"> Steam</a> <br/>
-                        Download link 2 : <a href="steam://install/218"> SDK 2007</a> <br /> 
-                        Download link 3 : <a href="http://filemaster.intranet.lan/Games/GoldenEYE/GoldenEye.exe"> Golden Eye</a> <br /> <br />
-                        <a href="downloads/eye" target="_blank"> Readme ( BELANGRIJK! ) + Screenshots</a></p>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Call of Duty 4/Call of Duty Modern Warfare.part1.exe"> Installer</a> <br />
+                        Download link 2 : <a href="http://filemaster.intranet.lan/Games/Call of Duty 4/Call of Duty Modern Warfare.part2.rar"> Bestand 2</a> <br /> <br />
+                        <a href="downloads/cod" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
@@ -34,10 +33,13 @@
                 </div>
 
                 <div class="col-md-3">
-                    <h3>Warcraft 3</h3>
+                    <h3>Command Conquer 3 Kanes Wrath</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Warcraft3/Warcraft3.exe"> Installer</a> <br /> <br />
-                        <a href="downloads/wc3" target="_blank"> Readme + Screenshots</a></p>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.exe"> Installer</a> <br />
+                        Download link 2 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part2.rar"> Bestand 2</a> <br />
+                        Download link 3 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part3.rar"> Bestand 3</a> <br />
+                        Download link 4 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part4.rar"> Bestand 4</a> <br /> <br />
+                        <a href="downloads/cnc" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">

@@ -33,6 +33,11 @@
                     <h3><i class="icon-info-circled"></i> Informatie</h3>
 
                     <hr />
+                    <h3>Soul-Soldiers Discord</h3>
+                    <p>
+                        Kom gezellig op onze Discord. Dit is een absolute must voor de team tournooien! <br /><br />
+                        <a href="https://discord.gg/8dfHrXE" target="_blank">https://discord.gg/8dfHrXE</a>
+                    </p>
                     <h3>Avondeten (Zaterdag 19:00)</h3>
                     <p>
                         {% if payedForBuffet %}

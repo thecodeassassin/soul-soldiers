@@ -1,6 +1,6 @@
 {% extends 'layout.volt' %}
 
-{% block pageTitle %}<i class="icon-download"></i>Keep Talking and nobody explodes{% endblock %}
+{% block pageTitle %}<i class="icon-download"></i>Trackmania{% endblock %}
 {% block content %}
 
 {% set image_1 = 'img/downloads/tm_ingame.jpg' %}

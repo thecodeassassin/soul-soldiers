@@ -1,5 +1,5 @@
 {% extends 'layout.volt' %}
-{% block pageTitle %}<i class="icon-download"></i>Counter Strike : GO{% endblock %}
+{% block pageTitle %}<i class="icon-download"></i>Call of Duty 4{% endblock %}
 {% block content %}
 {% set image_1 = 'img/downloads/cod_ingame.jpg' %}
 {% set image_2 = 'img/downloads/cod_ingame2.jpg' %}
