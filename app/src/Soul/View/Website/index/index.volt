@@ -53,7 +53,7 @@
 
                 <div class="text" style="padding: 10px;">
                     <h3>Soul-Soldiers 2018</h3>
-                    <h4>13, 14 en 15 April 2018</h4>
+                    <h4>26, 27 en 28 Oktober 2018</h4>
                     Deze editie zal opnieuw plaats vinden in JC Solution in Hillegom. Ook deze keer hebben we leuke competitities en prijzen! <br /><br />
 
                     De competities en prijzen zullen z.s.m. bekend gemaakt worden.
