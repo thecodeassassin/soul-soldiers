@@ -21,6 +21,10 @@
             <td><strong>Prijs entreeticket</strong></td>
             <td>&euro; {{ '%01.2f'|format(event.product.cost) }} voor 3 dagen</td>
         </tr>
+        <tr>
+            <td><strong>Aantal plekken</strong></td>
+            <td>{{ event.maxEntries }}</td>
+        </tr>
     </table>
 
     <h3>Aanvullende informatie</h3>
