@@ -18,28 +18,24 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <h3>Call Of Duty 4</h3>
+                    <h3>Golden Eye</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Call of Duty 4/Call of Duty Modern Warfare.part1.exe"> Installer</a> <br />
-                        Download link 2 : <a href="http://filemaster.intranet.lan/Games/Call of Duty 4/Call of Duty Modern Warfare.part2.rar"> Bestand 2</a> <br /> <br />
-                        <a href="downloads/cod" target="_blank"> Readme + Screenshots</a></p>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/GoldenEYE/GoldenEye.exe"> Installer</a> <br />
+                        <a href="downloads/eye" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
-                    <h3>Rocket League</h3>
+                    <h3>Trackmania</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="steam://install/252950"> Steam Installer</a> <br /> <br />
-                        <a href="downloads/rocket" target="_blank"> Readme + Screenshots</a></p>
+                        Download link 1 : a href="http://filemaster.intranet.lan/Games/Trackmania/Tm.exe"> Installer</a> <br /> <br />
+                        <a href="downloads/tm" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
-                    <h3>Command Conquer 3 Kanes Wrath</h3>
+                    <h3>Red Alert 2</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part1.exe"> Installer</a> <br />
-                        Download link 2 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part2.rar"> Bestand 2</a> <br />
-                        Download link 3 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part3.rar"> Bestand 3</a> <br />
-                        Download link 4 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part4.rar"> Bestand 4</a> <br /> <br />
-                        <a href="downloads/cnc" target="_blank"> Readme + Screenshots</a></p>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/RA2/Ra2.exe"> Installer</a> <br />
+                        <a href="downloads/ra2" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
                 <div class="col-md-3">
@@ -59,7 +55,7 @@
                 <div class="col-md-3">
                     <h3>Muziek Request </h3>
                     <p>Download links : <br />
-                       Download link 1 : <a href="http://filemaster.intranet.lan/Apps/songrequest.zip"> Installer</a> <br /><br/>
+                       Download link 1 : <a href="http://filemaster.intranet.lan/Apps/muziekaanvraag.exe"> Installer</a> <br /><br/>
                     <a href="downloads/muziek" target="_blank"> Readme</a></p>
                 </div>
 

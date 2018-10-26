@@ -12,8 +12,9 @@
 
             <h1>Installatie instructies</h1>
             <p>Download de file en pak deze uit op plek naar keuze<br />
-                Start het programma op met Mirc.exe.<br />
-                Lees het uitleg.txt voor info over hoe je muziek kan aanvragen.<br /><br />
+                Start het programma op met muziek.exe.<br />
+                Je kan hier inloggen met je twitch account, of als gast als je dit niet wilt.<br />
+                Plak je youtube link in de balk en klik op vraag nummer aan, je nummer wordt nu in de wachtlijst gezet.<br /><br />
                 </p>
 
 
