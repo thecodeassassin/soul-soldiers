@@ -141,7 +141,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <p>Copyright &copy; 2014 Soul-Soldiers / Alle rechten voorbehouden.</p>
+                            <p>Copyright &copy; 2018 Soul-Soldiers / Alle rechten voorbehouden.</p>
                         </div>
 
                     </div>

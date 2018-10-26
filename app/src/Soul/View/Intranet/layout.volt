@@ -94,7 +94,7 @@
 
             <!-- Footer -->
             <footer>
-                &copy; Soul-Soldiers 2014
+                &copy; Soul-Soldiers 2014-2018
             </footer>
             <!-- END Footer -->
         </div>
