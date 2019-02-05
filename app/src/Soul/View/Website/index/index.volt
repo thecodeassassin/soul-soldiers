@@ -52,8 +52,8 @@
                 <h2>Volgende evenement</h2>
 
                 <div class="text" style="padding: 10px;">
-                    <h3>Soul-Soldiers 2018</h3>
-                    <h4>26, 27 en 28 Oktober 2018</h4>
+                    <h3>Soul-Soldiers 2019: Spring Edition</h3>
+                    <h4>12, 13 en 14 April 2019</h4>
                     Deze editie zal opnieuw plaats vinden in JC Solution in Hillegom. Ook deze keer hebben we leuke competitities en prijzen! <br /><br />
 
                     De competities en prijzen zullen z.s.m. bekend gemaakt worden.
