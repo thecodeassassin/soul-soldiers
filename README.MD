@@ -7,4 +7,4 @@ Installation
 2. <install phalcon>
 3. sudo a2enmod rewrite
 4. sudo a2enmod expires
-5
+
