@@ -145,7 +145,7 @@ $(function() {
         var eventName = $(this).attr('eventName'),
             eventSystemName = $(this).attr('systemName');
 
-        bootbox.confirm("<br /><h3>Weet je zeker dat je je wilt inschrijven voor " + eventName + "? </h3><br /><br /><strong>Door jezelf in te schrijven ga je akkoord met onze <a href=\"/content/rules\" target=\"_blank\">algemene voorwaarden</a> die op het moment gelden.</strong>", function(result) {
+        bootbox.confirm("<br /><h3>Weet je zeker dat je je wilt inschrijven voor " + eventName + "? </h3><br /><br /><strong>Door jezelf in te schrijven ga je akkoord met onze <a href=\"/content/rules\" target=\"_blank\" style=\"color: white;text-decoration: underline;\">algemene voorwaarden</a> die op het moment gelden.</strong>", function(result) {
             if (result) {
                 window.location = 'register/'+eventSystemName;
             }
