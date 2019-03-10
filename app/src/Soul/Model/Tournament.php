@@ -171,7 +171,7 @@ class Tournament extends Base
         $existing = self::findFirstBySystemName($this->systemName);
 
         if ($existing) {
-            if ($existing->name != $this->name) {
+            if (($existing->name === $this->name) && $existing->tournamentId != $this->tournamentId) {
                 $this->validate(new Uniqueness(
                     array(
                         "field"   => "name",
@@ -193,13 +193,10 @@ class Tournament extends Base
             ]));
         }
 
-        if ($this->validationHasFailed() == true) {
-            return false;
-        }
 
         return true;
     }
-
+ 
     /**
      * When creating
      */
@@ -210,7 +207,7 @@ class Tournament extends Base
         if (!$this->isTeamTournament) {
             $this->setTeamTournament(false);
         }
-
+        
         $this->state = self::STATE_PENDING;
 
     }

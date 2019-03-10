@@ -54,7 +54,6 @@ body.login h3 {
 
 h1,h2,h3,h4,h5,h6 {
     color: #5495F7;
-    text-shadow: 0 0 1px #000;
 }
 
 #login-container {
@@ -68,7 +67,7 @@ h1,h2,h3,h4,h5,h6 {
 */
 
 body {
-    background-color: #f9f9f9;
+    background-color: #426d84;
     color: #FFFFEE;
     font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

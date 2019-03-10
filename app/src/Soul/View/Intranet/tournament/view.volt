@@ -65,7 +65,7 @@
             {% endif %}
 
             {% if isAdmin and pending and env == 'development' %}
-                <a data-tournament-id="{{ tournament.systemName }}" class="generate-players btn btn-lg btn-primary">
+                <a data-tournament-id="{{ tournament.systemName }}" class="generate-players btn btn-lg btn-danger">
                     <i class="icon-attention"></i> Genereer spelers
                 </a>
             {% endif %}
@@ -207,8 +207,8 @@
                     <div class="list-group-item">
                         <h4 class="list-group-item-heading">
                             {{ team.name }}
-                            {% if isAdmin and pending %}
-                                <a class="btn btn-primary" href="{{ url('admin/editTeamName/' ~ team.teamId) }}"
+                            {% if (isAdmin and pending) or team.userInTeam(user.userId) %}
+                                <a class="btn btn-primary" href="{{ url('tournament/editTeamName/' ~ team.teamId) }}"
                                    id="editTeamName"
                                    rel="remote-modal"
                                    data-before-submit-callback="ajaxLoadCallback">

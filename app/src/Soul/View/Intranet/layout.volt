@@ -47,7 +47,7 @@
         <!-- END Header -->
 
         <!-- Inner Container -->
-        <div id="inner-container">
+        <div id="inner-container" class="hidden">
             <!-- Sidebar -->
             <aside id="page-sidebar" class="collapse navbar-collapse navbar-main-collapse">
 
@@ -119,5 +119,12 @@
 
     {% endblock %}
     {% block javascript %}{% endblock %}
+
+    <script type="text/javascript">
+        /* global $ */
+        $(function() {
+            $('#inner-container').removeClass('hidden');
+        });
+    </script>
     </body>
 </html>

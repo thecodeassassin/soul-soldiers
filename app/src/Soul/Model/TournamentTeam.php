@@ -51,6 +51,28 @@ class TournamentTeam extends Base
         return TournamentUser::findByTeamId($this->teamId);
     }
 
+
+    private function getPlayerIdentifiers()
+    {
+        $players = $this->getPlayers();
+        $playerIds = [];
+
+        foreach ($players as $player) {
+            $playerIds[] = $player->userId;
+        }
+
+        return $playerIds;
+
+    }
+
+    public function userInTeam($userId)
+    {
+        $players = $this->getPlayerIdentifiers();
+
+        return in_array($userId, $players);
+
+    }
+
     /**
      * Before deleting, remove all users from the teams
      */

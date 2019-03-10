@@ -9,7 +9,13 @@
     var token = null;
     var notifyEnabled = false;
 
-    setupWebSocket();
+    try {
+        setupWebSocket();
+    } catch (err) {
+        alert("Chat niet beschikbaar");
+        ajaxLoad(false);
+        return
+    }
 
     if (Notify.needsPermission) {
         Notify.requestPermission(function() {

@@ -98,43 +98,6 @@ class AdminController extends \Soul\Controller\Website\AdminController
     }
 
     /**
-     * @param $teamId
-     *
-     * @return \Phalcon\Http\ResponseInterface
-     */
-    public function editTeamNameAction($teamId)
-    {
-
-        $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
-        $team = TournamentTeam::findFirstById($teamId);
-
-        if ($this->request->isPost()) {
-
-            if ($team) {
-                $teamName = $this->request->get('teamName');
-                $tournament = $team->getTournament();
-
-                $team->name = $teamName;
-                $saved = $team->save();
-
-                if (!$saved) {
-                    $this->flashMessages($team->getMessages(), 'error', true);
-                } else {
-                    $this->flashMessage(sprintf('Team naam aangepast naar %s', $teamName), 'success', true);
-                }
-
-                return $this->response->redirect('tournament/view/'.$tournament->systemName);
-            }
-
-        }
-
-        $this->view->team = $team;
-        $this->view->teamId = $teamId;
-
-    }
-
-
-    /**
      * @param $systemName
      * @param $count
      */

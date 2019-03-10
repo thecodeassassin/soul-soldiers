@@ -313,4 +313,47 @@ class TournamentController extends Base
 
     }
 
+    /**
+     * @param $teamId
+     *
+     * @return \Phalcon\Http\ResponseInterface
+     */
+    public function editTeamNameAction($teamId)
+    {
+
+        $userId = $this->authService->getAuthData()->userId;
+        $isAdmin = $this->authService->getAuthData()->isAdmin();
+        $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+        $team = TournamentTeam::findFirstById($teamId);
+
+        if ($this->request->isPost()) {
+
+            if ($team) {
+                $teamName = $this->request->get('teamName');
+                $tournament = $team->getTournament();
+                
+                if (!$team->userInTeam($userId) && !$isAdmin) {
+                    $this->flashMessage(sprintf('Je bent geen lid van %s', $team->name), 'error', true);
+                    return $this->response->redirect('tournament/view/'.$tournament->systemName);
+                }
+
+                $team->name = $teamName;
+                $saved = $team->save();
+
+                if (!$saved) {
+                    $this->flashMessages($team->getMessages(), 'error', true);
+                } else {
+                    $this->flashMessage(sprintf('Team naam aangepast naar %s', $teamName), 'success', true);
+                }
+
+                return $this->response->redirect('tournament/view/'.$tournament->systemName);
+            }
+
+        }
+
+        $this->view->team = $team;
+        $this->view->teamId = $teamId;
+
+    }
+
 }
