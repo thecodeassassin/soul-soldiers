@@ -1,4 +1,4 @@
-{% set eventFull = amountPayed >= event.maxEntries}
+{% set eventFull = amountPayed >= event.maxEntries %}
 
 <div class="container">
     <div class="row">
