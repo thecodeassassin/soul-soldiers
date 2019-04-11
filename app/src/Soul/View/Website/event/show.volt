@@ -1,3 +1,5 @@
+{% set eventFull = amountPayed >= event.maxEntries}
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -8,24 +10,24 @@
 
                 {{ event.details }}
 
-                {% if amountPayed >= event.maxEntries %}
+                {% if eventFull and not payed %}
                     <p><a class="btn btn-primary btn-lg disabled" role="button" href="javascript:void(0)">Dit evenement is helaas volgeboekt.</a></p>
                 {% else %}
                     {% if user %}
-                        {% if not registered %}
+                        {% if not registered and not eventFull %}
                             <p><a class="btn btn-primary btn-lg" id="registerEvent" eventName="{{ event.name }}" systemName="{{ event.systemName }}" role="button" href="{{ url('event/register' ~ event.systemName) }}">
                                     <i class="icon-left"></i> Schrijf je nu in!
                                 </a>
                             </p>
                         {% else %}
 
-                            {% if not payed %}
+                            {% if not payed and not eventFull %}
                                 <p><a class="btn btn-primary btn-lg" role="button" href="{{ url('event/pay/' ~ event.systemName) }}">
                                         <span class="icon-euro"></span>
                                         Entreeticket betalen
                                     </a>
                                 </p>
-                            {% else %}
+                            {% elseif payed %}
 
                                 {% if event.seatmap %}
                                 <p><a class="btn btn-primary btn-lg"
