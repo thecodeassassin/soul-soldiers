@@ -38,6 +38,12 @@
                         Kom gezellig op onze Discord. Dit is een absolute must voor de team tournooien! <br /><br />
                         <a href="https://discord.gg/8dfHrXE" target="_blank">https://discord.gg/8dfHrXE</a>
                     </p>
+                    <h3>Soul-Soldiers Live-stream</h3>
+                    <p>
+                        Er is een live-stream beschikbaar van de LAN! Deze stream is alleen beschikbaar met de link.<br /><br />
+                        <a href="https://www.youtube.com/watch?v=XLnNpLe-TP0" target="_blank">https://www.youtube.com/watch?v=XLnNpLe-TP0</a>
+                    </p>
+                    <iframe width="482px" height="300px" src="https://www.youtube.com/embed/XLnNpLe-TP0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <h3>Avondeten (Zaterdag 19:00)</h3>
                     <p>
                         {% if payedForBuffet %}
