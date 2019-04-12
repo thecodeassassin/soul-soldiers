@@ -43,7 +43,7 @@
                         Er is een live-stream beschikbaar van de LAN! Deze stream is alleen beschikbaar met de link.<br /><br />
                         <a href="https://www.twitch.tv/silentassassin89" target="_blank">https://www.twitch.tv/silentassassin89</a>
                     </p>                    
-                    <iframe src="https://player.twitch.tv/?channel=silentassassin89" frameborder="0" allowfullscreen="true" scrolling="no" height="482" width="300"></iframe><a href="https://www.twitch.tv/silentassassin89?tt_content=text_link&tt_medium=live_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;">Watch live video from silentassassin89 on www.twitch.tv</a>
+                    <iframe src="https://player.twitch.tv/?channel=silentassassin89" frameborder="0" allowfullscreen="true" scrolling="no" height="300" width="482"></iframe><a href="https://www.twitch.tv/silentassassin89?tt_content=text_link&tt_medium=live_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;">Watch live video from silentassassin89 on www.twitch.tv</a>
                     <h3>Avondeten (Zaterdag 19:00)</h3>
                     <p>
                         {% if payedForBuffet %}
