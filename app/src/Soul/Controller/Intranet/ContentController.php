@@ -22,7 +22,7 @@ class ContentController extends \Soul\Controller\Base
         $this->view->pick('content/'.$name);
     }
 
-    public function generateCodFix()
+    public function generateCodFixAction()
     {
         $keys = [
             "DQ8G SWEJ PEDQ SPPG 7162",
