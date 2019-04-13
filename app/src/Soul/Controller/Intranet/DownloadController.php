@@ -65,7 +65,7 @@ Windows Registry Editor Version 5.00
         $response->setHeader("Expires", "0");
         $response->setExpires(new \DateTime('now'));
 
-        $response->setContent($fix);
+        $response->setContent(ltrim($fix));
 
         return $response->send();
     }
