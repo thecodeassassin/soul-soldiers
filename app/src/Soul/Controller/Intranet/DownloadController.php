@@ -56,7 +56,7 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Activision]
 \r\n\r\n
 [HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Activision\Call of Duty 4]\r\n
-\"codkey\"=\"". $key . "\"";
+\"codkey\"=\"". $key . "\"\r\n\r\n";
 
         $response = new Response();
         $response->setContentType('text/plain');
