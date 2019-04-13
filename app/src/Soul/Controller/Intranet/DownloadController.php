@@ -50,16 +50,16 @@ class DownloadController extends \Soul\Controller\Base
 
         $key = str_replace(" ", "", $keys[array_rand($keys)]);
 
-        $fix = '
+        $fix = "
 Windows Registry Editor Version 5.00
-
+\r\n\r\n
 [HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Activision]
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Activision\Call of Duty 4]
-"codkey"="'. $key . '"';
+\r\n\r\n
+[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Activision\Call of Duty 4]\r\n
+\"codkey\"=\"". $key . "\"";
 
         $response = new Response();
-        $response->setContentType('text/csv');
+        $response->setContentType('text/plain');
         $response->setHeader("Content-Disposition", "attachment; filename=cod4_reg_fix.reg");
         $response->setHeader("Pragma", "no-cache");
         $response->setHeader("Expires", "0");
