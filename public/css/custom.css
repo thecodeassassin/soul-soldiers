@@ -557,7 +557,7 @@ strong {
     width: 150px !important;
 }
 
-.eiland .seatmap-wrapper .seat {
+.eiland .seatmap .seat-row .seat {
     height: 40px !important;
     width: 26px !important;
 }
