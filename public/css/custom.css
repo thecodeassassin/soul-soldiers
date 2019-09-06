@@ -553,6 +553,19 @@ strong {
     transform: rotate(-10deg);
 }
 
+.eiland .seat-row-wrapper {
+    width: 150px !important;
+}
+
+.eiland .seatmap .seatmap-wrapper .seat {
+    height: 40px !important;
+    width: 26px !important;
+}
+
+.eiland .seat-table {
+    width: 150px !important;
+}
+
 div.tooltip {
     transform: none !important;
 }
