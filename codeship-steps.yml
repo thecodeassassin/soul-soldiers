@@ -13,11 +13,11 @@
   type: push
   exclude: master
   image_name: eu.gcr.io/soul-soldiers/legacy
-  image_tag: "{{.ServiceName}}:{{.BuildID}}"
+  image_tag: "{{.BuildID}}"
   registry: https://eu.gcr.io
   dockercfg_service: gcr_dockercfg
 
 # deployment
 - name: google-cloud-deployment
   service: googleclouddeployment
-  command: deploy-cloudrun.sh {{.Branch}}
+  command: /deploy/deploy-cloudrun.sh {{.Branch}}
