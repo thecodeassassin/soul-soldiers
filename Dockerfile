@@ -37,6 +37,5 @@ ENV WEBROOT=/var/www/html/public
 # ADD docker/run.sh /run.sh
 # RUN chmod +x /run.sh
 
-EXPOSE 80
+EXPOSE 8080
 EXPOSE 8081
-EXPOSE 443
