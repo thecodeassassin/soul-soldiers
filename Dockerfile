@@ -32,9 +32,6 @@ ADD . /var/www/html
 
 RUN chmod +x /srv/start_chat.sh /run.sh
 
-# Finish composer
-RUN composer dump-autoload  --optimize
-
 # # Generate minified assets (for the website)
 # WORKDIR /var/www/html/public
 # RUN ls -lha /var/www/html/app/config/services/../../../; ls -lha /var/www/html/app/config/services/../../../vendor ; cat /var/www/html/app/config/services/../../../vendor/autoload.php

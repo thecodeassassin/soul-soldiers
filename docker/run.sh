@@ -1,5 +1,9 @@
 #!/bin/sh
 
+cd ${WEBROOT}/..
+
+composer dump-autoload  --optimize
+
 cd ${WEBROOT}
 
 php assets.php
