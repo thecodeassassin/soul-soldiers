@@ -16,7 +16,6 @@ apk add php5-memcached-2.2.0-r0.apk
 ADD docker/phalcon.so /usr/lib/php5/modules/phalcon.so
 RUN /bin/echo 'extension=phalcon.so' > /etc/php5/conf.d/phalcon.ini
 
-WORKDIR /var/www/html
 
 # COPY composer.json composer.json
 # COPY composer.lock composer.lock
@@ -27,7 +26,9 @@ ADD docker/run.sh /run.sh
 ADD docker/start_chat.sh /srv/start_chat.sh
 RUN chmod +x /srv/start_chat.sh /run.sh
 
-ADD . ./
+ADD . /var/www/html
+
+WORKDIR /var/www/html
 
 RUN mkdir vendor && composer global require hirak/prestissimo && composer install && ls -lha /var/www/html/vendor/
 

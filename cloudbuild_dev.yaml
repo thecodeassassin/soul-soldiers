@@ -1,12 +1,6 @@
-# steps:
-# - name: 'gcr.io/cloud-builders/docker'
-#   args: [ 'build', '--rm=false' , '-t', 'eu.gcr.io/$PROJECT_ID/legacy:$BUILD_ID', '.' ]
 steps:
-- name: 'gcr.io/kaniko-project/executor:latest'
-  args:
-  - --destination=eu.gcr.io/$PROJECT_ID/legacy:$BUILD_ID
-  - --cache=true
-  - --cache-ttl=6h
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '--rm=false' , '-t', 'eu.gcr.io/$PROJECT_ID/legacy:$BUILD_ID', '.' ]
 
 # Push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
