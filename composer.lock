@@ -841,14 +841,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4",
-        "ext-phalcon": ">=1.2.4",
-        "ext-mcrypt": "*",
-        "ext-mysql": "*",
-        "ext-pdo_mysql": "*",
-        "ext-memcached": "*",
-        "ext-curl": "*",
-        "ext-memcache": "*"
+        "php": ">=5.4"
     },
     "platform-dev": []
 }
