@@ -33,9 +33,9 @@ WORKDIR /var/www/html
 # RUN mkdir vendor && composer global require hirak/prestissimo && composer install && ls -lha /var/www/html/vendor/
 
 # Finish composer and generate minified assets (for the website)
-RUN ls -lha /var/www/html/vendor/ && cd public/ && php assets.php
+# RUN ls -lha /var/www/html/vendor/ && cd public/ && php assets.php
 
 EXPOSE 8080
 EXPOSE 8081
 
-# CMD ["/run.sh"]
+CMD ["/run.sh"]
