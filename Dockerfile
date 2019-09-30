@@ -20,7 +20,7 @@ WORKDIR /var/www/html
 
 COPY composer.json composer.json
 COPY composer.lock composer.lock
-RUN composer install --no-scripts --no-dev --no-autoloader && rm -rf /root/.composer && ls -lha /var/www/html/vendor/
+RUN composer install --no-scripts --no-dev --no-autoloader && rm -rf /root/.composer && mv /var/www/html/vendor /tmp/vendor
 
 ADD docker/supervisord.conf /tmp/supervisord.conf
 RUN cat /tmp/supervisord.conf >> /etc/supervisord.conf
@@ -33,12 +33,12 @@ ADD . /var/www/html
 RUN chmod +x /srv/start_chat.sh /run.sh
 
 # Finish composer
-RUN composer dump-autoload  --optimize
+RUN mv /tmp/vendor/ /var/www/html/vendor/ && composer dump-autoload  --optimize
 
 # Generate minified assets (for the website)
 WORKDIR /var/www/html/public
-RUN ls -lha /var/www/html/vendor/
-RUN php assets.php
+
+RUN ls -lha /var/www/html/vendor/ && php assets.php
 
 EXPOSE 8080
 EXPOSE 8081
