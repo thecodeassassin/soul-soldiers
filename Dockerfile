@@ -1,5 +1,7 @@
 FROM richarvey/nginx-php-fpm:php5
 
+ENV WEBROOT=/var/www/html/public
+
 RUN apk update && apk add php5-sockets memcached
 
 WORKDIR /tmp
@@ -34,12 +36,8 @@ RUN composer dump-autoload  --optimize && cat vendor/autoload.php
 
 # Generate minified assets (for the website)
 WORKDIR /var/www/html/public
+RUN ls -lha /var/www/html/app/config/services/../../../ ; cat /var/www/html/app/config/services/../../../vendor/autoload.php
 RUN php assets.php
-
-ENV WEBROOT=/var/www/html/public
-
-# ADD docker/run.sh /run.sh
-# RUN chmod +x /run.sh
 
 EXPOSE 8080
 EXPOSE 8081
