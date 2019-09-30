@@ -3,7 +3,7 @@
 app/config/acl.php
 app/cache/*
 app/log/*
-vendor/*
+vendor/**
 public/doc
 public/demo
 public/img/tournaments/*
