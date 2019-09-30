@@ -2,6 +2,7 @@ legacy:
   build:
     dockerfile: Dockerfile
     image: eu.gcr.io/soul-soldiers/legacy
+  cached: true
 
 gcr_dockercfg:
   image: codeship/gcr-dockercfg-generator
