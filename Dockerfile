@@ -33,7 +33,7 @@ ADD . /var/www/html
 RUN chmod +x /srv/start_chat.sh /run.sh
 
 # Finish composer and generate minified assets (for the website)
-RUN cp -R /tmp/vendor/* /var/www/html/vendor/ && ls -lha /tmp/vendor && ls -lha /var/www/html/vendor/ && composer dump-autoload  --optimize && cd public/ && php assets.php && rm -rf /tmp/vendor
+RUN  mv /tmp/vendor /var/www/html && ls -lha /var/www/html/vendor/ && composer dump-autoload  --optimize && cd public/ && php assets.php
 
 EXPOSE 8080
 EXPOSE 8081
