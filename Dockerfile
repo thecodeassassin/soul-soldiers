@@ -32,7 +32,7 @@ ADD . /var/www/html
 RUN chmod +x /srv/start_chat.sh
 
 # Finish composer
-RUN composer dump-autoload  --optimize && cd public && php assets.php
+RUN php -i | grep phalcon; composer dump-autoload  --optimize && cd public && php assets.php
 
 # # Generate minified assets (for the website)
 # WORKDIR /var/www/html/public
