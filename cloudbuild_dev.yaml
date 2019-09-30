@@ -1,6 +1,8 @@
 steps:
 # Bring in dependencies
 - name: 'gcr.io/cloud-builders/composer'
+  args: ['global', 'require', 'hirak/prestissimo']
+- name: 'gcr.io/cloud-builders/composer'
   args: ['install']
 
 - name: 'gcr.io/cloud-builders/docker'
