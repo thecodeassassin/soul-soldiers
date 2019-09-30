@@ -30,7 +30,7 @@ ADD docker/start_chat.sh /srv/start_chat.sh
 
 ADD . /var/www/html
 
-RUN composer install
+RUN composer install && ls -lha /var/www/html/vendor/
 
 RUN chmod +x /srv/start_chat.sh /run.sh
 
