@@ -20,19 +20,16 @@ WORKDIR /var/www/html
 
 # COPY composer.json composer.json
 # COPY composer.lock composer.lock
-RUN composer global require hirak/prestissimo
-
 ADD docker/supervisord.conf /tmp/supervisord.conf
 RUN cat /tmp/supervisord.conf >> /etc/supervisord.conf
 ADD docker/nginx.conf /etc/nginx/sites-enabled/default.conf
 ADD docker/run.sh /run.sh
 ADD docker/start_chat.sh /srv/start_chat.sh
+RUN chmod +x /srv/start_chat.sh /run.sh
 
 ADD . /var/www/html
 
-RUN composer install && ls -lha /var/www/html/vendor/
-
-RUN chmod +x /srv/start_chat.sh /run.sh
+RUN mkdir vendor && composer global require hirak/prestissimo && composer install && ls -lha /var/www/html/vendor/
 
 # Finish composer and generate minified assets (for the website)
 RUN ls -lha /var/www/html/vendor/ && cd public/ && php assets.php
