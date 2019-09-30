@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'eu.gcr.io/$PROJECT_ID/legacy:$BUILD_ID', '.' ]
+  args: [ 'build', '--rm=false' , '-t', 'eu.gcr.io/$PROJECT_ID/legacy:$BUILD_ID', '.' ]
 # Push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'eu.gcr.io/$PROJECT_ID/legacy:$BUILD_ID']
