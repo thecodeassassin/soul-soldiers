@@ -1,5 +1,5 @@
 .idea
-app/config/config.php
+.history
 app/config/acl.php
 app/cache/*
 app/log/*
@@ -8,3 +8,5 @@ public/doc
 public/demo
 public/img/tournaments/*
 params.sh
+.env
+.env.gcloud

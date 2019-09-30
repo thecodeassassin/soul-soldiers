@@ -32,6 +32,10 @@ RUN chmod +x /srv/start_chat.sh
 # Finish composer
 RUN composer dump-autoload  --optimize
 
+# Generate minified assets (for the website)
+WORKDIR /var/www/html/public
+RUN php assets.php
+
 ENV WEBROOT=/var/www/html/public
 
 # ADD docker/run.sh /run.sh
