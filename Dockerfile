@@ -30,7 +30,7 @@ ADD . /var/www/html
 RUN chmod +x /srv/start_chat.sh
 
 # Finish composer
-RUN composer dump-autoload  --optimize
+RUN composer dump-autoload  --optimize && cat vendor/autoload.php
 
 # Generate minified assets (for the website)
 WORKDIR /var/www/html/public
