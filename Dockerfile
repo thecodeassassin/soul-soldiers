@@ -36,7 +36,7 @@ RUN composer dump-autoload  --optimize && cat vendor/autoload.php
 
 # Generate minified assets (for the website)
 WORKDIR /var/www/html/public
-RUN ls -lha /var/www/html/app/config/services/../../../ ; cat /var/www/html/app/config/services/../../../vendor/autoload.php
+RUN ls -lha /var/www/html/app/config/services/../../../; ls -lha /var/www/html/app/config/services/../../../vendor ; cat /var/www/html/app/config/services/../../../vendor/autoload.php
 RUN php assets.php
 
 EXPOSE 8080
