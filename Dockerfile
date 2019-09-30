@@ -32,12 +32,12 @@ ADD . /var/www/html
 RUN chmod +x /srv/start_chat.sh
 
 # Finish composer
-RUN composer dump-autoload  --optimize ; pwd ; ls -lha vendor/
+RUN composer dump-autoload  --optimize && cd public && php assets.php
 
-# Generate minified assets (for the website)
-WORKDIR /var/www/html/public
-RUN ls -lha /var/www/html/app/config/services/../../../; ls -lha /var/www/html/app/config/services/../../../vendor ; cat /var/www/html/app/config/services/../../../vendor/autoload.php
-RUN php assets.php
+# # Generate minified assets (for the website)
+# WORKDIR /var/www/html/public
+# RUN ls -lha /var/www/html/app/config/services/../../../; ls -lha /var/www/html/app/config/services/../../../vendor ; cat /var/www/html/app/config/services/../../../vendor/autoload.php
+# RUN php assets.php
 
 EXPOSE 8080
 EXPOSE 8081
