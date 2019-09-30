@@ -32,13 +32,8 @@ ADD . /var/www/html
 
 RUN chmod +x /srv/start_chat.sh /run.sh
 
-# Finish composer
-RUN mv /tmp/vendor/ /var/www/html/vendor/ && composer dump-autoload  --optimize
-
-# Generate minified assets (for the website)
-WORKDIR /var/www/html/public
-
-RUN ls -lha /var/www/html/vendor/ && php assets.php
+# Finish composer and generate minified assets (for the website)
+RUN mv /tmp/vendor/ /var/www/html/vendor/ && composer dump-autoload  --optimize && cd public/ && php assets.php
 
 EXPOSE 8080
 EXPOSE 8081
