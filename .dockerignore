@@ -1,6 +1,5 @@
 .idea
 .env
 .env.gcloud
-**/vendor
 **/.git
 .history
