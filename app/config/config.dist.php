@@ -63,12 +63,6 @@ return new \Phalcon\Config(
         'crypt' => [
             'key' => ''
         ],
-        'twitter' => [
-            'key' => '',
-            'secret' => '',
-            'token' => '',
-            'tokenSecret' => ''
-        ],
         'captcha' => [
             'siteKey' => '',
             'secretKey' => ''
