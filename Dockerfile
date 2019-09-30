@@ -18,9 +18,8 @@ RUN /bin/echo 'extension=phalcon.so' > /etc/php5/conf.d/phalcon.ini
 
 WORKDIR /var/www/html
 
-COPY composer.json composer.json
-COPY composer.lock composer.lock
-RUN composer install --no-scripts --no-dev --no-autoloader && rm -rf /root/.composer
+# COPY composer.json composer.json
+# COPY composer.lock composer.lock
 
 ADD docker/supervisord.conf /tmp/supervisord.conf
 RUN cat /tmp/supervisord.conf >> /etc/supervisord.conf
@@ -28,7 +27,9 @@ ADD docker/nginx.conf /etc/nginx/sites-enabled/default.conf
 ADD docker/run.sh /run.sh
 ADD docker/start_chat.sh /srv/start_chat.sh
 
-COPY . /var/www/html
+ADD . /var/www/html
+
+RUN composer install --no-scripts --no-dev --no-autoloader && rm -rf /root/.composer
 
 RUN chmod +x /srv/start_chat.sh /run.sh
 
