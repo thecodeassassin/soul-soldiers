@@ -27,7 +27,7 @@ ADD docker/run.sh /run.sh
 ADD docker/start_chat.sh /srv/start_chat.sh
 RUN chmod +x /srv/start_chat.sh /run.sh
 
-ADD . /var/www/html
+ADD . ./
 
 RUN mkdir vendor && composer global require hirak/prestissimo && composer install && ls -lha /var/www/html/vendor/
 
