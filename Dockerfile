@@ -20,7 +20,7 @@ WORKDIR /var/www/html
 
 COPY composer.json composer.json
 COPY composer.lock composer.lock
-RUN composer install --no-scripts --no-dev --no-autoloader && rm -rf /root/.composer && ls -lha ls -lha /var/www/html/vendor/
+RUN composer install --no-scripts --no-dev --no-autoloader && rm -rf /root/.composer && ls -lha /var/www/html/vendor/
 
 ADD docker/supervisord.conf /tmp/supervisord.conf
 RUN cat /tmp/supervisord.conf >> /etc/supervisord.conf
