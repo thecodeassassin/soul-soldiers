@@ -25,14 +25,15 @@ RUN composer install --no-scripts --no-dev --no-autoloader && rm -rf /root/.comp
 ADD docker/supervisord.conf /tmp/supervisord.conf
 RUN cat /tmp/supervisord.conf >> /etc/supervisord.conf
 ADD docker/nginx.conf /etc/nginx/sites-enabled/default.conf
+ADD docker/run.sh /run.sh
 ADD docker/start_chat.sh /srv/start_chat.sh
 
 ADD . /var/www/html
 
-RUN chmod +x /srv/start_chat.sh
+RUN chmod +x /srv/start_chat.sh /run.sh
 
 # Finish composer
-RUN php -i | grep phalcon; composer dump-autoload  --optimize && cd public && php assets.php
+RUN composer dump-autoload  --optimize
 
 # # Generate minified assets (for the website)
 # WORKDIR /var/www/html/public
@@ -41,3 +42,5 @@ RUN php -i | grep phalcon; composer dump-autoload  --optimize && cd public && ph
 
 EXPOSE 8080
 EXPOSE 8081
+
+CMD ["/run.sh"]
