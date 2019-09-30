@@ -3,6 +3,8 @@ legacy:
     dockerfile: Dockerfile
     image: eu.gcr.io/soul-soldiers/legacy
   cached: true
+  volumes:
+  - ./:/var/www/html
 
 gcr_dockercfg:
   image: codeship/gcr-dockercfg-generator
