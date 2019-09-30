@@ -30,7 +30,7 @@ ADD . /var/www/html
 
 WORKDIR /var/www/html
 
-RUN mkdir vendor && composer global require hirak/prestissimo && composer install && ls -lha /var/www/html/vendor/
+# RUN mkdir vendor && composer global require hirak/prestissimo && composer install && ls -lha /var/www/html/vendor/
 
 # Finish composer and generate minified assets (for the website)
 RUN ls -lha /var/www/html/vendor/ && cd public/ && php assets.php
