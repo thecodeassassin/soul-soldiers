@@ -2,8 +2,8 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', 'eu.gcr.io/$PROJECT_ID/legacy:$BUILD_ID', '.' ]
 # Push the container image to Container Registry
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/legacy:$BUILD_ID']
+- name: 'eu.gcr.io/cloud-builders/docker'
+  args: ['push', 'eu.gcr.io/$PROJECT_ID/legacy:$BUILD_ID']
 # Deploy container image to Cloud Run
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['beta', 'run', 'deploy', 'legacy-test', '--image', 'eu.gcr.io/$PROJECT_ID/legacy:$BUILD_ID', '--region', 'europe-west1', '--platform', 'managed', '--allow-unauthenticated']
