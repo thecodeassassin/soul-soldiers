@@ -101,6 +101,7 @@ return new \Phalcon\Config(
                 'static',
                 'content',
                 'contact',
+                'download',
                 'chat'
             ],
             /**

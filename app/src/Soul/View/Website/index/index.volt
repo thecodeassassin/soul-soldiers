@@ -52,12 +52,12 @@
                 <h2>Volgende evenement</h2>
 
                 <div class="text" style="padding: 10px;">
-                    <h3>Soul-Soldiers 2019: Spring Edition</h3>
-                    <h4>12, 13 en 14 April 2019</h4>
-                    Deze editie zal opnieuw plaats vinden in JC Solution in Hillegom. Ook deze keer hebben we leuke competitities en prijzen! <br /><br />
+                    <h3>Soul-Soldiers 2019: Autumn Edition</h3>
+                    <h4>11, 12 en 13 Oktober 2019</h4>
+                    Deze editie zal plaats vinden in dorpshuis "Het eiland" in Beinsdorp. Ook deze keer hebben we leuke competitities en prijzen! <br /><br />
 
                     De competities en prijzen zullen z.s.m. bekend gemaakt worden.
-                        
+
                     {#De volgende competities zullen worden gespeeld tijdens de lan: <br  /><br />
 
                     <ul>

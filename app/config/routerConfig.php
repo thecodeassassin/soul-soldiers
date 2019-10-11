@@ -165,6 +165,11 @@ return [
             "action" => "index"
         ],
 
+        '/download/generate-cod-fix' => [
+            "controller" => "download",
+            "action" => "generateCodFix"
+        ],
+
         '/tournaments' => [
             "controller" => "tournament",
             "action" => "index"

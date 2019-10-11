@@ -5,15 +5,14 @@
         <tr>
             <td><strong>Datum</strong></td>
             <td>
-                Vrijdag 12 April 2019 - Zondag 14 April 2019
+                Vrijdag 11 Oktober 2019 - Zondag 13 Oktober 2019
             </td>
         </tr>
         <tr>
             <td><strong>Locatie</strong></td>
             <td><address>
-                    Ojc Solution<br />
-                    van den Endelaan 7 (Sportpark “De Zanderij”)<br />
-                    2182 ES Hillegom
+                    Dorpshuis "Het Eiland"  <br />
+                    Rietkraag 5, 2144 KA Beinsdorp
                 </address>
             </td>
         </tr>

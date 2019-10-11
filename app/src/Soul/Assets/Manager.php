@@ -48,17 +48,8 @@ class Manager extends \Phalcon\Assets\Manager
      */
     public function __construct(DiInterface $di, Config $assetConfig)
     {
-//        $this->cache = $di->get('cache');
+
         $this->config = $di->get('config');
-//
-//        $cacheKey = crc32(serialize($assetConfig));
-//        // if the collection exists
-//        if ($this->cache->exists($cacheKey)) {
-//
-//            $this->_collections = $this->cache->get($cacheKey);
-//
-//            return $this;
-//        }
 
         foreach ($assetConfig as $collectionName => $collection) {
 
@@ -84,10 +75,7 @@ class Manager extends \Phalcon\Assets\Manager
 
         }
 
-        // build the collections
         $this->build();
-
-//        $this->cache->save($cacheKey, $this->_collections);
 
         return $this;
     }
@@ -95,7 +83,7 @@ class Manager extends \Phalcon\Assets\Manager
     /**
      * Build the collections
      */
-    protected function build()
+    protected function build($legacy = true)
     {
 
         foreach ($this->_collections as $name => $collection) {
@@ -103,7 +91,6 @@ class Manager extends \Phalcon\Assets\Manager
             $type = $this->collectionTypes[$name];
 
             $newFile = sprintf('%s/%s.%s', $this->config->application->cacheDir, ACTIVE_MODULE, $type);
-
 
             // do not minify css/js on dev (takes too much time and is not relevant)
             if ((APPLICATION_ENV != Kernel::ENV_DEVELOPMENT) && ACTIVE_MODULE == 'website') {
@@ -151,10 +138,4 @@ class Manager extends \Phalcon\Assets\Manager
         }
 
     }
-
-
-
-
-
-
 }

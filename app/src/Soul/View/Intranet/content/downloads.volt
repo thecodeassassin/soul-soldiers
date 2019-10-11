@@ -23,6 +23,10 @@
                         Download link 1 : <a href="http://filemaster.intranet.lan/Games/CoD4/Call of Duty Modern Warfare.part1.exe"> Installer</a> <br />
                         Download link 2 : <a href="http://filemaster.intranet.lan/Games/CoD4/Call of Duty Modern Warfare.part2.rar"> Deel 2</a> <br />
                         Download link 3 : <a href="http://filemaster.intranet.lan/Games/CoD4/keys.txt"> Deel 3</a><br /><br />
+<<<<<<< HEAD
+=======
+                        Registry fix / KeyGen : <a href="http://intranet.lan/download/generate-cod-fix"> KeyGen (Download & Run) </a><br /><br />
+>>>>>>> 626cea30cdb9f9502e48b4807bcaa03cda1ceaec
                         <a href="downloads/cod" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
