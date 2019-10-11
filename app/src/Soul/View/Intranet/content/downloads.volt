@@ -20,7 +20,7 @@
                 <div class="col-md-12">
                     <h3>Soul Soldiers Download App</h3>
                     <p>Download links : <br />
-                       Download link 1 : <a href="http://10.13.37.55:8081/lan-downloads/SoulApp.exe"> Installer</a> <br/><br />
+                       Download link 1 : <a href="http://10.13.37.55:8081/SoulApp.exe"> Installer</a> <br/><br />
                     <a href="downloads/app" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
