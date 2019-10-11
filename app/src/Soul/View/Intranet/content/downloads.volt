@@ -17,41 +17,11 @@
             <H1>Downloads</H1>
 
             <div class="row">
-                <div class="col-md-3">
-                    <h3>Call of Duty 4</h3>
+                <div class="col-md-12">
+                    <h3>Soul Soldiers Download App</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/CoD4/Call of Duty Modern Warfare.part1.exe"> Installer</a> <br />
-                        Download link 2 : <a href="http://filemaster.intranet.lan/Games/CoD4/Call of Duty Modern Warfare.part2.rar"> Deel 2</a> <br />
-                        Download link 3 : <a href="http://filemaster.intranet.lan/Games/CoD4/keys.txt"> Deel 3</a><br /><br />
-<<<<<<< HEAD
-=======
-                        Registry fix / KeyGen : <a href="http://intranet.lan/download/generate-cod-fix"> KeyGen (Download & Run) </a><br /><br />
->>>>>>> 626cea30cdb9f9502e48b4807bcaa03cda1ceaec
-                        <a href="downloads/cod" target="_blank"> Readme + Screenshots</a></p>
-                </div>
-
-                <div class="col-md-3">
-                    <h3>Flatout 2</h3>
-                    <p>Download links : <br />
-                       Download link 1 : <a href="http://filemaster.intranet.lan/Games/Flatout/FlatOut2.exe"> Installer</a> <br/> <br/>
-                    <a href="downloads/flatout2" target="_blank"> Readme + Screenshots</a></p>
-                </div>
-
-                <div class="col-md-3">
-                    <h3>Command & Conquer 3</h3>
-                    <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part1.exe"> Installer</a><br/>
-                        Download link 2 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part2.rar"> Deel 2</a><br/>
-                        Download link 3 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part3.rar"> Deel 3</a><br/>
-                        Download link 4 : <a href="http://filemaster.intranet.lan/Games/CnC3/CnC3.part4.rar"> Deel 4</a><br/><br />
-                        <a href="downloads/cnc" target="_blank"> Readme + Screenshots</a></p>
-                </div>
-
-                <div class="col-md-3">
-                    <h3>Unreal Tournament 2004 </h3>
-                    <p>Download links : <br />
-                       Download link 1 : <a href="http://filemaster.intranet.lan/Games/UT/Unreal Tournament 2004.exe"> Installer</a> <br/><br />
-                    <a href="downloads/ut2004" target="_blank"> Readme + Screenshots</a></p>
+                       Download link 1 : <a href="http://10.13.37.55:8081/lan-downloads/SoulApp.exe"> Installer</a> <br/><br />
+                    <a href="downloads/app" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
 
