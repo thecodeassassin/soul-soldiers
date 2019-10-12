@@ -34,7 +34,7 @@
                 <div class="col-md-3">
                     <h3>Muziek Request </h3>
                     <p>Download links : <br />
-                       Download link 1 : <a href="http://filemaster.intranet.lan/Apps/muziekaanvraag.exe"> Installer</a> <br /><br/>
+                       Download link 1 : <a href="http://10.13.37.55:8081/Apps/muziekaanvraag.exe"> Installer</a> <br /><br/>
                     <a href="downloads/muziek" target="_blank"> Readme</a></p>
                 </div>
 
@@ -42,8 +42,8 @@
                 <div class="col-md-3">
                     <h3>Trackmania</h3>
                     <p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Games/Trackmania/Tm.exe"> Installer</a> <br /> <br />
-                        <a href="downloads/tm" target="_blank"> Readme + Screenshots</a></p>
+                        Download link 1 : <a href="http://10.13.37.55:8081/Games/GoldenEye_Source_v5.0.6_full.exe"> Installer</a> <br /> <br />
+                        <a href="downloads/eye" target="_blank"> Readme + Screenshots</a></p>
                 </div>
 
 
