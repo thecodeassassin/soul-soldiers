@@ -20,6 +20,8 @@ class IndexController extends Base
      */
     public function indexAction()
     {
+        setlocale(LC_TIME, 'nl_NL');
+
         $event = Event::getCurrent();
         
         $this->view->event = $event;
