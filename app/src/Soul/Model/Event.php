@@ -53,6 +53,12 @@ class Event extends Base
     
     /**
      *
+     * @var string
+     */
+    public $location;
+
+    /**
+     *
      * @var integer
      */
     public $maxEntries;
@@ -379,6 +385,11 @@ class Event extends Base
         return $seatmap;
     }
 
+    public function getFullDate() 
+    {
+
+    }
+
     /**
      * Independent Column Mapping.
      */
@@ -394,7 +405,8 @@ class Event extends Base
             'maxEntries' => 'maxEntries',
             'productId' => 'productId',
             'seatMapId' => 'seatMapId',
-            'crewSize' => 'crewSize'
+            'crewSize' => 'crewSize',
+            'location' => 'location'
         );
 
     }
