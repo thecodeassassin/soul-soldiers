@@ -391,7 +391,7 @@ class Event extends Base
     public function getFullDate() 
     {
         setlocale(LC_TIME, 'nl_NL');
-        $format = '%A %e %B %Y %H %M';
+        $format = '%A %e %B %Y %H:%M';
 
         return strftime($format, strtotime($this->startDate)) . " t/m " . strftime($format, strtotime($this->endDate));        
     }
