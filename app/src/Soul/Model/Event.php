@@ -385,9 +385,15 @@ class Event extends Base
         return $seatmap;
     }
 
+      /**
+     * @return string
+     */
     public function getFullDate() 
     {
+        setlocale(LC_TIME, 'nl_NL');
 
+        return strftime("%A %e %B %Y %T", strtotime($this->startDate)) . " t/m " . strftime("%A %e %B %Y %T", strtotime($this->endDate));
+        
     }
 
     /**

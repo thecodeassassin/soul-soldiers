@@ -19,7 +19,9 @@ class IndexController extends Base
      */
     public function indexAction()
     {
-
+        $event = Event::getCurrent();
+        
+        $this->view->event = $event;
     }
 
     /**
