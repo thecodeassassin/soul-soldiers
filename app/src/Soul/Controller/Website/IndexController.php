@@ -2,6 +2,7 @@
 namespace Soul\Controller\Website;
 
 use Soul\Controller\Base;
+use Soul\Model\Event;
 
 /**
  * Class IndexController
