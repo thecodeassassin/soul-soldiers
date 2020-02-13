@@ -41,9 +41,9 @@
                     <h3>Soul-Soldiers Live-stream</h3>
                     <p>
                         Er is een live-stream beschikbaar van de LAN! Deze stream is alleen beschikbaar met de link.<br /><br />
-                        <a href="https://www.twitch.tv/silentassassin89" target="_blank">https://www.twitch.tv/silentassassin89</a>
+                        <a href="https://youtu.be/j1nZKIQuB-g" target="_blank">https://youtu.be/j1nZKIQuB-g</a>
                     </p>                    
-                    <iframe src="https://player.twitch.tv/?channel=silentassassin89" frameborder="0" allowfullscreen="true" scrolling="no" height="300" width="482"></iframe><a href="https://www.twitch.tv/silentassassin89?tt_content=text_link&tt_medium=live_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;">Watch live video from silentassassin89 on www.twitch.tv</a>
+                    <iframe width="424" height="240" src="https://www.youtube.com/embed/j1nZKIQuB-g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <h3>Avondeten (Zaterdag 19:00)</h3>
                     <p>
                         {% if payedForBuffet %}

@@ -1,0 +1,23 @@
+
+# production builds
+- service: legacy
+  type: push
+  tag: master
+  image_name: eu.gcr.io/soul-soldiers/legacy
+  image_tag: latest
+  registry: https://eu.gcr.io
+  dockercfg_service: gcr_dockercfg
+
+# non production builds
+- service: legacy
+  type: push
+  exclude: master
+  image_name: eu.gcr.io/soul-soldiers/legacy
+  image_tag: "{{.BuildID}}"
+  registry: https://eu.gcr.io
+  dockercfg_service: gcr_dockercfg
+
+# deployment
+- name: google-cloud-deployment
+  service: googleclouddeployment
+  command: /deploy/deploy-cloudrun.sh {{.Branch}}

@@ -56,48 +56,6 @@
             "time": "2016-05-25 12:55:03"
         },
         {
-            "name": "dg/twitter-php",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dg/twitter-php.git",
-                "reference": "97e0680a43d2ed767960c9bf8be1ddee69634161"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dg/twitter-php/zipball/97e0680a43d2ed767960c9bf8be1ddee69634161",
-                "reference": "97e0680a43d2ed767960c9bf8be1ddee69634161",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "https://davidgrudl.com"
-                }
-            ],
-            "description": "Small and easy Twitter library for PHP",
-            "homepage": "https://github.com/dg/twitter-php",
-            "keywords": [
-                "oauth",
-                "twitter"
-            ],
-            "time": "2016-10-17 11:10:13"
-        },
-        {
             "name": "evenement/evenement",
             "version": "dev-master",
             "source": {
@@ -878,20 +836,12 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "phalcon/incubator": 20,
-        "dg/twitter-php": 20
+        "phalcon/incubator": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4",
-        "ext-phalcon": ">=1.2.4",
-        "ext-mcrypt": "*",
-        "ext-mysql": "*",
-        "ext-pdo_mysql": "*",
-        "ext-memcached": "*",
-        "ext-curl": "*",
-        "ext-memcache": "*"
+        "php": ">=5.4"
     },
     "platform-dev": []
 }

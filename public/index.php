@@ -28,8 +28,9 @@ if (count($missing) > 0) {
     die(sprintf('The following php extensions are not installed or enabled: %s', implode(', ',$missing)));
 }
 
-//  define('ACTIVE_MODULE', 'intranet');
-if (strpos(BASE_URL, '.lan') !== false || strpos(BASE_URL, 'intranet') !== false) {
+$isIntranet = getenv("INTRANET") === "true";
+
+if (strpos(BASE_URL, '.lan') !== false || strpos(BASE_URL, 'intranet') !== false || $isIntranet) {
     define('ACTIVE_MODULE', 'intranet');
 } else {
     define('ACTIVE_MODULE', 'website');
@@ -87,31 +88,31 @@ $di = new FactoryDefault();
 
 include __DIR__ . "/../app/config/services.php";
 
-if (APPLICATION_ENV == \Soul\Kernel::ENV_STAGING) {
-    $stagingAccess = $config->stagingAccess->toArray();
-    $ip = \Soul\Util::getClientIp();
-    $access = false;
+// if (APPLICATION_ENV == \Soul\Kernel::ENV_STAGING) {
+//     $stagingAccess = $config->stagingAccess->toArray();
+//     $ip = \Soul\Util::getClientIp();
+//     $access = false;
 
-    if (strpos($ip, ',') !== false) {
-        $ips = explode(',', $ip);
-    } else {
-        $ips = array($ip);
-    }
+//     if (strpos($ip, ',') !== false) {
+//         $ips = explode(',', $ip);
+//     } else {
+//         $ips = array($ip);
+//     }
 
-    foreach ($ips as $checkIp) {
-        if (in_array($checkIp, $stagingAccess)) {
-            $access = true;
-        }
-    }
+//     foreach ($ips as $checkIp) {
+//         if (in_array($checkIp, $stagingAccess)) {
+//             $access = true;
+//         }
+//     }
 
-    if (!$access) {
+//     if (!$access) {
 
-        // redirect an unauthorised user to soul-soldiers.nl
-        header('Location: http://soul-soldiers.nl');
-        exit;
-    }
+//         // redirect an unauthorised user to soul-soldiers.nl
+//         header('Location: http://soul-soldiers.nl');
+//         exit;
+//     }
 
-}
+// }
 
 if (APPLICATION_ENV == \Soul\Kernel::ENV_DEVELOPMENT) {
     ini_set('display_errors', 1);

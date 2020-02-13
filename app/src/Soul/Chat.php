@@ -122,7 +122,7 @@ class Chat implements MessageComponentInterface {
                         $msg->message = strip_tags($msg->message, 'a');
                         
                         // store the message to load when opening the window 
-                        $this->cache->set($messageHash, $msg, 300); // store messages for up to one hour
+                        $this->cache->set($messageHash, $msg, 345600); // store messages for up to 4 days
                         $this->storedMessages[] = $messageHash;
                         
                         // send a regular chat message

@@ -1,7 +1,12 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-export DOCKER_HOST_IP=$(route -n | awk '/UG[ \t]/{print $2}')
+cd ${WEBROOT}/..
 
-echo "Docker host IP: $DOCKER_HOST_IP"
+composer dump-autoload  --optimize
 
-. /config/bootstrap.sh
+cd ${WEBROOT}
+
+php assets.php
+
+# Start supervisord and services
+bash /start.sh
