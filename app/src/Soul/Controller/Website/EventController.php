@@ -249,6 +249,7 @@ class EventController extends \Soul\Controller\Base
         $config = $this->getConfig();
         $dinerAvailable = false;
 
+        var_dump($user);
         // 604800 seconds is one week
         if ((strtotime($event->startDate) - 604800) > time()) {
             $dinerAvailable = true;
@@ -263,7 +264,10 @@ class EventController extends \Soul\Controller\Base
                 return $this->response->redirect('event/current');
             }
 
+            var_dump(1);
+
             if ($this->request->isPost()) {
+                
                 $issuer = $this->request->get('issuer', 'string');
                 $layoutCode = $config->paymentServices->targetPay->layoutCode;
                 $returnUrl = $config->paymentServices->targetPay->returnUrl;
@@ -276,6 +280,8 @@ class EventController extends \Soul\Controller\Base
                     $amount = $amount + (self::DINNER_OPTION_PRICE * 100);
                     $description .= ' plus buffet';
                 }
+
+                var_dump($layoutCode, $returnUrl, $productId, $amount);
 
                 // build the transaction
                 $idealStart = new IdealStart($layoutCode, $issuer, $description, $amount, $returnUrl, $reportUrl);
