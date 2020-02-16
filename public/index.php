@@ -24,8 +24,6 @@ foreach ($requiredExtensions as $extension) {
     }
 }
 
-var_dump(BASE_URL . '/event/current');
-
 if (count($missing) > 0) {
     die(sprintf('The following php extensions are not installed or enabled: %s', implode(', ',$missing)));
 }
