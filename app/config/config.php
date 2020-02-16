@@ -37,7 +37,7 @@ return new \Phalcon\Config(
             ]
         ],
         'error' => [
-            'logger' => new Phalcon\Logger\Adapter\Syslog,
+            'logger' => new Phalcon\Logger\Adapter\Syslog(null),
             'controller' => 'error',
             'action' => 'index',
         ],
