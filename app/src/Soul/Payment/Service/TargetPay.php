@@ -127,12 +127,17 @@ class TargetPay extends AbstractPaymentService
 
         $resultRaw = file_get_contents($idealCheck->toUri($this->checkUrl));
 
+
+        var_dump($resultRaw);
+
         if (!$resultRaw) {
             return false;
         }
 
         // this result only contains a header
         $result = $this->parseResultHeader($resultRaw);
+
+        die(var_dump($resultRaw));
 
         if ($result['status'] == 'OK') {
 
