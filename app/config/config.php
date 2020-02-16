@@ -37,7 +37,7 @@ return new \Phalcon\Config(
             ]
         ],
         'error' => [
-            'logger' => new \Phalcon\Logger\Adapter\File(APPLICATION_PATH . '/log/' . APPLICATION_ENV . '.log'),
+            'logger' => new Phalcon\Logger\Adapter\Syslog,
             'controller' => 'error',
             'action' => 'index',
         ],
