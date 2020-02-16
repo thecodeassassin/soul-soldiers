@@ -283,6 +283,9 @@ class EventController extends \Soul\Controller\Base
                 // start the transaction
                 $transactionDetails = $this->paymentService->startTransaction($idealStart, $userId, $productId);
 
+                var_dump($transactionDetails);
+                var_dump($layoutCode, $issuer, $description, $amount, $returnUrl, $reportUrl);
+                
                 if (!$transactionDetails) {
                     $this->flashMessage('Er is iets mis gegaan met de iDeal betaling, probeer het later nogmaals', 'error', true);
 
