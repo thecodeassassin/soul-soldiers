@@ -30,7 +30,7 @@ return new \Phalcon\Config(
         ],
         'paymentServices' => [
             'targetPay' => [
-                'testMode' => true,
+                'testMode' => false,
                 'layoutCode' =>  getenv("TARGETPAY_LAYOUT_CODE"),
                 'returnUrl' => BASE_URL . '/event/current',
                 'reportUrl' => ''
