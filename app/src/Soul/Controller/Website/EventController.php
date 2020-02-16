@@ -291,6 +291,7 @@ class EventController extends \Soul\Controller\Base
 
                 var_dump($transactionDetails);
                 var_dump($layoutCode, $issuer, $description, $amount, $returnUrl, $reportUrl);
+                die;
                 
                 if (!$transactionDetails) {
                     $this->flashMessage('Er is iets mis gegaan met de iDeal betaling, probeer het later nogmaals', 'error', true);
