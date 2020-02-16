@@ -70,11 +70,14 @@ class EventController extends \Soul\Controller\Base
 
         }
 
+        $config = $this->getConfig();
         $user = $this->authService->getAuthData();
+        $testMode = $config->paymentServices->targetPay->testMode;
+
         if ($transactionId) {
             try {
 
-                if ($this->paymentService->checkTransaction($transactionId)) {
+                if ($this->paymentService->checkTransaction($transactionId) || $testMode === true) {
                     $this->flashMessage('Uw betaling is successvol verwerkt, bedankt! U ontvangt een bevestiging per e-mail', 'success');
                 } else {
                     throw new Exception('De betaling is mislukt of geannuleerd, probeer het later nogmaals.');
@@ -249,7 +252,6 @@ class EventController extends \Soul\Controller\Base
         $config = $this->getConfig();
         $dinerAvailable = false;
 
-        var_dump($user);
         // 604800 seconds is one week
         if ((strtotime($event->startDate) - 604800) > time()) {
             $dinerAvailable = true;
@@ -263,8 +265,6 @@ class EventController extends \Soul\Controller\Base
 //                return $this->redirectToLastPage();
                 return $this->response->redirect('event/current');
             }
-
-            var_dump(1);
 
             if ($this->request->isPost()) {
                 
@@ -281,17 +281,11 @@ class EventController extends \Soul\Controller\Base
                     $description .= ' plus buffet';
                 }
 
-                var_dump($layoutCode, $returnUrl, $productId, $amount);
-
                 // build the transaction
                 $idealStart = new IdealStart($layoutCode, $issuer, $description, $amount, $returnUrl, $reportUrl);
 
                 // start the transaction
                 $transactionDetails = $this->paymentService->startTransaction($idealStart, $userId, $productId);
-
-                var_dump($transactionDetails);
-                var_dump($layoutCode, $issuer, $description, $amount, $returnUrl, $reportUrl);
-                die;
                 
                 if (!$transactionDetails) {
                     $this->flashMessage('Er is iets mis gegaan met de iDeal betaling, probeer het later nogmaals', 'error', true);
@@ -301,7 +295,7 @@ class EventController extends \Soul\Controller\Base
                 }
 
                 if (array_key_exists('url', $transactionDetails)) {
-                    return $this->response->redirect($transactionDetails['url'], true, 200);
+                    return $this->response->redirect($transactionDetails['url'], true, 302);
                 }
 
             }
