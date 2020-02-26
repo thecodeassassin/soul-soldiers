@@ -9,19 +9,10 @@ $di->set('cache', function() use ($config){
             "lifetime" => 86400
         ));
 
-        if (APPLICATION_ENV != Kernel::ENV_DEVELOPMENT || ACTIVE_MODULE == 'intranet') {
-
-            //Create the Cache setting memcached connection options
-            $cache = new Phalcon\Cache\Backend\Memcache($backCache, array(
-                'host' => 'localhost',
-                'port' => 11211,
-                'persistent' => false
-            ));
-
-            return $cache;
-        }
-
-        $cache = new \Phalcon\Cache\Backend\Memory($backCache);
+        $cache = new Phalcon\Cache\Backend\File($backCache, array(
+            "cacheDir" => $config->application->cacheDir,
+            "prefix" => "Site"
+        ));
 
         return $cache;
     } catch(\Exception $e) {

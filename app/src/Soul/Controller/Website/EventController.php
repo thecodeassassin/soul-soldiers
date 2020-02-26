@@ -281,23 +281,35 @@ class EventController extends \Soul\Controller\Base
                     $description .= ' plus buffet';
                 }
 
-                // build the transaction
-                $idealStart = new IdealStart($layoutCode, $issuer, $description, $amount, $returnUrl, $reportUrl);
+                try {
+                    // build the transaction
+                    $idealStart = new IdealStart($layoutCode, $issuer, $description, $amount, $returnUrl, $reportUrl);
 
-                // start the transaction
-                $transactionDetails = $this->paymentService->startTransaction($idealStart, $userId, $productId);
-                
-                if (!$transactionDetails) {
-                    $this->flashMessage('Er is iets mis gegaan met de iDeal betaling, probeer het later nogmaals', 'error', true);
+                    // set the test mode found in the config
+                    $idealStart->setTestMode($config->paymentServices->targetPay->testMode);
+
+                    // start the transaction
+                    $transactionDetails = $this->paymentService->startTransaction($idealStart, $userId, $productId);
+
+                    if (!$transactionDetails) {
+                        $this->flashMessage('Er is iets mis gegaan met de iDeal betaling, probeer het later nogmaals', 'error', true);
 
 //                    return $this->redirectToLastPage();
-                    return $this->response->redirect('event/current');
-                }
+                        return $this->response->redirect('event/current');
+                    }
 
-                if (array_key_exists('url', $transactionDetails)) {
-                    return $this->response->redirect($transactionDetails['url'], true, 302);
-                }
+                    if (array_key_exists('url', $transactionDetails)) {
+                        return $this->response->redirect($transactionDetails['url'], true, 302);
+                    } else {
+                        throw new \Error('No transaction details');
+                    }
 
+                } catch (\Soul\Payment\Data\Exception $e) {
+                    $this->flashMessage(sprintf("Uw betaling kon niet worden gestart. Foutmelding: %s", $e->getMessage()), 'error');
+                } catch (\Exception $e) {
+                    $this->flashMessage('Uw betaling kon niet worden gestart. Meld dit AUB zsm via ons contactformulier.', 'error');
+                    $this->getLogger()->log(Logger::ALERT, $e->getMessage());
+                }
             }
 
         }

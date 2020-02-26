@@ -347,7 +347,13 @@ class Base extends Controller
         $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
 
         $type = strtolower(array_pop(explode('.', $resource)));
-        $this->response->setHeader('Content-Type', sprintf('text/%s', $type));
+        $primaryType = 'text';
+
+        if (in_array($type, ['png', 'jpg', 'jpeg', 'gif'])) {
+            $primaryType = 'image';
+        }
+
+        $this->response->setHeader('Content-Type', sprintf('%s/%s', $primaryType, $type));
 
         $cacheDir = $this->config->application->cacheDir;
 
@@ -356,7 +362,6 @@ class Base extends Controller
         if (file_exists($resourceLocation)) {
             echo file_get_contents($resourceLocation);
         } else {
-
             echo '<!-- file not available -->';
         }
     }

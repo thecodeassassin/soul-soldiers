@@ -2,8 +2,6 @@
 {% set seatImagePosY = seatMap.posY %}
 {% set crewSize = event.crewSize %}
 {% set tableSize = 2 %}
-{% set numSeats = seatMap.numSeats %}
-{% set blockedSeats = seatMap.blockedSeats|json_encode %}
 
 <h1>Plek reserveren</h1>
 {% if not seatingAvailable %}

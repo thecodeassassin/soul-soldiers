@@ -19,6 +19,10 @@ $di->setShared('config', function() use ($config) {
     return $config;
 });
 
+
+// load the db service
+include __DIR__ . "/../app/config/services/db.php";
+
 $isIntranet = getenv("INTRANET") === "true";
 
 if ($isIntranet) {
@@ -30,5 +34,11 @@ if ($isIntranet) {
 $assetManager = new \Soul\Assets\Manager($di, $assetsConfig[ACTIVE_MODULE]);
 $assetManager->outputCss('main');
 $assetManager->outputJs('scripts');
+
+$event = \Soul\Model\Event::getCurrent();
+
+if ($event) {
+    $event->getSeatMap();
+}
 
 echo "Generated assets";

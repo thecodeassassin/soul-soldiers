@@ -45,6 +45,11 @@ class IdealCheck extends AbstractData
         $this->trxid = $transactionId;
     }
 
+    public function setTestMode($value)
+    {
+        $this->test = ($value ? 1 : 0);
+    }
+
     /**
      * Layoutcode targetpay
      *
@@ -69,8 +74,8 @@ class IdealCheck extends AbstractData
     /**
      * Test mode
      *
-     * @var bool
+     * @var integer
      */
-    public $test = false;
+    public $test = 0;
 
 }

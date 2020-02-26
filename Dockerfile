@@ -7,12 +7,6 @@ RUN apk update && apk add php5-sockets memcached
 WORKDIR /tmp
 # Run build process on one line to avoid generating bloat via intermediate images
 
-# Add php5-memcached
-RUN apk --no-cache add ca-certificates && \
-curl -Ls -o /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-php5-memcached/master/sgerrand.rsa.pub && \
-curl -Ls -o php5-memcached-2.2.0-r0.apk https://github.com/sgerrand/alpine-pkg-php5-memcached/releases/download/2.2.0-r0/php5-memcached-2.2.0-r0.apk && \
-apk add php5-memcached-2.2.0-r0.apk 
-
 ADD docker/phalcon.so /usr/lib/php5/modules/phalcon.so
 RUN /bin/echo 'extension=phalcon.so' > /etc/php5/conf.d/phalcon.ini
 
@@ -27,6 +21,8 @@ ADD docker/start_chat.sh /srv/start_chat.sh
 RUN chmod +x /srv/start_chat.sh /run.sh
 
 ADD . /var/www/html
+
+RUN chmod 777 -R /var/www/html/app/cache
 
 WORKDIR /var/www/html
 
