@@ -8,24 +8,20 @@
 	<div class="col-md-12">
 		<div class="gutter well">
 
-			<br />
+			<H1>Downloads</H1>
 
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Soul Soldiers Download App</h3>
+					<p>Download links : <br />
+                       Download link 1 : <a href="http://10.13.37.55:8080/Apps/SoulApp.exe"> Installer</a> <br/><br />
+						<a href="downloads/app" target="_blank"> Readme + Screenshots</a></p>
+				</div>
+			</div>
+
+			<h2>Toernooi games</h2>
 			<p>Hieronder kan je de spellen downloaden waar competities van gehouden gaan worden.<br />
                Deze downloads zijn enkel bedoeld om tijdens onze LAN gebruikt te worden.<br /></p>
-
-
-				<H1>Downloads</H1>
-
-				<div class="row">
-					<div class="col-md-12">
-						<h3>Soul Soldiers Download App</h3>
-						<p>Download links : <br />
-                       Download link 1 : <a href="http://10.13.37.55:8080/Apps/SoulApp.exe"> Installer</a> <br/><br />
-							<a href="downloads/app" target="_blank"> Readme + Screenshots</a></p>
-					</div>
-				</div>
-
-				<h2>Toernooi games</h2>
 				<div class="row">
 					<div class="col-md-3">
 						<h3>Unreal Tournament 2004</h3>
