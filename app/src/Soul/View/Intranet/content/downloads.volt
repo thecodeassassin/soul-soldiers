@@ -25,17 +25,8 @@
 					</div>
 				</div>
 
-				<h2>Toernooi spellen</h2>
+				<h2>Toernooi games</h2>
 				<div class="row">
-					<div class="col-md-3">
-						<h3>Golden Eye : Source</h3>
-						<p>Download links : <br />
-                        Download link 1 : <a href="http://10.13.37.55:8080/Games/GoldenEye_Source_v5.0.6_full.exe">
-								Installer</a> <br /> <br />
-							<a href="downloads/eye" target="_blank"> Readme + Screenshots</a></p>
-					</div>
-
-
 					<div class="col-md-3">
 						<h3>Unreal Tournament 2004</h3>
 						<p>Download links : <br />
@@ -55,6 +46,7 @@
 					</div>
 
 				</div>
+				<h2>Overige downloads</h2>
 				<div class="row">
 					<div class="col-md-3">
 						<h3>DC++</h3>
@@ -68,9 +60,16 @@
                        Download link 1 : <a href="http://10.13.37.55:8080/Apps/muziekaanvraag.exe"> Installer</a> <br /><br/>
 							<a href="downloads/muziek" target="_blank"> Readme</a></p>
 					</div>
-
-
-
+				</div>
+				<h2>Andere games</h2>
+				<div class="row">
+					<div class="col-md-3">
+						<h3>Golden Eye : Source</h3>
+						<p>Download links : <br />
+                        Download link 1 : <a href="http://10.13.37.55:8080/Games/GoldenEye_Source_v5.0.6_full.exe">
+								Installer</a> <br /> <br />
+							<a href="downloads/eye" target="_blank"> Readme + Screenshots</a></p>
+					</div>
 				</div>
 		</div>
 	</div>
