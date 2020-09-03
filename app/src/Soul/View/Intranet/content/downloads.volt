@@ -23,22 +23,10 @@
                        Download link 1 : <a href="http://10.13.37.55:8080/Apps/SoulApp.exe"> Installer</a> <br/><br />
 							<a href="downloads/app" target="_blank"> Readme + Screenshots</a></p>
 					</div>
-
-
-
 				</div>
 
-
-
+				<h2>Toernooi spellen</h2>
 				<div class="row">
-					<div class="col-md-3">
-						<h3>Muziek Request </h3>
-						<p>Download links : <br />
-                       Download link 1 : <a href="http://10.13.37.55:8080/Apps/muziekaanvraag.exe"> Installer</a> <br /><br/>
-							<a href="downloads/muziek" target="_blank"> Readme</a></p>
-					</div>
-
-
 					<div class="col-md-3">
 						<h3>Golden Eye : Source</h3>
 						<p>Download links : <br />
@@ -74,6 +62,13 @@
                         Download link 1 : <a href="http://filemaster.intranet.lan/Apps/DC++.exe"> Installer</a> <br/> <br/>
 							<a href="downloads/dc" target="_blank"> Readme + Screenshots</a></p>
 					</div>
+					<div class="col-md-3">
+						<h3>Muziek Request </h3>
+						<p>Download links : <br />
+                       Download link 1 : <a href="http://10.13.37.55:8080/Apps/muziekaanvraag.exe"> Installer</a> <br /><br/>
+							<a href="downloads/muziek" target="_blank"> Readme</a></p>
+					</div>
+
 
 
 				</div>
