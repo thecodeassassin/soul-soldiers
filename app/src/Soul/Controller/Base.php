@@ -24,6 +24,7 @@ use Soul\Model\User;
 use Soul\Translate;
 use Soul\Util;
 use Soul\Security\Exception as SecurityException;
+
 /**
  * Base controller for all controllers
  *
@@ -97,7 +98,7 @@ class Base extends Controller
 
         if (ACTIVE_MODULE == 'intranet') {
             $menuConfig = $this->di->get('menuconfig');
-            $this->userMenu = Builder::build($menuConfig['intranet-user'], false, array(),'\Soul\Menu\Dropdown');
+            $this->userMenu = Builder::build($menuConfig['intranet-user'], false, array(), '\Soul\Menu\Dropdown');
 
             $this->view->usermenu = $this->userMenu->outputHTML();
         }
@@ -116,7 +117,6 @@ class Base extends Controller
                     $editor->save();
                 }
             }
-
         }
     }
 
@@ -143,7 +143,7 @@ class Base extends Controller
                 $newPost->module = ACTIVE_MODULE;
 
                 $newPost->published = date('Y-m-d H:i:s', time());
-                
+
                 if (!$newPost->save()) {
                     $this->flashMessages($newPost->newsAddForm->getMessages(), 'error');
                 }
@@ -151,7 +151,6 @@ class Base extends Controller
                 $this->flashMessage('Nieuws artikel geplaatst', 'success', true);
 
                 return $this->response->redirect('home');
-
             }
         }
     }
@@ -310,7 +309,6 @@ class Base extends Controller
             $output .= "&nbsp;<span class='icon-angle-circled-right'></span>&nbsp; $message <br />";
         }
         $this->flash->$type($output);
-
     }
 
     /**
@@ -395,6 +393,21 @@ class Base extends Controller
 
         if ($user) {
             $result = $user->isAdmin();
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isIntranetAdmin()
+    {
+        $user = $this->getUser();
+        $result = false;
+
+        if ($user) {
+            $result = $user->isIntranetAdmin();
         }
 
         return $result;
