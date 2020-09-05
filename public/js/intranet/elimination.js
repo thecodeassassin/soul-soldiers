@@ -1,16 +1,18 @@
 $(function () {
     var bracketOptions = {
         init: __BRACKET_DATA,
-        decorator: function () {
-            jqBracket = $('.jQBracket');
+        decorator: {
+            render: function () {
+                jqBracket = $('.jQBracket');
 
-            if (jqBracket.find('.finals').length > 0) {
-                height = jqBracket.find('.finals').height();
-            } else {
-                height = jqBracket.find('.bracket').height();
-            }
+                if (jqBracket.find('.finals').length > 0) {
+                    height = jqBracket.find('.finals').height();
+                } else {
+                    height = jqBracket.find('.bracket').height();
+                }
 
-            jqBracket.css('min-height', height);
+                jqBracket.css('min-height', height);
+            },
         },
         //skipSecondaryFinal: true
     },
