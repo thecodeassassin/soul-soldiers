@@ -96,8 +96,8 @@
 </script>
 <div class="row">
 	<div class="col-md-12 bracketcontainer">
-		<div class="well">
-			<div id="bracket"><img src="/img/ajax-loader.gif" height="25" width="25"> Bezig met bracket laden...</div>
+		<div id="bracket" class="well">
+			<img src="/img/ajax-loader.gif" height="25" width="25"> Bezig met bracket laden...
 			</div>
 		</div>
 	</div>
