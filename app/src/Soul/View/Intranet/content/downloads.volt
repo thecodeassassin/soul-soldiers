@@ -41,7 +41,7 @@
 					</div>
 
 					<div class="col-md-3">
-						<h3>Flatout 2</h3>
+						<h3>Age of Empires 2</h3>
 						<p>Download links : <br />
                         Download link 1 : <a href="http://10.13.37.55:8080/Games/AoEII.zip">
 								Installer</a> <br /><br />
