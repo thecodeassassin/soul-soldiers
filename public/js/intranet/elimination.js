@@ -2,17 +2,7 @@ $(function () {
     var bracketOptions = {
         init: __BRACKET_DATA,
         decorator: {
-            render: function () {
-                jqBracket = $('.jQBracket');
-
-                if (jqBracket.find('.finals').length > 0) {
-                    height = jqBracket.find('.finals').height();
-                } else {
-                    height = jqBracket.find('.bracket').height();
-                }
-
-                jqBracket.css('min-height', height);
-            },
+            render: render_fn
         },
         //skipSecondaryFinal: true
     },
@@ -42,3 +32,19 @@ $(function () {
     });
 
 });
+
+function render_fn(container, data, score, state) {
+    switch (state) {
+        case "entry-complete":
+            jqBracket = $('.jQBracket');
+
+            if (jqBracket.find('.finals').length > 0) {
+                height = jqBracket.find('.finals').height();
+            } else {
+                height = jqBracket.find('.bracket').height();
+            }
+
+            jqBracket.css('min-height', height);
+            return;
+    }
+}
