@@ -23,6 +23,10 @@ div.jQBracket .team.highlight {
     background-color: #47A447;
 }
 
+.bracketcontainer .well {
+    display: inline-block;
+}
+
 #bracket {
     min-height: 500px;
     width: 100%;
