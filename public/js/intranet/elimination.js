@@ -1,9 +1,6 @@
 $(function () {
     var bracketOptions = {
         init: __BRACKET_DATA,
-        decorator: {
-            render: render_fn
-        },
         //skipSecondaryFinal: true
     },
         jqBracket,
