@@ -99,7 +99,6 @@
         <div class="well">
             <div id="bracket">
                 <img src="/img/ajax-loader.gif" height="25" width="25"> Bezig met bracket laden...
-                </div>
             </div>
         </div>
 	</div>
