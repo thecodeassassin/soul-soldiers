@@ -42,9 +42,9 @@
 					<h3>Soul-Soldiers Live-stream</h3>
 					<p>
 						Er is een live-stream beschikbaar van de LAN!<br /><br />
-						<a href="https://youtu.be/zB5JylqQl0M" target="_blank">https://youtu.be/zB5JylqQl0M</a>
+						<a href="https://youtu.be/nepDmFIXX24" target="_blank">https://youtu.be/zB5JylqQl0M</a>
 					</p>
-					<iframe width="424" height="240" src="https://www.youtube.com/embed/zB5JylqQl0M" frameborder="0"
+					<iframe width="424" height="240" src="https://www.youtube.com/embed/nepDmFIXX24" frameborder="0"
 						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 						allowfullscreen></iframe>
 					<h3>Avondeten (Zaterdag 19:00)</h3>
