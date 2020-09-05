@@ -3,10 +3,10 @@
 use \Soul\AclBuilder as AclBuilder;
 
 /**
-                                                                         * @author Stephen Hoogendijk
-                                                                         * @copyright Soul-Soldiers
-                                                 * @namespace Soul
-                                                 */
+ * @author Stephen Hoogendijk
+ * @copyright Soul-Soldiers
+ * @namespace Soul
+*/
 return new \Phalcon\Config(
     [
 
