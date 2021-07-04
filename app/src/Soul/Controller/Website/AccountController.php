@@ -62,7 +62,7 @@ class AccountController extends AccountBase
                     // create the new user
                     $newUser->save();
 
-                    $this->flashMessage('Je registratie is gelukt, hou je e-mail in de gaten voor een bevestigings e-mail.', 'success', true);
+                    $this->flashMessage('Je registratie is gelukt, hou je e-mail in de gaten voor een bevestigings e-mail.', 'success');
 
 //                    return $this->redirectToLastPage();
                     return $this->response->redirect('home');
@@ -93,12 +93,12 @@ class AccountController extends AccountBase
 
             // make sure the user is also logged in
             $this->authService->setAuthData(AuthData::buildFromUser($user));
-            $this->flashMessage('Uw account is geactiveerd, u bent nu ingelogd.', 'success', true);
+            $this->flashMessage('Uw account is geactiveerd, u bent nu ingelogd.', 'success');
 
             return $this->response->redirect('home');
         }
 
-        $this->flashMessage('Uw account kan niet worden geactiveerd, neem a.u.b. contact met ons.', 'error', true);
+        $this->flashMessage('Uw account kan niet worden geactiveerd, neem a.u.b. contact met ons.', 'error');
         return $this->response->redirect('home');
 
     }
@@ -138,7 +138,7 @@ class AccountController extends AccountBase
                 // make sure the user is also logged in
                 $this->authService->setAuthData(AuthData::buildFromUser($user));
 
-                $this->flashMessage('Uw wachtwoord is gewijzigd, u bent nu ingelogd', 'success', true);
+                $this->flashMessage('Uw wachtwoord is gewijzigd, u bent nu ingelogd', 'success');
                 return $this->response->redirect('home');
 //                return $this->redirectToLastPage();
 
@@ -168,12 +168,12 @@ class AccountController extends AccountBase
 
                 $this->authService->sendConfirmationMail($user, true);
 
-                $this->flashMessage('Bevestigings email opnieuw verstuurd.', 'success', true);
+                $this->flashMessage('Bevestigings email opnieuw verstuurd.', 'success');
                 return $this->response->redirect('home');
             }
 
         } catch (\Exception $e) {
-            $this->flashMessage('Bevestigings email kon niet worden vestuurd, gebruiker niet gevonden.', 'error', true);
+            $this->flashMessage('Bevestigings email kon niet worden vestuurd, gebruiker niet gevonden.', 'error');
         }
 
         return $this->response->redirect('home');

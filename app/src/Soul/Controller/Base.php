@@ -143,12 +143,12 @@ class Base extends Controller
                 $newPost->module = ACTIVE_MODULE;
 
                 $newPost->published = date('Y-m-d H:i:s', time());
-                
+
                 if (!$newPost->save()) {
                     $this->flashMessages($newPost->newsAddForm->getMessages(), 'error');
                 }
 
-                $this->flashMessage('Nieuws artikel geplaatst', 'success', true);
+                $this->flashMessage('Nieuws artikel geplaatst', 'success');
 
                 return $this->response->redirect('home');
 
@@ -169,7 +169,7 @@ class Base extends Controller
 
                 $newsItem->save();
 
-                $this->flashMessage('Nieuws item succesvol aangepast', 'success', true);
+                $this->flashMessage('Nieuws item succesvol aangepast', 'success');
                 return $this->response->redirect('home');
             }
         }
@@ -185,7 +185,7 @@ class Base extends Controller
             // delete the news item
             $newsItem->delete();
 
-            $this->flashMessage('Nieuws item verwijderd', 'success', true);
+            $this->flashMessage('Nieuws item verwijderd', 'success');
 
             return $this->response->redirect('home');
         }

@@ -146,9 +146,9 @@ class EventController extends \Soul\Controller\Base
                 $occupiedSeats[$eventEntry->seat] = $eventEntry->user->nickName;
             }
         }
-        
+
         $parsedMap = $seatMap->getParsedMap();
-        
+
         $this->view->blockSizePx = $parsedMap['blockSizePx'];
         $this->view->map = $parsedMap['map'];
         $this->view->userSeat = $userSeat;
@@ -169,7 +169,7 @@ class EventController extends \Soul\Controller\Base
     {
 
         try {
-            
+
             $user = $this->authService->getAuthData();
             $event = Event::findBySystemName($systemName);
 
@@ -188,7 +188,7 @@ class EventController extends \Soul\Controller\Base
             }
 
             foreach ($event->entries as $eventEntry) {
-                
+
                 if ($eventEntry->seat === $reserveSeat) {
                     throw new SecurityException('U heeft geprobeerd een plek te reserveren die al is gereserveerd!');
                 }
@@ -198,7 +198,7 @@ class EventController extends \Soul\Controller\Base
             $entry = Event::findEntryByUserIdAndEventId($user->getUserId(), $event->eventId);
             $entry->seat = sprintf('%.2f', $reserveSeat);
             $entry->save();
-            
+
             $this->flashMessage(sprintf('U heeft plek %s gereserveerd', $reserveSeat), 'success', true);
 
         } catch (SecurityException $e) {
@@ -267,7 +267,7 @@ class EventController extends \Soul\Controller\Base
             }
 
             if ($this->request->isPost()) {
-                
+
                 $issuer = $this->request->get('issuer', 'string');
                 $layoutCode = $config->paymentServices->targetPay->layoutCode;
                 $returnUrl = $config->paymentServices->targetPay->returnUrl;
@@ -292,7 +292,7 @@ class EventController extends \Soul\Controller\Base
                     $transactionDetails = $this->paymentService->startTransaction($idealStart, $userId, $productId);
 
                     if (!$transactionDetails) {
-                        $this->flashMessage('Er is iets mis gegaan met de iDeal betaling, probeer het later nogmaals', 'error', true);
+                        $this->flashMessage('Er is iets mis gegaan met de iDeal betaling, probeer het later nogmaals', 'error');
 
 //                    return $this->redirectToLastPage();
                         return $this->response->redirect('event/current');

@@ -35,7 +35,7 @@ class ArchiveController extends \Soul\Controller\Base
     {
 
         if (!$event = Event::findBySystemName($systemName)) {
-            $this->flashMessage('Dit evenement bestaat niet', 'error', true);
+            $this->flashMessage('Dit evenement bestaat niet', 'error');
             $this->setLastPage();
 
             return $this->response->redirect('/event/current');
