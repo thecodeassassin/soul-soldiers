@@ -39,16 +39,11 @@
 						Kom gezellig op onze Discord. Dit is een absolute must voor de team tournooien! <br /><br />
 						<a href="https://discord.gg/8dfHrXE" target="_blank">https://discord.gg/8dfHrXE</a>
 					</p>
-					<h3>Soul-Soldiers Live-stream</h3>
-					<p>
-						Er is een live-stream beschikbaar van de LAN!<br /><br />
-						<a href="https://www.twitch.tv/silentassassin89" target="_blank">https://www.twitch.tv/silentassassin89</a>
-					</p>
-                    <iframe src="https://player.twitch.tv/?channel=silentassassin89&parent=intranet.lan" frameborder="0" allowfullscreen="true" scrolling="no" height="240" width="424"></iframe>
+
 					<h3>Avondeten (Zaterdag 19:00)</h3>
 					<p>
 						{% if payedForBuffet %}
-						Fantastisch dat je mee eet op Zaterdag avond! We starten met het serveren van eten om 19:00. <br />
+						Fantastisch dat je mee eet op Zaterdag avond! We starten met het serveren van eten om 18:00. <br />
                         Zorg dus dat je op tijd buiten staat om gezellig met ons te eten.
                         {% else %}
                         Je hebt (nog) niet betaald voor het avondeten. Mocht je hier toch aan mee willen doen, geef dit dan aan bij 1 van de crewleden.
@@ -60,12 +55,15 @@
 						<h4>Eten/Drinken</h4>
 						<p>
 							{#Er is bij de crew energy drink te koop voor &euro; 1 euro per stuk. Tijdens deze lan geld tevens 3 halen 2 betalen voor de energy drink :) <br />#}
-							Iedereen is verantwoordelijk voor z'n eigen eten en drinken tijdens de LAN party. <br />Er staat een koelkast in de zaal die vrij te gebruiken is.
+							Iedereen is verantwoordelijk voor z'n eigen eten en drinken tijdens de LAN party. <br />Er staat een koelkast in de kader ruimte die vrij te gebruiken is.<br />
+							Mocht je medicijnen hebben die gekoeld moeten blijven, geef dit dan aan bij de organisatie<br />
+
                     </p>
 							<h4>Filesharing</h4>
 							<ul>
 								<li><a href="{{ url('content/downloads') }}">Downloads pagina</a></li>
 								<li>Fileserver: \\FILESERVER</li>
+								<li>Direct IP (windows explorer) voor de Fileserver: 10.13.37.55</li>
 								</li>
 				</div>
 			</div>

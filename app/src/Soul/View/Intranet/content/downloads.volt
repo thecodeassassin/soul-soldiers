@@ -54,7 +54,7 @@
 					<div class="col-md-3">
 						<h3>DC++</h3>
 						<p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Apps/DC++.exe"> Installer</a> <br/> <br/>
+                        Download link 1 : <a href="http://filemaster.intranet.lan/Apps/DCplus.exe"> Installer</a> <br/> <br/>
 							<a href="downloads/dc" target="_blank"> Readme + Screenshots</a></p>
 					</div>
 					<div class="col-md-3">
@@ -64,7 +64,6 @@
 							<a href="downloads/muziek" target="_blank"> Readme</a></p>
 					</div>
 				</div>
-				<h2>Andere games</h2>
 		</div>
 	</div>
 	{% endblock %}
