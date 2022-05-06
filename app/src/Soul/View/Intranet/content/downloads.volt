@@ -54,7 +54,7 @@
 					<div class="col-md-3">
 						<h3>DC++</h3>
 						<p>Download links : <br />
-                        Download link 1 : <a href="http://filemaster.intranet.lan/Apps/DCplus.exe"> Installer</a> <br/> <br/>
+                        Download link 1 : <a href="http://10.13.37.55:8080/Apps/DCplus.exe"> Installer</a> <br/> <br/>
 							<a href="downloads/dc" target="_blank"> Readme + Screenshots</a></p>
 					</div>
 					<div class="col-md-3">
