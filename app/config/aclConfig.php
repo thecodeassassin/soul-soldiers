@@ -1,17 +1,18 @@
 <?php
+
 use \Soul\AclBuilder as AclBuilder;
 
 /**
  * @author Stephen Hoogendijk
  * @copyright Soul-Soldiers
  * @namespace Soul
- */
+*/
 return new \Phalcon\Config(
     [
 
         /**
-         * Website ACL
-         */
+                         * Website ACL
+                         */
         'website' => [
 
             /**
@@ -36,7 +37,7 @@ return new \Phalcon\Config(
                 'content',
                 'contact',
                 'archive'
-//                'forum'
+                //                'forum'
             ],
             /**
              * <pre>
@@ -118,23 +119,28 @@ return new \Phalcon\Config(
              *
              */
             'resources' =>
-                [
-                    AclBuilder::ROLE_GUEST => [
-                        'account' => [
-                            'login'
-                        ]
-
-                    ],
-                    AclBuilder::ROLE_USER => [
-                        'account' => ['logout', 'manage'],
-                        'tournament' => ['index', 'signup', 'overview', 'view', 'cancel', 'editTeamName']
-                    ],
-                    AclBuilder::ROLE_ADMIN => [
-                        'admin' => '*',
-                        'index' => ['generate', 'addNews', 'deleteNews', 'editNews'],
-                        'tournament' => ['addScore', 'removeUser', 'start', 'end', 'reset' , 'generateteams', 'updateRank']
+            [
+                AclBuilder::ROLE_GUEST => [
+                    'account' => [
+                        'login'
                     ]
+
+                ],
+                AclBuilder::ROLE_USER => [
+                    'account' => ['logout', 'manage'],
+                    'tournament' => ['index', 'signup', 'overview', 'view', 'cancel', 'editTeamName']
+                ],
+                AclBuilder::ROLE_ADMIN => [
+                    'admin' => '*',
+                    'index' => ['generate', 'addNews', 'deleteNews', 'editNews'],
+                    'tournament' => ['addScore', 'removeUser', 'start', 'end', 'reset', 'generateteams', 'updateRank']
+                ],
+                AclBuilder::ROLE_MODERATOR => [
+                    'admin' => '*',
+                    'index' => ['generate'],
+                    'tournament' => ['addScore', 'removeUser', 'start', 'end', 'reset', 'generateteams', 'updateRank']
                 ]
+            ]
         ]
     ]
 );

@@ -1,8 +1,8 @@
-$(function (){
+$(function () {
     var bracketOptions = {
-            init: __BRACKET_DATA
-            //skipSecondaryFinal: true
-        },
+        init: __BRACKET_DATA,
+        //skipSecondaryFinal: true
+    },
         jqBracket,
         height = 0;
 
@@ -10,30 +10,37 @@ $(function (){
         bracketOptions = $.extend({}, bracketOptions, __BRACKET_OPTS);
     }
 
-    $('#bracket').bracket(bracketOptions);
+    $('#bracket').bracket(bracketOptions)
 
-    $('.team').find('.label').each(function() {
-       var originalFunction,
-           parentElem = $(this).parent(),
-           title = $(this).html();
-       parentElem.attr('title', title);
+    $('.team').find('.label').each(function () {
+        var originalFunction,
+            parentElem = $(this).parent(),
+            title = $(this).html();
+        parentElem.attr('title', title);
 
         if (title != '--' && title != __BYE_STR) {
             parentElem.tooltip({
                 trigger: 'manual'
             });
-            parentElem.hover(function() {
+            parentElem.hover(function () {
                 $(this).tooltip('toggle')
             });
         }
     });
-    jqBracket = $('.jQBracket');
 
-    if (jqBracket.find('.finals').length > 0) {
-        height = jqBracket.find('.finals').height();
-    } else {
-        height = jqBracket.find('.bracket').height();
-    }
+    var heightCheck = setInterval(function() {
+        jqBracket = $('.jQBracket');
 
-    jqBracket.css('min-height', height);
+        if (jqBracket.find('.finals').length > 0) {
+            height = jqBracket.find('.finals').height();
+        } else {
+            height = jqBracket.find('.bracket').height();
+        }
+
+        jqBracket.css('min-height', height);
+
+        if (height > 0) {
+            clearInterval(heightCheck)
+        }
+    }, 1000);
 });

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Stephen "TheCodeAssassin" Hoogendijk <admin@tca0.nl>
  */
@@ -156,14 +157,13 @@ class Data
         $instance = new self();
 
         $instance->setEmail($user->email)
-                 ->setUserId($user->userId)
-                 ->setUserType($user->userType)
-                 ->setNickName($user->nickName)
-                 ->setUserState($user->state)
-                 ->setRealName($user->realName);
+            ->setUserId($user->userId)
+            ->setUserType($user->userType)
+            ->setNickName($user->nickName)
+            ->setUserState($user->state)
+            ->setRealName($user->realName);
 
         return $instance;
-
     }
     /**
      * @return array
@@ -181,4 +181,12 @@ class Data
         return $this->userType == AclBuilder::ROLE_ADMIN;
     }
 
+
+    /**
+     * @return bool
+     */
+    public function isIntranetAdmin()
+    {
+        return $this->userType == AclBuilder::ROLE_ADMIN || $this->userType == AclBuilder::ROLE_MODERATOR;
+    }
 }

@@ -7,20 +7,18 @@
 {% set image_3 = 'img/downloads/duck_ingame31.jpg' %}
 <div class="row">
 
-    <div class="col-md-12">
-        <div class="gutter well">
+	<div class="col-md-12">
+		<div class="gutter well">
 
-            <h1>Installatie instructies</h1>
-            <p>Download de file en pak deze uit op plek naar keuze<br />
-                Start het programma op met muziek.exe.<br />
-                Je kan hier inloggen met je twitch account, of als gast als je dit niet wilt.<br />
+			<h1>Installatie instructies</h1>
+			<p>Download de file en pak deze uit op plek naar keuze<br />
                 Plak je youtube link in de balk en klik op vraag nummer aan, je nummer wordt nu in de wachtlijst gezet.<br /><br />
                 </p>
 
 
-            
 
-        </div>
-    </div>
+
+		</div>
+	</div>
 </div>
 {% endblock %}

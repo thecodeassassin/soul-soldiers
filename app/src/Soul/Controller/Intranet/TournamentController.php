@@ -1,4 +1,5 @@
 <?php
+
 namespace Soul\Controller\Intranet;
 
 use Phalcon\Mvc\View;
@@ -24,7 +25,7 @@ class TournamentController extends Base
      */
     public function indexAction()
     {
-//        $this->view->tournaments = Tournament::getLatestTournaments();
+        //        $this->view->tournaments = Tournament::getLatestTournaments();
     }
 
     public function viewAction($systemName)
@@ -37,7 +38,7 @@ class TournamentController extends Base
                 $teamUserCount = count($tournament->teams) * $tournament->teamSize;
                 $userCount = count($tournament->players);
 
-                if ($teamUserCount != $userCount && $this->isAdmin()) {
+                if ($teamUserCount != $userCount && $this->isIntranetAdmin()) {
                     $this->flashMessage('Het aantal spelers in teams is niet gelijk aan het aantal inschrijvingen, regeneer de teams voordat het toernooi start.', 'error');
                 }
             }
@@ -45,7 +46,7 @@ class TournamentController extends Base
 
         if ($tournament->state == Tournament::STATE_STARTED || $tournament->state == Tournament::STATE_FINISHED) {
 
-            if ($this->isAdmin()) {
+            if ($this->isIntranetAdmin()) {
 
                 if ($tournament->isEliminationTournament()) {
                     $this->assets->collection('scripts')->addJs('js/intranet/eliminationAdmin.js');
@@ -58,11 +59,9 @@ class TournamentController extends Base
                 $this->assets->collection('main')->addCss('css/intranet/bracket.css');
                 $this->assets->collection('main')->addCss('css/intranet/bracket.custom.css');
             }
-
         }
 
-        if ((($tournament->isEliminationTournament() && !in_array($tournament->state, [Tournament::STATE_STARTED, Tournament::STATE_FINISHED])
-            ) || !$tournament->isEliminationTournament()) && $this->isAdmin()) {
+        if ((($tournament->isEliminationTournament() && !in_array($tournament->state, [Tournament::STATE_STARTED, Tournament::STATE_FINISHED])) || !$tournament->isEliminationTournament()) && $this->isIntranetAdmin()) {
 
             $this->assets->collection('scripts')->addJs('js/jquery-ui.min.js');
             $this->assets->collection('scripts')->addJs('js/intranet/topscore.js');
@@ -83,7 +82,7 @@ class TournamentController extends Base
             if ($tournament->hasEntered($this->view->user->getUserId())) {
                 $this->flashMessage(sprintf('Je bent al ingeschreven voor %s', $tournament->name), 'error', true);
 
-                return $this->response->redirect('tournament/view/'.$systemName);
+                return $this->response->redirect('tournament/view/' . $systemName);
             }
 
             // sign the user up for the given tournament
@@ -92,7 +91,7 @@ class TournamentController extends Base
             $this->flashMessage(sprintf('Successvol ingeschreven voor %s', $tournament->name), 'success', true);
         }
 
-        return $this->response->redirect('tournament/view/'.$systemName);
+        return $this->response->redirect('tournament/view/' . $systemName);
     }
 
     /**
@@ -109,7 +108,7 @@ class TournamentController extends Base
             if (!$tournament->hasEntered($userId)) {
                 $this->flashMessage(sprintf('Je bent niet ingeschreven voor %s', $tournament->name), 'error', true);
 
-                return $this->response->redirect('tournament/view/'.$systemName);
+                return $this->response->redirect('tournament/view/' . $systemName);
             }
             $tournamentUser = TournamentUser::findFirstByTournamentIdAndUserId($tournament->tournamentId, $userId);
 
@@ -119,14 +118,13 @@ class TournamentController extends Base
                 if (!$deleted) {
                     $this->flashMessages($tournamentUser->getMessages(), 'error', true);
                 }
-
             }
 
 
             $this->flashMessage(sprintf('Successvol uitgeschreven voor %s', $tournament->name), 'success', true);
         }
 
-        return $this->response->redirect('tournament/view/'.$systemName);
+        return $this->response->redirect('tournament/view/' . $systemName);
     }
 
     /**
@@ -150,14 +148,15 @@ class TournamentController extends Base
 
                 if (!$this->request->isAjax()) {
                     $this->flashMessage(
-                        sprintf('%s punten toegevoegd aan %s', $scoreCount, $tournamentUser->user->nickName), 'success', true
+                        sprintf('%s punten toegevoegd aan %s', $scoreCount, $tournamentUser->user->nickName),
+                        'success',
+                        true
                     );
                 }
             }
         }
 
-        return $this->response->redirect('tournament/view/'.$tournamentUser->tournament->systemName);
-
+        return $this->response->redirect('tournament/view/' . $tournamentUser->tournament->systemName);
     }
 
     /**
@@ -175,7 +174,7 @@ class TournamentController extends Base
 
             $playerCount = count($tournament->players);
 
-            if (($playerCount % $tournament->teamSize) != 0 ) {
+            if (($playerCount % $tournament->teamSize) != 0) {
                 throw new \Exception(sprintf('Er kunnen geen teams gemaakt worden van %d deelnemers.', $playerCount));
             }
 
@@ -186,15 +185,11 @@ class TournamentController extends Base
             $teams = $tournament->generateTeams();
 
             $this->flashMessage(sprintf('Aantal teams gegenereerd: %d', count($teams)), 'success', true);
-
         } catch (\Exception $e) {
             $this->flashMessage(sprintf('Teams kunnen niet worden gegenereerd: %s', $e->getMessage()), 'error', true);
-
         }
 
-        return $this->response->redirect('tournament/view/'.$systemName);
-
-
+        return $this->response->redirect('tournament/view/' . $systemName);
     }
 
     /**
@@ -205,7 +200,6 @@ class TournamentController extends Base
         $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
         $tournament = Tournament::findFirstBySystemName($systemName);
         if ($tournament) {
-
             if ($tournament->isTeamTournament() && count($tournament->players) % $tournament->teamSize != 0
                 || count($tournament->players) < 2) {
                 $this->flashMessage('Er zijn nog geen teams aangemaakt, of er zijn onvoldoende spelers!', 'error');
@@ -214,10 +208,9 @@ class TournamentController extends Base
                 $tournament->updateBracketData($tournament->isTeamTournament());
                 $tournament->start();
             }
-
         }
 
-        return $this->response->redirect('tournament/view/'.$systemName);
+        return $this->response->redirect('tournament/view/' . $systemName);
     }
 
     /**
@@ -236,10 +229,9 @@ class TournamentController extends Base
                 $tournament->reset();
                 $this->flashMessage('Het toernooi is gereset', 'success');
             }
-
         }
 
-        return $this->response->redirect('tournament/view/'.$systemName);
+        return $this->response->redirect('tournament/view/' . $systemName);
     }
 
     /**
@@ -262,7 +254,7 @@ class TournamentController extends Base
             }
         }
 
-        return $this->response->redirect('tournament/view/'.$systemName);
+        return $this->response->redirect('tournament/view/' . $systemName);
     }
 
     /**
@@ -288,9 +280,8 @@ class TournamentController extends Base
                 $tournamentUser->delete();
             }
 
-            return $this->response->redirect('tournament/view/'.$tournament->systemName);
+            return $this->response->redirect('tournament/view/' . $tournament->systemName);
         }
-
     }
 
     /**
@@ -304,13 +295,11 @@ class TournamentController extends Base
         $tournament->updateRanks($users);
     }
 
-       /**
+    /**
      * @param $systemName
      */
     public function overviewAction($systemName)
     {
-
-
     }
 
     /**
@@ -322,7 +311,7 @@ class TournamentController extends Base
     {
 
         $userId = $this->authService->getAuthData()->userId;
-        $isAdmin = $this->authService->getAuthData()->isAdmin();
+        $isIntranetAdmin = $this->authService->getAuthData()->isIntranetAdmin();
         $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
         $team = TournamentTeam::findFirstById($teamId);
 
@@ -332,9 +321,10 @@ class TournamentController extends Base
                 $teamName = $this->request->get('teamName');
                 $tournament = $team->getTournament();
 
-                if (!$team->userInTeam($userId) && !$isAdmin) {
+
+                if (!$team->userInTeam($userId) && !$isIntranetAdmin) {
                     $this->flashMessage(sprintf('Je bent geen lid van %s', $team->name), 'error', true);
-                    return $this->response->redirect('tournament/view/'.$tournament->systemName);
+                    return $this->response->redirect('tournament/view/' . $tournament->systemName);
                 }
 
                 $team->name = $teamName;
@@ -346,14 +336,11 @@ class TournamentController extends Base
                     $this->flashMessage(sprintf('Team naam aangepast naar %s', $teamName), 'success', true);
                 }
 
-                return $this->response->redirect('tournament/view/'.$tournament->systemName);
+                return $this->response->redirect('tournament/view/' . $tournament->systemName);
             }
-
         }
 
         $this->view->team = $team;
         $this->view->teamId = $teamId;
-
     }
-
 }
