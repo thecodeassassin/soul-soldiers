@@ -170,7 +170,7 @@ class AdminController extends \Soul\Controller\Website\AdminController
 
                     if ($saveState && !$error) {
 
-                        $this->flashMessage('Het toernooi is opgeslagen', 'success', true);
+                        $this->flashMessage('Het toernooi is opgeslagen', 'success');
 
                         if ($backToTournament) {
                             return $this->response->redirect('tournament/view/' . $tournament->systemName);

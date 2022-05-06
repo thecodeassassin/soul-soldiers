@@ -200,12 +200,9 @@ class TournamentController extends Base
         $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
         $tournament = Tournament::findFirstBySystemName($systemName);
         if ($tournament) {
-
-            if (
-                $tournament->isTeamTournament() && count($tournament->players) % $tournament->teamSize != 0
-                || count($tournament->players) < 2
-            ) {
-                $this->flashMessage('Er zijn nog geen teams aangemaakt, of er zijn onvoldoende spelers!', 'error', true);
+            if ($tournament->isTeamTournament() && count($tournament->players) % $tournament->teamSize != 0
+                || count($tournament->players) < 2) {
+                $this->flashMessage('Er zijn nog geen teams aangemaakt, of er zijn onvoldoende spelers!', 'error');
             } else {
 
                 $tournament->updateBracketData($tournament->isTeamTournament());
@@ -230,7 +227,7 @@ class TournamentController extends Base
             if ($tournament->state == Tournament::STATE_STARTED) {
 
                 $tournament->reset();
-                $this->flashMessage('Het toernooi is gereset', 'success', true);
+                $this->flashMessage('Het toernooi is gereset', 'success');
             }
         }
 
@@ -323,6 +320,7 @@ class TournamentController extends Base
             if ($team) {
                 $teamName = $this->request->get('teamName');
                 $tournament = $team->getTournament();
+
 
                 if (!$team->userInTeam($userId) && !$isIntranetAdmin) {
                     $this->flashMessage(sprintf('Je bent geen lid van %s', $team->name), 'error', true);

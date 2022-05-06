@@ -15,7 +15,7 @@ defined('BASE_URL')
 || define('BASE_URL', sprintf('%s://%s', (array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] != null) ||
 (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ? 'https' : 'http', $_SERVER['HTTP_HOST']));
 
-$requiredExtensions = ['gd', 'curl', 'mcrypt', 'mysql', 'memcached', 'phalcon'];
+$requiredExtensions = ['gd', 'curl', 'mcrypt', 'mysql', 'phalcon'];
 
 $missing = [];
 foreach ($requiredExtensions as $extension) {
@@ -30,7 +30,7 @@ if (count($missing) > 0) {
 
 $isIntranet = getenv("INTRANET") === "true";
 
-if (strpos(BASE_URL, '.lan') !== false || strpos(BASE_URL, 'intranet') !== false || $isIntranet) {
+if ($isIntranet) {
     define('ACTIVE_MODULE', 'intranet');
 } else {
     define('ACTIVE_MODULE', 'website');

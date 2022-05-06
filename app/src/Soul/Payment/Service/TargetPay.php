@@ -24,7 +24,7 @@ class TargetPay extends AbstractPaymentService
     /**
      * @var string
      */
-    protected $issuersLink = 'https://www.targetpay.com/ideal/getissuers.php?format=xml';
+    protected $issuersLink = 'https://transaction.digiwallet.nl/ideal/getissuers?ver=4&format=xml';
 
 
     /**
@@ -32,7 +32,7 @@ class TargetPay extends AbstractPaymentService
      *
      * @var string
      */
-    public $startUrl = 'https://www.targetpay.com/ideal/start';
+    public $startUrl = 'https://transaction.digiwallet.nl/ideal/start';
 
 
 
@@ -41,7 +41,7 @@ class TargetPay extends AbstractPaymentService
      *
      * @var string
      */
-    public $checkUrl = 'https://www.targetpay.com/ideal/check';
+    public $checkUrl = 'https://transaction.digiwallet.nl/ideal/check';
 
     /**
      * Returns a list of available banks (issuers)
@@ -107,8 +107,6 @@ class TargetPay extends AbstractPaymentService
      */
     public function checkTransaction($transactionId)
     {
-
-
         $payment = Payment::findPaymentByTransactionId($transactionId);
 
         if (!$payment || $payment->confirmed) {

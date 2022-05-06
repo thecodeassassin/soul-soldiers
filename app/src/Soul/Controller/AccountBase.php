@@ -69,7 +69,7 @@ class AccountBase extends Base
 //                      return $this->response->redirect('/change-password');
                     }
 
-                    $this->flashMessage('Je bent nu ingelogd.', 'success', true);
+                    $this->flashMessage('Je bent nu ingelogd.', 'success');
 
                     // redirect the user to his last known location
                     if ($this->getLastPage()) {
@@ -192,7 +192,7 @@ class AccountBase extends Base
                             // send the user a confirmation email
                             $this->authService->sendConfirmationMail($user);
 
-                            $this->flashMessage('Uw profiel informatie is gewijzigd, uw email adres dient echter wel opnieuw bevestigd te worden.', 'success', true);
+                            $this->flashMessage('Uw profiel informatie is gewijzigd, uw email adres dient echter wel opnieuw bevestigd te worden.', 'success');
                             $this->authService->destroyAuthData();
                             $this->response->redirect('home');
 
@@ -212,12 +212,12 @@ class AccountBase extends Base
                 $newPassword = $this->request->get('password', 'string');
 
                 if ($user->password !== sha1($currentPassword)) {
-                    $this->flashMessage('Het huidige wachtwoord wat u heeft opgegeven klopt niet.', 'error', true);
+                    $this->flashMessage('Het huidige wachtwoord wat u heeft opgegeven klopt niet.', 'error');
                     $this->response->redirect('account/manage#change-password');
 
                 } else {
                     if ($changepasswordForm->isValid($this->request->getPost()) == false) {
-                        $this->flashMessages($changepasswordForm->getMessages(), 'error', true);
+                        $this->flashMessages($changepasswordForm->getMessages(), 'error');
                         $this->response->redirect('account/manage#change-password');
                     } else {
 
@@ -225,7 +225,7 @@ class AccountBase extends Base
                         $user->changePassword($newPassword, false);
 
 
-                        $this->flashMessage('Uw wachtwoord is gewijzigd', 'success', true);
+                        $this->flashMessage('Uw wachtwoord is gewijzigd', 'success');
 
                         $this->response->redirect('account/manage#change-password');
                     }

@@ -377,10 +377,7 @@ class Event extends Base
             file_put_contents($cacheDir.$cachedSeatMap, $seatmap->image);
         }
 
-        $seatmap->url = sprintf('/static/image/%s', $cachedSeatMap);
-        
-        // set blocked seats
-        $seatmap->blockedSeats = json_decode($seatmap->blockedSeats);
+        $seatmap->url = sprintf('/static/%s', $cachedSeatMap);
 
         return $seatmap;
     }

@@ -159,14 +159,14 @@ class AdminController extends \Soul\Controller\Base
         $user = $this->validateUserId($userId);
 
         if (!$user) {
-            $this->flashMessage('Ongeldige gebruiker', 'error', true);
+            $this->flashMessage('Ongeldige gebruiker', 'error');
         }
 
         if ($user->userType == AclBuilder::ROLE_ADMIN) {
-            $this->flashMessage('Admins kunnen niet verwijderd worden (sorry :P)', 'error', true);
+            $this->flashMessage('Admins kunnen niet verwijderd worden (sorry :P)', 'error');
         } else {
             $user->delete();
-            $this->flashMessage(sprintf('Gebruiker %s verwijderd', $user->nickName), 'success', true);
+            $this->flashMessage(sprintf('Gebruiker %s verwijderd', $user->nickName), 'success');
         }
 
         $this->response->redirect('admin/users');
@@ -294,7 +294,7 @@ class AdminController extends \Soul\Controller\Base
         $user = null;
 
         if (!$userId) {
-            $this->flashMessage('Ongeldige gebruiker id', 'error', true);
+            $this->flashMessage('Ongeldige gebruiker id', 'error');
         } else {
             $user = User::findFirstByUserId($userId);
         }

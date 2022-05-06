@@ -58,7 +58,21 @@ class IdealStart extends AbstractData
         $this->amount = $amount;
         $this->returnurl = $returnUrl;
         $this->reporturl = $reportUrl;
+        $this->ver = 4;
     }
+
+    public function setTestMode($value)
+    {
+        $this->test = ($value ? 1 : 0);
+    }
+
+
+    /**
+     * Test mode
+     *
+     * @var integer
+     */
+    public $test = 0;
 
     /**
      * Layoutcode targetpay
@@ -113,7 +127,13 @@ class IdealStart extends AbstractData
      *
      * @var string
      */
-    public $reporturl = '';
+    public $reporturl = ''; /**
+ *
+     * API version
+     *
+     * @var string
+     */
+    public $ver = 4;
 
 
 }

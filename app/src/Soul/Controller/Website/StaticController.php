@@ -24,6 +24,6 @@ class StaticController extends \Soul\Controller\Base
      */
     public function indexAction($resource)
     {
-        parent::staticResource($resource);
+        return;
     }
 }

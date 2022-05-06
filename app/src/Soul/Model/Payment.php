@@ -107,6 +107,24 @@ class Payment extends Base
         return $payment;
     }
 
+    public function confirmPayment(Entry $entry)
+    {
+        $this->confirmed = 1;
+        $this->save();
+
+        $entry->paymentId = $this->paymentId;
+        $entry->save();
+
+        // confirm the payment with the user
+        $this->getMail()->sendToUser(
+            User::findFirstByUserId($userId),
+            'Bedankt voor je betaling',
+            'paymentConfirmed',
+            compact('event')
+        );
+
+    }
+
     /**
      * Independent Column Mapping.
      */
