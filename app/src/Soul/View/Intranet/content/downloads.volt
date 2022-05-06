@@ -15,11 +15,11 @@
                Deze downloads zijn enkel bedoeld om tijdens onze LAN gebruikt te worden.<br /></p>
 				<div class="row">
 					<div class="col-md-3">
-						<h3>League Of Legends</h3>
+						<h3>Golden Eye</h3>
 						<p>Download links : <br />
-                        Download link 1 : <a href="http://10.13.37.55:8080/Games/Lol.exe">
+                        Download link 1 : <a href="http://10.13.37.55:8080/Games/GoldenEye_Source_v5.0.6_full.exe">
 								Installer</a> <br />
-							<a href="downloads/lol" target="_blank"> Readme + Screenshots</a></p>
+							<a href="downloads/eye" target="_blank"> Readme + Screenshots</a></p>
 					</div>
 
 					<div class="col-md-3">
@@ -41,11 +41,11 @@
 					</div>
 
 					<div class="col-md-3">
-						<h3>Age of Empires 2</h3>
+						<h3>StarCraft 2 : Direct Strike</h3>
 						<p>Download links : <br />
-                        Download link 1 : <a href="http://10.13.37.55:8080/Games/AoEII.zip">
+                        Download link 1 : <a href="http://10.13.37.55:8080/Games/Battlenet.exe">
 								Installer</a> <br /><br />
-							<a href="downloads/aoe" target="_blank"> Readme + Screenshots</a></p>
+							<a href="downloads/sc2" target="_blank"> Readme + Screenshots</a></p>
 					</div>
 
 				</div>
