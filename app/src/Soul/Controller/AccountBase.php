@@ -69,7 +69,7 @@ class AccountBase extends Base
 //                      return $this->response->redirect('/change-password');
                     }
 
-                    $this->flashMessage('Je bent nu ingelogd.', 'success');
+                    $this->flashMessage('Je bent nu ingelogd.', 'success', true);
 
                     // redirect the user to his last known location
                     if ($this->getLastPage()) {
