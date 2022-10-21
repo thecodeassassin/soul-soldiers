@@ -17,35 +17,45 @@
 					<div class="col-md-3">
 						<h3>Golden Eye</h3>
 						<p>Download links : <br />
-                        Download link 1 : <a href="http://10.13.37.55:8080/Games/GoldenEye_Source_v5.0.6_full.exe">
+                        Download link 1 : <a href="http://10.13.37.55:8080\Downloads\GoldenEye_Source_v5.0.6_full.exe">
 								Installer</a> <br />
 							<a href="downloads/eye" target="_blank"> Readme + Screenshots</a></p>
 					</div>
 
 					<div class="col-md-3">
-						<h3>Flatout 2</h3>
+						<h3>Trackmania</h3>
 						<p>Download links : <br />
-                        Download link 1 : <a href="http://10.13.37.55:8080/Games/Flatout2.exe">
+                        Download link 1 : <a href="steam://run/11020">
 								Installer</a> <br /><br />
-							<a href="downloads/flatout2" target="_blank"> Readme + Screenshots</a></p>
+							<a href="downloads/tm" target="_blank"> Readme + Screenshots</a></p>
 					</div>
 
 					<div class="col-md-3">
 						<h3>Unreal Tournament 2004</h3>
 						<p>Download links : <br />
-                        Download link 1/2 : <a href="http://10.13.37.55:8080/Games/Unreal%20Tournament%202004.z01">
+                        Download link 1/2 : <a href="http://10.13.37.55:8080\Downloads\Unreal%20Tournament%202004.part1.exe">
 								Deel 1</a> <br />
-                        Download link 2/2 : <a href="http://10.13.37.55:8080/Games/Unreal%20Tournament%202004.zip">
+                        Download link 2/2 : <a href="http://10.13.37.55:8080\Downloads\Unreal%20Tournament%202004.part2.zip">
 								Deel 2</a> <br /> <br />
 							<a href="downloads/ut2004" target="_blank"> Readme + Screenshots</a></p>
 					</div>
 
 					<div class="col-md-3">
-						<h3>StarCraft 2 : Direct Strike</h3>
+						<h3>BAR  - Beyond All Reason </h3>
 						<p>Download links : <br />
-                        Download link 1 : <a href="http://10.13.37.55:8080/Games/Battlenet.exe">
-								Installer</a> <br /><br />
-							<a href="downloads/sc2" target="_blank"> Readme + Screenshots</a></p>
+						Download link 1/6 : <a href="http://10.13.37.55:8080\Downloads\BAR.part1.exe">
+								Deel 1</a> <br />
+                        Download link 2/6 : <a href="http://10.13.37.55:8080\Downloads\BAR.part2.rar">
+								Deel 2</a> <br />
+						Download link 3/6 : <a href="http://10.13.37.55:8080\Downloads\BAR.part3.rar">
+								Deel 3</a> <br />
+						Download link 4/6 : <a href="http://10.13.37.55:8080\Downloads\BAR.part4.rar">
+								Deel 4</a> <br />
+						Download link 5/6 : <a href="http://10.13.37.55:8080\Downloads\BAR.part5.rar">
+								Deel 5</a> <br />
+						Download link 6/6 : <a href="http://10.13.37.55:8080\Downloads\BAR.part6.rar">
+								Deel 6</a> <br /> <br />
+                        	<a href="downloads/bar" target="_blank"> Readme + Screenshots</a></p>
 					</div>
 
 				</div>
@@ -54,13 +64,14 @@
 					<div class="col-md-3">
 						<h3>DC++</h3>
 						<p>Download links : <br />
-                        Download link 1 : <a href="http://10.13.37.55:8080/Apps/DCplus.exe"> Installer</a> <br/> <br/>
+                        Download link 1 : <a href="http://10.13.37.55:8080\Apps\DCplus.exe"> Installer</a> <br/> <br/>
 							<a href="downloads/dc" target="_blank"> Readme + Screenshots</a></p>
 					</div>
 					<div class="col-md-3">
 						<h3>Muziek Request </h3>
 						<p>Download links : <br />
-                       Download link 1 : <a href="http://10.13.37.55:8080/Apps/MusicApp.zip"> Installer</a> <br /><br/>
+                    
+							<br/>
 							<a href="downloads/muziek" target="_blank"> Readme</a></p>
 					</div>
 				</div>

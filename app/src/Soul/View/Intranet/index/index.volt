@@ -55,16 +55,21 @@
 						<h4>Eten/Drinken</h4>
 						<p>
 							{#Er is bij de crew energy drink te koop voor &euro; 1 euro per stuk. Tijdens deze lan geld tevens 3 halen 2 betalen voor de energy drink :) <br />#}
-							Iedereen is verantwoordelijk voor z'n eigen eten en drinken tijdens de LAN party. <br />Er staat een koelkast in de kader ruimte die vrij te gebruiken is.<br />
+							Iedereen is verantwoordelijk voor z'n eigen eten en drinken tijdens de LAN party. <br />Er staan 2 termoskannen met Gamerfinity op de links op de bar<br / >
+							Hier kan je gratis energy drink uit tappen in de smaken Mango/passievrucht en Aardbij/Kiwi. <br />
+							Als je dit lekker vind, bezoek dan de website op https://www.gamerfinitie.nl <br />
 							Mocht je medicijnen hebben die gekoeld moeten blijven, geef dit dan aan bij de organisatie<br />
 
                     </p>
-							<h4>Filesharing</h4>
-							<ul>
-								<li><a href="{{ url('content/downloads') }}">Downloads pagina</a></li>
-								<li>Fileserver: \\FILESERVER</li>
-								<li>Direct IP (windows explorer) voor de Fileserver: 10.13.37.55</li>
-								</li>
+							<h4>Sponsor</h4>
+							<p>
+								Voor deze LAN sponsored Gamerfinitie de energydrinks en enkele prijzen.<br />
+								Mocht je interesse in hun producten hebben kan je deze bestellen op de website <br />
+								https://www.gamerfinitie.nl/<br />
+
+								Tijdens de LAN kan je kortingscode "soul-soldiers" gebruiken om 20% korting op je bestelling te krijgen.<br />
+								Indien je een pakket met een beker besteld, laat dan aan de crew je Gamertag weten zodat je naam de beker komt te staan.<br />
+							</p>
 				</div>
 			</div>
 		</div>
