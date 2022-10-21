@@ -35,7 +35,7 @@
 						<p>Download links : <br />
                         Download link 1/2 : <a href="http://10.13.37.55:8080\Downloads\Unreal%20Tournament%202004.part1.exe">
 								Deel 1</a> <br />
-                        Download link 2/2 : <a href="http://10.13.37.55:8080\Downloads\Unreal%20Tournament%202004.part2.zip">
+                        Download link 2/2 : <a href="http://10.13.37.55:8080\Downloads\Unreal%20Tournament%202004.part2.rar">
 								Deel 2</a> <br /> <br />
 							<a href="downloads/ut2004" target="_blank"> Readme + Screenshots</a></p>
 					</div>
