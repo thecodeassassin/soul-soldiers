@@ -43,18 +43,20 @@
 					<div class="col-md-3">
 						<h3>BAR  - Beyond All Reason </h3>
 						<p>Download links : <br />
-						Download link 1/6 : <a href="http://10.13.37.55:8080\Downloads\BAR.part1.exe">
+						Download link 1/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part1.exe">
 								Deel 1</a> <br />
-                        Download link 2/6 : <a href="http://10.13.37.55:8080\Downloads\BAR.part2.rar">
+                        Download link 2/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part2.rar">
 								Deel 2</a> <br />
-						Download link 3/6 : <a href="http://10.13.37.55:8080\Downloads\BAR.part3.rar">
+						Download link 3/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part3.rar">
 								Deel 3</a> <br />
-						Download link 4/6 : <a href="http://10.13.37.55:8080\Downloads\BAR.part4.rar">
+						Download link 4/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part4.rar">
 								Deel 4</a> <br />
-						Download link 5/6 : <a href="http://10.13.37.55:8080\Downloads\BAR.part5.rar">
+						Download link 5/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part5.rar">
 								Deel 5</a> <br />
-						Download link 6/6 : <a href="http://10.13.37.55:8080\Downloads\BAR.part6.rar">
-								Deel 6</a> <br /> <br />
+						Download link 6/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part6.rar">
+								Deel 6</a> <br />
+						Download link 7/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part6.rar">
+								Deel 7</a> <br /> <br />
                         	<a href="downloads/bar" target="_blank"> Readme + Screenshots</a></p>
 					</div>
 
