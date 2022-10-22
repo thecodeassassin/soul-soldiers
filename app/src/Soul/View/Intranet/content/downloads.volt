@@ -55,7 +55,7 @@
 								Deel 5</a> <br />
 						Download link 6/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part6.rar">
 								Deel 6</a> <br />
-						Download link 7/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part6.rar">
+						Download link 7/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part7.rar">
 								Deel 7</a> <br /> <br />
                         	<a href="downloads/bar" target="_blank"> Readme + Screenshots</a></p>
 					</div>
