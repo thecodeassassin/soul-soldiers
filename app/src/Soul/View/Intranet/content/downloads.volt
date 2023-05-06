@@ -15,11 +15,15 @@
                Deze downloads zijn enkel bedoeld om tijdens onze LAN gebruikt te worden.<br /></p>
 				<div class="row">
 					<div class="col-md-3">
-						<h3>Golden Eye</h3>
+						<h3>Call Of Duty 4</h3>
 						<p>Download links : <br />
-                        Download link 1 : <a href="http://10.13.37.55:8080\Downloads\GoldenEye_Source_v5.0.6_full.exe">
-								Installer</a> <br />
-							<a href="downloads/eye" target="_blank"> Readme + Screenshots</a></p>
+							Download link 1/3 : <a href="http://10.13.37.55:8080\Downloads\CoD.part1.exe">
+								Deel 1</a> <br />
+							Download link 2/3 : <a href="http://10.13.37.55:8080\Downloads\CoD.part2.rar">
+								Deel 2</a> <br />
+							Download link 3/3 : <a href="http://10.13.37.55:8080\Downloads\CoD.part3.rar">
+								Deel 3</a> <br /> <br />
+							<a href="downloads/cod" target="_blank"> Readme + Screenshots</a></p>
 					</div>
 
 					<div class="col-md-3">
@@ -41,23 +45,11 @@
 					</div>
 
 					<div class="col-md-3">
-						<h3>BAR  - Beyond All Reason </h3>
+						<h3>Starcraft 2 : Dessert Strike</h3>
 						<p>Download links : <br />
-						Download link 1/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part1.exe">
-								Deel 1</a> <br />
-                        Download link 2/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part2.rar">
-								Deel 2</a> <br />
-						Download link 3/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part3.rar">
-								Deel 3</a> <br />
-						Download link 4/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part4.rar">
-								Deel 4</a> <br />
-						Download link 5/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part5.rar">
-								Deel 5</a> <br />
-						Download link 6/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part6.rar">
-								Deel 6</a> <br />
-						Download link 7/7 : <a href="http://10.13.37.55:8080\Downloads\BAR.part7.rar">
-								Deel 7</a> <br /> <br />
-                        	<a href="downloads/bar" target="_blank"> Readme + Screenshots</a></p>
+						Download link 1 : <a href="http://10.13.37.55:8080\Games\Battlenet.exe">
+								Installer</a> <br />
+                        	<a href="downloads/sc2" target="_blank"> Readme + Screenshots</a></p>
 					</div>
 
 				</div>
